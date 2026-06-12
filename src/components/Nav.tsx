@@ -10,18 +10,20 @@ import {
 
 type DropdownId = 'solutions' | 'products' | null
 
+const DARK_PAGES = ['/']
+
 const solutionsTech = [
-  { Icon: CodeIcon,        href: '/services/software-development',   title: 'Software Development',    desc: 'Web, mobile, SaaS & enterprise apps' },
-  { Icon: ZapIcon,         href: '/services/digital-transformation', title: 'Digital Transformation',  desc: 'Process automation & modernization' },
-  { Icon: ServerIcon,      href: '/services/cloud-infrastructure',   title: 'Cloud & Infrastructure',  desc: 'Hosting, migration & managed infra' },
-  { Icon: ShieldCheckIcon, href: '/services/cybersecurity',          title: 'Cybersecurity',           desc: 'Audits, protection & compliance' },
+  { Icon: CodeIcon,        href: '/services/software-development',   title: 'Software Development',   desc: 'Web, mobile, SaaS & enterprise apps' },
+  { Icon: ZapIcon,         href: '/services/digital-transformation', title: 'Digital Transformation', desc: 'Process automation & modernization' },
+  { Icon: ServerIcon,      href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure', desc: 'Hosting, migration & managed infra' },
+  { Icon: ShieldCheckIcon, href: '/services/cybersecurity',          title: 'Cybersecurity',          desc: 'Audits, protection & compliance' },
 ]
 
 const solutionsBusiness = [
-  { Icon: DatabaseIcon,  href: '/services/crm-erp',            title: 'CRM & ERP Solutions',   desc: 'HubSpot, Zoho, Odoo & custom CRM' },
-  { Icon: MegaphoneIcon, href: '/services/digital-marketing',  title: 'Digital Marketing',     desc: 'SEO, paid ads & lead generation' },
-  { Icon: BrushIcon,     href: '/services/branding-creative',  title: 'Branding & Creative',   desc: 'Identity, design & print production' },
-  { Icon: ConsultIcon,   href: '/services/consulting',         title: 'Technology Consulting', desc: 'Strategy, roadmaps & advisory' },
+  { Icon: DatabaseIcon,  href: '/services/crm-erp',           title: 'CRM & ERP Solutions',   desc: 'Salesforce, Odoo, SAP & custom CRM' },
+  { Icon: MegaphoneIcon, href: '/services/digital-marketing', title: 'Digital Marketing',     desc: 'SEO, paid ads & lead generation' },
+  { Icon: BrushIcon,     href: '/services/brand-design',      title: 'Brand & Design',        desc: 'Identity, product design & creative' },
+  { Icon: ConsultIcon,   href: '/services/it-consulting',     title: 'IT Strategy',           desc: 'Technology roadmaps & advisory' },
 ]
 
 function ChevronDown({ open }: { open: boolean }) {
@@ -43,8 +45,10 @@ export default function Nav() {
   const wrapRef   = useRef<HTMLDivElement>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  const isDarkPage = DARK_PAGES.includes(pathname)
+
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40)
+    const handler = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
@@ -83,10 +87,14 @@ export default function Nav() {
       <div ref={wrapRef} className="fixed top-0 left-0 right-0 z-50">
 
         {/* ── Main bar ── */}
-        <nav className={`flex items-center justify-between px-[clamp(24px,5vw,80px)] h-[72px] transition-all duration-300 bg-[rgba(var(--ch-bg),0.96)] backdrop-blur-xl border-b border-[rgba(var(--ch-border),0.10)] ${scrolled ? 'shadow-sm' : ''}`}>
+        <nav className={`flex items-center justify-between px-[clamp(24px,5vw,80px)] h-[72px] transition-all duration-500 border-b ${
+          isDarkPage && !scrolled
+            ? 'bg-transparent border-transparent'
+            : 'bg-[rgba(var(--ch-bg),0.97)] backdrop-blur-xl border-[rgba(var(--ch-border),0.10)] shadow-sm'
+        }`}>
 
-          <Link href="/" className="font-serif text-[22px] font-bold tracking-wide text-[var(--color-text)] shrink-0">
-            Astacraft<span className="text-[var(--color-green)]"> Systems</span>
+          <Link href="/" className={`font-serif text-[22px] font-bold tracking-wide shrink-0 transition-colors duration-300 ${isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-text)]'}`}>
+            Astacraft<span style={{ color: '#55AD3D' }}> Systems</span>
           </Link>
 
           {/* Desktop links */}
@@ -99,10 +107,12 @@ export default function Nav() {
             >
               <button
                 onClick={() => setDropdown(dropdown === 'solutions' ? null : 'solutions')}
+                aria-haspopup="true"
+                aria-expanded={dropdown === 'solutions'}
                 className={`flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
                   dropdown === 'solutions' || pathname.startsWith('/services')
-                    ? 'text-[var(--color-accent)]'
-                    : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
+                    ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
+                    : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
                 }`}
               >
                 Solutions <ChevronDown open={dropdown === 'solutions'} />
@@ -116,10 +126,12 @@ export default function Nav() {
             >
               <button
                 onClick={() => setDropdown(dropdown === 'products' ? null : 'products')}
+                aria-haspopup="true"
+                aria-expanded={dropdown === 'products'}
                 className={`flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
                   dropdown === 'products' || pathname.startsWith('/products')
-                    ? 'text-[var(--color-accent)]'
-                    : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
+                    ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
+                    : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
                 }`}
               >
                 Products <ChevronDown open={dropdown === 'products'} />
@@ -127,6 +139,7 @@ export default function Nav() {
             </li>
 
             {[
+              { href: '/work',     label: 'Work' },
               { href: '/about',    label: 'About' },
               { href: '/insights', label: 'Insights' },
             ].map(l => (
@@ -135,8 +148,8 @@ export default function Nav() {
                   href={l.href}
                   className={`font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 block transition-colors duration-200 ${
                     pathname.startsWith(l.href)
-                      ? 'text-[var(--color-accent)]'
-                      : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
+                      ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
+                      : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
                   }`}
                 >
                   {l.label}
@@ -147,7 +160,11 @@ export default function Nav() {
             <li className="ml-3" onMouseEnter={() => openDropdown(null)}>
               <Link
                 href="/contact"
-                className="font-mono text-[11px] tracking-[0.12em] uppercase font-medium bg-[var(--color-accent)] text-white px-5 py-2.5 hover:bg-[var(--color-accent-hover)] transition-colors duration-200"
+                className={`font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 transition-colors duration-200 ${
+                  isDarkPage && !scrolled
+                    ? 'bg-white text-[#060C18] hover:bg-[rgba(255,255,255,0.88)]'
+                    : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]'
+                }`}
               >
                 Book Consultation →
               </Link>
@@ -156,13 +173,23 @@ export default function Nav() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col gap-[5px] cursor-pointer p-2"
+            className="md:hidden flex flex-col gap-[5px] cursor-pointer p-3 -mr-3 min-w-[44px] min-h-[44px] items-center justify-center"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
           >
-            <span className={`block w-6 h-[1.5px] bg-[var(--color-text)] transition-all duration-300 ${mobileOpen ? 'translate-y-[6.5px] rotate-45' : ''}`} />
-            <span className={`block w-6 h-[1.5px] bg-[var(--color-text)] transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
-            <span className={`block w-6 h-[1.5px] bg-[var(--color-text)] transition-all duration-300 ${mobileOpen ? '-translate-y-[6.5px] -rotate-45' : ''}`} />
+            {['top', 'mid', 'bot'].map((pos) => (
+              <span
+                key={pos}
+                className={`block w-6 h-[1.5px] transition-all duration-300 ${
+                  isDarkPage && !scrolled ? 'bg-white' : 'bg-[var(--color-text)]'
+                } ${
+                  pos === 'top' && mobileOpen ? 'translate-y-[6.5px] rotate-45' :
+                  pos === 'mid' && mobileOpen ? 'opacity-0 scale-x-0' :
+                  pos === 'bot' && mobileOpen ? '-translate-y-[6.5px] -rotate-45' : ''
+                }`}
+              />
+            ))}
           </button>
         </nav>
 
@@ -314,16 +341,23 @@ export default function Nav() {
 
       {/* ── Mobile full-screen menu ── */}
       {mobileOpen && (
-        <div className="fixed inset-0 bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className="fixed inset-0 bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8"
+        >
           {[
             { href: '/services',  label: 'Solutions' },
             { href: '/products',  label: 'Products' },
+            { href: '/work',      label: 'Work' },
             { href: '/about',     label: 'About' },
             { href: '/insights',  label: 'Insights' },
-          ].map(l => (
+          ].map((l, i) => (
             <Link
               key={l.href}
               href={l.href}
+              autoFocus={i === 0}
               className="font-serif text-[clamp(28px,6vw,48px)] font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-200"
             >
               {l.label}

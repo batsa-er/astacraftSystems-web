@@ -21,11 +21,11 @@ export default async function Footer() {
             <div className="font-serif text-[26px] font-bold text-[var(--color-text)] mb-4">
               Astacraft<span className="text-[var(--color-green)]"> Systems</span>
             </div>
-            <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed max-w-sm">
+            <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed max-w-[48ch]">
               Technology, software, cloud, and digital transformation solutions helping African businesses modernize, automate, and scale.
             </p>
             <p className="mt-6 font-mono text-[11px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.28)]">
-              {address} · {email}
+              {address} · <a href={`mailto:${email}`} className="hover:text-[var(--color-accent)] transition-colors duration-200">{email}</a>
             </p>
           </div>
 
@@ -34,7 +34,7 @@ export default async function Footer() {
             <ul className="space-y-3">
               {[
                 ['Software Development', '/services/software-development'],
-                ['Cloud & Infrastructure', '/services/cloud-infrastructure'],
+                ['Cloud & Infrastructure', '/services/cloud-solutions'],
                 ['Cybersecurity', '/services/cybersecurity'],
                 ['CRM & ERP', '/services/crm-erp'],
                 ['Digital Transformation', '/services/digital-transformation'],

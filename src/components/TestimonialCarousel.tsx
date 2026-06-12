@@ -33,15 +33,15 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
       {/* Stars */}
       <div className="inline-flex items-center gap-1 mb-10">
         {[...Array(5)].map((_, i) => (
-          <span key={i} className="text-[var(--color-accent)] text-lg">★</span>
+          <span key={i} className="text-[#F59E0B] text-lg">★</span>
         ))}
       </div>
 
       {/* Quote */}
       <blockquote
         key={active}
-        className="font-serif font-semibold text-[var(--color-text)] leading-snug mb-10 animate-fade-in"
-        style={{ fontSize: 'clamp(22px,3vw,36px)' }}
+        className="font-serif font-black text-[var(--color-text)] leading-[1.08] tracking-[-0.02em] mb-10 animate-fade-in"
+        style={{ fontSize: 'clamp(24px,3.5vw,44px)' }}
       >
         &ldquo;{t.quote}&rdquo;
       </blockquote>

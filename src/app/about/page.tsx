@@ -99,7 +99,7 @@ export default async function AboutPage() {
               { Icon: ShieldCheckIcon, num: '98%',   label: 'Client Satisfaction' },
             ].map(({ Icon, num, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
-                <Icon className="w-5 h-5 text-[rgba(37,99,235,0.45)] mb-3" />
+                <Icon className="w-5 h-5 text-[rgba(27,78,140,0.45)] mb-3" />
                 <p className="font-serif font-bold text-[var(--color-accent)] mb-1" style={{ fontSize: 'clamp(32px,4vw,52px)', lineHeight: 1 }}>{num}</p>
                 <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
               </div>
@@ -120,7 +120,7 @@ export default async function AboutPage() {
               const Icon = num === '01' ? TargetIcon : num === '02' ? GlobeIcon : num === '03' ? ShieldCheckIcon : TreeIcon
               return (
                 <div key={num} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-surface)] p-8 relative overflow-hidden reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                  <span className="absolute bottom-3 right-5 font-serif font-bold text-[100px] leading-none text-[rgba(37,99,235,0.04)] select-none pointer-events-none">
+                  <span className="absolute bottom-3 right-5 font-serif font-bold text-[100px] leading-none text-[rgba(27,78,140,0.04)] select-none pointer-events-none">
                     {num}
                   </span>
                   <div className="flex items-center gap-3 mb-4">

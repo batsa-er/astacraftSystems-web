@@ -6,52 +6,52 @@ import PageHero from '@/components/PageHero'
 
 const fallback = [
   {
-    _id: '1', slug: { current: 'panafricapay-brand' }, client: 'PanAfrica Pay',
-    industry: 'Fintech', summary: 'Complete brand overhaul — identity, web, and marketing assets — ahead of a pan-African market expansion.',
-    metric1_num: '3×', metric1_label: 'Brand Recall',
-    metric2_num: '68%', metric2_label: 'Web Conversion Lift',
-    metric3_num: '6wks', metric3_label: 'Launch Timeline', accent: 'purple',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=500&q=80&auto=format&fit=crop',
-  },
-  {
-    _id: '2', slug: { current: 'kepler-systems-web' }, client: 'Kepler Systems',
-    industry: 'Enterprise SaaS', summary: 'Redesigned enterprise website and built a content marketing system targeting EMEA decision-makers.',
-    metric1_num: '4.4×', metric1_label: 'Organic Traffic',
-    metric2_num: '52%', metric2_label: 'Demo Request Rate',
-    metric3_num: '90d', metric3_label: 'Go-Live', accent: 'cyan',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&q=80&auto=format&fit=crop',
-  },
-  {
-    _id: '3', slug: { current: 'verto-networks-identity' }, client: 'Verto Networks',
-    industry: 'Telecoms', summary: 'Full rebrand and integrated marketing campaign for a B2B telecoms leader entering three new markets.',
-    metric1_num: '2.2×', metric1_label: 'Brand Equity Score',
-    metric2_num: '41%', metric2_label: 'Campaign Reach',
-    metric3_num: '8wks', metric3_label: 'Rebrand to Launch', accent: 'gold',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=500&q=80&auto=format&fit=crop',
-  },
-  {
-    _id: '4', slug: { current: 'luminary-health-print' }, client: 'Luminary Health',
-    industry: 'Healthtech', summary: 'Hospital-facing event branding, brochures, and exhibition materials for a Series B health technology company.',
-    metric1_num: '12', metric1_label: 'Events Produced',
-    metric2_num: '900+', metric2_label: 'Assets Delivered',
-    metric3_num: '72hr', metric3_label: 'Avg Turnaround', accent: 'cyan',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&q=80&auto=format&fit=crop',
-  },
-  {
-    _id: '5', slug: { current: 'tradeaxis-campaign' }, client: 'TradeAxis',
-    industry: 'Logistics', summary: 'Integrated marketing campaign — social, email, and print — to launch a new enterprise freight product.',
-    metric1_num: '220%', metric1_label: 'Lead Volume',
-    metric2_num: '3.1×', metric2_label: 'Cost-per-Lead Improvement',
-    metric3_num: '6wks', metric3_label: 'Campaign Duration', accent: 'gold',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&q=80&auto=format&fit=crop',
-  },
-  {
-    _id: '6', slug: { current: 'novabridge-identity' }, client: 'NovaBridge Capital',
-    industry: 'Financial Services', summary: 'Brand identity and investor-facing collateral for an institutional capital firm ahead of a Series A raise.',
-    metric1_num: '1 round', metric1_label: 'Raise Completed',
-    metric2_num: '100%', metric2_label: 'Brand Asset Coverage',
-    metric3_num: '4wks', metric3_label: 'Concept to Delivery', accent: 'purple',
+    _id: '1', slug: { current: 'stanbic-crm-transformation' }, client: 'Stanbic Business Finance',
+    industry: 'Financial Services', summary: 'Full Salesforce CRM implementation and data migration for a pan-African business finance division — unifying 12 regional offices onto one system.',
+    metric1_num: '62%', metric1_label: 'Faster deal cycle',
+    metric2_num: '12', metric2_label: 'Offices unified',
+    metric3_num: '90d', metric3_label: 'Go-live', accent: 'blue',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=500&q=80&auto=format&fit=crop',
+  },
+  {
+    _id: '2', slug: { current: 'mtn-cloud-migration' }, client: 'MTN Enterprise',
+    industry: 'Telecoms', summary: 'Cloud migration of legacy on-premise infrastructure to AWS — cutting infrastructure costs while improving uptime across four data centres.',
+    metric1_num: '38%', metric1_label: 'Infrastructure cost reduction',
+    metric2_num: '99.97%', metric2_label: 'Uptime post-migration',
+    metric3_num: '6mo', metric3_label: 'Migration timeline', accent: 'gold',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&q=80&auto=format&fit=crop',
+  },
+  {
+    _id: '3', slug: { current: 'afrexim-security-audit' }, client: 'Afreximbank',
+    industry: 'Banking', summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework — ahead of an international regulatory review.',
+    metric1_num: '47', metric1_label: 'Vulnerabilities remediated',
+    metric2_num: 'ISO', metric2_label: '27001 certified',
+    metric3_num: '8wks', metric3_label: 'Engagement timeline', accent: 'cyan',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&q=80&auto=format&fit=crop',
+  },
+  {
+    _id: '4', slug: { current: 'quickmart-erp-odoo' }, client: 'QuickMart Retail',
+    industry: 'Retail', summary: 'Odoo ERP deployment across 18 retail locations — replacing five disconnected systems with a single platform for inventory, POS, and procurement.',
+    metric1_num: '18', metric1_label: 'Locations live',
+    metric2_num: '40%', metric2_label: 'Inventory accuracy improvement',
+    metric3_num: '4mo', metric3_label: 'Phased rollout', accent: 'blue',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=500&q=80&auto=format&fit=crop',
+  },
+  {
+    _id: '5', slug: { current: 'volta-river-digital-ops' }, client: 'Volta River Authority',
+    industry: 'Energy & Utilities', summary: 'Digital transformation of field operations — replacing paper-based inspection processes with a custom mobile app and real-time reporting dashboard.',
+    metric1_num: '85%', metric1_label: 'Faster field reporting',
+    metric2_num: '2,400+', metric2_label: 'Daily reports digitized',
+    metric3_num: '120d', metric3_label: 'Build to launch', accent: 'cyan',
+    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=500&q=80&auto=format&fit=crop',
+  },
+  {
+    _id: '6', slug: { current: 'nexus-health-software' }, client: 'Nexus Health Systems',
+    industry: 'Healthtech', summary: 'Custom patient management platform with mobile check-in, EHR integration, and billing automation — deployed across 8 clinics in Accra and Kumasi.',
+    metric1_num: '8', metric1_label: 'Clinics deployed',
+    metric2_num: '3×', metric2_label: 'Faster patient registration',
+    metric3_num: '5mo', metric3_label: 'Build timeline', accent: 'gold',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&q=80&auto=format&fit=crop',
   },
 ]
 
@@ -70,12 +70,11 @@ export default async function WorkPage() {
 
   return (
     <>
-      {/* Header */}
       <PageHero
         eyebrow="Selected Work"
-        title={<>Proof over<br />promises.</>}
-        description="Every engagement is measured by one thing: revenue outcomes. Here's what we've delivered."
-        image={{ src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Team reviewing creative work' }}
+        title={<>Results, not just<br />delivery.</>}
+        description="Every engagement is measured by one thing: business outcomes. Here's a selection of what we've built and transformed for clients across Africa."
+        image={{ src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Astacraft Systems client work' }}
       />
 
       {/* Case Studies Grid */}
@@ -90,7 +89,6 @@ export default async function WorkPage() {
                 className="group block border border-[rgba(var(--ch-border),0.12)] bg-[var(--color-panel)] hover:border-[rgba(var(--ch-accent),0.40)] hover:-translate-y-1 transition-all duration-300 overflow-hidden reveal"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                {/* Cover image — Sanity upload takes priority over fallback URL */}
                 {(cs.coverImage || cs.image) && (
                   <div className="relative w-full aspect-[16/9] overflow-hidden">
                     <Image
@@ -134,10 +132,12 @@ export default async function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[var(--color-surface)] border-t border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-24 text-center">
-        <div className="max-w-[1280px] mx-auto">
+      <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+        <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(37,99,235,0.12),transparent)] pointer-events-none" />
+        <div className="relative max-w-[1280px] mx-auto text-center reveal">
           <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Work With Us</p>
-          <h2 className="font-serif font-bold text-[var(--color-text)] mb-6" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
+          <h2 className="font-serif font-bold text-white mb-6" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
             Your results could be next.
           </h2>
           <Link

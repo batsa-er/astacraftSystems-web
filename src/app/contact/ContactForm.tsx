@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', company: '', message: '', service: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '', service: '' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -36,10 +36,12 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Name *</label>
+              <label htmlFor="cf-name" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Name *</label>
               <input
+                id="cf-name"
                 required
                 type="text"
+                autoComplete="name"
                 value={form.name}
                 onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                 className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] font-mono placeholder:text-[rgba(var(--ch-text),0.25)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
@@ -47,10 +49,12 @@ export default function ContactForm() {
               />
             </div>
             <div>
-              <label className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Email *</label>
+              <label htmlFor="cf-email" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Email *</label>
               <input
+                id="cf-email"
                 required
                 type="email"
+                autoComplete="email"
                 value={form.email}
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                 className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] font-mono placeholder:text-[rgba(var(--ch-text),0.25)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
@@ -59,30 +63,52 @@ export default function ContactForm() {
             </div>
           </div>
 
-          <div>
-            <label className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Company</label>
-            <input
-              type="text"
-              value={form.company}
-              onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
-              className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] font-mono placeholder:text-[rgba(var(--ch-text),0.25)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
-              placeholder="Your company"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="cf-company" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Company</label>
+              <input
+                id="cf-company"
+                type="text"
+                autoComplete="organization"
+                value={form.company}
+                onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] font-mono placeholder:text-[rgba(var(--ch-text),0.25)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
+                placeholder="Your company"
+              />
+            </div>
+            <div>
+              <label htmlFor="cf-phone" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Phone</label>
+              <input
+                id="cf-phone"
+                type="tel"
+                autoComplete="tel"
+                value={form.phone}
+                onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] font-mono placeholder:text-[rgba(var(--ch-text),0.25)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
+                placeholder="+233 XX XXX XXXX"
+              />
+            </div>
           </div>
 
           <div>
-            <label className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">What are you looking for?</label>
+            <label htmlFor="cf-service" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">What are you looking for?</label>
             <div className="relative">
               <select
+                id="cf-service"
                 value={form.service}
                 onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
                 className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[rgba(var(--ch-text),0.60)] font-mono focus:outline-none focus:border-[var(--color-accent)] transition-colors appearance-none pr-10"
               >
                 <option value="">Select a service</option>
-                <option value="brand-identity">Brand &amp; Identity</option>
-                <option value="web-digital">Web &amp; Digital</option>
-                <option value="marketing-campaigns">Marketing &amp; Campaigns</option>
-                <option value="print-production">Print &amp; Production</option>
+                <option value="software-development">Software Development</option>
+                <option value="digital-transformation">Digital Transformation</option>
+                <option value="cloud-solutions">Cloud Solutions</option>
+                <option value="cybersecurity">Cybersecurity</option>
+                <option value="crm-erp">CRM &amp; ERP Systems</option>
+                <option value="digital-marketing">Digital Marketing</option>
+                <option value="brand-design">Brand &amp; Design</option>
+                <option value="it-consulting">IT Consulting</option>
+                <option value="astabill">AstaBill</option>
                 <option value="other">Not sure yet</option>
               </select>
               <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[rgba(var(--ch-text),0.40)] text-[10px]">▾</span>
@@ -90,14 +116,15 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Tell us about your situation *</label>
+            <label htmlFor="cf-message" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Tell us about your situation *</label>
             <textarea
+              id="cf-message"
               required
               rows={5}
               value={form.message}
               onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
               className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] font-mono placeholder:text-[rgba(var(--ch-text),0.25)] focus:outline-none focus:border-[var(--color-accent)] transition-colors resize-none"
-              placeholder="Current stage, revenue goal, biggest challenge..."
+              placeholder="Current systems, challenges, goals, timeline..."
             />
           </div>
 
@@ -109,9 +136,19 @@ export default function ContactForm() {
             {status === 'sending' ? 'Sending...' : 'Send Message'}
           </button>
           {status === 'error' && (
-            <p className="text-center font-mono text-[11px] text-red-500 tracking-[0.08em]">
-              Something went wrong. Please email us directly.
-            </p>
+            <div className="flex items-center justify-between border border-red-200 bg-red-50 px-4 py-3" role="alert">
+              <p className="font-mono text-[11px] text-red-600 tracking-[0.06em]">
+                Send failed — please try again or email{' '}
+                <a href="mailto:info@astacraftsystems.com" className="underline">info@astacraftsystems.com</a>
+              </p>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className="font-mono text-[10px] tracking-[0.1em] uppercase text-red-500 hover:text-red-700 transition-colors ml-4 shrink-0"
+              >
+                Retry
+              </button>
+            </div>
           )}
         </form>
       )}
