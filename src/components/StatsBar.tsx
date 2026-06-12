@@ -6,13 +6,12 @@ import {
 } from '@/components/Icons'
 
 const stats = [
-  { Icon: TrendingUpIcon, num: '8.4×',  label: 'Average ROI — enterprise clients, Year 1' },
-  { Icon: UsersIcon,      num: '62%',   label: 'Avg increase in qualified pipeline within 90 days' },
-  { Icon: CurrencyIcon,   num: '$47M',  label: 'In verified client revenue attributed to our systems' },
-  { Icon: ShieldCheckIcon,num: '94%',   label: 'Client retention rate' },
+  { Icon: TrendingUpIcon, num: '200+',  label: 'Businesses served across Africa' },
+  { Icon: UsersIcon,      num: '50+',   label: 'Certified technology professionals' },
+  { Icon: CurrencyIcon,   num: '$28M',  label: 'In client revenue powered by our systems' },
+  { Icon: ShieldCheckIcon,num: '98%',   label: 'Client satisfaction rate' },
 ]
 
-// Parse a display string like '$47M', '8.4×', '62%' into parts
 function parse(raw: string): { prefix: string; value: number; suffix: string; decimals: number } {
   const prefix = raw.match(/^[^0-9]*/)?.[0] ?? ''
   const suffix = raw.match(/[^0-9.]+$/)?.[0] ?? ''
@@ -33,7 +32,6 @@ function useCountUp(target: number, decimals: number, active: boolean) {
     function tick(now: number) {
       const elapsed = now - start
       const progress = Math.min(elapsed / duration, 1)
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
       setDisplay(parseFloat((eased * target).toFixed(decimals)))
       if (progress < 1) raf.current = requestAnimationFrame(tick)

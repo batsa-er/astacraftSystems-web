@@ -28,10 +28,13 @@
   --color-text:         #0B0F14;
   --color-accent:       #2563EB;
   --color-accent-hover: #1D4ED8;
+  --color-green:        #22A656;
+  --color-green-hover:  #1A8A44;
   --ch-bg:     246,247,251;
   --ch-text:   11,15,20;
   --ch-border: 15,23,42;
   --ch-accent: 37,99,235;
+  --ch-green:  34,166,86;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,10 +45,13 @@
     --color-text:         #F1F5F9;
     --color-accent:       #3B82F6;
     --color-accent-hover: #2563EB;
+    --color-green:        #34D277;
+    --color-green-hover:  #22C55E;
     --ch-bg:     12,16,24;
     --ch-text:   241,245,249;
     --ch-border: 241,245,249;
     --ch-accent: 59,130,246;
+    --ch-green:  52,210,119;
   }
 }
 
@@ -135,3 +141,62 @@ body::before {
 }
 .animate-marquee { animation: marquee 28s linear infinite; }
 .animate-marquee:hover { animation-play-state: paused; }
+
+/* ── Gradient text (blue → green) — for hero headlines ── */
+.text-gradient {
+  background: linear-gradient(130deg, #60A5FA 0%, #4ADE80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Hero grid overlay ── */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ── Animated gradient orbs ── */
+@keyframes orb-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(80px, -60px) scale(1.07); }
+  66%       { transform: translate(-40px, 50px) scale(0.94); }
+}
+@keyframes orb-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%       { transform: translate(-70px, 45px) scale(1.05); }
+  75%       { transform: translate(55px, -70px) scale(0.95); }
+}
+@keyframes orb-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(55px, 65px) scale(1.06); }
+  80%       { transform: translate(-50px, -40px) scale(0.96); }
+}
+.animate-orb-1 { animation: orb-1 20s ease-in-out infinite; }
+.animate-orb-2 { animation: orb-2 26s ease-in-out infinite; }
+.animate-orb-3 { animation: orb-3 32s ease-in-out infinite; }
+
+/* ── Card glow on hover ── */
+.card-glow {
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+.card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(37,99,235,0.20), 0 24px 64px rgba(37,99,235,0.07);
+  transform: translateY(-2px);
+}
+
+/* ── Mega-menu dropdown entrance ── */
+@keyframes dropdown-enter {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mega-dropdown { animation: dropdown-enter 0.22s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ── Pulsing status dot ── */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+.animate-status { animation: status-pulse 2s ease-in-out infinite; }

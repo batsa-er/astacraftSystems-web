@@ -6,10 +6,10 @@ export default async function Footer() {
   let settings = null
   try { settings = await getSiteSettings() } catch {}
 
-  const email        = settings?.email        || 'hello@apexgrowth.africa'
+  const email        = settings?.email        || 'info@astacraftsystems.com'
   const address      = settings?.address      || 'Accra, Ghana'
-  const linkedinUrl  = settings?.linkedinUrl  || 'https://linkedin.com/company/apexgrowthpartners'
-  const twitterUrl   = settings?.twitterUrl   || 'https://x.com/apexgrowth_af'
+  const linkedinUrl  = settings?.linkedinUrl  || 'https://linkedin.com/company/astacraftsystems'
+  const twitterUrl   = settings?.twitterUrl   || 'https://x.com/astacraftsys'
   const facebookUrl  = settings?.facebookUrl  || null
   const instagramUrl = settings?.instagramUrl || null
 
@@ -18,11 +18,11 @@ export default async function Footer() {
       <div className="max-w-[1280px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2">
-            <div className="font-serif text-[28px] font-bold text-[var(--color-text)] mb-4">
-              Apex<span className="text-[var(--color-accent)]">.</span>Growth
+            <div className="font-serif text-[26px] font-bold text-[var(--color-text)] mb-4">
+              Astacraft<span className="text-[var(--color-green)]"> Systems</span>
             </div>
             <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed max-w-sm">
-              Full-service creative agency delivering brand identity, web, marketing, and print production across Africa and globally.
+              Technology, software, cloud, and digital transformation solutions helping African businesses modernize, automate, and scale.
             </p>
             <p className="mt-6 font-mono text-[11px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.28)]">
               {address} · {email}
@@ -30,9 +30,15 @@ export default async function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-6">Company</h4>
+            <h4 className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-6">Solutions</h4>
             <ul className="space-y-3">
-              {[['Work', '/work'], ['Services', '/services'], ['About', '/about'], ['Careers', '/about#careers']].map(([l, h]) => (
+              {[
+                ['Software Development', '/services/software-development'],
+                ['Cloud & Infrastructure', '/services/cloud-infrastructure'],
+                ['Cybersecurity', '/services/cybersecurity'],
+                ['CRM & ERP', '/services/crm-erp'],
+                ['Digital Transformation', '/services/digital-transformation'],
+              ].map(([l, h]) => (
                 <li key={h}>
                   <Link href={h} className="text-[13px] text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)] transition-colors duration-200">{l}</Link>
                 </li>
@@ -41,9 +47,16 @@ export default async function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-6">Resources</h4>
+            <h4 className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-6">Company</h4>
             <ul className="space-y-3">
-              {[['Insights', '/insights'], ['Contact', '/contact'], ['Privacy Policy', '/privacy']].map(([l, h]) => (
+              {[
+                ['Products', '/products'],
+                ['About', '/about'],
+                ['Case Studies', '/work'],
+                ['Insights', '/insights'],
+                ['Contact', '/contact'],
+                ['Privacy Policy', '/privacy'],
+              ].map(([l, h]) => (
                 <li key={h}>
                   <Link href={h} className="text-[13px] text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)] transition-colors duration-200">{l}</Link>
                 </li>
@@ -54,7 +67,7 @@ export default async function Footer() {
 
         <div className="border-t border-[rgba(var(--ch-border),0.10)] pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <p className="font-mono text-[11px] tracking-[0.08em] text-[rgba(var(--ch-text),0.28)]">
-            © {new Date().getFullYear()} Apex Growth Partners. All rights reserved.
+            © {new Date().getFullYear()} Astacraft Systems Limited. All rights reserved.
           </p>
           <div className="flex gap-3">
             <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"

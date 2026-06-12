@@ -20,7 +20,7 @@ export default function PageHero({ eyebrow, title, description, image }: Props) 
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(11,15,20,0.72)] via-[rgba(11,15,20,0.60)] to-[rgba(11,15,20,0.80)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(11,15,20,0.45)] via-[rgba(11,15,20,0.30)] to-[rgba(11,15,20,0.60)]" />
         </>
       )}
       <div className="relative max-w-[1280px] mx-auto">

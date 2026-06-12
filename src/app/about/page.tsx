@@ -10,37 +10,55 @@ import {
 
 const fallbackTeam = [
   {
-    _id: '1', name: 'Kwame Asante', role: 'Founder & Creative Director',
-    bio: 'Founded Apex Growth to bring world-class creative thinking to African businesses. 15 years building brands across finance, healthcare, and technology sectors.',
+    _id: '1', name: 'Kwame Asante', role: 'Founder & CEO',
+    bio: 'Founded Astacraft Systems to address the technology gap facing African businesses. 15+ years in enterprise software, systems architecture, and digital transformation across West Africa.',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&q=80&auto=format&fit=crop&crop=face',
   },
   {
-    _id: '2', name: 'Adaeze Okonkwo', role: 'Head of Brand Strategy',
-    bio: 'Brand strategist with deep expertise in identity, positioning, and visual systems across EMEA and Africa. Previously strategy lead at a global creative consultancy.',
+    _id: '2', name: 'Adaeze Okonkwo', role: 'Head of Software Engineering',
+    bio: 'Leads our engineering practice with deep expertise in enterprise systems, cloud architecture, and scalable API design. Previously led engineering teams across EMEA.',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&q=80&auto=format&fit=crop&crop=face',
   },
   {
-    _id: '3', name: 'Seun Bankole', role: 'Head of Digital & Performance',
-    bio: 'Led digital campaigns and performance marketing for high-growth consumer and B2B brands. Data-driven creative with a track record of measurable outcomes.',
+    _id: '3', name: 'Seun Bankole', role: 'Head of Cybersecurity',
+    bio: 'Certified security architect with 10+ years in enterprise security, risk management, and compliance. Former security lead at a pan-African financial institution.',
     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&q=80&auto=format&fit=crop&crop=face',
   },
   {
-    _id: '4', name: 'Yemi Adesanya', role: 'Head of Production',
-    bio: 'Manages end-to-end production across web, print, and brand — from vendor coordination to quality control. Delivered 500+ projects across 12 countries.',
+    _id: '4', name: 'Yemi Adesanya', role: 'Head of Cloud & Infrastructure',
+    bio: 'AWS and Azure certified cloud architect with a track record of complex cloud migrations and managed infrastructure deployments across 12+ countries.',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&q=80&auto=format&fit=crop&crop=face',
   },
 ]
 
 const values = [
-  { num: '01', title: 'Results over aesthetics', body: 'Beautiful work that does not perform is not great work. Every design decision, campaign, and asset is measured against one question: does it achieve the objective?' },
-  { num: '02', title: 'Context over templates', body: 'African markets have distinct audiences, visual cultures, and competitive landscapes. We do not import Western playbooks — we build creative that resonates where your brand actually operates.' },
-  { num: '03', title: 'Integrated over fragmented', body: 'Brand, digital, marketing, and print from four different agencies produces four different looks. We keep everything under one creative roof so your brand stays consistent at every touchpoint.' },
-  { num: '04', title: 'Long-term over short-term', body: 'We build brand systems designed to grow with your business. The goal is never a one-off deliverable — it is a creative foundation your team can operate and scale for years.' },
+  {
+    num: '01', title: 'Client Results First',
+    body: 'We measure every engagement against business outcomes — not deliverables alone. If the technology we implement does not move the needle, we go back to the drawing board.',
+  },
+  {
+    num: '02', title: 'Built for Africa',
+    body: 'African markets have distinct infrastructure constraints, user behaviors, and regulatory requirements. We build solutions designed for these realities — not imported templates from elsewhere.',
+  },
+  {
+    num: '03', title: 'Engineering Excellence',
+    body: 'We do not cut corners. Every system we build is designed for reliability, security, and long-term maintainability — because your business depends on it running perfectly.',
+  },
+  {
+    num: '04', title: 'Long-Term Partnership',
+    body: 'Technology is not a one-time purchase. We build lasting relationships with ongoing support, optimization, and strategic guidance as your business evolves and scales.',
+  },
 ]
 
 const fallbackCareers = [
-  { _id: '1', title: 'Brand Strategist', department: 'Brand', type: 'Contract / Full-time', location: 'Accra / Remote', excerpt: 'Own brand strategy, positioning, and identity direction for creative engagements.' },
-  { _id: '2', title: 'Performance Marketing Lead', department: 'Performance', type: 'Contract / Full-time', location: 'Accra / Remote', excerpt: 'Run LinkedIn/Google demand gen, attribution, and conversion optimisation for client campaigns.' },
+  {
+    _id: '1', title: 'Senior Software Engineer', department: 'Engineering', type: 'Full-time', location: 'Accra / Remote',
+    excerpt: 'Lead complex software projects across web, mobile, and enterprise platforms. Strong TypeScript and cloud integration experience required.',
+  },
+  {
+    _id: '2', title: 'Cloud Infrastructure Engineer', department: 'Cloud', type: 'Full-time', location: 'Accra / Remote',
+    excerpt: 'Design and manage cloud infrastructure for client deployments on AWS and Azure. AWS or Azure certification preferred.',
+  },
 ]
 
 export default async function AboutPage() {
@@ -54,12 +72,11 @@ export default async function AboutPage() {
 
   return (
     <>
-      {/* Header */}
       <PageHero
-        eyebrow="About"
-        title={<>One agency.<br />Every brand<br />touchpoint.</>}
-        description="Apex Growth Partners is a full-service creative agency based in Accra, Ghana. We deliver brand identity, web, marketing, and print production under one roof — with a single creative direction and measurable results."
-        image={{ src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Apex Growth creative studio' }}
+        eyebrow="About Astacraft Systems"
+        title={<>Technology partner<br />for Africa&apos;s<br />most ambitious teams.</>}
+        description="Astacraft Systems Limited is a technology, software, cloud, and digital transformation company based in Accra, Ghana. We help organizations across Africa modernize operations, automate workflows, and scale through technology."
+        image={{ src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Astacraft Systems office' }}
       />
 
       {/* Mission */}
@@ -68,18 +85,18 @@ export default async function AboutPage() {
           <div className="reveal">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6">Our Mission</p>
             <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
-              Brand architecture for Africa&apos;s most ambitious companies.
+              Closing the technology gap for Africa&apos;s businesses.
             </h2>
             <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed">
-              We believe Africa&apos;s best businesses deserve the same calibre of creative expertise that top global brands take for granted. That means world-class design, consistent messaging, and brand systems that scale — built for African market realities.
+              We believe Africa&apos;s best businesses deserve the same calibre of technology capability that top global enterprises take for granted. That means world-class engineering, reliable infrastructure, and systems built for African market realities.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-6">
             {[
-              { Icon: UsersIcon,       num: '200+',   label: 'Brands Built' },
-              { Icon: LayersIcon,      num: '1,500+', label: 'Assets Produced' },
-              { Icon: ClockIcon,       num: '72hr',   label: 'Fast Turnaround' },
-              { Icon: ShieldCheckIcon, num: '94%',    label: 'Client Retention' },
+              { Icon: UsersIcon,       num: '200+',  label: 'Businesses Served' },
+              { Icon: LayersIcon,      num: '500+',  label: 'Systems Deployed' },
+              { Icon: ClockIcon,       num: '8+',    label: 'Years in Technology' },
+              { Icon: ShieldCheckIcon, num: '98%',   label: 'Client Satisfaction' },
             ].map(({ Icon, num, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
                 <Icon className="w-5 h-5 text-[rgba(37,99,235,0.45)] mb-3" />
@@ -95,14 +112,14 @@ export default async function AboutPage() {
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto">
           <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6 reveal">How We Work</p>
-          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-16 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)', transitionDelay: '80ms' }}>
+          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-16 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
             Principles we do not compromise on.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {values.map(({ num, title, body }, i) => {
-              const Icon = num === '01' ? TargetIcon : num === '02' ? GlobeIcon : num === '03' ? LayersIcon : TreeIcon
+              const Icon = num === '01' ? TargetIcon : num === '02' ? GlobeIcon : num === '03' ? ShieldCheckIcon : TreeIcon
               return (
-                <div key={num} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-surface)] p-8 relative overflow-hidden group reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                <div key={num} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-surface)] p-8 relative overflow-hidden reveal" style={{ transitionDelay: `${i * 80}ms` }}>
                   <span className="absolute bottom-3 right-5 font-serif font-bold text-[100px] leading-none text-[rgba(37,99,235,0.04)] select-none pointer-events-none">
                     {num}
                   </span>
@@ -125,8 +142,8 @@ export default async function AboutPage() {
       <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto">
           <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6 reveal">The Team</p>
-          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-16 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)', transitionDelay: '80ms' }}>
-            Operators. Not consultants.
+          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-16 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
+            Engineers. Architects. Strategists.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member: any, i: number) => {
@@ -134,26 +151,25 @@ export default async function AboutPage() {
                 ? urlFor(member.photo).width(400).height(300).url()
                 : member.image
               return (
-              <div key={member._id || member.name} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-bg)] overflow-hidden reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                {/* Headshot — Sanity photo takes priority over fallback URL */}
-                {photoSrc && (
-                  <div className="relative w-full aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={photoSrc}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                    />
+                <div key={member._id || member.name} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-bg)] overflow-hidden reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                  {photoSrc && (
+                    <div className="relative w-full aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={photoSrc}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <h3 className="font-serif text-[18px] font-bold text-[var(--color-text)] mb-1">{member.name}</h3>
+                    <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[var(--color-accent)] mb-4">{member.role}</p>
+                    <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{member.bio}</p>
                   </div>
-                )}
-                <div className="p-6">
-                  <h3 className="font-serif text-[18px] font-bold text-[var(--color-text)] mb-1">{member.name}</h3>
-                  <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[var(--color-accent)] mb-4">{member.role}</p>
-                  <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{member.bio}</p>
                 </div>
-              </div>
-            )})}
-
+              )
+            })}
           </div>
         </div>
       </section>
@@ -162,11 +178,11 @@ export default async function AboutPage() {
       <section id="careers" className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto">
           <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6 reveal">Careers</p>
-          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)', transitionDelay: '80ms' }}>
-            Build careers that move markets.
+          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
+            Build technology that matters.
           </h2>
           <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] max-w-xl mb-16 reveal" style={{ transitionDelay: '160ms' }}>
-            We hire operators, strategists, and builders who are serious about results. No passengers. Every hire makes a material difference to our clients and our culture.
+            We hire engineers, architects, and strategists who care about impact. Every hire at Astacraft has the opportunity to shape technology outcomes for hundreds of businesses across Africa.
           </p>
 
           <div className="space-y-4">

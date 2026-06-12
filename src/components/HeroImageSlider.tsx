@@ -24,7 +24,7 @@ const fallbackSlides: Slide[] = [
   },
 ]
 
-export default function HeroImageSlider({ slides }: { slides?: Slide[] }) {
+export default function HeroImageSlider({ slides, className }: { slides?: Slide[]; className?: string }) {
   const images = slides?.length ? slides : fallbackSlides
   const [current, setCurrent] = useState(0)
 
@@ -34,7 +34,7 @@ export default function HeroImageSlider({ slides }: { slides?: Slide[] }) {
   }, [images.length])
 
   return (
-    <div className="relative aspect-[4/5] overflow-hidden">
+    <div className={`overflow-hidden ${className ?? 'relative aspect-[3/2] lg:aspect-[4/5]'}`}>
       {images.map(({ src, alt }, i) => (
         <div
           key={src}

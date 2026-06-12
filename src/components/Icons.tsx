@@ -209,3 +209,65 @@ export function BriefcaseIcon({ className = 'w-4 h-4' }: P) {
     </svg>
   )
 }
+
+export function CodeIcon({ className = 'w-5 h-5' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 7L2 10L6 13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14 7L18 10L14 13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4L8 16" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function CloudIcon({ className = 'w-5 h-5' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 13.5H14.5C16.157 13.5 17.5 12.157 17.5 10.5C17.5 8.843 16.157 7.5 14.5 7.5C14.332 7.5 14.167 7.516 14.007 7.545C13.575 5.531 11.775 4 9.6 4C7.170 4 5.2 5.970 5.2 8.4C5.2 8.503 5.204 8.605 5.212 8.706C5.141 8.702 5.071 8.7 5 8.7C3.343 8.7 2 10.043 2 11.7C2 13.357 3.343 14.7 5 14.7H8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 12V18" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M8 16L10 18L12 16" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+export function ServerIcon({ className = 'w-5 h-5' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2.5" y="3" width="15" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+      <rect x="2.5" y="12" width="15" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+      <circle cx="15.5" cy="5.5" r="0.8" fill="currentColor" />
+      <circle cx="15.5" cy="14.5" r="0.8" fill="currentColor" />
+      <path d="M5.5 5.5H10" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M5.5 14.5H10" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function ZapIcon({ className = 'w-5 h-5' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.5 2L4 11H10L8.5 18L16 9H10L11.5 2Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+export function DatabaseIcon({ className = 'w-5 h-5' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="10" cy="5" rx="7" ry="2.5" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M3 5V10C3 11.381 6.134 12.5 10 12.5C13.866 12.5 17 11.381 17 10V5" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M3 10V15C3 16.381 6.134 17.5 10 17.5C13.866 17.5 17 16.381 17 15V10" stroke="currentColor" strokeWidth="1.3" />
+    </svg>
+  )
+}
+
+export function ConsultIcon({ className = 'w-5 h-5' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2.5" y="4" width="15" height="10" rx="1" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M7 17H13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M10 14V17" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M6.5 9.5L8.5 11.5L13.5 7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
