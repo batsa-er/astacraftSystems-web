@@ -125,9 +125,9 @@ export default async function ServicesPage() {
                     <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-8">{s.description}</p>
                     <Link
                       href={`/services/${slug}`}
-                      className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.35)] text-[rgba(var(--ch-text),0.70)] px-6 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-text)] transition-colors duration-200"
+                      className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.25)] text-[rgba(var(--ch-text),0.60)] px-6 py-3 hover:border-[var(--color-green)] hover:text-[var(--color-green)] transition-colors duration-200"
                     >
-                      Learn More →
+                      Explore {s.title} →
                     </Link>
                   </div>
 
@@ -152,21 +152,29 @@ export default async function ServicesPage() {
       {/* CTA */}
       <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(27,78,140,0.12),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[700px] mx-auto text-center reveal">
-          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Get Started</p>
+          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.30)] mb-4">Ready to begin?</p>
           <h2 className="font-serif font-bold text-white mb-4" style={{ fontSize: 'clamp(28px,3vw,48px)' }}>
             Not sure which service fits your needs?
           </h2>
-          <p className="text-[rgba(255,255,255,0.50)] mb-8">
+          <p className="text-[rgba(255,255,255,0.50)] mb-10">
             Book a complimentary 45-minute Technology Strategy Call. We will assess your current situation and recommend the right engagement — no commitment required.
           </p>
-          <Link
-            href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-accent)] text-white px-10 py-4 hover:bg-[var(--color-accent-hover)] transition-colors duration-200"
-          >
-            Book a Strategy Call
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+            >
+              Start a Project →
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.18)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+            >
+              Submit RFP
+            </Link>
+          </div>
         </div>
       </section>
     </>

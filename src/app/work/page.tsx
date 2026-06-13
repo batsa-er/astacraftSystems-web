@@ -75,6 +75,7 @@ export default async function WorkPage() {
         title={<>Results, not just<br />delivery.</>}
         description="Every engagement is measured by one thing: business outcomes. Here's a selection of what we've built and transformed for clients across Africa."
         image={{ src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Astacraft Systems client work' }}
+        cta={{ label: 'Start a Project →', href: '/contact' }}
       />
 
       {/* Case Studies Grid */}
@@ -134,18 +135,26 @@ export default async function WorkPage() {
       {/* CTA */}
       <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(37,99,235,0.12),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[1280px] mx-auto text-center reveal">
-          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Work With Us</p>
+          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Work With Us</p>
           <h2 className="font-serif font-bold text-white mb-6" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
             Your results could be next.
           </h2>
-          <Link
-            href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-accent)] text-white px-10 py-4 hover:bg-[var(--color-accent-hover)] transition-colors duration-200"
-          >
-            Book Strategy Call
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+            >
+              Start a Project →
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.18)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+            >
+              Submit RFP
+            </Link>
+          </div>
         </div>
       </section>
     </>

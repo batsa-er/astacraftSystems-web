@@ -13,83 +13,161 @@ export default async function Footer() {
   const facebookUrl  = settings?.facebookUrl  || null
   const instagramUrl = settings?.instagramUrl || null
 
+  const socials: { label: string; href: string; Icon: React.ComponentType<{ className?: string }> }[] = [
+    { label: 'LinkedIn',    href: linkedinUrl, Icon: LinkedInIcon },
+    { label: 'X / Twitter', href: twitterUrl,  Icon: XIcon },
+    ...(facebookUrl  ? [{ label: 'Facebook',  href: facebookUrl,  Icon: FacebookIcon  }] : []),
+    ...(instagramUrl ? [{ label: 'Instagram', href: instagramUrl, Icon: InstagramIcon }] : []),
+  ]
+
   return (
-    <footer className="bg-[var(--color-surface)] border-t border-[rgba(var(--ch-border),0.10)] px-[clamp(24px,5vw,80px)] py-20">
-      <div className="max-w-[1280px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="md:col-span-2">
-            <div className="font-serif text-[26px] font-bold text-[var(--color-text)] mb-4">
-              Astacraft<span className="text-[var(--color-green)]"> Systems</span>
-            </div>
-            <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed max-w-[48ch]">
-              Technology, software, cloud, and digital transformation solutions helping African businesses modernize, automate, and scale.
-            </p>
-            <p className="mt-6 font-mono text-[11px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.28)]">
-              {address} · <a href={`mailto:${email}`} className="hover:text-[var(--color-accent)] transition-colors duration-200">{email}</a>
-            </p>
-          </div>
+    <footer className="bg-[#0A0F1E]">
 
+      {/* ── Submit RFP enterprise banner ── */}
+      <div className="border-b border-[rgba(255,255,255,0.06)] px-[clamp(24px,5vw,80px)] py-8">
+        <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-5">
           <div>
-            <h4 className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-6">Solutions</h4>
-            <ul className="space-y-3">
-              {[
-                ['Software Development', '/services/software-development'],
-                ['Cloud & Infrastructure', '/services/cloud-solutions'],
-                ['Cybersecurity', '/services/cybersecurity'],
-                ['CRM & ERP', '/services/crm-erp'],
-                ['Digital Transformation', '/services/digital-transformation'],
-              ].map(([l, h]) => (
-                <li key={h}>
-                  <Link href={h} className="text-[13px] text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)] transition-colors duration-200">{l}</Link>
-                </li>
-              ))}
-            </ul>
+            <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-1">
+              Enterprise Procurement
+            </p>
+            <p className="text-[15px] font-medium text-white">
+              Ready to start a formal engagement?
+            </p>
           </div>
-
-          <div>
-            <h4 className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-6">Company</h4>
-            <ul className="space-y-3">
-              {[
-                ['Products', '/products'],
-                ['About', '/about'],
-                ['Case Studies', '/work'],
-                ['Insights', '/insights'],
-                ['Contact', '/contact'],
-                ['Privacy Policy', '/privacy'],
-              ].map(([l, h]) => (
-                <li key={h}>
-                  <Link href={h} className="text-[13px] text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)] transition-colors duration-200">{l}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Link
+            href="/contact"
+            className="inline-block font-mono text-[10px] tracking-[0.16em] uppercase font-medium border border-[rgba(255,255,255,0.18)] text-white px-7 py-3.5 hover:border-[#55AA49] hover:text-[#55AA49] transition-colors duration-200 shrink-0"
+          >
+            Submit RFP →
+          </Link>
         </div>
+      </div>
 
-        <div className="border-t border-[rgba(var(--ch-border),0.10)] pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <p className="font-mono text-[11px] tracking-[0.08em] text-[rgba(var(--ch-text),0.28)]">
-            © {new Date().getFullYear()} Astacraft Systems Limited. All rights reserved.
-          </p>
-          <div className="flex gap-3">
-            <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-              className="w-8 h-8 border border-[rgba(var(--ch-border),0.10)] flex items-center justify-center text-[rgba(var(--ch-text),0.35)] hover:text-[var(--color-accent)] hover:border-[rgba(var(--ch-accent),0.30)] transition-colors duration-200">
-              <LinkedInIcon className="w-4 h-4" />
-            </a>
-            <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"
-              className="w-8 h-8 border border-[rgba(var(--ch-border),0.10)] flex items-center justify-center text-[rgba(var(--ch-text),0.35)] hover:text-[var(--color-accent)] hover:border-[rgba(var(--ch-accent),0.30)] transition-colors duration-200">
-              <XIcon className="w-4 h-4" />
-            </a>
-            {facebookUrl && (
-              <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
-                className="w-8 h-8 border border-[rgba(var(--ch-border),0.10)] flex items-center justify-center text-[rgba(var(--ch-text),0.35)] hover:text-[var(--color-accent)] hover:border-[rgba(var(--ch-accent),0.30)] transition-colors duration-200">
-                <FacebookIcon className="w-4 h-4" />
+      {/* ── Main grid ── */}
+      <div className="px-[clamp(24px,5vw,80px)] pt-16 pb-12">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-16">
+
+            {/* Brand column */}
+            <div>
+              <Link href="/" className="inline-block font-serif text-[24px] font-bold text-white mb-4">
+                Astacraft<span className="text-[#55AA49]"> Systems</span>
+              </Link>
+              <p className="text-[13px] text-[rgba(255,255,255,0.40)] leading-relaxed max-w-[38ch] mb-6">
+                Technology, software, cloud, and digital transformation solutions helping African organizations modernize and scale.
+              </p>
+              <p className="font-mono text-[10px] tracking-[0.10em] text-[rgba(255,255,255,0.22)]">
+                {address}
+              </p>
+              <a
+                href={`mailto:${email}`}
+                className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.22)] hover:text-[#55AA49] transition-colors duration-200 mt-1 block"
+              >
+                {email}
               </a>
-            )}
-            {instagramUrl && (
-              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                className="w-8 h-8 border border-[rgba(var(--ch-border),0.10)] flex items-center justify-center text-[rgba(var(--ch-text),0.35)] hover:text-[var(--color-accent)] hover:border-[rgba(var(--ch-accent),0.30)] transition-colors duration-200">
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-            )}
+            </div>
+
+            {/* Services column */}
+            <div>
+              <h4 className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
+                Services
+              </h4>
+              <ul className="space-y-3.5">
+                {[
+                  ['Software Development', '/services/software-development'],
+                  ['Cloud & Infrastructure', '/services/cloud-solutions'],
+                  ['Cybersecurity', '/services/cybersecurity'],
+                  ['CRM & ERP Systems', '/services/crm-erp'],
+                  ['Digital Transformation', '/services/digital-transformation'],
+                  ['IT Consulting', '/services/it-consulting'],
+                ].map(([label, href]) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-[13px] text-[rgba(255,255,255,0.36)] hover:text-white transition-colors duration-200"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company column */}
+            <div>
+              <h4 className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
+                Company
+              </h4>
+              <ul className="space-y-3.5">
+                {[
+                  ['About Us',       '/about'],
+                  ['Our Work',       '/work'],
+                  ['AstaBill',       '/products'],
+                  ['Insights',       '/insights'],
+                  ['Contact',        '/contact'],
+                  ['Privacy Policy', '/privacy'],
+                ].map(([label, href]) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-[13px] text-[rgba(255,255,255,0.36)] hover:text-white transition-colors duration-200"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Connect column */}
+            <div>
+              <h4 className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
+                Connect
+              </h4>
+              <div className="flex flex-col gap-3.5 mb-8">
+                {socials.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 text-[13px] text-[rgba(255,255,255,0.36)] hover:text-white transition-colors duration-200 group"
+                  >
+                    <Icon className="w-4 h-4 text-[rgba(255,255,255,0.20)] group-hover:text-[#55AA49] transition-colors duration-200 shrink-0" />
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <Link
+                href="/contact"
+                className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-5 py-3 hover:bg-[#489A3E] transition-colors duration-200"
+              >
+                Start a Project →
+              </Link>
+            </div>
+
+          </div>
+
+          {/* ── Bottom strip ── */}
+          <div className="border-t border-[rgba(255,255,255,0.06)] pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <p className="font-mono text-[10px] tracking-[0.06em] text-[rgba(255,255,255,0.18)]">
+              © {new Date().getFullYear()} Astacraft Systems Limited · Accra, Ghana
+            </p>
+            <div className="flex items-center gap-6">
+              {[
+                ['Terms',   '/terms'],
+                ['Privacy', '/privacy'],
+                ['Sitemap', '/sitemap.xml'],
+              ].map(([label, href]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.18)] hover:text-[rgba(255,255,255,0.50)] transition-colors duration-200"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

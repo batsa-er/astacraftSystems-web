@@ -94,7 +94,7 @@ export default function Nav() {
         }`}>
 
           <Link href="/" className={`font-serif text-[22px] font-bold tracking-wide shrink-0 transition-colors duration-300 ${isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-text)]'}`}>
-            Astacraft<span style={{ color: '#55AD3D' }}> Systems</span>
+            Astacraft<span style={{ color: '#55AA49' }}> Systems</span>
           </Link>
 
           {/* Desktop links */}
@@ -162,11 +162,11 @@ export default function Nav() {
                 href="/contact"
                 className={`font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 transition-colors duration-200 ${
                   isDarkPage && !scrolled
-                    ? 'bg-white text-[#060C18] hover:bg-[rgba(255,255,255,0.88)]'
-                    : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]'
+                    ? 'bg-[#55AA49] text-white hover:bg-[#489A3E]'
+                    : 'bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)]'
                 }`}
               >
-                Book Consultation →
+                Start a Project →
               </Link>
             </li>
           </ul>
@@ -268,9 +268,9 @@ export default function Nav() {
                   </div>
                   <Link
                     href="/contact"
-                    className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-accent)] text-white px-6 py-3 hover:bg-[var(--color-accent-hover)] transition-colors duration-200 self-start"
+                    className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 self-start"
                   >
-                    Book Consultation →
+                    Start a Project →
                   </Link>
                 </div>
 
@@ -365,9 +365,9 @@ export default function Nav() {
           ))}
           <Link
             href="/contact"
-            className="mt-4 font-mono text-[13px] tracking-[0.12em] uppercase font-medium bg-[var(--color-accent)] text-white px-12 py-5 hover:bg-[var(--color-accent-hover)] transition-colors duration-200"
+            className="mt-4 font-mono text-[13px] tracking-[0.12em] uppercase font-medium bg-[var(--color-green)] text-white px-12 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
           >
-            Book Consultation
+            Start a Project
           </Link>
         </div>
       )}

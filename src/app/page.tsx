@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { CountUp } from '@/components/CountUp'
@@ -69,15 +70,18 @@ export default async function HomePage() {
       ───────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[100dvh] flex flex-col bg-[#060C18] overflow-hidden">
         {/* Ambient orbs */}
-        <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(27,78,140,0.30)_0%,transparent_60%)] animate-orb-1 pointer-events-none" />
-        <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(85,173,61,0.12)_0%,transparent_60%)] animate-orb-2 pointer-events-none" />
-        <div className="absolute bottom-[-8%] right-[25%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(27,78,140,0.14)_0%,transparent_60%)] animate-orb-3 pointer-events-none" />
+        <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.30)_0%,transparent_60%)] animate-orb-1 pointer-events-none" />
+        <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(85,170,73,0.12)_0%,transparent_60%)] animate-orb-2 pointer-events-none" />
+        <div className="absolute bottom-[-8%] right-[25%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.14)_0%,transparent_60%)] animate-orb-3 pointer-events-none" />
         <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
 
-        {/* Announcement badge */}
-        <div className="relative flex items-center px-[clamp(24px,5vw,80px)] pt-32 hero-in hero-in-1">
-          <div className="badge-announce inline-flex items-center gap-3 border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#55AD3D] animate-status shrink-0" />
+        {/* Eyebrow + status badge */}
+        <div className="relative flex flex-col gap-3 px-[clamp(24px,5vw,80px)] pt-32 hero-in hero-in-1">
+          <p className="font-mono text-[9px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.38)]">
+            Ghana&apos;s Premier Technology Company
+          </p>
+          <div className="badge-announce inline-flex items-center gap-3 border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-sm w-fit">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#55AA49] animate-status shrink-0" />
             <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.55)]">
               Systems online · Accra, Ghana
             </span>
@@ -112,26 +116,38 @@ export default async function HomePage() {
               </span>
             </h1>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end hero-in hero-in-3">
+            <div className="mt-12 flex flex-col gap-8 hero-in hero-in-3">
               <p
                 className="text-[rgba(255,255,255,0.62)] leading-relaxed max-w-[52ch]"
                 style={{ fontSize: 'clamp(15px,1.4vw,18px)' }}
               >
                 Astacraft Systems builds the cloud infrastructure, custom software, and security frameworks that African enterprises need to compete globally.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap items-center gap-6">
                 <Link
                   href="/contact"
-                  className="btn-shimmer inline-block bg-[#1B4E8C] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[#163D70] transition-colors duration-200"
+                  className="btn-shimmer inline-block bg-[#55AA49] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[#489A3E] transition-colors duration-200"
                 >
-                  Book Consultation
+                  Start a Project →
                 </Link>
                 <Link
                   href="/services"
                   className="inline-block border border-[rgba(255,255,255,0.14)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.32)] transition-colors duration-200"
                 >
-                  Our Services
+                  View Services
                 </Link>
+              </div>
+              <div className="flex flex-wrap gap-x-8 gap-y-2 hero-in hero-in-4">
+                {[
+                  { num: '200+', label: 'projects delivered' },
+                  { num: '12',   label: 'countries served' },
+                  { num: '98%',  label: 'client retention' },
+                ].map(({ num, label }) => (
+                  <span key={label} className="font-mono text-[10px] tracking-[0.12em] uppercase">
+                    <span className="text-[#55AA49] font-bold">{num}</span>
+                    <span className="text-[rgba(255,255,255,0.30)] ml-2">{label}</span>
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -193,7 +209,7 @@ export default async function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
             <div className="relative">
               <span className="absolute -top-6 left-0 font-serif font-black leading-none select-none pointer-events-none text-[rgba(var(--ch-text),0.04)]" style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">01</span>
-              <p className="relative font-mono text-[9px] tracking-[0.26em] uppercase text-[#1B4E8C] mb-5">What We Do</p>
+              <p className="relative font-mono text-[9px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">What We Do</p>
               <h2
                 className="relative font-serif font-black text-[var(--color-text)] leading-[0.90] tracking-[-0.035em]"
                 style={{ fontSize: 'clamp(36px,5.5vw,72px)' }}
@@ -203,7 +219,7 @@ export default async function HomePage() {
             </div>
             <Link
               href="/services"
-              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)] hover:text-[#1B4E8C] transition-colors duration-200"
+              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)] hover:text-[#1D4776] transition-colors duration-200"
             >
               All services →
             </Link>
@@ -222,7 +238,7 @@ export default async function HomePage() {
                 </span>
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-2 md:gap-10 items-center">
                   <h3
-                    className="font-serif font-bold text-[var(--color-text)] group-hover:text-[#1B4E8C] transition-colors duration-200"
+                    className="font-serif font-bold text-[var(--color-text)] group-hover:text-[#1D4776] transition-colors duration-200"
                     style={{ fontSize: 'clamp(16px,1.9vw,22px)' }}
                   >
                     {title}
@@ -231,7 +247,7 @@ export default async function HomePage() {
                     {desc}
                   </p>
                 </div>
-                <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.18)] group-hover:text-[#1B4E8C] group-hover:translate-x-1.5 transition-all duration-200 shrink-0">
+                <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.18)] group-hover:text-[#1D4776] group-hover:translate-x-1.5 transition-all duration-200 shrink-0">
                   →
                 </span>
               </Link>
@@ -244,22 +260,24 @@ export default async function HomePage() {
           ASTABILL — product showcase with mock UI dashboard
       ───────────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(85,173,61,0.10)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(85,170,73,0.10)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
 
         <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div className="reveal">
-            <div className="relative inline-flex items-center gap-2.5 font-mono text-[9px] tracking-[0.24em] uppercase text-[#55AD3D] border border-[rgba(85,173,61,0.22)] px-4 py-2 mb-9">
-              <span className="w-1 h-1 rounded-full bg-[#55AD3D] animate-status" />
+            <div className="relative inline-flex items-center gap-2.5 font-mono text-[9px] tracking-[0.24em] uppercase text-[#55AA49] border border-[rgba(85,170,73,0.22)] px-4 py-2 mb-9">
+              <span className="w-1 h-1 rounded-full bg-[#55AA49] animate-status" />
               Featured Product
             </div>
-            <h2
+            <div className="mb-8">
+              <Image src="/astabill-icon.svg" alt="AstaBill" width={64} height={64} />
+            </div>
+            <p
               className="font-serif font-black text-white leading-[0.90] tracking-[-0.035em] mb-6"
-              style={{ fontSize: 'clamp(34px,5vw,64px)' }}
+              style={{ fontSize: 'clamp(28px,3.8vw,52px)', color: '#55AA49' }}
             >
-              AstaBill —<br />
-              <span style={{ color: '#55AD3D' }}>Finance made simple.</span>
-            </h2>
+              Finance made simple.
+            </p>
             <p
               className="text-[rgba(255,255,255,0.52)] leading-relaxed mb-10 max-w-[52ch]"
               style={{ fontSize: 'clamp(14px,1.3vw,17px)' }}
@@ -270,7 +288,7 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
               {ASTABILL_FEATURES.map(({ title, body }) => (
                 <div key={title} className="border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.025)] p-5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#55AD3D] mb-3" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#55AA49] mb-3" />
                   <p className="font-serif text-[14px] font-semibold text-white mb-1.5">{title}</p>
                   <p className="text-[12px] text-[rgba(255,255,255,0.35)] leading-relaxed">{body}</p>
                 </div>
@@ -278,10 +296,10 @@ export default async function HomePage() {
             </div>
 
             <Link
-              href="/services/crm-erp"
-              className="inline-flex items-center gap-3 bg-[#55AD3D] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[#4A9933] transition-colors duration-200"
+              href="/products"
+              className="btn-shimmer inline-flex items-center gap-3 bg-[#55AA49] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[#489A3E] transition-colors duration-200"
             >
-              Learn about AstaBill →
+              Explore AstaBill →
             </Link>
           </div>
 
@@ -306,14 +324,14 @@ export default async function HomePage() {
                     <div key={m.label} className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] p-4">
                       <p className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.24)] mb-2">{m.label}</p>
                       <p className="font-serif text-[14px] font-bold text-white leading-none mb-1">{m.val}</p>
-                      <p className={`font-mono text-[9px] ${m.green ? 'text-[#55AD3D]' : 'text-[rgba(255,255,255,0.32)]'}`}>{m.note}</p>
+                      <p className={`font-mono text-[9px] ${m.green ? 'text-[#55AA49]' : 'text-[rgba(255,255,255,0.32)]'}`}>{m.note}</p>
                     </div>
                   ))}
                 </div>
                 <div className="border border-[rgba(255,255,255,0.06)]">
                   <div className="px-4 py-3 border-b border-[rgba(255,255,255,0.05)] flex justify-between">
                     <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.22)]">Recent Invoices</span>
-                    <span className="font-mono text-[9px] text-[#55AD3D]">View all</span>
+                    <span className="font-mono text-[9px] text-[#55AA49]">View all</span>
                   </div>
                   {[
                     { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', paid: true  },
@@ -327,7 +345,7 @@ export default async function HomePage() {
                       </div>
                       <div className="text-right">
                         <p className="font-mono text-[11px] text-white">{inv.amount}</p>
-                        <span className={`font-mono text-[8px] tracking-[0.1em] uppercase ${inv.paid ? 'text-[#55AD3D]' : 'text-[#D97706]'}`}>
+                        <span className={`font-mono text-[8px] tracking-[0.1em] uppercase ${inv.paid ? 'text-[#55AA49]' : 'text-[#D97706]'}`}>
                           {inv.paid ? 'Paid' : 'Pending'}
                         </span>
                       </div>
@@ -347,7 +365,7 @@ export default async function HomePage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 reveal">
             <div>
-              <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#1B4E8C] mb-5">Industries</p>
+              <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">Industries</p>
               <h2
                 className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.035em]"
                 style={{ fontSize: 'clamp(28px,4vw,52px)' }}
@@ -361,7 +379,7 @@ export default async function HomePage() {
               <Link
                 key={ind}
                 href="/work"
-                className="font-mono text-[10px] tracking-[0.14em] uppercase px-5 py-3.5 border border-[rgba(var(--ch-border),0.14)] text-[rgba(var(--ch-text),0.46)] hover:border-[rgba(27,78,140,0.38)] hover:text-[#1B4E8C] transition-all duration-200"
+                className="font-mono text-[10px] tracking-[0.14em] uppercase px-5 py-3.5 border border-[rgba(var(--ch-border),0.14)] text-[rgba(var(--ch-text),0.46)] hover:border-[rgba(29,71,118,0.38)] hover:text-[#1D4776] transition-all duration-200"
               >
                 {ind}
               </Link>
@@ -441,8 +459,125 @@ export default async function HomePage() {
       ───────────────────────────────────────────────────────────────── */}
       <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#1B4E8C] mb-10 text-center">What Clients Say</p>
+          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#1D4776] mb-10 text-center">What Clients Say</p>
           <TestimonialCarousel testimonials={displayTestimonials} />
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────────
+          TECHNOLOGY PARTNERS — platforms we build on
+      ───────────────────────────────────────────────────────────────── */}
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-20">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 reveal">
+            <div>
+              <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(var(--ch-text),0.30)] mb-2">Technology Ecosystem</p>
+              <h2
+                className="font-serif font-bold text-[var(--color-text)] leading-tight"
+                style={{ fontSize: 'clamp(22px,2.8vw,36px)' }}
+              >
+                Platforms we build on
+              </h2>
+            </div>
+            <p className="text-[13px] text-[rgba(var(--ch-text),0.45)] max-w-[40ch] leading-relaxed">
+              We work across the world's leading cloud and enterprise platforms — so your stack works with us from day one.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
+            {[
+              { name: 'Amazon Web Services', abbr: 'AWS' },
+              { name: 'Microsoft Azure',     abbr: 'Azure' },
+              { name: 'Google Cloud',        abbr: 'GCP' },
+              { name: 'Salesforce',          abbr: 'CRM' },
+              { name: 'Odoo',                abbr: 'ERP' },
+              { name: 'SAP',                 abbr: 'SAP' },
+            ].map(({ name, abbr }) => (
+              <div
+                key={name}
+                className="bg-[var(--color-bg)] flex flex-col items-center justify-center gap-2 py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-200"
+              >
+                <span
+                  className="font-serif font-black text-[rgba(var(--ch-text),0.12)] group-hover:text-[rgba(var(--ch-accent),0.20)] transition-colors duration-200"
+                  style={{ fontSize: 'clamp(20px,2vw,28px)' }}
+                >
+                  {abbr}
+                </span>
+                <span className="font-mono text-[8px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.28)] text-center leading-tight">
+                  {name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────────
+          ABOUT TEASER — built in Ghana, built for Africa
+      ───────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+        <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
+        <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.16)_0%,transparent_60%)] pointer-events-none" />
+
+        <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left — copy */}
+          <div className="reveal">
+            <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-6">Who We Are</p>
+            <h2
+              className="font-serif font-black text-white leading-[0.90] tracking-[-0.035em] mb-8"
+              style={{ fontSize: 'clamp(32px,5vw,64px)' }}
+            >
+              Built in Ghana.<br />
+              Built for Africa.<br />
+              <span className="text-gradient italic">Built for the world.</span>
+            </h2>
+            <p
+              className="text-[rgba(255,255,255,0.50)] leading-relaxed mb-5 max-w-[52ch]"
+              style={{ fontSize: 'clamp(14px,1.3vw,17px)' }}
+            >
+              Since 2016, Astacraft Systems has been the technology partner of choice for enterprises, governments, and organizations across Africa navigating digital change.
+            </p>
+            <p
+              className="text-[rgba(255,255,255,0.34)] leading-relaxed mb-10 max-w-[52ch]"
+              style={{ fontSize: 'clamp(14px,1.3vw,17px)' }}
+            >
+              Our engineers, architects, and strategists bring global standards to every engagement — building solutions that perform at scale and stand the test of time.
+            </p>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-3 font-mono text-[10px] tracking-[0.16em] uppercase text-white border border-[rgba(255,255,255,0.18)] px-7 py-4 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+            >
+              Meet the team →
+            </Link>
+          </div>
+
+          {/* Right — stat grid */}
+          <div className="grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '120ms' }}>
+            {[
+              { num: '8+',   label: 'Years in operation', sub: 'Est. 2016, Accra Ghana' },
+              { num: '50+',  label: 'Enterprise clients',  sub: 'Across 12 countries'   },
+              { num: '200+', label: 'Projects delivered',  sub: 'On time, on budget'    },
+              { num: '98%',  label: 'Client retention',    sub: 'Long-term partnerships' },
+            ].map(({ num, label, sub }, i) => (
+              <div
+                key={label}
+                className="border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.025)] p-6"
+                style={{ transitionDelay: `${120 + i * 60}ms` }}
+              >
+                <p
+                  className="font-serif font-black text-white leading-none mb-2"
+                  style={{ fontSize: 'clamp(28px,3vw,44px)' }}
+                >
+                  {num}
+                </p>
+                <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.42)] mb-1">
+                  {label}
+                </p>
+                <p className="text-[11px] text-[rgba(255,255,255,0.20)]">{sub}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -451,7 +586,7 @@ export default async function HomePage() {
       ───────────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] py-28 md:py-36 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full bg-[radial-gradient(ellipse,rgba(27,78,140,0.20)_0%,transparent_65%)] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full bg-[radial-gradient(ellipse,rgba(29,71,118,0.20)_0%,transparent_65%)] pointer-events-none" />
 
         <div className="relative max-w-[1280px] mx-auto reveal">
           <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.24)] mb-9">
@@ -468,9 +603,9 @@ export default async function HomePage() {
           <div className="flex flex-wrap gap-4 mb-12">
             <Link
               href="/contact"
-              className="btn-shimmer inline-block bg-[#1B4E8C] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:bg-[#163D70] transition-colors duration-200"
+              className="btn-shimmer inline-block bg-[#55AA49] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:bg-[#489A3E] transition-colors duration-200"
             >
-              Book Strategy Call
+              Start a Project →
             </Link>
             <Link
               href="/services"

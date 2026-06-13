@@ -20,16 +20,16 @@
   --color-text:         #080C14;
   --color-text-2:       rgba(8,12,20,0.55);
   /* Brand navy blue — from the "A" in the Astacraft logo */
-  --color-accent:       #1B4E8C;
-  --color-accent-hover: #163D70;
+  --color-accent:       #1D4776;
+  --color-accent-hover: #163662;
   /* Brand grass green — from the "S" in the Astacraft logo */
-  --color-green:        #55AD3D;
-  --color-green-hover:  #4A9933;
+  --color-green:        #55AA49;
+  --color-green-hover:  #489A3E;
   --ch-bg:     244,246,251;
   --ch-text:   8,12,20;
   --ch-border: 8,12,20;
-  --ch-accent: 27,78,140;
-  --ch-green:  85,173,61;
+  --ch-accent: 29,71,118;
+  --ch-green:  85,170,73;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -186,7 +186,7 @@ body::before {
   transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 .card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(27,78,140,0.22), 0 20px 60px rgba(27,78,140,0.08);
+  box-shadow: 0 0 0 1px rgba(29,71,118,0.22), 0 20px 60px rgba(29,71,118,0.08);
   transform: translateY(-2px);
 }
 
@@ -233,7 +233,7 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(27,78,140,0.03);
+  background: rgba(29,71,118,0.03);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);

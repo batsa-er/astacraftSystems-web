@@ -99,9 +99,28 @@ export default async function AboutPage() {
               { Icon: ShieldCheckIcon, num: '98%',   label: 'Client Satisfaction' },
             ].map(({ Icon, num, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
-                <Icon className="w-5 h-5 text-[rgba(27,78,140,0.45)] mb-3" />
+                <Icon className="w-5 h-5 text-[rgba(29,71,118,0.45)] mb-3" />
                 <p className="font-serif font-bold text-[var(--color-accent)] mb-1" style={{ fontSize: 'clamp(32px,4vw,52px)', lineHeight: 1 }}>{num}</p>
                 <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recognition band */}
+      <section className="bg-[#060C18] border-y border-[rgba(255,255,255,0.05)] px-[clamp(24px,5vw,80px)] py-12">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(255,255,255,0.05)]">
+            {[
+              { num: 'Est. 2016', label: '8+ years in operation' },
+              { num: 'ISO 27001', label: 'Security ready' },
+              { num: 'GRA',      label: 'Compliant & certified' },
+              { num: '12+',      label: 'Countries served' },
+            ].map(({ num, label }) => (
+              <div key={label} className="bg-[#060C18] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
+                <p className="font-serif font-black text-white" style={{ fontSize: 'clamp(16px,2vw,24px)' }}>{num}</p>
+                <p className="font-mono text-[8px] tracking-[0.20em] uppercase text-[rgba(255,255,255,0.28)]">{label}</p>
               </div>
             ))}
           </div>
@@ -120,7 +139,7 @@ export default async function AboutPage() {
               const Icon = num === '01' ? TargetIcon : num === '02' ? GlobeIcon : num === '03' ? ShieldCheckIcon : TreeIcon
               return (
                 <div key={num} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-surface)] p-8 relative overflow-hidden reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                  <span className="absolute bottom-3 right-5 font-serif font-bold text-[100px] leading-none text-[rgba(27,78,140,0.04)] select-none pointer-events-none">
+                  <span className="absolute bottom-3 right-5 font-serif font-bold text-[100px] leading-none text-[rgba(29,71,118,0.04)] select-none pointer-events-none">
                     {num}
                   </span>
                   <div className="flex items-center gap-3 mb-4">
@@ -205,7 +224,7 @@ export default async function AboutPage() {
                 </div>
                 <a
                   href={job.applyUrl || '/contact'}
-                  className="shrink-0 font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.35)] text-[rgba(var(--ch-text),0.70)] px-6 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-text)] transition-colors duration-200"
+                  className="shrink-0 font-mono text-[10px] tracking-[0.14em] uppercase bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
                 >
                   Apply →
                 </a>

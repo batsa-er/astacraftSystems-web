@@ -218,8 +218,9 @@ export default async function ServicePage({ params }: { params: { slug: string }
       {/* CTA */}
       <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(37,99,235,0.12),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[700px] mx-auto text-center reveal">
+          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Ready to begin?</p>
           <h2 className="font-serif font-bold text-white leading-tight mb-6" style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}>
             Ready to get started?
           </h2>
@@ -229,9 +230,9 @@ export default async function ServicePage({ params }: { params: { slug: string }
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-accent)] text-white px-10 py-4 hover:bg-[var(--color-accent-hover)] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
             >
-              Book Strategy Call
+              Start a Project →
             </Link>
             <Link
               href="/services"

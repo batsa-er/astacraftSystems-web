@@ -201,6 +201,7 @@ export default function ProductsPage() {
       <section className="relative bg-[#0B0F14] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,166,86,0.08)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative max-w-[1280px] mx-auto text-center reveal">
+          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Get started today</p>
           <h2
             className="font-serif font-bold text-white leading-tight mb-6"
             style={{ fontSize: 'clamp(36px,5vw,64px)' }}
@@ -210,12 +211,20 @@ export default function ProductsPage() {
           <p className="text-[clamp(15px,1.1vw,17px)] text-[rgba(255,255,255,0.50)] max-w-lg mx-auto mb-10">
             Book a free 30-minute demo and we will walk you through the platform live. No commitment, no credit card required.
           </p>
-          <Link
-            href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-12 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-          >
-            Book Free Demo
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-12 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+            >
+              Book Free Demo →
+            </Link>
+            <Link
+              href="#pricing"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.18)] text-white px-12 py-5 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+            >
+              View Pricing
+            </Link>
+          </div>
         </div>
       </section>
     </>
