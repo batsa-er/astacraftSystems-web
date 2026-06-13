@@ -7,9 +7,12 @@
   --color-border:        rgba(15,23,42,0.10);
   --color-border-strong: rgba(15,23,42,0.18);
 
-  --font-serif: var(--font-manrope), system-ui, sans-serif;
-  --font-sans:  var(--font-manrope), system-ui, sans-serif;
-  --font-mono:  var(--font-dm-mono), 'DM Mono', monospace;
+  /* Manrope is a geometric sans-serif used for all type. --font-serif and
+     --font-display are aliases — add a real serif to --font-serif if desired later. */
+  --font-display: var(--font-manrope), system-ui, sans-serif;
+  --font-serif:   var(--font-manrope), system-ui, sans-serif;
+  --font-sans:    var(--font-manrope), system-ui, sans-serif;
+  --font-mono:    var(--font-dm-mono), 'DM Mono', monospace;
 }
 
 /* ── Color tokens ── */
@@ -25,6 +28,9 @@
   /* Brand grass green — from the "S" in the Astacraft logo */
   --color-green:        #55AA49;
   --color-green-hover:  #489A3E;
+  /* Dark section backgrounds — always dark regardless of light/dark mode */
+  --color-dark:         #060C18;
+  --color-dark-deep:    #040810;
   --ch-bg:     244,246,251;
   --ch-text:   8,12,20;
   --ch-border: 8,12,20;

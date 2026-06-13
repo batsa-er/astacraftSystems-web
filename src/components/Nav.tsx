@@ -205,7 +205,7 @@ export default function Nav() {
 
                 {/* Column 1: Technology */}
                 <div>
-                  <p className="font-mono text-[9px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Technology</p>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Technology</p>
                   <div className="space-y-1">
                     {solutionsTech.map(({ Icon, href, title, desc }) => (
                       <Link
@@ -227,7 +227,7 @@ export default function Nav() {
 
                 {/* Column 2: Business Solutions */}
                 <div>
-                  <p className="font-mono text-[9px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Business Solutions</p>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Business Solutions</p>
                   <div className="space-y-1">
                     {solutionsBusiness.map(({ Icon, href, title, desc }) => (
                       <Link
@@ -250,7 +250,7 @@ export default function Nav() {
                 {/* Column 3: Enterprise CTA panel */}
                 <div className="border-l border-[rgba(var(--ch-border),0.10)] pl-10 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[9px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Enterprise</p>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Enterprise</p>
                     <h3 className="font-serif text-[22px] font-bold text-[var(--color-text)] mb-3 leading-tight">
                       End-to-end digital<br />transformation.
                     </h3>
@@ -301,14 +301,14 @@ export default function Nav() {
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="font-serif text-[18px] font-bold text-[var(--color-text)] group-hover:text-[var(--color-green)] transition-colors duration-200">AstaBill</h3>
-                        <span className="font-mono text-[8px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Flagship</span>
+                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Flagship</span>
                       </div>
                       <p className="text-[13px] text-[rgba(var(--ch-text),0.50)]">Cloud business management platform</p>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-5">
                     {['Invoicing', 'Payments', 'GRA Compliance', 'Analytics', 'Team Collaboration'].map(tag => (
-                      <span key={tag} className="font-mono text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 border border-[rgba(var(--ch-border),0.12)] text-[rgba(var(--ch-text),0.38)]">{tag}</span>
+                      <span key={tag} className="font-mono text-[11px] tracking-[0.12em] uppercase px-2.5 py-1 border border-[rgba(var(--ch-border),0.12)] text-[rgba(var(--ch-text),0.38)]">{tag}</span>
                     ))}
                   </div>
                   <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-accent)] group-hover:text-[var(--color-green)] transition-colors duration-200">
@@ -319,7 +319,7 @@ export default function Nav() {
                 {/* Demo CTA */}
                 <div className="w-56 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[9px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-4">Get Started</p>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-4">Get Started</p>
                     <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed mb-6">
                       See AstaBill live in a free 30-minute demo with our product team.
                     </p>

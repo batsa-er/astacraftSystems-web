@@ -12,7 +12,7 @@ interface Props {
 
 export default function PageHero({ eyebrow, title, description, image, cta }: Props) {
   return (
-    <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] mt-[72px] pt-24 pb-24 overflow-hidden">
+    <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] mt-[72px] pt-24 pb-24 overflow-hidden">
       {image && (
         <>
           <Image
@@ -27,7 +27,7 @@ export default function PageHero({ eyebrow, title, description, image, cta }: Pr
       <div className="absolute inset-0 hero-grid opacity-25 pointer-events-none" />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.22)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative max-w-[1280px] mx-auto">
-        <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.50)] mb-6 hero-in hero-in-1">
+        <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.50)] mb-6 hero-in hero-in-1">
           {eyebrow}
         </p>
         <h1

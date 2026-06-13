@@ -21,13 +21,13 @@ export default async function Footer() {
   ]
 
   return (
-    <footer className="bg-[#0A0F1E]">
+    <footer className="bg-[var(--color-dark)]">
 
       {/* ── Submit RFP enterprise banner ── */}
       <div className="border-b border-[rgba(255,255,255,0.06)] px-[clamp(24px,5vw,80px)] py-8">
         <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-5">
           <div>
-            <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-1">
+            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-1">
               Enterprise Procurement
             </p>
             <p className="text-[15px] font-medium text-white">
@@ -69,7 +69,7 @@ export default async function Footer() {
 
             {/* Services column */}
             <div>
-              <h4 className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
+              <h4 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
                 Services
               </h4>
               <ul className="space-y-3.5">
@@ -95,7 +95,7 @@ export default async function Footer() {
 
             {/* Company column */}
             <div>
-              <h4 className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
+              <h4 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
                 Company
               </h4>
               <ul className="space-y-3.5">
@@ -121,7 +121,7 @@ export default async function Footer() {
 
             {/* Connect column */}
             <div>
-              <h4 className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
+              <h4 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.28)] mb-6">
                 Connect
               </h4>
               <div className="flex flex-col gap-3.5 mb-8">

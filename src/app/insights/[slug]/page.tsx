@@ -148,7 +148,7 @@ export default async function InsightPage({ params }: { params: { slug: string }
               ← Insights
             </Link>
             <span className="text-[rgba(var(--ch-text),0.20)]">/</span>
-            <span className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{ins.tag}</span>
+            <span className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{ins.tag}</span>
           </div>
           <h1 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6"
             style={{ fontSize: 'clamp(32px,5vw,64px)' }}>{ins.title}</h1>

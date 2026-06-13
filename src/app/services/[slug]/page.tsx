@@ -60,7 +60,7 @@ const fallbackServices: Record<string, any> = {
     detail: 'Cybersecurity is no longer optional for businesses of any size. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage. Our certified security team provides the full spectrum of protection: from vulnerability identification to incident response and ongoing monitoring.',
     outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', 'SOC monitoring & incident response', 'Employee security awareness training', 'Security policy development'],
     process: ['Security baseline assessment', 'Threat & risk modelling', 'Penetration testing', 'Remediation prioritization', 'Controls implementation', 'Continuous monitoring & reporting'],
-    stats: [{ num: '0', label: 'Client breaches post-engagement' }, { num: 'ISO', label: '27001 certified practice' }, { num: '24/7', label: 'SOC monitoring capability' }],
+    stats: [{ num: '0', label: 'Client breaches post-engagement' }, { num: 'ISO', label: '27001 compliance advisory' }, { num: '24/7', label: 'SOC monitoring capability' }],
   },
   'crm-erp': {
     number: '05', title: 'CRM & ERP Systems', tagline: 'Systems that run your business.',
@@ -112,7 +112,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
   return (
     <>
       {/* Dark hero */}
-      <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] pt-40 pb-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] pt-40 pb-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-50 pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_60%_-10%,rgba(37,99,235,0.12),transparent)] pointer-events-none" />
 
@@ -125,7 +125,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
           </Link>
 
           <div className="hero-in hero-in-2">
-            <span className="inline-flex items-center gap-2.5 font-mono text-[9px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(37,99,235,0.35)] text-[rgba(100,160,255,0.80)] mb-8">
+            <span className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(37,99,235,0.35)] text-[rgba(100,160,255,0.80)] mb-8">
               <Icon className="w-3 h-3" />
               Service {svc.number}
             </span>
@@ -155,7 +155,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
             {stats.map(({ num, label }: { num: string; label: string }, i: number) => (
               <div key={label} className="text-center reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
                 <p className="font-serif font-bold text-[var(--color-accent)] mb-1" style={{ fontSize: 'clamp(28px,3vw,44px)', lineHeight: 1 }}>{num}</p>
-                <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
               </div>
             ))}
           </div>
@@ -216,11 +216,11 @@ export default async function ServicePage({ params }: { params: { slug: string }
       )}
 
       {/* CTA */}
-      <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[700px] mx-auto text-center reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Ready to begin?</p>
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Ready to begin?</p>
           <h2 className="font-serif font-bold text-white leading-tight mb-6" style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}>
             Ready to get started?
           </h2>

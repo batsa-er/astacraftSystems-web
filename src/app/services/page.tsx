@@ -132,7 +132,7 @@ export default async function ServicesPage() {
                   </div>
 
                   <div>
-                    <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.30)] mb-5">Deliverables</p>
+                    <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.30)] mb-5">Deliverables</p>
                     <ul className="space-y-3">
                       {(s.outcomes || []).map((o: string) => (
                         <li key={o} className="flex items-start gap-3">
@@ -150,11 +150,11 @@ export default async function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[700px] mx-auto text-center reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.30)] mb-4">Ready to begin?</p>
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.30)] mb-4">Ready to begin?</p>
           <h2 className="font-serif font-bold text-white mb-4" style={{ fontSize: 'clamp(28px,3vw,48px)' }}>
             Not sure which service fits your needs?
           </h2>

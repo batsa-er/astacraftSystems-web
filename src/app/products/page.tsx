@@ -15,7 +15,7 @@ export default function ProductsPage() {
       <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-24">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="reveal">
-            <span className="inline-block font-mono text-[9px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(34,166,86,0.40)] text-[var(--color-green)] mb-8">
+            <span className="inline-block font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(34,166,86,0.40)] text-[var(--color-green)] mb-8">
               Cloud-Based · GRA Compliant · Made in Ghana
             </span>
             <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
@@ -42,14 +42,14 @@ export default function ProductsPage() {
           <div className="grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '100ms' }}>
             {[
               { Icon: TrendingUpIcon, stat: '40%', label: 'Average reduction in billing time' },
-              { Icon: UsersIcon,      stat: '500+', label: 'Businesses on AstaBill' },
+              { Icon: UsersIcon,      stat: '500+', label: 'Invoices sent daily' },
               { Icon: ShieldCheckIcon,stat: '100%', label: 'GRA compliant invoicing' },
               { Icon: CurrencyIcon,   stat: '₵2B+', label: 'Transactions processed' },
             ].map(({ Icon, stat, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 70}ms` }}>
                 <Icon className="w-5 h-5 text-[rgba(34,166,86,0.55)] mb-3" />
                 <p className="font-serif font-bold text-[var(--color-green)] mb-1" style={{ fontSize: 'clamp(28px,3vw,44px)', lineHeight: 1 }}>{stat}</p>
-                <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
               </div>
             ))}
           </div>
@@ -163,7 +163,7 @@ export default function ProductsPage() {
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 {primary && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 font-mono text-[9px] tracking-[0.18em] uppercase bg-[var(--color-green)] text-white px-4 py-1">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 font-mono text-[11px] tracking-[0.18em] uppercase bg-[var(--color-green)] text-white px-4 py-1">
                     Most Popular
                   </span>
                 )}
@@ -198,10 +198,10 @@ export default function ProductsPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative bg-[#0B0F14] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,166,86,0.08)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative max-w-[1280px] mx-auto text-center reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Get started today</p>
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Get started today</p>
           <h2
             className="font-serif font-bold text-white leading-tight mb-6"
             style={{ fontSize: 'clamp(36px,5vw,64px)' }}

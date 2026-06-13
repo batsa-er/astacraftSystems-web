@@ -101,7 +101,7 @@ export default async function AboutPage() {
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
                 <Icon className="w-5 h-5 text-[rgba(29,71,118,0.45)] mb-3" />
                 <p className="font-serif font-bold text-[var(--color-accent)] mb-1" style={{ fontSize: 'clamp(32px,4vw,52px)', lineHeight: 1 }}>{num}</p>
-                <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
               </div>
             ))}
           </div>
@@ -109,18 +109,18 @@ export default async function AboutPage() {
       </section>
 
       {/* Recognition band */}
-      <section className="bg-[#060C18] border-y border-[rgba(255,255,255,0.05)] px-[clamp(24px,5vw,80px)] py-12">
+      <section className="bg-[var(--color-dark)] border-y border-[rgba(255,255,255,0.05)] px-[clamp(24px,5vw,80px)] py-12">
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(255,255,255,0.05)]">
             {[
               { num: 'Est. 2016', label: '8+ years in operation' },
-              { num: 'ISO 27001', label: 'Security ready' },
+              { num: 'ISO 27001', label: 'Pursuing certification' },
               { num: 'GRA',      label: 'Compliant & certified' },
               { num: '12+',      label: 'Countries served' },
             ].map(({ num, label }) => (
-              <div key={label} className="bg-[#060C18] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
+              <div key={label} className="bg-[var(--color-dark)] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
                 <p className="font-serif font-black text-white" style={{ fontSize: 'clamp(16px,2vw,24px)' }}>{num}</p>
-                <p className="font-mono text-[8px] tracking-[0.20em] uppercase text-[rgba(255,255,255,0.28)]">{label}</p>
+                <p className="font-mono text-[10px] tracking-[0.20em] uppercase text-[rgba(255,255,255,0.28)]">{label}</p>
               </div>
             ))}
           </div>
@@ -183,7 +183,7 @@ export default async function AboutPage() {
                   )}
                   <div className="p-6">
                     <h3 className="font-serif text-[18px] font-bold text-[var(--color-text)] mb-1">{member.name}</h3>
-                    <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[var(--color-accent)] mb-4">{member.role}</p>
+                    <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-accent)] mb-4">{member.role}</p>
                     <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{member.bio}</p>
                   </div>
                 </div>
@@ -209,13 +209,13 @@ export default async function AboutPage() {
               <div key={job._id} className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 reveal" style={{ transitionDelay: `${i * 80}ms` }}>
                 <div>
                   <div className="flex flex-wrap items-center gap-3 mb-3">
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">
                       <BriefcaseIcon className="w-3 h-3" />{job.department}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(var(--ch-text),0.35)] border border-[rgba(var(--ch-border),0.10)]">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(var(--ch-text),0.35)] border border-[rgba(var(--ch-border),0.10)]">
                       <ClockIcon className="w-3 h-3" />{job.type}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.25)]">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.25)]">
                       <MapPinIcon className="w-3 h-3" />{job.location}
                     </span>
                   </div>

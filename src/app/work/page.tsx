@@ -104,7 +104,7 @@ export default async function WorkPage() {
                 <div className="p-8">
                   <div className="flex items-center justify-between mb-6">
                     <span
-                      className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1.5"
+                      className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1.5"
                       style={{ color: acc.text, border: `1px solid ${acc.border}` }}
                     >
                       {cs.industry}
@@ -121,7 +121,7 @@ export default async function WorkPage() {
                     ].map(([num, label]) => (
                       <div key={label}>
                         <p className="font-serif text-[20px] font-bold mb-0.5" style={{ color: acc.text }}>{num}</p>
-                        <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                        <p className="font-mono text-[11px] tracking-[0.1em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
                       </div>
                     ))}
                   </div>
@@ -133,11 +133,11 @@ export default async function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative bg-[#080C12] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[1280px] mx-auto text-center reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Work With Us</p>
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Work With Us</p>
           <h2 className="font-serif font-bold text-white mb-6" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
             Your results could be next.
           </h2>

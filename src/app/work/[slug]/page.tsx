@@ -46,7 +46,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
             </Link>
             <span className="text-[rgba(var(--ch-text),0.20)]">/</span>
             <span
-              className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1"
+              className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1"
               style={{ color: accentColor, border: `1px solid ${accentColor}` }}
             >
               {cs.industry}

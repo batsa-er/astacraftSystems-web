@@ -36,7 +36,7 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="cf-name" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Name *</label>
+              <label htmlFor="cf-name" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Name *</label>
               <input
                 id="cf-name"
                 required
@@ -49,7 +49,7 @@ export default function ContactForm() {
               />
             </div>
             <div>
-              <label htmlFor="cf-email" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Email *</label>
+              <label htmlFor="cf-email" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Email *</label>
               <input
                 id="cf-email"
                 required
@@ -65,7 +65,7 @@ export default function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="cf-company" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Company</label>
+              <label htmlFor="cf-company" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Company</label>
               <input
                 id="cf-company"
                 type="text"
@@ -77,7 +77,7 @@ export default function ContactForm() {
               />
             </div>
             <div>
-              <label htmlFor="cf-phone" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Phone</label>
+              <label htmlFor="cf-phone" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Phone</label>
               <input
                 id="cf-phone"
                 type="tel"
@@ -91,7 +91,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="cf-service" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">What are you looking for?</label>
+            <label htmlFor="cf-service" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">What are you looking for?</label>
             <div className="relative">
               <select
                 id="cf-service"
@@ -116,7 +116,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="cf-message" className="block font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Tell us about your situation *</label>
+            <label htmlFor="cf-message" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Tell us about your situation *</label>
             <textarea
               id="cf-message"
               required

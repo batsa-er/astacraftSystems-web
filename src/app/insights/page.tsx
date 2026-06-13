@@ -85,8 +85,8 @@ export default async function InsightsPage() {
               )}
               <div className="p-12">
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{insights[0].tag}</span>
-                  {insights[0].label && <span className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 text-[rgba(var(--ch-text),0.35)] border border-[rgba(var(--ch-border),0.10)]">{insights[0].label}</span>}
+                  <span className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1.5 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{insights[0].tag}</span>
+                  {insights[0].label && <span className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1.5 text-[rgba(var(--ch-text),0.35)] border border-[rgba(var(--ch-border),0.10)]">{insights[0].label}</span>}
                 </div>
                 <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4 group-hover:text-[var(--color-accent)] transition-colors" style={{ fontSize: 'clamp(24px,3vw,40px)' }}>
                   {insights[0].title}
@@ -127,18 +127,18 @@ export default async function InsightsPage() {
                 )}
                 <div className="p-8">
                   <div className="flex items-center gap-2 mb-5">
-                    <span className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{ins.tag}</span>
+                    <span className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{ins.tag}</span>
                   </div>
                   <h2 className="font-serif text-[20px] font-semibold text-[var(--color-text)] leading-snug mb-3 group-hover:text-[var(--color-accent)] transition-colors">
                     {ins.title}
                   </h2>
                   <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed mb-6">{ins.excerpt}</p>
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1 font-mono text-[9px] tracking-[0.1em] text-[rgba(var(--ch-text),0.28)]">
+                    <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.28)]">
                       <CalendarIcon className="w-3 h-3" />{formatDate(ins.publishedAt)}
                     </span>
                     <span className="text-[rgba(var(--ch-text),0.15)]">·</span>
-                    <span className="inline-flex items-center gap-1 font-mono text-[9px] tracking-[0.1em] text-[rgba(var(--ch-text),0.28)]">
+                    <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.28)]">
                       <ClockIcon className="w-3 h-3" />{ins.readTime}
                     </span>
                   </div>

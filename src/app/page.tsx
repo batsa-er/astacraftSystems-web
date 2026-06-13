@@ -68,7 +68,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           HERO — left-aligned editorial, massive type, dark navy canvas
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100dvh] flex flex-col bg-[#060C18] overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col bg-[var(--color-dark)] overflow-hidden">
         {/* Ambient orbs */}
         <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.30)_0%,transparent_60%)] animate-orb-1 pointer-events-none" />
         <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(85,170,73,0.12)_0%,transparent_60%)] animate-orb-2 pointer-events-none" />
@@ -77,17 +77,17 @@ export default async function HomePage() {
 
         {/* Eyebrow + status badge */}
         <div className="relative flex flex-col gap-3 px-[clamp(24px,5vw,80px)] pt-32 hero-in hero-in-1">
-          <p className="font-mono text-[9px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.38)]">
-            Ghana&apos;s Premier Technology Company
+          <p className="font-mono text-[11px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.38)]">
+            Enterprise Technology Partner — Accra, Ghana
           </p>
           <div className="badge-announce inline-flex items-center gap-3 border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-sm w-fit">
             <span className="w-1.5 h-1.5 rounded-full bg-[#55AA49] animate-status shrink-0" />
-            <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.55)]">
+            <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.55)]">
               Systems online · Accra, Ghana
             </span>
             <span className="w-px h-3 bg-[rgba(255,255,255,0.14)]" />
-            <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">
-              Est. 2016 · ISO 27001 Ready
+            <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">
+              Est. 2016 · Pursuing ISO 27001
             </span>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default async function HomePage() {
         {/* Client trust strip at bottom of hero */}
         <div className="relative border-t border-[rgba(255,255,255,0.06)] hero-in hero-in-5">
           <div className="px-[clamp(24px,5vw,80px)] py-5 flex items-center gap-8 overflow-hidden">
-            <p className="font-mono text-[8px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.18)] shrink-0 hidden sm:block">
+            <p className="font-mono text-[10px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.18)] shrink-0 hidden sm:block">
               Trusted by
             </p>
             <div className="overflow-hidden flex-1">
@@ -175,7 +175,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           IMPACT NUMBERS — full-bleed, Accenture-scale type
       ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[#040810]">
+      <section className="bg-[var(--color-dark-deep)]">
         <div className="grid grid-cols-2 md:grid-cols-4">
           {STATS.map(({ prefix, value, suffix, label }, i) => (
             <div
@@ -209,7 +209,7 @@ export default async function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
             <div className="relative">
               <span className="absolute -top-6 left-0 font-serif font-black leading-none select-none pointer-events-none text-[rgba(var(--ch-text),0.04)]" style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">01</span>
-              <p className="relative font-mono text-[9px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">What We Do</p>
+              <p className="relative font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">What We Do</p>
               <h2
                 className="relative font-serif font-black text-[var(--color-text)] leading-[0.90] tracking-[-0.035em]"
                 style={{ fontSize: 'clamp(36px,5.5vw,72px)' }}
@@ -233,7 +233,7 @@ export default async function HomePage() {
                 className="service-row group flex items-center gap-6 md:gap-10 py-9 md:py-11 border-b border-[rgba(var(--ch-border),0.08)] hover:translate-x-3 transition-transform duration-300 reveal"
                 style={{ transitionDelay: `${i * 45}ms` }}
               >
-                <span className="font-mono text-[9px] tracking-[0.18em] text-[rgba(var(--ch-text),0.20)] w-7 shrink-0">
+                <span className="font-mono text-[11px] tracking-[0.18em] text-[rgba(var(--ch-text),0.20)] w-7 shrink-0">
                   {num}
                 </span>
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-2 md:gap-10 items-center">
@@ -243,7 +243,7 @@ export default async function HomePage() {
                   >
                     {title}
                   </h3>
-                  <p className="text-[13px] text-[rgba(var(--ch-text),0.40)] leading-relaxed hidden md:block">
+                  <p className="text-[13px] text-[rgba(var(--ch-text),0.40)] leading-relaxed mt-1 md:mt-0">
                     {desc}
                   </p>
                 </div>
@@ -259,13 +259,13 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           ASTABILL — product showcase with mock UI dashboard
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(85,170,73,0.10)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
 
         <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div className="reveal">
-            <div className="relative inline-flex items-center gap-2.5 font-mono text-[9px] tracking-[0.24em] uppercase text-[#55AA49] border border-[rgba(85,170,73,0.22)] px-4 py-2 mb-9">
+            <div className="relative inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.24em] uppercase text-[#55AA49] border border-[rgba(85,170,73,0.22)] px-4 py-2 mb-9">
               <span className="w-1 h-1 rounded-full bg-[#55AA49] animate-status" />
               Featured Product
             </div>
@@ -322,16 +322,16 @@ export default async function HomePage() {
                     { label: 'Paid This Month', val: 'GH₵ 31,700', note: '↑ 8%',       green: true  },
                   ].map(m => (
                     <div key={m.label} className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] p-4">
-                      <p className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.24)] mb-2">{m.label}</p>
+                      <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.24)] mb-2">{m.label}</p>
                       <p className="font-serif text-[14px] font-bold text-white leading-none mb-1">{m.val}</p>
-                      <p className={`font-mono text-[9px] ${m.green ? 'text-[#55AA49]' : 'text-[rgba(255,255,255,0.32)]'}`}>{m.note}</p>
+                      <p className={`font-mono text-[11px] ${m.green ? 'text-[#55AA49]' : 'text-[rgba(255,255,255,0.32)]'}`}>{m.note}</p>
                     </div>
                   ))}
                 </div>
                 <div className="border border-[rgba(255,255,255,0.06)]">
                   <div className="px-4 py-3 border-b border-[rgba(255,255,255,0.05)] flex justify-between">
-                    <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.22)]">Recent Invoices</span>
-                    <span className="font-mono text-[9px] text-[#55AA49]">View all</span>
+                    <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.22)]">Recent Invoices</span>
+                    <span className="font-mono text-[11px] text-[#55AA49]">View all</span>
                   </div>
                   {[
                     { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', paid: true  },
@@ -345,7 +345,7 @@ export default async function HomePage() {
                       </div>
                       <div className="text-right">
                         <p className="font-mono text-[11px] text-white">{inv.amount}</p>
-                        <span className={`font-mono text-[8px] tracking-[0.1em] uppercase ${inv.paid ? 'text-[#55AA49]' : 'text-[#D97706]'}`}>
+                        <span className={`font-mono text-[10px] tracking-[0.1em] uppercase ${inv.paid ? 'text-[#55AA49]' : 'text-[#D97706]'}`}>
                           {inv.paid ? 'Paid' : 'Pending'}
                         </span>
                       </div>
@@ -365,7 +365,7 @@ export default async function HomePage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 reveal">
             <div>
-              <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">Industries</p>
+              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">Industries</p>
               <h2
                 className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.035em]"
                 style={{ fontSize: 'clamp(28px,4vw,52px)' }}
@@ -391,12 +391,12 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           CASE STUDIES — dark canvas, large green metric callouts
       ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[#040810] px-[clamp(24px,5vw,80px)] py-28">
+      <section className="bg-[var(--color-dark-deep)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
             <div className="relative">
               <span className="absolute -top-6 left-0 font-serif font-black leading-none select-none pointer-events-none text-[rgba(255,255,255,0.04)]" style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">02</span>
-              <p className="relative font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.40)] mb-5">Selected Work</p>
+              <p className="relative font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.40)] mb-5">Selected Work</p>
               <h2
                 className="relative font-serif font-black text-white leading-[0.90] tracking-[-0.035em]"
                 style={{ fontSize: 'clamp(32px,5vw,64px)' }}
@@ -422,7 +422,7 @@ export default async function HomePage() {
               >
                 <div className="p-7">
                   <div className="flex items-center justify-between mb-8">
-                    <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.26)] border border-[rgba(255,255,255,0.09)] px-3 py-1.5">
+                    <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.26)] border border-[rgba(255,255,255,0.09)] px-3 py-1.5">
                       {cs.industry}
                     </span>
                     <span className="font-mono text-[12px] text-[rgba(255,255,255,0.18)] group-hover:text-white group-hover:translate-x-1 transition-all duration-200">
@@ -443,7 +443,7 @@ export default async function HomePage() {
                     >
                       {cs.metric1_num}
                     </p>
-                    <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)]">
+                    <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)]">
                       {cs.metric1_label}
                     </p>
                   </div>
@@ -459,7 +459,7 @@ export default async function HomePage() {
       ───────────────────────────────────────────────────────────────── */}
       <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#1D4776] mb-10 text-center">What Clients Say</p>
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-10 text-center">What Clients Say</p>
           <TestimonialCarousel testimonials={displayTestimonials} />
         </div>
       </section>
@@ -471,7 +471,7 @@ export default async function HomePage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 reveal">
             <div>
-              <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(var(--ch-text),0.30)] mb-2">Technology Ecosystem</p>
+              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(var(--ch-text),0.30)] mb-2">Technology Ecosystem</p>
               <h2
                 className="font-serif font-bold text-[var(--color-text)] leading-tight"
                 style={{ fontSize: 'clamp(22px,2.8vw,36px)' }}
@@ -502,7 +502,7 @@ export default async function HomePage() {
                 >
                   {abbr}
                 </span>
-                <span className="font-mono text-[8px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.28)] text-center leading-tight">
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.28)] text-center leading-tight">
                   {name}
                 </span>
               </div>
@@ -514,7 +514,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           ABOUT TEASER — built in Ghana, built for Africa
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
         <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.16)_0%,transparent_60%)] pointer-events-none" />
 
@@ -522,7 +522,7 @@ export default async function HomePage() {
 
           {/* Left — copy */}
           <div className="reveal">
-            <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-6">Who We Are</p>
+            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-6">Who We Are</p>
             <h2
               className="font-serif font-black text-white leading-[0.90] tracking-[-0.035em] mb-8"
               style={{ fontSize: 'clamp(32px,5vw,64px)' }}
@@ -570,7 +570,7 @@ export default async function HomePage() {
                 >
                   {num}
                 </p>
-                <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.42)] mb-1">
+                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.42)] mb-1">
                   {label}
                 </p>
                 <p className="text-[11px] text-[rgba(255,255,255,0.20)]">{sub}</p>
@@ -584,12 +584,12 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           FINAL CTA — full-bleed dark, type fills the section
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#060C18] px-[clamp(24px,5vw,80px)] py-28 md:py-36 overflow-hidden">
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 md:py-36 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full bg-[radial-gradient(ellipse,rgba(29,71,118,0.20)_0%,transparent_65%)] pointer-events-none" />
 
         <div className="relative max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.24)] mb-9">
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.24)] mb-9">
             Start a Conversation
           </p>
           <h2

@@ -23,7 +23,7 @@ export default async function ContactPage() {
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
           <div className="reveal">
-            <p className="font-mono text-[9px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-8">Reach us directly</p>
+            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-8">Reach us directly</p>
             <div className="space-y-6">
               {[
                 { Icon: EnvelopeIcon, label: 'Email',         value: email, href: `mailto:${email}` },
@@ -35,7 +35,7 @@ export default async function ContactPage() {
                     <Icon className="w-4 h-4 text-[var(--color-accent)]" />
                   </div>
                   <div>
-                    <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.28)] mb-1">{label}</p>
+                    <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.28)] mb-1">{label}</p>
                     {href ? (
                       <a href={href} className="font-mono text-[13px] tracking-[0.06em] text-[rgba(var(--ch-text),0.70)] hover:text-[var(--color-accent)] transition-colors duration-200">{value}</a>
                     ) : (

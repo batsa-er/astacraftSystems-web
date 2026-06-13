@@ -55,7 +55,7 @@ export default function CaseCard({ slug, client, industry, summary, metric1_num,
       <div className="p-8">
         <div className="flex items-center justify-between mb-6">
           <span
-            className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1.5"
+            className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1.5"
             style={{ color: acc.text, border: `1px solid ${acc.border}`, opacity: 0.85 }}
           >
             {industry}
@@ -74,7 +74,7 @@ export default function CaseCard({ slug, client, industry, summary, metric1_num,
           ].map(([num, label]) => (
             <div key={label}>
               <p className="font-serif text-[20px] font-bold mb-0.5" style={{ color: acc.text }}>{num}</p>
-              <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
             </div>
           ))}
         </div>
