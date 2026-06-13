@@ -24,6 +24,10 @@ export default function ContactForm() {
 
   return (
     <div className="border border-[rgba(var(--ch-border),0.12)] bg-[var(--color-panel)] p-10 shadow-sm reveal" style={{ transitionDelay: '160ms' }}>
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {status === 'sent' && 'Message sent. We will be in touch within 24 hours.'}
+        {status === 'error' && 'Message failed to send. Please try again or email info@astacraftsystems.com.'}
+      </div>
       {status === 'sent' ? (
         <div className="text-center py-12">
           <div className="w-16 h-16 rounded-full bg-[rgba(var(--ch-accent),0.12)] border border-[rgba(var(--ch-accent),0.30)] flex items-center justify-center mx-auto mb-6">

@@ -42,8 +42,11 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [dropdown, setDropdown]       = useState<DropdownId>(null)
   const pathname  = usePathname()
-  const wrapRef   = useRef<HTMLDivElement>(null)
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const wrapRef              = useRef<HTMLDivElement>(null)
+  const closeTimer           = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const keyboardOpen         = useRef(false)
+  const dropdownContainerRef = useRef<HTMLDivElement>(null)
+  const mobileDialogRef      = useRef<HTMLDivElement>(null)
 
   const isDarkPage = DARK_PAGES.includes(pathname)
 
@@ -73,6 +76,36 @@ export default function Nav() {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
+  useEffect(() => {
+    if (dropdown && keyboardOpen.current) {
+      const first = dropdownContainerRef.current?.querySelector<HTMLElement>('[role="menuitem"]')
+      first?.focus()
+      keyboardOpen.current = false
+    }
+  }, [dropdown])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    const el = mobileDialogRef.current
+    if (!el) return
+    const getFocusable = () =>
+      Array.from(el.querySelectorAll<HTMLElement>('a, button, [tabindex]:not([tabindex="-1"])'))
+    const handler = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      const items = getFocusable()
+      if (!items.length) return
+      const first = items[0]
+      const last  = items[items.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus() }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus() }
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [mobileOpen])
+
   function openDropdown(id: DropdownId) {
     if (closeTimer.current) clearTimeout(closeTimer.current)
     setDropdown(id)
@@ -80,6 +113,25 @@ export default function Nav() {
 
   function scheduleClose() {
     closeTimer.current = setTimeout(() => setDropdown(null), 120)
+  }
+
+  function handleTriggerKeyDown(e: React.KeyboardEvent, id: DropdownId) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault()
+      keyboardOpen.current = true
+      setDropdown(id)
+    }
+  }
+
+  function handleMenuKeyDown(e: React.KeyboardEvent) {
+    const items = dropdownContainerRef.current?.querySelectorAll<HTMLElement>('[role="menuitem"]') ?? []
+    const arr   = Array.from(items)
+    const idx   = arr.indexOf(document.activeElement as HTMLElement)
+    if (e.key === 'ArrowDown') { e.preventDefault(); arr[(idx + 1) % arr.length]?.focus() }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); arr[(idx - 1 + arr.length) % arr.length]?.focus() }
+    if (e.key === 'Home')      { e.preventDefault(); arr[0]?.focus() }
+    if (e.key === 'End')       { e.preventDefault(); arr[arr.length - 1]?.focus() }
+    if (e.key === 'Tab')       { setDropdown(null) }
   }
 
   return (
@@ -107,7 +159,8 @@ export default function Nav() {
             >
               <button
                 onClick={() => setDropdown(dropdown === 'solutions' ? null : 'solutions')}
-                aria-haspopup="true"
+                onKeyDown={e => handleTriggerKeyDown(e, 'solutions')}
+                aria-haspopup="menu"
                 aria-expanded={dropdown === 'solutions'}
                 className={`flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
                   dropdown === 'solutions' || pathname.startsWith('/services')
@@ -126,7 +179,8 @@ export default function Nav() {
             >
               <button
                 onClick={() => setDropdown(dropdown === 'products' ? null : 'products')}
-                aria-haspopup="true"
+                onKeyDown={e => handleTriggerKeyDown(e, 'products')}
+                aria-haspopup="menu"
                 aria-expanded={dropdown === 'products'}
                 className={`flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
                   dropdown === 'products' || pathname.startsWith('/products')
@@ -196,9 +250,12 @@ export default function Nav() {
         {/* ── Solutions mega-dropdown ── */}
         {dropdown === 'solutions' && (
           <div
+            ref={dropdownContainerRef}
+            role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
             onMouseEnter={() => openDropdown('solutions')}
             onMouseLeave={scheduleClose}
+            onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
               <div className="grid grid-cols-3 gap-10">
@@ -211,6 +268,7 @@ export default function Nav() {
                       <Link
                         key={href}
                         href={href}
+                        role="menuitem"
                         className="flex items-start gap-3 p-3 -mx-3 hover:bg-[rgba(var(--ch-accent),0.05)] transition-colors duration-150 group rounded-sm"
                       >
                         <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.05)] transition-all duration-150">
@@ -233,6 +291,7 @@ export default function Nav() {
                       <Link
                         key={href}
                         href={href}
+                        role="menuitem"
                         className="flex items-start gap-3 p-3 -mx-3 hover:bg-[rgba(var(--ch-accent),0.05)] transition-colors duration-150 group rounded-sm"
                       >
                         <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.05)] transition-all duration-150">
@@ -268,6 +327,7 @@ export default function Nav() {
                   </div>
                   <Link
                     href="/contact"
+                    role="menuitem"
                     className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 self-start"
                   >
                     Start a Project →
@@ -282,9 +342,12 @@ export default function Nav() {
         {/* ── Products dropdown ── */}
         {dropdown === 'products' && (
           <div
+            ref={dropdownContainerRef}
+            role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
             onMouseEnter={() => openDropdown('products')}
             onMouseLeave={scheduleClose}
+            onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
               <div className="flex gap-10 max-w-2xl">
@@ -292,6 +355,7 @@ export default function Nav() {
                 {/* AstaBill card */}
                 <Link
                   href="/products"
+                  role="menuitem"
                   className="flex-1 border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-6 hover:border-[rgba(34,166,86,0.40)] transition-colors duration-200 group"
                 >
                   <div className="flex items-start gap-4 mb-5">
@@ -326,6 +390,7 @@ export default function Nav() {
                   </div>
                   <Link
                     href="/contact"
+                    role="menuitem"
                     className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
                   >
                     Book Free Demo →
@@ -342,6 +407,7 @@ export default function Nav() {
       {/* ── Mobile full-screen menu ── */}
       {mobileOpen && (
         <div
+          ref={mobileDialogRef}
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
