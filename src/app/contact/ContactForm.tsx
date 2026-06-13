@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '', service: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '', service: '', budget: '' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -94,28 +94,49 @@ export default function ContactForm() {
             </div>
           </div>
 
-          <div>
-            <label htmlFor="cf-service" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">What are you looking for?</label>
-            <div className="relative">
-              <select
-                id="cf-service"
-                value={form.service}
-                onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
-                className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[rgba(var(--ch-text),0.60)] font-mono focus:outline-none focus:border-[var(--color-accent)] transition-colors appearance-none pr-10"
-              >
-                <option value="">Select a service</option>
-                <option value="software-development">Software Development</option>
-                <option value="digital-transformation">Digital Transformation</option>
-                <option value="cloud-solutions">Cloud Solutions</option>
-                <option value="cybersecurity">Cybersecurity</option>
-                <option value="crm-erp">CRM &amp; ERP Systems</option>
-                <option value="digital-marketing">Digital Marketing</option>
-                <option value="brand-design">Brand &amp; Design</option>
-                <option value="it-consulting">IT Consulting</option>
-                <option value="astabill">AstaBill</option>
-                <option value="other">Not sure yet</option>
-              </select>
-              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[rgba(var(--ch-text),0.40)] text-[10px]">▾</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="cf-service" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">What are you looking for?</label>
+              <div className="relative">
+                <select
+                  id="cf-service"
+                  value={form.service}
+                  onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                  className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[rgba(var(--ch-text),0.60)] font-mono focus:outline-none focus:border-[var(--color-accent)] transition-colors appearance-none pr-10"
+                >
+                  <option value="">Select a service</option>
+                  <option value="software-development">Software Development</option>
+                  <option value="digital-transformation">Digital Transformation</option>
+                  <option value="cloud-solutions">Cloud Solutions</option>
+                  <option value="cybersecurity">Cybersecurity</option>
+                  <option value="crm-erp">CRM &amp; ERP Systems</option>
+                  <option value="digital-marketing">Digital Marketing</option>
+                  <option value="brand-design">Brand &amp; Design</option>
+                  <option value="it-consulting">IT Consulting</option>
+                  <option value="astabill">AstaBill</option>
+                  <option value="other">Not sure yet</option>
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[rgba(var(--ch-text),0.40)] text-[10px]">▾</span>
+              </div>
+            </div>
+            <div>
+              <label htmlFor="cf-budget" className="block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.35)] mb-2">Approximate budget</label>
+              <div className="relative">
+                <select
+                  id="cf-budget"
+                  value={form.budget}
+                  onChange={e => setForm(f => ({ ...f, budget: e.target.value }))}
+                  className="w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[rgba(var(--ch-text),0.60)] font-mono focus:outline-none focus:border-[var(--color-accent)] transition-colors appearance-none pr-10"
+                >
+                  <option value="">Select a range</option>
+                  <option value="under-10k">Under GH₵ 10,000</option>
+                  <option value="10k-50k">GH₵ 10,000 – 50,000</option>
+                  <option value="50k-200k">GH₵ 50,000 – 200,000</option>
+                  <option value="200k-plus">GH₵ 200,000+</option>
+                  <option value="not-sure">Not sure yet</option>
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[rgba(var(--ch-text),0.40)] text-[10px]">▾</span>
+              </div>
             </div>
           </div>
 
