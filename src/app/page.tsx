@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
-import TestimonialCarousel from '@/components/TestimonialCarousel'
+import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
 import ParticlesBackground from '@/components/ui/particles-bg'
 import { FileText, Receipt, BarChart3, Globe } from 'lucide-react'
@@ -460,10 +460,10 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           TESTIMONIALS — large editorial quote carousel
       ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
+      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-10 text-center">What Clients Say</p>
-          <TestimonialCarousel testimonials={displayTestimonials} />
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-14">What Clients Say</p>
+          <DesignTestimonial testimonials={displayTestimonials} />
         </div>
       </section>
 

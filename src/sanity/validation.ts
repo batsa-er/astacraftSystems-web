@@ -81,6 +81,7 @@ export const TestimonialSchema = z.object({
   name: z.string().min(1),
   role: z.string().optional(),
   initials: z.string().optional(),
+  photo: z.object({ asset: z.object({ _id: z.string(), url: z.string() }) }).optional(),
   featured: z.boolean().default(false),
 }) satisfies z.ZodType<Testimonial>
 

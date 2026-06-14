@@ -60,6 +60,7 @@ export interface Testimonial {
   name: string
   role?: string
   initials?: string
+  photo?: { asset: { _id: string; url: string } }
   featured: boolean
 }
 

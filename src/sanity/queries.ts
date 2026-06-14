@@ -70,7 +70,8 @@ export async function getServiceBySlug(slug: string): Promise<ServiceDetail | nu
 // ── Testimonials ──────────────────────────────────────
 export async function getTestimonials(): Promise<Testimonial[]> {
   const data = await client.fetch(`*[_type == "testimonial" && published == true] | order(featured desc) {
-    _id, quote, name, role, initials, featured
+    _id, quote, name, role, initials, featured,
+    photo { asset->{ _id, url } }
   }`)
   return validateArray(TestimonialSchema, data, 'testimonial')
 }
