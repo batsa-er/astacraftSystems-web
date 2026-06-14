@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { CountUp } from '@/components/CountUp'
+import ParticlesBackground from '@/components/ui/particles-bg'
 import { FileText, Receipt, BarChart3, Globe } from 'lucide-react'
 
 const SERVICES = [
@@ -69,7 +70,8 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           HERO — left-aligned editorial, massive type, dark navy canvas
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100dvh] flex flex-col bg-[var(--color-dark)] overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col overflow-hidden">
+        <ParticlesBackground />
         {/* Ambient orbs */}
         <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.30)_0%,transparent_60%)] animate-orb-1 pointer-events-none" />
         <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(85,170,73,0.12)_0%,transparent_60%)] animate-orb-2 pointer-events-none" />
