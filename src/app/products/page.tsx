@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { CheckIcon, TrendingUpIcon, UsersIcon, ShieldCheckIcon, CurrencyIcon } from '@/components/Icons'
+import { FileText, Receipt, UserCircle, Smartphone, ShieldCheck, BarChart3 } from 'lucide-react'
+import { PricingSection } from '@/components/PricingSection'
 
 export default function ProductsPage() {
   return (
@@ -68,42 +70,48 @@ export default function ProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
+                Icon: FileText,
                 title: 'Invoicing & Quotations',
                 body: 'Create professional invoices and quotations in seconds. Automatic payment reminders, late fee calculations, and client portals included.',
                 features: ['Custom branded templates', 'Auto-reminders & follow-ups', 'Multi-currency support'],
               },
               {
+                Icon: Receipt,
                 title: 'Expense Management',
                 body: 'Capture, categorize, and approve expenses with receipt scanning and real-time budget tracking across departments.',
                 features: ['Receipt scanning & OCR', 'Budget tracking by department', 'Approval workflows'],
               },
               {
+                Icon: UserCircle,
                 title: 'Customer Management',
                 body: 'Maintain a complete record of every client — contact details, transaction history, outstanding balances, and communication logs.',
                 features: ['Client transaction history', 'Outstanding balance tracking', 'Communication logs'],
               },
               {
+                Icon: Smartphone,
                 title: 'Payment Collection',
                 body: 'Accept payments via Mobile Money, bank transfer, and card directly through AstaBill payment links — no third-party checkout required.',
                 features: ['Mobile Money (MTN, Vodafone, AirtelTigo)', 'Bank transfer & card payments', 'Instant payment notifications'],
               },
               {
+                Icon: ShieldCheck,
                 title: 'GRA Tax Compliance',
                 body: 'Stay fully compliant with Ghana Revenue Authority requirements. Automatic VAT calculation, e-levy handling, and tax report generation.',
                 features: ['Automatic VAT & e-levy', 'GRA-ready tax reports', 'Annual filing preparation'],
               },
               {
+                Icon: BarChart3,
                 title: 'Business Analytics',
                 body: 'Real-time dashboards showing revenue, expenses, outstanding payments, and cash flow — with drill-down into any metric.',
                 features: ['Real-time revenue dashboards', 'Cash flow forecasting', 'Custom report builder'],
               },
-            ].map(({ title, body, features }, i) => (
+            ].map(({ Icon, title, body, features }, i) => (
               <div
                 key={title}
                 className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-surface)] p-8 reveal"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className="w-2 h-2 bg-[var(--color-green)] mb-6" />
+                <Icon className="w-5 h-5 text-[var(--color-green)] mb-6 stroke-[1.4]" />
                 <h3 className="font-serif text-[22px] font-bold text-[var(--color-text)] mb-3">{title}</h3>
                 <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed mb-6">{body}</p>
                 <ul className="space-y-2">
@@ -120,82 +128,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-16 reveal">
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Pricing</p>
-            <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4" style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}>
-              Simple, transparent pricing.
-            </h2>
-            <p className="text-[15px] text-[rgba(var(--ch-text),0.50)] max-w-xl mx-auto">
-              Start free. Upgrade when you need more. Cancel anytime.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                name: 'Starter', price: 'Free', period: 'forever',
-                desc: 'For freelancers and solo entrepreneurs getting started.',
-                features: ['Up to 5 invoices/month', '1 user', 'Basic reporting', 'Email support'],
-                cta: 'Get Started Free', primary: false,
-              },
-              {
-                name: 'Growth', price: 'GH₵ 149', period: '/month',
-                desc: 'For growing SMEs that need more volume and team access.',
-                features: ['Unlimited invoices', 'Up to 5 users', 'GRA compliance tools', 'Payment links', 'Advanced reporting', 'Priority support'],
-                cta: 'Start Free Trial', primary: true,
-              },
-              {
-                name: 'Enterprise', price: 'Custom', period: '',
-                desc: 'For multi-location businesses with custom requirements.',
-                features: ['Unlimited everything', 'Custom integrations', 'Dedicated account manager', 'SLA guarantee', 'On-premise option', 'Training & onboarding'],
-                cta: 'Book a Demo', primary: false,
-              },
-            ].map(({ name, price, period, desc, features, cta, primary }, i) => (
-              <div
-                key={name}
-                className={`border p-8 flex flex-col reveal ${
-                  primary
-                    ? 'border-[var(--color-green)] bg-[var(--color-bg)] relative'
-                    : 'border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-bg)]'
-                }`}
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                {primary && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 font-mono text-[11px] tracking-[0.18em] uppercase bg-[var(--color-green)] text-white px-4 py-1">
-                    Most Popular
-                  </span>
-                )}
-                <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--color-accent)] mb-4">{name}</p>
-                <div className="mb-4">
-                  <span className="font-serif font-bold text-[var(--color-text)]" style={{ fontSize: 'clamp(32px,4vw,48px)', lineHeight: 1 }}>{price}</span>
-                  {period && <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.40)] ml-1">{period}</span>}
-                </div>
-                <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed mb-8">{desc}</p>
-                <ul className="space-y-3 mb-10 flex-1">
-                  {features.map(f => (
-                    <li key={f} className="flex items-start gap-2">
-                      <CheckIcon className="text-[var(--color-green)] mt-0.5 shrink-0 w-3 h-3" />
-                      <span className="text-[13px] text-[rgba(var(--ch-text),0.60)]">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/contact"
-                  className={`font-mono text-[11px] tracking-[0.14em] uppercase font-medium py-4 text-center transition-colors duration-200 ${
-                    primary
-                      ? 'bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)]'
-                      : 'border border-[rgba(var(--ch-accent),0.35)] text-[rgba(var(--ch-text),0.70)] hover:border-[var(--color-accent)] hover:text-[var(--color-text)]'
-                  }`}
-                >
-                  {cta}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PricingSection />
 
       {/* CTA */}
       <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">

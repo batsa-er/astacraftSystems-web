@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { CountUp } from '@/components/CountUp'
+import { FileText, Receipt, BarChart3, Globe } from 'lucide-react'
 
 const SERVICES = [
   { num: '01', slug: 'software-development',   title: 'Software Development',     desc: 'Custom platforms, mobile apps, and APIs — engineered for scale and built to last.' },
@@ -33,10 +34,10 @@ const INDUSTRIES = [
 ]
 
 const ASTABILL_FEATURES = [
-  { title: 'Smart Invoicing',   body: 'Create, send, and track invoices with automated payment reminders and real-time status.' },
-  { title: 'Expense Tracking',  body: 'Capture receipts, categorize expenses, and sync with your bank automatically.' },
-  { title: 'Financial Reports', body: 'P&L, cash flow, and tax summaries on demand — without the accountant.' },
-  { title: 'Multi-Currency',    body: 'Invoice in GHS, USD, EUR, and 30+ currencies with live exchange rates.' },
+  { Icon: FileText,   title: 'Smart Invoicing',   body: 'Create, send, and track invoices with automated payment reminders and real-time status.' },
+  { Icon: Receipt,    title: 'Expense Tracking',  body: 'Capture receipts, categorize expenses, and sync with your bank automatically.' },
+  { Icon: BarChart3,  title: 'Financial Reports', body: 'P&L, cash flow, and tax summaries on demand — without the accountant.' },
+  { Icon: Globe,      title: 'Multi-Currency',    body: 'Invoice in GHS, USD, EUR, and 30+ currencies with live exchange rates.' },
 ]
 
 const FALLBACK_CASES = [
@@ -286,9 +287,9 @@ export default async function HomePage() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-              {ASTABILL_FEATURES.map(({ title, body }) => (
+              {ASTABILL_FEATURES.map(({ Icon, title, body }) => (
                 <div key={title} className="border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.025)] p-5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#55AA49] mb-3" />
+                  <Icon className="w-4 h-4 text-[#55AA49] mb-3 stroke-[1.5]" />
                   <p className="font-serif text-[14px] font-semibold text-white mb-1.5">{title}</p>
                   <p className="text-[12px] text-[rgba(255,255,255,0.35)] leading-relaxed">{body}</p>
                 </div>
