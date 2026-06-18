@@ -485,7 +485,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <p className="text-[13px] text-[rgba(var(--ch-text),0.45)] max-w-[40ch] leading-relaxed">
-              We work across the world's leading cloud and enterprise platforms — so your stack works with us from day one.
+              We work across the world&apos;s leading cloud and enterprise platforms — so your stack works with us from day one.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>

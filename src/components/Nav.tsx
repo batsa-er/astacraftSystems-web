@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -56,7 +56,7 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  useEffect(() => { setMobileOpen(false); setDropdown(null) }, [pathname])
+  useEffect(() => { startTransition(() => { setMobileOpen(false); setDropdown(null) }) }, [pathname])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {

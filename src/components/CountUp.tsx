@@ -14,9 +14,6 @@ export function CountUp({ to, duration = 2200, className }: Props) {
   const started = useRef(false)
 
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) { setCount(to); return }
-
     const el = spanRef.current
     if (!el) return
 
@@ -24,6 +21,8 @@ export function CountUp({ to, duration = 2200, className }: Props) {
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true
+          const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          if (reduced) { setCount(to); return }
           const startTime = performance.now()
           const tick = (now: number) => {
             const t = Math.min((now - startTime) / duration, 1)

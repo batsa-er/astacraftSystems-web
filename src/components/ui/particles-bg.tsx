@@ -7,11 +7,11 @@ export default function ParticlesBackground() {
     const oldCanvas = document.querySelector('#particles-js canvas')
     if (oldCanvas) oldCanvas.remove()
 
-    // @ts-ignore
+    // @ts-expect-error - particles.js extends window
     if (window.pJSDom?.length > 0) {
-      // @ts-ignore
+      // @ts-expect-error - particles.js extends window
       window.pJSDom.forEach((p) => p.pJS.fn.vendors.destroypJS())
-      // @ts-ignore
+      // @ts-expect-error - particles.js extends window
       window.pJSDom = []
     }
 
@@ -19,7 +19,7 @@ export default function ParticlesBackground() {
       ? { particles: '#55AD3D', lines: '#3E8A2C', accent: '#1B4E8C' }
       : { particles: '#1B4E8C', lines: '#2563EB', accent: '#55AD3D' }
 
-    // @ts-ignore
+    // @ts-expect-error - particles.js extends window
     window.particlesJS('particles-js', {
       particles: {
         number: { value: 140, density: { enable: true, value_area: 800 } },
