@@ -265,25 +265,25 @@ export default function Nav() {
             onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="grid grid-cols-3 gap-10">
+              <div className="grid grid-cols-[1fr_1fr_300px] gap-10">
 
                 {/* Column 1: Technology */}
                 <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Technology</p>
-                  <div className="space-y-1">
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Technology</p>
+                  <div>
                     {solutionsTech.map(({ Icon, href, title, desc }) => (
                       <Link
                         key={href}
                         href={href}
                         role="menuitem"
-                        className="flex items-start gap-3 p-3 -mx-3 hover:bg-[rgba(var(--ch-accent),0.05)] transition-colors duration-150 group rounded-sm"
+                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
                       >
-                        <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.05)] transition-all duration-150">
-                          <Icon className="w-4 h-4 text-[var(--color-accent)]" />
+                        <div className="w-9 h-9 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
+                          <Icon className="w-4 h-4 text-[rgba(var(--ch-accent),0.45)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
                         </div>
                         <div>
                           <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
-                          <p className="text-[12px] text-[rgba(var(--ch-text),0.42)] leading-snug">{desc}</p>
+                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
                         </div>
                       </Link>
                     ))}
@@ -292,42 +292,42 @@ export default function Nav() {
 
                 {/* Column 2: Business Solutions */}
                 <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Business Solutions</p>
-                  <div className="space-y-1">
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Business Solutions</p>
+                  <div>
                     {solutionsBusiness.map(({ Icon, href, title, desc }) => (
                       <Link
                         key={href}
                         href={href}
                         role="menuitem"
-                        className="flex items-start gap-3 p-3 -mx-3 hover:bg-[rgba(var(--ch-accent),0.05)] transition-colors duration-150 group rounded-sm"
+                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
                       >
-                        <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.05)] transition-all duration-150">
-                          <Icon className="w-4 h-4 text-[var(--color-accent)]" />
+                        <div className="w-9 h-9 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
+                          <Icon className="w-4 h-4 text-[rgba(var(--ch-accent),0.45)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
                         </div>
                         <div>
                           <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
-                          <p className="text-[12px] text-[rgba(var(--ch-text),0.42)] leading-snug">{desc}</p>
+                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
                         </div>
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                {/* Column 3: Enterprise CTA panel */}
-                <div className="border-l border-[rgba(var(--ch-border),0.10)] pl-10 flex flex-col justify-between">
+                {/* Column 3: Enterprise — dark panel */}
+                <div className="bg-[var(--color-dark)] p-8 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-6">Enterprise</p>
-                    <h3 className="font-serif text-[22px] font-bold text-[var(--color-text)] mb-3 leading-tight">
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Enterprise</p>
+                    <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
                       End-to-end digital<br />transformation.
                     </h3>
-                    <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed mb-6">
+                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
                       From strategy through deployment — we manage the full technology lifecycle for your organization.
                     </p>
-                    <ul className="space-y-2 mb-8">
+                    <ul className="space-y-2.5 mb-8">
                       {['Technology roadmapping', 'Vendor selection & management', 'Change management support'].map(item => (
-                        <li key={item} className="flex items-center gap-2">
-                          <span className="w-1 h-1 rounded-full bg-[var(--color-accent)] shrink-0" />
-                          <span className="text-[12px] text-[rgba(var(--ch-text),0.45)]">{item}</span>
+                        <li key={item} className="flex items-center gap-2.5">
+                          <span className="w-1 h-1 rounded-full bg-[#55AA49] shrink-0" />
+                          <span className="text-[12px] text-[rgba(255,255,255,0.45)]">{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -335,7 +335,7 @@ export default function Nav() {
                   <Link
                     href="/contact"
                     role="menuitem"
-                    className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 self-start"
+                    className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-6 py-3 hover:bg-[#489A3E] transition-colors duration-200 self-start"
                   >
                     Start a Project →
                   </Link>
@@ -357,51 +357,65 @@ export default function Nav() {
             onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="flex gap-10 max-w-2xl">
+              <div className="grid grid-cols-[1fr_260px] gap-0 max-w-[720px]">
 
                 {/* AstaBill card */}
                 <Link
                   href="/products"
                   role="menuitem"
-                  className="flex-1 border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-6 hover:border-[rgba(34,166,86,0.40)] transition-colors duration-200 group"
+                  className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-7 hover:border-[rgba(34,166,86,0.40)] transition-colors duration-200 group"
                 >
-                  <div className="flex items-start gap-4 mb-5">
-                    <div className="w-10 h-10 bg-[var(--color-green)] flex items-center justify-center shrink-0">
-                      <span className="font-serif font-bold text-white text-[16px]">A</span>
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <img src="/astabill-logo.svg"       alt="AstaBill" className="h-7 w-auto dark:hidden" />
+                      <img src="/astabill-logo-white.svg" alt="AstaBill" className="h-7 w-auto hidden dark:block" />
+                      <span className="font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Live</span>
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-serif text-[18px] font-bold text-[var(--color-text)] group-hover:text-[var(--color-green)] transition-colors duration-200">AstaBill</h3>
-                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Flagship</span>
-                      </div>
-                      <p className="text-[13px] text-[rgba(var(--ch-text),0.50)]">Cloud business management platform</p>
-                    </div>
+                    <p className="text-[12px] text-[rgba(var(--ch-text),0.45)]">Invoicing & payment platform for African businesses</p>
                   </div>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {['Invoicing', 'Payments', 'GRA Compliance', 'Analytics', 'Team Collaboration'].map(tag => (
-                      <span key={tag} className="font-mono text-[11px] tracking-[0.12em] uppercase px-2.5 py-1 border border-[rgba(var(--ch-border),0.12)] text-[rgba(var(--ch-text),0.38)]">{tag}</span>
+                  <div className="grid grid-cols-3 gap-3 mb-6">
+                    {[
+                      { stat: '500+',    label: 'Invoices sent' },
+                      { stat: 'GHS 2M+', label: 'Collected' },
+                      { stat: 'Free',    label: 'To start' },
+                    ].map(({ stat, label }) => (
+                      <div key={label} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-bg)] p-3 text-center">
+                        <p className="font-serif font-bold text-[var(--color-text)] text-[15px] mb-0.5">{stat}</p>
+                        <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                      </div>
                     ))}
                   </div>
                   <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-accent)] group-hover:text-[var(--color-green)] transition-colors duration-200">
-                    Explore AstaBill →
+                    View product →
                   </p>
                 </Link>
 
-                {/* Demo CTA */}
-                <div className="w-56 flex flex-col justify-between">
+                {/* Dark CTA panel */}
+                <div className="bg-[var(--color-dark)] p-7 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.28)] mb-4">Get Started</p>
-                    <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed mb-6">
-                      See AstaBill live in a free 30-minute demo with our product team.
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Get Started</p>
+                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
+                      Free to start. See how AstaBill handles invoicing and payments end-to-end.
                     </p>
                   </div>
-                  <Link
-                    href="/contact"
-                    role="menuitem"
-                    className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
-                  >
-                    Book Free Demo →
-                  </Link>
+                  <div className="space-y-3">
+                    <a
+                      href="https://astabill.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-5 py-3 hover:bg-[#489A3E] transition-colors duration-200 text-center"
+                    >
+                      Try Free →
+                    </a>
+                    <Link
+                      href="/contact"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-5 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
+                    >
+                      Book Demo
+                    </Link>
+                  </div>
                 </div>
 
               </div>

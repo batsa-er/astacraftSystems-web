@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
 import ParticlesBackground from '@/components/ui/particles-bg'
-import { FileText, Receipt, BarChart3, Globe } from 'lucide-react'
 
 export const revalidate = 3600
 
@@ -34,13 +32,6 @@ const CLIENTS = [
 const INDUSTRIES = [
   'Financial Services', 'Telecoms', 'Energy & Utilities', 'Healthcare',
   'Retail & Commerce', 'Government', 'Real Estate', 'Agritech',
-]
-
-const ASTABILL_FEATURES = [
-  { Icon: FileText,   title: 'Smart Invoicing',   body: 'Create, send, and track invoices with automated payment reminders and real-time status.' },
-  { Icon: Receipt,    title: 'Expense Tracking',  body: 'Capture receipts, categorize expenses, and sync with your bank automatically.' },
-  { Icon: BarChart3,  title: 'Financial Reports', body: 'P&L, cash flow, and tax summaries on demand — without the accountant.' },
-  { Icon: Globe,      title: 'Multi-Currency',    body: 'Invoice in GHS, USD, EUR, and 30+ currencies with live exchange rates.' },
 ]
 
 const FALLBACK_CASES = [
@@ -269,92 +260,151 @@ export default async function HomePage() {
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
 
         <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+          {/* Left — pitch */}
           <div className="reveal">
-            <div className="relative inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.24em] uppercase text-[#55AA49] border border-[rgba(85,170,73,0.22)] px-4 py-2 mb-9">
+            <div className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.24em] uppercase text-[#55AA49] border border-[rgba(85,170,73,0.22)] px-4 py-2 mb-10">
               <span className="w-1 h-1 rounded-full bg-[#55AA49] animate-status" />
               Featured Product
             </div>
-            <div className="mb-8">
-              <Image src="/astabill-icon.svg" alt="AstaBill" width={64} height={64} />
+
+            <div className="mb-7">
+              <img src="/astabill-logo-white.svg" alt="AstaBill" className="h-9 w-auto" />
             </div>
-            <p
+
+            <h2
               className="font-serif font-black text-white leading-[0.90] tracking-[-0.035em] mb-6"
-              style={{ fontSize: 'clamp(28px,3.8vw,52px)', color: '#55AA49' }}
+              style={{ fontSize: 'clamp(32px,4.2vw,58px)' }}
             >
-              Finance made simple.
-            </p>
+              Invoice smart.<br />
+              <span style={{ color: '#55AA49' }}>Get paid faster.</span>
+            </h2>
+
             <p
-              className="text-[rgba(255,255,255,0.52)] leading-relaxed mb-10 max-w-[52ch]"
-              style={{ fontSize: 'clamp(14px,1.3vw,17px)' }}
+              className="text-[rgba(255,255,255,0.52)] leading-relaxed mb-10 max-w-[48ch]"
+              style={{ fontSize: 'clamp(14px,1.2vw,16px)' }}
             >
-              The billing, invoicing, and financial management platform built for African businesses. No spreadsheets. No complexity. Just clarity.
+              The invoicing and payment platform built for African businesses. Send a professional invoice, collect via Mobile Money or card, and see your cash flow — all in one place.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-              {ASTABILL_FEATURES.map(({ Icon, title, body }) => (
-                <div key={title} className="border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.025)] p-5">
-                  <Icon className="w-4 h-4 text-[#55AA49] mb-3 stroke-[1.5]" />
-                  <p className="font-serif text-[14px] font-semibold text-white mb-1.5">{title}</p>
-                  <p className="text-[12px] text-[rgba(255,255,255,0.35)] leading-relaxed">{body}</p>
+            <ul className="space-y-3.5 mb-10">
+              {[
+                'Professional invoices with public payment pages',
+                'Mobile Money (MTN MoMo, Telecel, AT Money) & card via Paystack',
+                'Real-time cash flow — invoiced, collected, and overdue at a glance',
+              ].map(point => (
+                <li key={point} className="flex items-start gap-3">
+                  <span className="mt-1 w-4 h-4 rounded-full bg-[rgba(85,170,73,0.15)] border border-[rgba(85,170,73,0.35)] flex items-center justify-center shrink-0">
+                    <svg className="w-2 h-2" viewBox="0 0 8 8" fill="none">
+                      <path d="M1.5 4L3.5 6L6.5 2" stroke="#55AA49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <span className="text-[14px] text-[rgba(255,255,255,0.60)] leading-snug">{point}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex gap-8 mb-10 pb-10 border-b border-[rgba(255,255,255,0.07)]">
+              {[
+                { stat: '500+',    label: 'Invoices sent' },
+                { stat: 'GHS 2M+', label: 'Collected' },
+                { stat: 'Free',    label: 'To start' },
+              ].map(({ stat, label }) => (
+                <div key={label}>
+                  <p className="font-serif font-black text-white leading-none mb-1" style={{ fontSize: 'clamp(22px,2.2vw,32px)' }}>{stat}</p>
+                  <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.35)]">{label}</p>
                 </div>
               ))}
             </div>
 
-            <Link
-              href="/products"
-              className="btn-shimmer inline-flex items-center gap-3 bg-[#55AA49] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[#489A3E] transition-colors duration-200"
-            >
-              Explore AstaBill →
-            </Link>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://astabill.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-shimmer inline-block bg-[#55AA49] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+              >
+                Try Free →
+              </a>
+              <Link
+                href="/products"
+                className="inline-block border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.70)] font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.55)] hover:text-white transition-colors duration-200"
+              >
+                Learn More
+              </Link>
+            </div>
           </div>
 
-          {/* Mock dashboard */}
+          {/* Right — mock dashboard */}
           <div className="reveal lg:pl-4" style={{ transitionDelay: '140ms' }}>
             <div className="border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.025)] shadow-2xl overflow-hidden">
-              <div className="flex items-center gap-2 px-5 py-4 border-b border-[rgba(255,255,255,0.06)]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.12)]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.07)]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.05)]" />
-                <span className="ml-4 font-mono text-[10px] text-[rgba(255,255,255,0.20)] tracking-wide">
-                  astabill.io — Dashboard
-                </span>
+
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,80,80,0.40)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,180,0,0.30)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(85,170,73,0.30)]" />
+                <div className="ml-4 flex-1 bg-[rgba(255,255,255,0.05)] rounded-sm px-3 py-1 flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 opacity-20">
+                    <svg viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="white" strokeWidth="1"/><path d="M5 2v3l2 1" stroke="white" strokeWidth="1" strokeLinecap="round"/></svg>
+                  </span>
+                  <span className="font-mono text-[10px] text-[rgba(255,255,255,0.25)] tracking-wide">astabill.com/dashboard</span>
+                </div>
               </div>
-              <div className="p-5 space-y-4">
-                <div className="grid grid-cols-1 xs:grid-cols-3 sm:grid-cols-3 gap-2">
+
+              <div className="p-5 space-y-3">
+                {/* Stat cards */}
+                <div className="grid grid-cols-3 gap-2">
                   {[
-                    { label: 'Total Revenue',   val: 'GH₵ 84,200', note: '↑ 14%',      green: true  },
-                    { label: 'Pending',         val: 'GH₵ 12,500', note: '⏳ Due soon', green: false },
-                    { label: 'Paid This Month', val: 'GH₵ 31,700', note: '↑ 8%',       green: true  },
+                    { label: 'Total Revenue',   val: 'GH₵ 84,200', note: '↑ 14% this month', green: true  },
+                    { label: 'Outstanding',     val: 'GH₵ 12,500', note: '3 invoices due',   green: false },
+                    { label: 'Paid This Month', val: 'GH₵ 31,700', note: '↑ 8% vs last',     green: true  },
                   ].map(m => (
-                    <div key={m.label} className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] p-4">
-                      <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.24)] mb-2">{m.label}</p>
-                      <p className="font-serif text-[14px] font-bold text-white leading-none mb-1">{m.val}</p>
-                      <p className={`font-mono text-[11px] ${m.green ? 'text-[#55AA49]' : 'text-[rgba(255,255,255,0.32)]'}`}>{m.note}</p>
+                    <div key={m.label} className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] p-3.5">
+                      <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.25)] mb-2">{m.label}</p>
+                      <p className="font-serif text-[13px] font-bold text-white leading-none mb-1.5">{m.val}</p>
+                      <p className={`font-mono text-[10px] ${m.green ? 'text-[#55AA49]' : 'text-[#D97706]'}`}>{m.note}</p>
                     </div>
                   ))}
                 </div>
+
+                {/* Invoice table */}
                 <div className="border border-[rgba(255,255,255,0.06)]">
-                  <div className="px-4 py-3 border-b border-[rgba(255,255,255,0.05)] flex justify-between">
-                    <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.22)]">Recent Invoices</span>
-                    <span className="font-mono text-[11px] text-[#55AA49]">View all</span>
+                  <div className="px-4 py-2.5 border-b border-[rgba(255,255,255,0.05)] flex justify-between items-center">
+                    <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">Recent Invoices</span>
+                    <span className="font-mono text-[10px] text-[#55AA49] hover:text-[#68CA50] cursor-pointer">View all →</span>
                   </div>
                   {[
-                    { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', paid: true  },
-                    { id: 'INV-0041', client: 'Kente Exports Co',  amount: 'GH₵ 2,200', paid: false },
-                    { id: 'INV-0040', client: 'TechBridge Africa', amount: 'GH₵ 7,500', paid: true  },
+                    { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', status: 'Paid',    paid: true  },
+                    { id: 'INV-0041', client: 'Kente Exports Co',  amount: 'GH₵ 2,200', status: 'Pending', paid: false },
+                    { id: 'INV-0040', client: 'TechBridge Africa', amount: 'GH₵ 7,500', status: 'Paid',    paid: true  },
+                    { id: 'INV-0039', client: 'Volta Agro Ltd',    amount: 'GH₵ 1,950', status: 'Overdue', paid: false },
                   ].map(inv => (
-                    <div key={inv.id} className="flex items-center justify-between px-4 py-3.5 border-b border-[rgba(255,255,255,0.04)] last:border-0">
+                    <div key={inv.id} className="flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.04)] last:border-0 hover:bg-[rgba(255,255,255,0.02)] transition-colors duration-150">
                       <div>
-                        <p className="font-mono text-[10px] text-[rgba(255,255,255,0.48)]">{inv.id}</p>
-                        <p className="font-sans text-[11px] text-[rgba(255,255,255,0.26)] mt-0.5">{inv.client}</p>
+                        <p className="font-mono text-[10px] text-[rgba(255,255,255,0.50)]">{inv.id}</p>
+                        <p className="text-[11px] text-[rgba(255,255,255,0.30)] mt-0.5">{inv.client}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-mono text-[11px] text-white">{inv.amount}</p>
-                        <span className={`font-mono text-[10px] tracking-[0.1em] uppercase ${inv.paid ? 'text-[#55AA49]' : 'text-[#D97706]'}`}>
-                          {inv.paid ? 'Paid' : 'Pending'}
+                        <p className="font-mono text-[11px] text-white mb-0.5">{inv.amount}</p>
+                        <span className={`font-mono text-[9px] tracking-[0.1em] uppercase px-1.5 py-0.5 ${
+                          inv.status === 'Paid'    ? 'text-[#55AA49] bg-[rgba(85,170,73,0.10)]' :
+                          inv.status === 'Overdue' ? 'text-[#F87171] bg-[rgba(248,113,113,0.10)]' :
+                          'text-[#D97706] bg-[rgba(217,119,6,0.10)]'
+                        }`}>
+                          {inv.status}
                         </span>
                       </div>
                     </div>
+                  ))}
+                </div>
+
+                {/* Quick action strip */}
+                <div className="flex gap-2 pt-1">
+                  {['New Invoice', 'Record Payment', 'Send Reminder'].map(action => (
+                    <button key={action} className="flex-1 font-mono text-[9px] tracking-[0.10em] uppercase text-[rgba(255,255,255,0.35)] border border-[rgba(255,255,255,0.08)] py-2 hover:border-[rgba(85,170,73,0.40)] hover:text-[#55AA49] transition-colors duration-150">
+                      {action}
+                    </button>
                   ))}
                 </div>
               </div>
