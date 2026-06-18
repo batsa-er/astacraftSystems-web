@@ -128,12 +128,14 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-export default async function InsightPage({ params }: { params: { slug: string } }) {
+export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+
   let ins: any = null
   try {
-    ins = await getInsight(params.slug)
+    ins = await getInsight(slug)
   } catch {}
-  if (!ins) ins = fallbackInsights[params.slug]
+  if (!ins) ins = fallbackInsights[slug]
   if (!ins) notFound()
 
   const bodyText: string = ins.body || ins.excerpt || ''

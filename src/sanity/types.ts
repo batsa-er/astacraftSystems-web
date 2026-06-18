@@ -49,9 +49,15 @@ export interface Service {
   price: string
 }
 
+export interface ServiceStat {
+  num: string
+  label: string
+}
+
 export interface ServiceDetail extends Service {
   detail: string
   process?: string[]
+  stats?: ServiceStat[]
 }
 
 export interface Testimonial {

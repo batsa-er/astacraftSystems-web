@@ -25,12 +25,14 @@ const fallbackStudies: Record<string, any> = {
   },
 }
 
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+
   let cs: any = null
   try {
-    cs = await getCaseStudy(params.slug)
+    cs = await getCaseStudy(slug)
   } catch {}
-  if (!cs) cs = fallbackStudies[params.slug]
+  if (!cs) cs = fallbackStudies[slug]
   if (!cs) notFound()
 
   const accentColor = cs.accent === 'cyan' ? '#0891B2' : cs.accent === 'gold' ? '#D97706' : '#2563EB'

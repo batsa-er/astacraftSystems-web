@@ -6,6 +6,7 @@ import type {
   InsightDetail,
   Service,
   ServiceDetail,
+  ServiceStat,
   Testimonial,
   Career,
 } from './types'
@@ -69,9 +70,15 @@ export const ServiceSchema = z.object({
   price: z.string().default(''),
 }) satisfies z.ZodType<Service>
 
+const ServiceStatSchema = z.object({
+  num:   z.string().default(''),
+  label: z.string().default(''),
+}) satisfies z.ZodType<ServiceStat>
+
 export const ServiceDetailSchema = ServiceSchema.extend({
-  detail: z.string().default(''),
+  detail:  z.string().default(''),
   process: z.array(z.string()).optional(),
+  stats:   z.array(ServiceStatSchema).optional(),
 }) satisfies z.ZodType<ServiceDetail>
 
 // ── Testimonials ──────────────────────────────────────

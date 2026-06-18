@@ -60,7 +60,7 @@ export async function getServices(): Promise<Service[]> {
 export async function getServiceBySlug(slug: string): Promise<ServiceDetail | null> {
   const data = await client.fetch(
     `*[_type == "service" && slug.current == $slug][0] {
-      _id, slug, number, title, tagline, description, outcomes, price, detail, process
+      _id, slug, number, title, tagline, description, outcomes, price, detail, process, stats
     }`,
     { slug },
   )

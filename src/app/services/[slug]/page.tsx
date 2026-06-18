@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getServices } from '@/sanity/queries'
+import { getServices, getServiceBySlug } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
 import {
   CodeIcon, ZapIcon, ServerIcon, ShieldCheckIcon,
@@ -19,14 +19,14 @@ export async function generateStaticParams() {
 }
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  'software-development': CodeIcon,
+  'software-development':   CodeIcon,
   'digital-transformation': ZapIcon,
-  'cloud-solutions': ServerIcon,
-  'cybersecurity': ShieldCheckIcon,
-  'crm-erp': DatabaseIcon,
-  'digital-marketing': MegaphoneIcon,
-  'brand-design': BrushIcon,
-  'it-consulting': ConsultIcon,
+  'cloud-solutions':        ServerIcon,
+  'cybersecurity':          ShieldCheckIcon,
+  'crm-erp':                DatabaseIcon,
+  'digital-marketing':      MegaphoneIcon,
+  'brand-design':           BrushIcon,
+  'it-consulting':          ConsultIcon,
 }
 
 const fallbackServices: Record<string, any> = {
@@ -96,25 +96,34 @@ const fallbackServices: Record<string, any> = {
   },
 }
 
-export default async function ServicePage({ params }: { params: { slug: string } }) {
+const ALL_SLUGS = Object.keys(fallbackServices)
+
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+
   let svc: any = null
   try {
-    const services = await getServices()
-    svc = services?.find((s: any) => (s.slug?.current || s.slug) === params.slug)
+    svc = await getServiceBySlug(slug)
   } catch {}
-  if (!svc) svc = fallbackServices[params.slug]
+  if (!svc) svc = fallbackServices[slug]
   if (!svc) notFound()
 
-  const Icon = iconMap[params.slug] ?? ConsultIcon
-  const stats = svc.stats || fallbackServices[params.slug]?.stats || []
-  const process = svc.process || fallbackServices[params.slug]?.process || []
+  const Icon    = iconMap[slug] ?? ConsultIcon
+  const stats   = svc.stats   || fallbackServices[slug]?.stats   || []
+  const process = svc.process || fallbackServices[slug]?.process || []
+
+  const idx     = ALL_SLUGS.indexOf(slug)
+  const related = [1, 2, 3].map(offset => {
+    const s = ALL_SLUGS[(idx + offset) % ALL_SLUGS.length]
+    return { ...fallbackServices[s], slug: s, Icon: iconMap[s] ?? ConsultIcon }
+  })
 
   return (
     <>
-      {/* Dark hero */}
+      {/* ─── HERO ─── */}
       <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] pt-40 pb-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-50 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_60%_-10%,rgba(37,99,235,0.12),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_60%_-10%,rgba(27,78,140,0.14),transparent)] pointer-events-none" />
 
         <div className="relative max-w-[1000px] mx-auto">
           <Link
@@ -125,46 +134,52 @@ export default async function ServicePage({ params }: { params: { slug: string }
           </Link>
 
           <div className="hero-in hero-in-2">
-            <span className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(37,99,235,0.35)] text-[rgba(100,160,255,0.80)] mb-8">
+            <span className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(85,170,73,0.25)] text-[#55AA49] mb-8 w-fit">
               <Icon className="w-3 h-3" />
               Service {svc.number}
             </span>
           </div>
 
           <h1
-            className="font-serif font-bold text-white leading-tight mb-4 hero-in hero-in-3"
-            style={{ fontSize: 'clamp(44px,7vw,80px)' }}
+            className="font-serif font-black text-white leading-[0.90] tracking-[-0.035em] mb-5 hero-in hero-in-3"
+            style={{ fontSize: 'clamp(44px,7vw,88px)' }}
           >
             {svc.title}
           </h1>
-          <p className="font-mono text-[14px] tracking-[0.06em] italic text-[rgba(255,255,255,0.35)] mb-8 hero-in hero-in-4">
+          <p className="font-mono text-[13px] tracking-[0.08em] italic text-[rgba(255,255,255,0.32)] mb-8 hero-in hero-in-4">
             {svc.tagline}
           </p>
           <p
-            className="text-[clamp(16px,1.4vw,20px)] text-[rgba(255,255,255,0.55)] leading-relaxed max-w-2xl hero-in hero-in-5"
+            className="text-[rgba(255,255,255,0.55)] leading-relaxed max-w-2xl hero-in hero-in-5"
+            style={{ fontSize: 'clamp(15px,1.4vw,19px)' }}
           >
             {svc.description}
           </p>
         </div>
       </section>
 
-      {/* Stats strip */}
+      {/* ─── STATS STRIP ─── */}
       {stats.length > 0 && (
-        <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-12">
-          <div className="max-w-[1280px] mx-auto grid grid-cols-3 gap-8 max-w-2xl">
+        <section className="bg-[var(--color-dark-deep)] border-b border-[rgba(255,255,255,0.05)] px-[clamp(24px,5vw,80px)] py-14">
+          <div className="max-w-[860px] mx-auto grid grid-cols-3 gap-8">
             {stats.map(({ num, label }: { num: string; label: string }, i: number) => (
               <div key={label} className="text-center reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
-                <p className="font-serif font-bold text-[var(--color-accent)] mb-1" style={{ fontSize: 'clamp(28px,3vw,44px)', lineHeight: 1 }}>{num}</p>
-                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                <p
+                  className="stat-display font-serif font-black leading-none mb-2"
+                  style={{ fontSize: 'clamp(32px,4vw,56px)' }}
+                >
+                  {num}
+                </p>
+                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(255,255,255,0.28)]">{label}</p>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* Approach + Deliverables */}
+      {/* ─── APPROACH + DELIVERABLES ─── */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
           <div className="reveal">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6">The Approach</p>
             <p className="text-[15px] text-[rgba(var(--ch-text),0.65)] leading-relaxed">
@@ -177,10 +192,10 @@ export default async function ServicePage({ params }: { params: { slug: string }
             <ul className="space-y-4">
               {(svc.outcomes || []).map((o: string, i: number) => (
                 <li key={o} className="flex items-start gap-4">
-                  <span className="font-mono text-[10px] text-[var(--color-accent)] mt-0.5 shrink-0 w-6">
+                  <span className="font-mono text-[10px] text-[var(--color-green)] mt-0.5 shrink-0 w-6">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-mono text-[12px] tracking-[0.06em] text-[rgba(var(--ch-text),0.60)]">{o}</span>
+                  <span className="text-[13px] text-[rgba(var(--ch-text),0.60)] leading-relaxed">{o}</span>
                 </li>
               ))}
             </ul>
@@ -188,13 +203,16 @@ export default async function ServicePage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* Process steps */}
+      {/* ─── PROCESS STEPS ─── */}
       {process.length > 0 && (
         <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
           <div className="max-w-[1280px] mx-auto">
             <div className="mb-14 reveal">
               <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">How We Work</p>
-              <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
+              <h2
+                className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.03em]"
+                style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}
+              >
                 The engagement process.
               </h2>
             </div>
@@ -204,10 +222,10 @@ export default async function ServicePage({ params }: { params: { slug: string }
                   {i < process.length - 1 && (
                     <div className="hidden lg:block absolute top-5 left-[calc(50%+24px)] right-0 h-px border-t border-dashed border-[rgba(var(--ch-accent),0.20)]" />
                   )}
-                  <div className="w-10 h-10 border border-[rgba(var(--ch-accent),0.25)] flex items-center justify-center mb-4 bg-[var(--color-bg)]">
+                  <div className="w-10 h-10 border border-[rgba(var(--ch-accent),0.20)] flex items-center justify-center mb-4">
                     <span className="font-mono text-[10px] font-bold text-[var(--color-accent)]">{String(i + 1).padStart(2, '0')}</span>
                   </div>
-                  <p className="font-mono text-[11px] tracking-[0.04em] text-[rgba(var(--ch-text),0.60)] leading-snug">{step}</p>
+                  <p className="text-[12px] text-[rgba(var(--ch-text),0.58)] leading-snug">{step}</p>
                 </div>
               ))}
             </div>
@@ -215,17 +233,66 @@ export default async function ServicePage({ params }: { params: { slug: string }
         </section>
       )}
 
-      {/* CTA */}
+      {/* ─── RELATED SERVICES ─── */}
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="mb-12 reveal">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Also From Astacraft</p>
+            <h2
+              className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.03em]"
+              style={{ fontSize: 'clamp(24px,3vw,40px)' }}
+            >
+              Related services.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {related.map(({ slug, number, title, tagline, description, Icon: RelIcon }, i) => (
+              <Link
+                key={slug}
+                href={`/services/${slug}`}
+                className="group block border border-[rgba(var(--ch-border),0.12)] bg-[var(--color-surface)] p-8 hover:border-[rgba(var(--ch-accent),0.28)] transition-all duration-300 reveal"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-10 h-10 border border-[rgba(var(--ch-accent),0.18)] flex items-center justify-center">
+                    <RelIcon className="w-5 h-5 text-[var(--color-accent)]" />
+                  </div>
+                  <span className="font-mono text-[10px] tracking-[0.16em] text-[rgba(var(--ch-text),0.20)]">{number}</span>
+                </div>
+                <h3
+                  className="font-serif font-bold text-[var(--color-text)] mb-2 group-hover:text-[var(--color-accent)] transition-colors duration-200"
+                  style={{ fontSize: 'clamp(16px,1.8vw,20px)' }}
+                >
+                  {title}
+                </h3>
+                <p className="font-mono text-[11px] tracking-[0.06em] italic text-[rgba(var(--ch-text),0.35)] mb-4">{tagline}</p>
+                <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-relaxed mb-6 line-clamp-3">{description}</p>
+                <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.30)] group-hover:text-[var(--color-green)] transition-colors duration-200">
+                  Explore {title} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ─── */}
       <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.12),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(27,78,140,0.12),transparent)] pointer-events-none" />
         <div className="relative max-w-[700px] mx-auto text-center reveal">
-          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Ready to begin?</p>
-          <h2 className="font-serif font-bold text-white leading-tight mb-6" style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}>
-            Ready to get started?
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Start a Conversation</p>
+          <h2
+            className="font-serif font-black text-white leading-[0.90] tracking-[-0.03em] mb-6"
+            style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}
+          >
+            Let&apos;s talk {svc.title.toLowerCase()}.
           </h2>
-          <p className="text-[clamp(15px,1.1vw,17px)] text-[rgba(255,255,255,0.50)] max-w-lg mx-auto mb-10">
-            Book a complimentary strategy call. We will assess your current situation and outline exactly how {svc.title.toLowerCase()} applies to your business goals.
+          <p
+            className="text-[rgba(255,255,255,0.50)] max-w-lg mx-auto mb-10 leading-relaxed"
+            style={{ fontSize: 'clamp(14px,1.1vw,17px)' }}
+          >
+            Book a complimentary strategy call. We will assess your current situation and outline exactly how {svc.title.toLowerCase()} applies to your business goals — no commitment required.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
