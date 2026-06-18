@@ -70,7 +70,9 @@ body {
   overflow-x: hidden;
 }
 
-a { color: inherit; text-decoration: none; }
+@layer base {
+  a { color: inherit; text-decoration: none; }
+}
 
 /* ── Noise texture ── */
 body::before {

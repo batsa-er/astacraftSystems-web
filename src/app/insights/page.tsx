@@ -108,11 +108,11 @@ export default async function InsightsPage() {
                 </h2>
                 <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] leading-relaxed max-w-2xl mb-8">{insights[0].excerpt}</p>
                 <div className="flex items-center gap-4">
-                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.30)]">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.55)]">
                     <CalendarIcon className="w-3.5 h-3.5" />{formatDate(insights[0].publishedAt)}
                   </span>
-                  <span className="text-[rgba(var(--ch-text),0.15)]">·</span>
-                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.30)]">
+                  <span className="text-[rgba(var(--ch-text),0.30)]">·</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.55)]">
                     <ClockIcon className="w-3.5 h-3.5" />{insights[0].readTime}
                   </span>
                 </div>
@@ -149,11 +149,11 @@ export default async function InsightsPage() {
                   </h2>
                   <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed mb-6">{ins.excerpt}</p>
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.28)]">
+                    <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.55)]">
                       <CalendarIcon className="w-3 h-3" />{formatDate(ins.publishedAt)}
                     </span>
-                    <span className="text-[rgba(var(--ch-text),0.15)]">·</span>
-                    <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.28)]">
+                    <span className="text-[rgba(var(--ch-text),0.30)]">·</span>
+                    <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.55)]">
                       <ClockIcon className="w-3 h-3" />{ins.readTime}
                     </span>
                   </div>

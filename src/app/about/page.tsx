@@ -227,10 +227,10 @@ export default async function AboutPage() {
                     <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">
                       <BriefcaseIcon className="w-3 h-3" />{job.department}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(var(--ch-text),0.35)] border border-[rgba(var(--ch-border),0.10)]">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(var(--ch-text),0.55)] border border-[rgba(var(--ch-border),0.10)]">
                       <ClockIcon className="w-3 h-3" />{job.type}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.25)]">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.50)]">
                       <MapPinIcon className="w-3 h-3" />{job.location}
                     </span>
                   </div>

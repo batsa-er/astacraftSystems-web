@@ -137,7 +137,7 @@ export default async function HomePage() {
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-block border border-[rgba(255,255,255,0.14)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.32)] transition-colors duration-200"
+                  className="inline-block border border-[rgba(255,255,255,0.35)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.60)] transition-colors duration-200"
                 >
                   View Services
                 </Link>
@@ -224,7 +224,7 @@ export default async function HomePage() {
             </div>
             <Link
               href="/services"
-              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.35)] hover:text-[#1D4776] transition-colors duration-200"
+              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.55)] hover:text-[#1D4776] transition-colors duration-200"
             >
               All services →
             </Link>
@@ -248,7 +248,7 @@ export default async function HomePage() {
                   >
                     {title}
                   </h3>
-                  <p className="text-[13px] text-[rgba(var(--ch-text),0.40)] leading-relaxed mt-1 md:mt-0">
+                  <p className="text-[13px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mt-1 md:mt-0">
                     {desc}
                   </p>
                 </div>
@@ -384,7 +384,7 @@ export default async function HomePage() {
               <Link
                 key={ind}
                 href="/work"
-                className="font-mono text-[10px] tracking-[0.14em] uppercase px-5 py-3.5 border border-[rgba(var(--ch-border),0.14)] text-[rgba(var(--ch-text),0.46)] hover:border-[rgba(29,71,118,0.38)] hover:text-[#1D4776] transition-all duration-200"
+                className="font-mono text-[10px] tracking-[0.14em] uppercase px-5 py-3.5 border border-[rgba(var(--ch-border),0.14)] text-[rgba(var(--ch-text),0.62)] hover:border-[rgba(29,71,118,0.38)] hover:text-[#1D4776] transition-all duration-200"
               >
                 {ind}
               </Link>
@@ -476,7 +476,7 @@ export default async function HomePage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 reveal">
             <div>
-              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(var(--ch-text),0.30)] mb-2">Technology Ecosystem</p>
+              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(var(--ch-text),0.50)] mb-2">Technology Ecosystem</p>
               <h2
                 className="font-serif font-bold text-[var(--color-text)] leading-tight"
                 style={{ fontSize: 'clamp(22px,2.8vw,36px)' }}
@@ -484,7 +484,7 @@ export default async function HomePage() {
                 Platforms we build on
               </h2>
             </div>
-            <p className="text-[13px] text-[rgba(var(--ch-text),0.45)] max-w-[40ch] leading-relaxed">
+            <p className="text-[13px] text-[rgba(var(--ch-text),0.62)] max-w-[40ch] leading-relaxed">
               We work across the world&apos;s leading cloud and enterprise platforms — so your stack works with us from day one.
             </p>
           </div>
@@ -507,7 +507,7 @@ export default async function HomePage() {
                 >
                   {abbr}
                 </span>
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.28)] text-center leading-tight">
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.55)] text-center leading-tight">
                   {name}
                 </span>
               </div>
@@ -550,7 +550,7 @@ export default async function HomePage() {
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-3 font-mono text-[10px] tracking-[0.16em] uppercase text-white border border-[rgba(255,255,255,0.18)] px-7 py-4 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+              className="inline-flex items-center gap-3 font-mono text-[10px] tracking-[0.16em] uppercase text-white border border-[rgba(255,255,255,0.38)] px-7 py-4 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
               Meet the team →
             </Link>
@@ -614,7 +614,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/services"
-              className="inline-block border border-[rgba(255,255,255,0.14)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:border-[rgba(255,255,255,0.32)] transition-colors duration-200"
+              className="inline-block border border-[rgba(255,255,255,0.35)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:border-[rgba(255,255,255,0.60)] transition-colors duration-200"
             >
               Explore Services
             </Link>

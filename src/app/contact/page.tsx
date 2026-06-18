@@ -52,7 +52,7 @@ export default async function ContactPage() {
                     <Icon className="w-4 h-4 text-[var(--color-accent)]" />
                   </div>
                   <div>
-                    <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.28)] mb-1">{label}</p>
+                    <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.50)] mb-1">{label}</p>
                     {href ? (
                       <a href={href} className="font-mono text-[13px] tracking-[0.06em] text-[rgba(var(--ch-text),0.70)] hover:text-[var(--color-accent)] transition-colors duration-200">{value}</a>
                     ) : (

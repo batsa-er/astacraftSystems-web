@@ -136,7 +136,7 @@ export default async function ServicesPage() {
                       {s.number || String(i + 1).padStart(2, '0')}
                     </p>
                     <h2 className="font-serif text-[clamp(28px,3.5vw,48px)] font-bold text-[var(--color-text)] mb-2">{s.title}</h2>
-                    <p className="font-mono text-[12px] tracking-[0.08em] italic text-[rgba(var(--ch-text),0.40)] mb-6">{s.tagline}</p>
+                    <p className="font-mono text-[12px] tracking-[0.08em] italic text-[rgba(var(--ch-text),0.60)] mb-6">{s.tagline}</p>
                     <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-8">{s.description}</p>
                     <Link
                       href={`/services/${slug}`}
@@ -185,7 +185,7 @@ export default async function ServicesPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.18)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
               Submit RFP
             </Link>

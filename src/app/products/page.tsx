@@ -223,7 +223,7 @@ export default function ProductsPage() {
             </a>
             <Link
               href="#pricing"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.18)] text-white px-12 py-5 hover:border-[rgba(255,255,255,0.40)] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-12 py-5 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
               View Pricing
             </Link>

@@ -77,7 +77,7 @@ export default function WorkGrid({ caseStudies }: { caseStudies: any[] }) {
                     >
                       {cs.industry}
                     </span>
-                    <span className="font-mono text-[10px] text-[rgba(var(--ch-text),0.28)] group-hover:translate-x-1 transition-transform duration-200">→</span>
+                    <span className="font-mono text-[10px] text-[rgba(var(--ch-text),0.45)] group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </div>
                   <h2 className="font-serif text-[24px] font-semibold text-[var(--color-text)] mb-3">{cs.client}</h2>
                   <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed mb-8">{cs.summary}</p>
@@ -89,7 +89,7 @@ export default function WorkGrid({ caseStudies }: { caseStudies: any[] }) {
                     ].map(([num, label]) => (
                       <div key={label}>
                         <p className="font-serif text-[20px] font-bold mb-0.5" style={{ color: acc.text }}>{num}</p>
-                        <p className="font-mono text-[11px] tracking-[0.1em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                        <p className="font-mono text-[11px] tracking-[0.1em] uppercase text-[rgba(var(--ch-text),0.55)]">{label}</p>
                       </div>
                     ))}
                   </div>

@@ -542,7 +542,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </Link>
             <Link
               href="/services"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.15)] text-[rgba(255,255,255,0.60)] px-10 py-4 hover:border-[rgba(255,255,255,0.40)] hover:text-white transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
               All Services
             </Link>
