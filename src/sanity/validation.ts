@@ -109,10 +109,16 @@ export const TestimonialSchema = z.object({
 export const CareerSchema = z.object({
   _id: z.string().min(1),
   title: z.string().min(1),
+  slug: z.object({ current: z.string() }).optional(),
   department: z.string().optional(),
   type: z.string().optional(),
   location: z.string().optional(),
   excerpt: z.string().optional(),
+  description: z.string().optional(),
+  responsibilities: z.array(z.string()).optional(),
+  requirements: z.array(z.string()).optional(),
+  niceToHave: z.array(z.string()).optional(),
+  benefits: z.array(z.string()).optional(),
   applyUrl: z.string().optional(),
 }) satisfies z.ZodType<Career>
 

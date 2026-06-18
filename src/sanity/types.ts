@@ -85,9 +85,15 @@ export interface Testimonial {
 export interface Career {
   _id: string
   title: string
+  slug?: { current: string }
   department?: string
   type?: string
   location?: string
   excerpt?: string
+  description?: string
+  responsibilities?: string[]
+  requirements?: string[]
+  niceToHave?: string[]
+  benefits?: string[]
   applyUrl?: string
 }

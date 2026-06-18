@@ -201,6 +201,7 @@ export default function Nav() {
             {[
               { href: '/work',     label: 'Work' },
               { href: '/about',    label: 'About' },
+              { href: '/careers',  label: 'Careers' },
               { href: '/insights', label: 'Insights' },
             ].map(l => (
               <li key={l.href} onMouseEnter={() => openDropdown(null)}>
@@ -424,6 +425,7 @@ export default function Nav() {
             { href: '/products',  label: 'Products' },
             { href: '/work',      label: 'Work' },
             { href: '/about',     label: 'About' },
+            { href: '/careers',   label: 'Careers' },
             { href: '/insights',  label: 'Insights' },
           ].map((l, i) => (
             <Link

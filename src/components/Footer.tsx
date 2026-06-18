@@ -115,6 +115,7 @@ export default async function Footer() {
               <ul className="space-y-3.5">
                 {[
                   ['About Us',       '/about'],
+                  ['Careers',        '/careers'],
                   ['Our Work',       '/work'],
                   ['AstaBill',       '/products'],
                   ['Insights',       '/insights'],

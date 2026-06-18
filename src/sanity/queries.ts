@@ -102,7 +102,15 @@ export async function getHeroSlides(): Promise<Array<{ image: unknown; alt: stri
 // ── Careers ───────────────────────────────────────────
 export async function getCareers(): Promise<Career[]> {
   const data = await client.fetch(`*[_type == "career" && published == true] | order(_createdAt desc) {
-    _id, title, department, type, location, excerpt, applyUrl
+    _id, title, slug, department, type, location, excerpt, applyUrl
   }`)
   return validateArray(CareerSchema, data, 'career')
+}
+
+export async function getCareerBySlug(slug: string): Promise<Career | null> {
+  const data = await client.fetch(`*[_type == "career" && slug.current == $slug && published == true][0] {
+    _id, title, slug, department, type, location, excerpt,
+    description, responsibilities, requirements, niceToHave, benefits, applyUrl
+  }`, { slug })
+  return validateOne(CareerSchema, data, 'career')
 }

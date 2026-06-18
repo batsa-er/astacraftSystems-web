@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getCareers, getTeamMembers } from '@/sanity/queries'
+import { getTeamMembers } from '@/sanity/queries'
 
 export const revalidate = 3600
 
@@ -20,7 +20,6 @@ import { urlFor } from '@/sanity/client'
 import {
   UsersIcon, LayersIcon, ClockIcon, ShieldCheckIcon,
   TargetIcon, GlobeIcon, TreeIcon,
-  BriefcaseIcon, MapPinIcon,
 } from '@/components/Icons'
 
 const fallbackTeam = [
@@ -65,23 +64,10 @@ const values = [
   },
 ]
 
-const fallbackCareers = [
-  {
-    _id: '1', title: 'Senior Software Engineer', department: 'Engineering', type: 'Full-time', location: 'Accra / Remote',
-    excerpt: 'Lead complex software projects across web, mobile, and enterprise platforms. Strong TypeScript and cloud integration experience required.',
-  },
-  {
-    _id: '2', title: 'Cloud Infrastructure Engineer', department: 'Cloud', type: 'Full-time', location: 'Accra / Remote',
-    excerpt: 'Design and manage cloud infrastructure for client deployments on AWS and Azure. AWS or Azure certification preferred.',
-  },
-]
-
 export default async function AboutPage() {
-  let careers = fallbackCareers as any[]
   let team = fallbackTeam as any[]
   try {
-    const [c, t] = await Promise.all([getCareers(), getTeamMembers()])
-    if (c?.length) careers = c
+    const t = await getTeamMembers()
     if (t?.length) team = t
   } catch {}
 
@@ -208,46 +194,6 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Careers */}
-      <section id="careers" className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto">
-          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6 reveal">Careers</p>
-          <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
-            Build technology that matters.
-          </h2>
-          <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] max-w-xl mb-16 reveal" style={{ transitionDelay: '160ms' }}>
-            We hire engineers, architects, and strategists who care about impact. Every hire at Astacraft has the opportunity to shape technology outcomes for hundreds of businesses across Africa.
-          </p>
-
-          <div className="space-y-4">
-            {careers.map((job: any, i: number) => (
-              <div key={job._id} className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div>
-                  <div className="flex flex-wrap items-center gap-3 mb-3">
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">
-                      <BriefcaseIcon className="w-3 h-3" />{job.department}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(var(--ch-text),0.55)] border border-[rgba(var(--ch-border),0.10)]">
-                      <ClockIcon className="w-3 h-3" />{job.type}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.50)]">
-                      <MapPinIcon className="w-3 h-3" />{job.location}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-[22px] font-bold text-[var(--color-text)] mb-2">{job.title}</h3>
-                  <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{job.excerpt}</p>
-                </div>
-                <a
-                  href={job.applyUrl || '/contact'}
-                  className="shrink-0 font-mono text-[10px] tracking-[0.14em] uppercase bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-                >
-                  Apply →
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   )
 }
