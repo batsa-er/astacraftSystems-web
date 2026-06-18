@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
@@ -30,8 +31,14 @@ const CLIENTS = [
 ]
 
 const INDUSTRIES = [
-  'Financial Services', 'Telecoms', 'Energy & Utilities', 'Healthcare',
-  'Retail & Commerce', 'Government', 'Real Estate', 'Agritech',
+  { name: 'Financial Services', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Telecoms',           img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Energy & Utilities', img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Healthcare',         img: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Retail & Commerce',  img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Government',         img: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Real Estate',        img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=600&q=75&auto=format&fit=crop' },
+  { name: 'Agritech',           img: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&q=75&auto=format&fit=crop' },
 ]
 
 const FALLBACK_CASES = [
@@ -414,11 +421,11 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────
-          INDUSTRIES — clean tag layout
+          INDUSTRIES — image card grid
       ───────────────────────────────────────────────────────────────── */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
         <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 reveal">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
             <div>
               <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">Industries</p>
               <h2
@@ -428,15 +435,64 @@ export default async function HomePage() {
                 We work where<br />it matters most.
               </h2>
             </div>
+            <Link
+              href="/work"
+              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.55)] hover:text-[#1D4776] transition-colors duration-200"
+            >
+              All case studies →
+            </Link>
           </div>
-          <div className="flex flex-wrap gap-3 reveal" style={{ transitionDelay: '100ms' }}>
-            {INDUSTRIES.map((ind) => (
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 reveal" style={{ transitionDelay: '80ms' }}>
+            {INDUSTRIES.map(({ name, img }, i) => (
               <Link
-                key={ind}
-                href="/work"
-                className="font-mono text-[10px] tracking-[0.14em] uppercase px-5 py-3.5 border border-[rgba(var(--ch-border),0.14)] text-[rgba(var(--ch-text),0.62)] hover:border-[rgba(29,71,118,0.38)] hover:text-[#1D4776] transition-all duration-200"
+                key={name}
+                href={`/work?industry=${encodeURIComponent(name)}`}
+                className="group relative overflow-hidden aspect-[4/3] bg-[var(--color-dark)] block"
+                style={{ transitionDelay: `${i * 40}ms` }}
               >
-                {ind}
+                {/* Image — hidden below the card, slides up on hover */}
+                <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out will-change-transform">
+                  <Image
+                    src={img}
+                    alt={name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[rgba(6,12,24,0.52)]" />
+                </div>
+
+                {/* Subtle grid texture on dark bg */}
+                <div className="absolute inset-0 hero-grid opacity-10 pointer-events-none" />
+
+                {/* Faint watermark number */}
+                <span
+                  className="absolute -bottom-3 -right-2 font-serif font-black leading-none select-none pointer-events-none text-[rgba(255,255,255,0.05)]"
+                  style={{ fontSize: 'clamp(72px,7vw,108px)' }}
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                {/* Content — stays above image via z-10 */}
+                <div className="relative z-10 h-full flex flex-col justify-between p-5">
+                  <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.22)]">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p
+                      className="font-serif font-bold text-white mb-2.5 leading-tight"
+                      style={{ fontSize: 'clamp(15px,1.5vw,20px)' }}
+                    >
+                      {name}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0)] group-hover:text-[rgba(255,255,255,0.75)] transition-colors duration-300 delay-300">
+                      View work
+                      <span className="group-hover:translate-x-0.5 transition-transform duration-300">→</span>
+                    </span>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>

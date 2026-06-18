@@ -10,8 +10,8 @@ function accentFor(accent: string) {
   return { border: '#2563EB', text: '#2563EB', bg: 'rgba(37,99,235,0.06)' }
 }
 
-export default function WorkGrid({ caseStudies }: { caseStudies: any[] }) {
-  const [active, setActive] = useState<string | null>(null)
+export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies: any[], defaultIndustry?: string }) {
+  const [active, setActive] = useState<string | null>(defaultIndustry ?? null)
 
   const industries: string[] = Array.from(new Set(caseStudies.map((cs: any) => cs.industry))).filter(Boolean) as string[]
   const filtered = active ? caseStudies.filter((cs: any) => cs.industry === active) : caseStudies

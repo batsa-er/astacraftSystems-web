@@ -37,7 +37,7 @@ const fallback = [
   },
   {
     _id: '3', slug: { current: 'afrexim-security-audit' }, client: 'Afreximbank',
-    industry: 'Banking', summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework — ahead of an international regulatory review.',
+    industry: 'Financial Services', summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework — ahead of an international regulatory review.',
     metric1_num: '47', metric1_label: 'Vulnerabilities remediated',
     metric2_num: 'ISO', metric2_label: '27001 certified',
     metric3_num: '8wks', metric3_label: 'Engagement timeline', accent: 'cyan',
@@ -45,7 +45,7 @@ const fallback = [
   },
   {
     _id: '4', slug: { current: 'quickmart-erp-odoo' }, client: 'QuickMart Retail',
-    industry: 'Retail', summary: 'Odoo ERP deployment across 18 retail locations — replacing five disconnected systems with a single platform for inventory, POS, and procurement.',
+    industry: 'Retail & Commerce', summary: 'Odoo ERP deployment across 18 retail locations — replacing five disconnected systems with a single platform for inventory, POS, and procurement.',
     metric1_num: '18', metric1_label: 'Locations live',
     metric2_num: '40%', metric2_label: 'Inventory accuracy improvement',
     metric3_num: '4mo', metric3_label: 'Phased rollout', accent: 'blue',
@@ -61,7 +61,7 @@ const fallback = [
   },
   {
     _id: '6', slug: { current: 'nexus-health-software' }, client: 'Nexus Health Systems',
-    industry: 'Healthtech', summary: 'Custom patient management platform with mobile check-in, EHR integration, and billing automation — deployed across 8 clinics in Accra and Kumasi.',
+    industry: 'Healthcare', summary: 'Custom patient management platform with mobile check-in, EHR integration, and billing automation — deployed across 8 clinics in Accra and Kumasi.',
     metric1_num: '8', metric1_label: 'Clinics deployed',
     metric2_num: '3×', metric2_label: 'Faster patient registration',
     metric3_num: '5mo', metric3_label: 'Build timeline', accent: 'gold',
@@ -69,7 +69,9 @@ const fallback = [
   },
 ]
 
-export default async function WorkPage() {
+export default async function WorkPage({ searchParams }: { searchParams: Promise<{ industry?: string }> }) {
+  const { industry } = await searchParams
+
   let caseStudies = fallback as any[]
   try {
     const cs = await getCaseStudies()
@@ -86,7 +88,7 @@ export default async function WorkPage() {
         cta={{ label: 'Start a Project →', href: '/contact' }}
       />
 
-      <WorkGrid caseStudies={caseStudies} />
+      <WorkGrid caseStudies={caseStudies} defaultIndustry={industry} />
 
       {/* CTA */}
       <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
