@@ -51,8 +51,13 @@ export default async function Footer() {
 
             {/* Brand column */}
             <div>
-              <Link href="/" className="inline-block font-serif text-[24px] font-bold text-white mb-4">
-                Astacraft<span className="text-[#55AA49]"> Systems</span>
+              <Link href="/" className="inline-block mb-4" aria-label="Astacraft Systems">
+                <img
+                  src="/astacraft-logo-white.svg"
+                  alt="Astacraft Systems"
+                  height={28}
+                  className="h-10 w-auto"
+                />
               </Link>
               <p className="text-[13px] text-[rgba(255,255,255,0.40)] leading-relaxed max-w-[38ch] mb-6">
                 Technology, software, cloud, and digital transformation solutions helping African organizations modernize and scale.

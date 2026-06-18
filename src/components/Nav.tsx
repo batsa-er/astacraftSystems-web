@@ -145,8 +145,13 @@ export default function Nav() {
             : 'bg-[rgba(var(--ch-bg),0.97)] backdrop-blur-xl border-[rgba(var(--ch-border),0.10)] shadow-sm'
         }`}>
 
-          <Link href="/" className={`font-serif text-[22px] font-bold tracking-wide shrink-0 transition-colors duration-300 ${isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-text)]'}`}>
-            Astacraft<span style={{ color: '#55AA49' }}> Systems</span>
+          <Link href="/" className="shrink-0" aria-label="Astacraft Systems">
+            <img
+              src={isDarkPage && !scrolled ? '/astacraft-logo-white.svg' : '/astacraft-logo.svg'}
+              alt="Astacraft Systems"
+              height={32}
+              className="h-11 w-auto transition-opacity duration-300"
+            />
           </Link>
 
           {/* Desktop links */}
