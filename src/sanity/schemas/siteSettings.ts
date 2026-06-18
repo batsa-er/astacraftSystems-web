@@ -28,6 +28,7 @@ export default defineType({
       ],
     }),
     defineField({ name: 'email', title: 'Email', type: 'string' }),
+    defineField({ name: 'phone', title: 'Phone Number', type: 'string', description: 'e.g. "+233 XX XXX XXXX"' }),
     defineField({
       name: 'address', title: 'Address', type: 'string',
       description: 'e.g. "Accra, Ghana · Remote-first"',

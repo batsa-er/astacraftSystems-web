@@ -60,7 +60,8 @@ export async function getServices(): Promise<Service[]> {
 export async function getServiceBySlug(slug: string): Promise<ServiceDetail | null> {
   const data = await client.fetch(
     `*[_type == "service" && slug.current == $slug][0] {
-      _id, slug, number, title, tagline, description, outcomes, price, detail, process, stats
+      _id, slug, number, title, tagline, description, outcomes, price, detail, process, stats,
+      faq[]{ q, a }, seoTitle, seoDescription
     }`,
     { slug },
   )
@@ -86,7 +87,7 @@ export async function getTeamMembers() {
 // ── Site Settings ─────────────────────────────────────
 export async function getSiteSettings() {
   return client.fetch(`*[_type == "siteSettings" && _id == "siteSettings"][0] {
-    email, address, responseTime, linkedinUrl, twitterUrl, facebookUrl, instagramUrl
+    email, phone, address, responseTime, linkedinUrl, twitterUrl, facebookUrl, instagramUrl
   }`)
 }
 

@@ -1,5 +1,20 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getServices } from '@/sanity/queries'
+
+export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: 'Technology Services in Ghana | Astacraft Systems',
+  description: 'Software development, cloud infrastructure, cybersecurity, CRM & ERP implementation, digital marketing, and IT consulting — delivered by Astacraft Systems for businesses across Ghana and Africa.',
+  alternates: { canonical: 'https://astacraftsystems.com/services' },
+  openGraph: {
+    title: 'Technology Services in Ghana | Astacraft Systems',
+    description: 'Software development, cloud infrastructure, cybersecurity, CRM & ERP implementation, digital marketing, and IT consulting — delivered by Astacraft Systems for businesses across Ghana and Africa.',
+    url: 'https://astacraftsystems.com/services',
+    type: 'website',
+  },
+}
 import {
   CodeIcon, ZapIcon, ServerIcon, ShieldCheckIcon,
   DatabaseIcon, MegaphoneIcon, BrushIcon, ConsultIcon,

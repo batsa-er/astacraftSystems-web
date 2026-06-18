@@ -21,6 +21,8 @@ export interface CaseStudyDetail extends CaseStudy {
   challenge: string
   solution: string
   results: string
+  seoTitle?: string
+  seoDescription?: string
 }
 
 export interface Insight {
@@ -36,6 +38,8 @@ export interface Insight {
 
 export interface InsightDetail extends Insight {
   body: string
+  seoTitle?: string
+  seoDescription?: string
 }
 
 export interface Service {
@@ -54,10 +58,18 @@ export interface ServiceStat {
   label: string
 }
 
+export interface ServiceFaq {
+  q: string
+  a: string
+}
+
 export interface ServiceDetail extends Service {
   detail: string
   process?: string[]
   stats?: ServiceStat[]
+  faq?: ServiceFaq[]
+  seoTitle?: string
+  seoDescription?: string
 }
 
 export interface Testimonial {

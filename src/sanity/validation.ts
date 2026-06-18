@@ -6,6 +6,7 @@ import type {
   InsightDetail,
   Service,
   ServiceDetail,
+  ServiceFaq,
   ServiceStat,
   Testimonial,
   Career,
@@ -40,6 +41,8 @@ export const CaseStudyDetailSchema = CaseStudySchema.extend({
   challenge: z.string().default(''),
   solution: z.string().default(''),
   results: z.string().default(''),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
 }) satisfies z.ZodType<CaseStudyDetail>
 
 // ── Insights ──────────────────────────────────────────
@@ -56,6 +59,8 @@ export const InsightSchema = z.object({
 
 export const InsightDetailSchema = InsightSchema.extend({
   body: z.string().default(''),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
 }) satisfies z.ZodType<InsightDetail>
 
 // ── Services ──────────────────────────────────────────
@@ -75,10 +80,18 @@ const ServiceStatSchema = z.object({
   label: z.string().default(''),
 }) satisfies z.ZodType<ServiceStat>
 
+const ServiceFaqSchema = z.object({
+  q: z.string().min(1),
+  a: z.string().min(1),
+}) satisfies z.ZodType<ServiceFaq>
+
 export const ServiceDetailSchema = ServiceSchema.extend({
-  detail:  z.string().default(''),
-  process: z.array(z.string()).optional(),
-  stats:   z.array(ServiceStatSchema).optional(),
+  detail:         z.string().default(''),
+  process:        z.array(z.string()).optional(),
+  stats:          z.array(ServiceStatSchema).optional(),
+  faq:            z.array(ServiceFaqSchema).optional(),
+  seoTitle:       z.string().optional(),
+  seoDescription: z.string().optional(),
 }) satisfies z.ZodType<ServiceDetail>
 
 // ── Testimonials ──────────────────────────────────────

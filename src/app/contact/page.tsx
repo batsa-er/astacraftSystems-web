@@ -1,5 +1,20 @@
+import type { Metadata } from 'next'
 import type { ComponentType } from 'react'
-import { EnvelopeIcon, MapPinIcon, ClockIcon } from '@/components/Icons'
+
+export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: 'Contact Astacraft Systems | Book a Free Technology Strategy Call',
+  description: 'Book a complimentary 45-minute Technology Strategy Call with Astacraft Systems. Get expert advice on software development, cloud, CRM, ERP, and digital transformation for your business.',
+  alternates: { canonical: 'https://astacraftsystems.com/contact' },
+  openGraph: {
+    title: 'Contact Astacraft Systems | Book a Free Technology Strategy Call',
+    description: 'Book a complimentary 45-minute Technology Strategy Call with Astacraft Systems. Get expert advice on software, cloud, CRM, ERP, and digital transformation for your business.',
+    url: 'https://astacraftsystems.com/contact',
+    type: 'website',
+  },
+}
+import { EnvelopeIcon, MapPinIcon, ClockIcon, PhoneIcon } from '@/components/Icons'
 import { getSiteSettings } from '@/sanity/queries'
 import PageHero from '@/components/PageHero'
 import ContactForm from './ContactForm'
@@ -9,6 +24,7 @@ export default async function ContactPage() {
   try { settings = await getSiteSettings() } catch {}
 
   const email        = settings?.email        || 'info@astacraftsystems.com'
+  const phone        = settings?.phone        || null
   const address      = settings?.address      || 'Accra, Ghana · Remote-first'
   const responseTime = settings?.responseTime || 'Within 24 hours'
 
@@ -26,7 +42,8 @@ export default async function ContactPage() {
             <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-8">Reach us directly</p>
             <div className="space-y-6">
               {[
-                { Icon: EnvelopeIcon, label: 'Email',         value: email, href: `mailto:${email}` },
+                { Icon: EnvelopeIcon, label: 'Email',         value: email,    href: `mailto:${email}` },
+                ...(phone ? [{ Icon: PhoneIcon, label: 'Phone', value: phone, href: `tel:${phone.replace(/\s/g, '')}` }] : []),
                 { Icon: MapPinIcon,   label: 'Location',      value: address },
                 { Icon: ClockIcon,    label: 'Response time', value: responseTime },
               ].map(({ Icon, label, value, href }: { Icon: ComponentType<{ className?: string }>, label: string, value: string, href?: string }) => (

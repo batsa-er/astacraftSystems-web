@@ -24,6 +24,19 @@ export default defineType({
     }),
     defineField({ name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'published', title: 'Published', type: 'boolean', initialValue: true }),
+    defineField({
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string',
+      description: 'Overrides the page title in search results. 50–60 characters recommended.',
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'SEO Description',
+      type: 'text',
+      rows: 3,
+      description: 'Overrides the meta description in search results. 140–160 characters recommended.',
+    }),
   ],
   preview: { select: { title: 'client', subtitle: 'industry', media: 'coverImage' } },
 })

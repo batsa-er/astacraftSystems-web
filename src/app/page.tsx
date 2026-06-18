@@ -6,6 +6,8 @@ import { CountUp } from '@/components/CountUp'
 import ParticlesBackground from '@/components/ui/particles-bg'
 import { FileText, Receipt, BarChart3, Globe } from 'lucide-react'
 
+export const revalidate = 3600
+
 const SERVICES = [
   { num: '01', slug: 'software-development',   title: 'Software Development',     desc: 'Custom platforms, mobile apps, and APIs — engineered for scale and built to last.' },
   { num: '02', slug: 'digital-transformation', title: 'Digital Transformation',   desc: 'We redesign how your business operates: processes, data, and the tools your teams rely on.' },

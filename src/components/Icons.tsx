@@ -28,6 +28,14 @@ export function ClockIcon({ className = 'w-4 h-4' }: P) {
   )
 }
 
+export function PhoneIcon({ className = 'w-4 h-4' }: P) {
+  return (
+    <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 2.5C3 2.224 3.224 2 3.5 2H5.5C5.776 2 6 2.224 6 2.5V5C6 5.276 5.776 5.5 5.5 5.5H4.5C4.5 5.5 4.5 8 6.5 10C8.5 12 11 12 11 12V11C11 10.724 11.224 10.5 11.5 10.5H13.5C13.776 10.5 14 10.724 14 11V13C14 13.276 13.776 13.5 13.5 13.5C6.5 13.5 2.5 9.5 2.5 2.5C2.5 2.224 2.724 2 3 2Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export function CalendarIcon({ className = 'w-4 h-4' }: P) {
   return (
     <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

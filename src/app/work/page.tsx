@@ -1,5 +1,20 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCaseStudies } from '@/sanity/queries'
+
+export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: 'Our Work | Technology Case Studies — Astacraft Systems',
+  description: 'Explore how Astacraft Systems has delivered CRM implementations, software development, cloud migrations, and digital transformation for businesses across Ghana and Africa.',
+  alternates: { canonical: 'https://astacraftsystems.com/work' },
+  openGraph: {
+    title: 'Our Work | Technology Case Studies — Astacraft Systems',
+    description: 'Explore how Astacraft Systems has delivered CRM implementations, software development, cloud migrations, and digital transformation for businesses across Ghana and Africa.',
+    url: 'https://astacraftsystems.com/work',
+    type: 'website',
+  },
+}
 import PageHero from '@/components/PageHero'
 import WorkGrid from '@/components/WorkGrid'
 

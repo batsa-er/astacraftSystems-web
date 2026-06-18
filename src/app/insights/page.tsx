@@ -1,6 +1,21 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getInsights } from '@/sanity/queries'
+
+export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: 'Insights | Technology Strategy & Business Growth — Astacraft Systems',
+  description: 'Practical guides on CRM, ERP, software development, digital transformation, brand strategy, and technology consulting for businesses in Ghana and across Africa.',
+  alternates: { canonical: 'https://astacraftsystems.com/insights' },
+  openGraph: {
+    title: 'Insights | Technology Strategy & Business Growth — Astacraft Systems',
+    description: 'Practical guides on CRM, ERP, software development, digital transformation, brand strategy, and technology consulting for businesses in Ghana and across Africa.',
+    url: 'https://astacraftsystems.com/insights',
+    type: 'website',
+  },
+}
 import { urlFor } from '@/sanity/client'
 import { CalendarIcon, ClockIcon } from '@/components/Icons'
 import PageHero from '@/components/PageHero'

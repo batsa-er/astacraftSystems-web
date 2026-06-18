@@ -1,5 +1,20 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getCareers, getTeamMembers } from '@/sanity/queries'
+
+export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: 'About Astacraft Systems | Technology Partner for Africa',
+  description: 'Astacraft Systems Limited is a technology and digital transformation company based in Accra, Ghana. Meet the team of engineers, architects, and strategists building technology for Africa.',
+  alternates: { canonical: 'https://astacraftsystems.com/about' },
+  openGraph: {
+    title: 'About Astacraft Systems | Technology Partner for Africa',
+    description: 'Astacraft Systems Limited is a technology and digital transformation company based in Accra, Ghana. Meet the team of engineers, architects, and strategists building technology for Africa.',
+    url: 'https://astacraftsystems.com/about',
+    type: 'website',
+  },
+}
 import PageHero from '@/components/PageHero'
 import { urlFor } from '@/sanity/client'
 import {

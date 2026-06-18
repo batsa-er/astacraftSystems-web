@@ -1,5 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
+import { JsonLd } from '@/components/JsonLd'
+
+export const metadata: Metadata = {
+  title: 'AstaBill | Invoicing & Business Platform Built for African SMEs',
+  description: 'AstaBill is a GRA-compliant invoicing, expense management, and payment collection platform built for African businesses. Accept Mobile Money, issue professional invoices, and stay tax-compliant.',
+  alternates: { canonical: 'https://astacraftsystems.com/products' },
+  openGraph: {
+    title: 'AstaBill | Invoicing & Business Platform Built for African SMEs',
+    description: 'AstaBill is a GRA-compliant invoicing, expense management, and payment collection platform built for African businesses. Accept Mobile Money, issue professional invoices, and stay tax-compliant.',
+    url: 'https://astacraftsystems.com/products',
+    type: 'website',
+  },
+}
 import { CheckIcon, TrendingUpIcon, UsersIcon, ShieldCheckIcon, CurrencyIcon } from '@/components/Icons'
 import { FileText, Receipt, UserCircle, Smartphone, ShieldCheck, BarChart3 } from 'lucide-react'
 import { PricingSection } from '@/components/PricingSection'
@@ -7,6 +21,33 @@ import { PricingSection } from '@/components/PricingSection'
 export default function ProductsPage() {
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        '@id': 'https://astacraftsystems.com/products#astabill',
+        name: 'AstaBill',
+        applicationCategory: 'BusinessApplication',
+        operatingSystem: 'Web, iOS, Android',
+        description: 'GRA-compliant invoicing, expense management, and payment collection platform built for African businesses. Accept Mobile Money, issue professional invoices, and stay tax-compliant.',
+        url: 'https://astacraftsystems.com/products',
+        publisher: { '@id': 'https://astacraftsystems.com/#organization' },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'GHS',
+          price: '0',
+          description: 'Free plan available. Paid plans from GH₵ 89/month.',
+        },
+        featureList: [
+          'GRA-compliant invoicing',
+          'Mobile Money payments (MTN, Vodafone, AirtelTigo)',
+          'Expense management & receipt scanning',
+          'Customer management & billing history',
+          'GRA VAT & e-levy handling',
+          'Business analytics & cash flow reporting',
+        ],
+        areaServed: { '@type': 'Country', name: 'Ghana' },
+        screenshot: 'https://astacraftsystems.com/opengraph-image',
+      }} />
       <PageHero
         eyebrow="Products"
         title={<>AstaBill — the business<br />platform built for Africa.</>}

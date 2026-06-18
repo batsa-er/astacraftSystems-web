@@ -7,6 +7,7 @@ export default async function Footer() {
   try { settings = await getSiteSettings() } catch {}
 
   const email        = settings?.email        || 'info@astacraftsystems.com'
+  const phone        = settings?.phone        || null
   const address      = settings?.address      || 'Accra, Ghana'
   const linkedinUrl  = settings?.linkedinUrl  || 'https://linkedin.com/company/astacraftsystems'
   const twitterUrl   = settings?.twitterUrl   || 'https://x.com/astacraftsys'
@@ -59,6 +60,14 @@ export default async function Footer() {
               <p className="font-mono text-[10px] tracking-[0.10em] text-[rgba(255,255,255,0.22)]">
                 {address}
               </p>
+              {phone && (
+                <a
+                  href={`tel:${phone.replace(/\s/g, '')}`}
+                  className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.22)] hover:text-[#55AA49] transition-colors duration-200 mt-1 block"
+                >
+                  {phone}
+                </a>
+              )}
               <a
                 href={`mailto:${email}`}
                 className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.22)] hover:text-[#55AA49] transition-colors duration-200 mt-1 block"

@@ -35,6 +35,33 @@ export default defineType({
     }),
     defineField({ name: 'price', title: 'Price Label', type: 'string', placeholder: 'From $8,000 / mo' }),
     defineField({ name: 'order', title: 'Order',       type: 'number' }),
+    defineField({
+      name: 'faq',
+      title: 'FAQ',
+      description: 'Frequently asked questions shown at the bottom of the service page. Each entry becomes a FAQPage rich result in Google.',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'q', title: 'Question', type: 'string', validation: r => r.required() }),
+          defineField({ name: 'a', title: 'Answer',   type: 'text',   rows: 4, validation: r => r.required() }),
+        ],
+        preview: { select: { title: 'q', subtitle: 'a' } },
+      }],
+    }),
+    defineField({
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string',
+      description: 'Overrides the page title in search results. 50–60 characters recommended.',
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'SEO Description',
+      type: 'text',
+      rows: 3,
+      description: 'Overrides the meta description in search results. 140–160 characters recommended.',
+    }),
   ],
   preview: { select: { title: 'title', subtitle: 'tagline' } },
 })

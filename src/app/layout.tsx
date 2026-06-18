@@ -4,6 +4,7 @@ import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollReveal from '@/components/ScrollReveal'
+import { JsonLd } from '@/components/JsonLd'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -36,9 +37,8 @@ export const metadata: Metadata = {
     description: 'We build software, automate operations, secure digital infrastructure, and deliver business solutions that help African organizations grow faster.',
     url: 'https://astacraftsystems.com',
     siteName: 'Astacraft Systems Limited',
-    locale: 'en_GB',
+    locale: 'en_US',
     type: 'website',
-    images: [{ url: 'https://astacraftsystems.com/og-image.jpg', width: 1200, height: 630, alt: 'Astacraft Systems — Technology & Digital Transformation for Africa' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -46,7 +46,6 @@ export const metadata: Metadata = {
     creator: '@astacraftsys',
     title: 'Astacraft Systems | Technology, Cloud & Digital Transformation',
     description: 'Software development, cloud infrastructure, cybersecurity, and digital transformation solutions for African businesses.',
-    images: [{ url: 'https://astacraftsystems.com/og-image.jpg', alt: 'Astacraft Systems — Technology & Digital Transformation for Africa' }],
   },
   other: {
     'geo.region': 'GH-AA',
@@ -61,6 +60,75 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        <JsonLd data={[
+          {
+            '@context': 'https://schema.org',
+            '@type': ['Organization', 'LocalBusiness'],
+            '@id': 'https://astacraftsystems.com/#organization',
+            name: 'Astacraft Systems Limited',
+            url: 'https://astacraftsystems.com',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://astacraftsystems.com/opengraph-image',
+            },
+            image: 'https://astacraftsystems.com/opengraph-image',
+            description: 'Technology, software development, cloud, cybersecurity, CRM/ERP, and digital transformation solutions for businesses in Ghana and across Africa.',
+            email: 'info@astacraftsystems.com',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Accra',
+              addressRegion: 'Greater Accra',
+              addressCountry: 'GH',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 5.6037,
+              longitude: -0.1870,
+            },
+            areaServed: [
+              { '@type': 'Country', name: 'Ghana' },
+              { '@type': 'Country', name: 'Nigeria' },
+              { '@type': 'Country', name: 'Ivory Coast' },
+              { '@type': 'Country', name: 'Senegal' },
+            ],
+            sameAs: [
+              'https://www.linkedin.com/company/astacraftsystems',
+              'https://twitter.com/astacraftsys',
+            ],
+            foundingDate: '2016',
+            knowsAbout: [
+              'Software Development',
+              'Digital Transformation',
+              'Cloud Solutions',
+              'Cybersecurity',
+              'CRM Implementation',
+              'ERP Implementation',
+              'Business Automation',
+              'IT Consulting',
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            '@id': 'https://astacraftsystems.com/#website',
+            url: 'https://astacraftsystems.com',
+            name: 'Astacraft Systems',
+            description: 'Technology and digital transformation solutions for African businesses.',
+            publisher: { '@id': 'https://astacraftsystems.com/#organization' },
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: {
+                '@type': 'EntryPoint',
+                urlTemplate: 'https://astacraftsystems.com/insights?q={search_term_string}',
+              },
+              'query-input': 'required name=search_term_string',
+            },
+          },
+        ]} />
+      </head>
       <body className={`${manrope.variable} ${dmMono.variable} antialiased`}>
         <a
           href="#main-content"

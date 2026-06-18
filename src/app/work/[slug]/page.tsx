@@ -1,6 +1,10 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCaseStudy, getCaseStudies } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
+import { JsonLd } from '@/components/JsonLd'
+
+export const revalidate = 3600
 
 export async function generateStaticParams() {
   try {
@@ -25,6 +29,30 @@ const fallbackStudies: Record<string, any> = {
   },
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+
+  let cs: any = null
+  try { cs = await getCaseStudy(slug) } catch {}
+  if (!cs) cs = fallbackStudies[slug]
+  if (!cs) return { title: 'Case Study | Astacraft Systems' }
+
+  const title = `${cs.client} Case Study | Astacraft Systems`
+  const description = (cs.seoDescription || cs.summary || '').slice(0, 160)
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `https://astacraftsystems.com/work/${slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://astacraftsystems.com/work/${slug}`,
+      type: 'website',
+    },
+  }
+}
+
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
@@ -39,6 +67,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <>
+      <JsonLd data={[
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://astacraftsystems.com' },
+            { '@type': 'ListItem', position: 2, name: 'Work', item: 'https://astacraftsystems.com/work' },
+            { '@type': 'ListItem', position: 3, name: cs.client, item: `https://astacraftsystems.com/work/${slug}` },
+          ],
+        },
+      ]} />
+
       {/* Header */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] pt-40 pb-24">
         <div className="max-w-[900px] mx-auto">
