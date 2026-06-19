@@ -350,7 +350,7 @@ export default async function HomePage() {
             <div
               key={label}
               className={[
-                'px-[clamp(24px,5vw,72px)] py-20 md:py-28 reveal',
+                'px-[clamp(12px,2.5vw,40px)] py-20 md:py-28 reveal',
                 'border-[rgba(255,255,255,0.06)]',
                 i === 1 || i === 3 ? 'border-l' : '',
                 i < 2 ? 'border-b md:border-b-0' : '',
@@ -360,7 +360,7 @@ export default async function HomePage() {
             >
               <p
                 className="stat-display font-serif font-black leading-none tracking-[-0.04em] mb-4"
-                style={{ fontSize: 'clamp(56px,7vw,108px)' }}
+                style={{ fontSize: 'clamp(52px,6.5vw,100px)' }}
               >
                 {prefix}<CountUp to={value} />{suffix}
               </p>

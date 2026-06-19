@@ -8,8 +8,8 @@ export default async function Footer() {
   try { settings = await getSiteSettings() } catch {}
 
   const email        = settings?.email        || 'info@astacraftsystems.com'
-  const phone        = settings?.phone        || null
-  const address      = settings?.address      || 'Accra, Ghana'
+  const phone        = settings?.phone        || '+233 24 918 7555'
+  const address      = settings?.address      || 'North Ridge, Accra, Ghana'
   const linkedinUrl  = settings?.linkedinUrl  || 'https://linkedin.com/company/astacraftsystems'
   const twitterUrl   = settings?.twitterUrl   || 'https://x.com/astacraftsys'
   const facebookUrl  = settings?.facebookUrl  || null
