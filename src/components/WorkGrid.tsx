@@ -3,13 +3,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import type { CaseStudy } from '@/sanity/types'
 
-
-export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies: any[], defaultIndustry?: string }) {
+export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies: CaseStudy[], defaultIndustry?: string }) {
   const [active, setActive] = useState<string | null>(defaultIndustry ?? null)
 
-  const industries: string[] = Array.from(new Set(caseStudies.map((cs: any) => cs.industry))).filter(Boolean) as string[]
-  const filtered = active ? caseStudies.filter((cs: any) => cs.industry === active) : caseStudies
+  const industries: string[] = Array.from(new Set(caseStudies.map((cs) => cs.industry))).filter(Boolean) as string[]
+  const filtered = active ? caseStudies.filter((cs) => cs.industry === active) : caseStudies
 
   return (
     <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] pb-28">
@@ -44,10 +44,10 @@ export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((cs: any, i: number) => (
+          {filtered.map((cs, i: number) => (
             <Link
               key={cs._id}
-              href={`/work/${cs.slug?.current || cs.slug}`}
+              href={`/work/${cs.slug.current}`}
               className="group flex flex-col border border-[rgba(var(--ch-border),0.12)] bg-[var(--color-panel)] hover:border-[rgba(var(--ch-accent),0.35)] hover:-translate-y-1 transition-all duration-300 overflow-hidden reveal"
               style={{ transitionDelay: `${i * 80}ms` }}
             >

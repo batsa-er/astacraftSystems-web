@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getInsight, getInsights } from '@/sanity/queries'
+import type { Insight, InsightDetail } from '@/sanity/types'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
 import { urlFor } from '@/sanity/client'
@@ -9,7 +10,7 @@ import { urlFor } from '@/sanity/client'
 export async function generateStaticParams() {
   try {
     const ins = await getInsights()
-    return ins.map((i: any) => ({ slug: i.slug?.current || i.slug }))
+    return ins.map((i) => ({ slug: i.slug.current }))
   } catch {
     return []
   }
@@ -17,7 +18,7 @@ export async function generateStaticParams() {
 
 export const revalidate = 3600
 
-const fallbackInsights: Record<string, any> = {
+const fallbackInsights: Record<string, Omit<InsightDetail, '_id' | 'slug'>> = {
   'brand-consistency-africa': {
     title: 'Why Brand Consistency Is the Highest-Leverage Investment for African Businesses',
     tag: 'Brand Strategy', publishedAt: '2025-01-15', readTime: '7 min read',
@@ -204,9 +205,9 @@ Honest answers to these four questions will tell you what you actually need. Any
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
 
-  let ins: any = null
+  let ins: InsightDetail | null = null
   try { ins = await getInsight(slug) } catch {}
-  if (!ins) ins = fallbackInsights[slug]
+  if (!ins) ins = (fallbackInsights[slug] as InsightDetail | undefined) ?? null
   if (!ins) return { title: 'Insight | Astacraft Systems Insights' }
 
   const title = `${ins.title} | Astacraft Systems`
@@ -233,11 +234,11 @@ function formatDate(iso: string) {
 export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  let ins: any = null
+  let ins: InsightDetail | null = null
   try {
     ins = await getInsight(slug)
   } catch {}
-  if (!ins) ins = fallbackInsights[slug]
+  if (!ins) ins = (fallbackInsights[slug] as InsightDetail | undefined) ?? null
   if (!ins) notFound()
 
   const bodyText: string = ins.body || ins.excerpt || ''
@@ -245,13 +246,13 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   const allFallback = Object.entries(fallbackInsights)
     .filter(([key]) => key !== slug)
     .slice(0, 2)
-    .map(([key, val]: [string, any]) => ({ slug: key, ...val }))
+    .map(([key, val]) => ({ ...(val as InsightDetail), slug: { current: key }, _id: key } as Insight))
 
-  let readNext: any[] = allFallback
+  let readNext: Insight[] = allFallback
   try {
     const list = await getInsights()
     if (list?.length) {
-      readNext = list.filter((i: any) => (i.slug?.current || i.slug) !== slug).slice(0, 2)
+      readNext = list.filter((i) => i.slug.current !== slug).slice(0, 2)
     }
   } catch {}
 
@@ -383,8 +384,8 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
           <div className="max-w-[800px] mx-auto">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-8">Read next</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {readNext.map((next: any) => {
-                const nextSlug = next.slug?.current ?? next.slug
+              {readNext.map((next) => {
+                const nextSlug = next.slug.current
                 const nextImg = next.coverImage
                   ? urlFor(next.coverImage).width(600).height(340).url()
                   : next.image ?? null

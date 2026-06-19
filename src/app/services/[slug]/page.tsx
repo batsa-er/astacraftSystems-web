@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getServices, getServiceBySlug } from '@/sanity/queries'
+import type { ServiceDetail } from '@/sanity/types'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
 
@@ -10,7 +11,7 @@ import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, Monit
 export async function generateStaticParams() {
   try {
     const s = await getServices()
-    return s.map((svc: any) => ({ slug: svc.slug?.current || svc.slug }))
+    return s.map((svc) => ({ slug: svc.slug.current }))
   } catch {
     return [
       'software-development', 'digital-transformation', 'cloud-solutions', 'cybersecurity',
@@ -30,7 +31,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   'it-consulting':          MonitorCheck,
 }
 
-const fallbackServices: Record<string, any> = {
+const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
   'software-development': {
     number: '01', title: 'Software Development', tagline: 'Custom software engineered for scale.',
     description: 'Full-stack web, mobile, and enterprise application development. From MVPs to large-scale systems, we architect, build, and maintain software that performs reliably at scale.',
@@ -246,9 +247,9 @@ const ALL_SLUGS = Object.keys(fallbackServices)
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
 
-  let svc: any = null
+  let svc: ServiceDetail | null = null
   try { svc = await getServiceBySlug(slug) } catch {}
-  if (!svc) svc = fallbackServices[slug]
+  if (!svc) svc = (fallbackServices[slug] as ServiceDetail | undefined) ?? null
   if (!svc) return { title: 'Service | Astacraft Systems' }
 
   const title = `${svc.title} in Ghana | Astacraft Systems`
@@ -270,21 +271,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  let svc: any = null
+  let svc: ServiceDetail | null = null
   try {
     svc = await getServiceBySlug(slug)
   } catch {}
-  if (!svc) svc = fallbackServices[slug]
+  if (!svc) svc = (fallbackServices[slug] as ServiceDetail | undefined) ?? null
   if (!svc) notFound()
 
-  const Icon    = iconMap[slug] ?? ConsultIcon
+  const Icon    = iconMap[slug] ?? MonitorCheck
   const stats   = svc.stats   || fallbackServices[slug]?.stats   || []
   const process = svc.process || fallbackServices[slug]?.process || []
 
   const idx     = ALL_SLUGS.indexOf(slug)
   const related = [1, 2, 3].map(offset => {
     const s = ALL_SLUGS[(idx + offset) % ALL_SLUGS.length]
-    return { ...fallbackServices[s], slug: s, Icon: iconMap[s] ?? ConsultIcon }
+    return { ...fallbackServices[s], slug: s, Icon: iconMap[s] ?? MonitorCheck }
   })
 
   return (

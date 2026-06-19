@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
+import type { CaseStudy } from '@/sanity/types'
 
 interface Industry { name: string; img: string }
 
@@ -11,7 +12,7 @@ export function IndustriesWork({
   caseStudies,
 }: {
   industries: Industry[]
-  caseStudies: any[]
+  caseStudies: CaseStudy[]
 }) {
   const [active, setActive] = useState<string | null>(null)
   const casesRef = useRef<HTMLDivElement>(null)
@@ -26,8 +27,7 @@ export function IndustriesWork({
     ? caseStudies.filter((cs) => cs.industry === active)
     : caseStudies
 
-  const slugStr = (cs: any) =>
-    typeof cs.slug === 'string' ? cs.slug : cs.slug?.current
+  const slugStr = (cs: CaseStudy) => cs.slug.current
 
   return (
     <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
@@ -179,7 +179,7 @@ export function IndustriesWork({
               </Link>
             </div>
           ) : (
-            filtered.map((cs: any, i: number) => (
+            filtered.map((cs, i: number) => (
               <Link
                 key={cs._id}
                 href={`/work/${slugStr(cs)}`}

@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getCareerBySlug } from '@/sanity/queries'
+import type { Career } from '@/sanity/types'
 import { Briefcase, Clock, MapPin, Check } from 'lucide-react'
 
 export const revalidate = 3600
 
-const fallbackCareers: Record<string, any> = {
+const fallbackCareers: Record<string, Career> = {
   'senior-software-engineer': {
     _id: '1', title: 'Senior Software Engineer', department: 'Engineering', type: 'Full-time', location: 'Accra / Remote',
     excerpt: 'Lead complex software projects across web, mobile, and enterprise platforms. Strong TypeScript and cloud integration experience required.',
@@ -73,9 +74,9 @@ const fallbackCareers: Record<string, any> = {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  let job: any = null
+  let job: Career | null = null
   try { job = await getCareerBySlug(slug) } catch {}
-  if (!job) job = fallbackCareers[slug]
+  if (!job) job = fallbackCareers[slug] ?? null
   if (!job) return { title: 'Role Not Found | Astacraft Systems' }
   return {
     title: `${job.title} | Careers at Astacraft Systems`,
@@ -86,7 +87,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CareerDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  let job: any = null
+  let job: Career | null = null
   try { job = await getCareerBySlug(slug) } catch {}
   if (!job) job = fallbackCareers[slug] ?? null
   if (!job) notFound()
@@ -150,11 +151,11 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
               </div>
             )}
 
-            {job.responsibilities?.length > 0 && (
+            {(job.responsibilities?.length ?? 0) > 0 && (
               <div>
                 <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-5">Responsibilities</h2>
                 <ul className="space-y-3">
-                  {job.responsibilities.map((r: string) => (
+                  {job.responsibilities?.map((r: string) => (
                     <li key={r} className="flex items-start gap-3">
                       <Check className="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0 mt-1" />
                       <span className="text-[14px] text-[rgba(var(--ch-text),0.70)] leading-relaxed">{r}</span>
@@ -164,11 +165,11 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
               </div>
             )}
 
-            {job.requirements?.length > 0 && (
+            {(job.requirements?.length ?? 0) > 0 && (
               <div>
                 <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-5">Requirements</h2>
                 <ul className="space-y-3">
-                  {job.requirements.map((r: string) => (
+                  {job.requirements?.map((r: string) => (
                     <li key={r} className="flex items-start gap-3">
                       <Check className="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0 mt-1" />
                       <span className="text-[14px] text-[rgba(var(--ch-text),0.70)] leading-relaxed">{r}</span>
@@ -178,11 +179,11 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
               </div>
             )}
 
-            {job.niceToHave?.length > 0 && (
+            {(job.niceToHave?.length ?? 0) > 0 && (
               <div>
                 <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-5">Nice to Have</h2>
                 <ul className="space-y-3">
-                  {job.niceToHave.map((r: string) => (
+                  {job.niceToHave?.map((r: string) => (
                     <li key={r} className="flex items-start gap-3">
                       <span className="text-[var(--color-accent)] shrink-0 mt-0.5 text-[10px]">◦</span>
                       <span className="text-[14px] text-[rgba(var(--ch-text),0.60)] leading-relaxed">{r}</span>
@@ -210,11 +211,11 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
             </div>
 
             {/* Benefits card */}
-            {job.benefits?.length > 0 && (
+            {(job.benefits?.length ?? 0) > 0 && (
               <div className="border border-[rgba(var(--ch-accent),0.15)] bg-[var(--color-surface)] p-8">
                 <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[rgba(var(--ch-text),0.40)] mb-5">What we offer</p>
                 <ul className="space-y-3">
-                  {job.benefits.map((b: string) => (
+                  {job.benefits?.map((b: string) => (
                     <li key={b} className="flex items-start gap-3">
                       <Check className="w-3 h-3 text-[var(--color-green)] shrink-0 mt-1" />
                       <span className="text-[13px] text-[rgba(var(--ch-text),0.65)] leading-relaxed">{b}</span>

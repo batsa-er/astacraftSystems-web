@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
+import type { Testimonial, CaseStudy } from '@/sanity/types'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
 import ParticlesBackground from '@/components/ui/particles-bg'
@@ -42,9 +44,9 @@ const INDUSTRIES = [
 ]
 
 const FALLBACK_CASES = [
-  { _id: '1', client: 'Stanbic Business Finance', industry: 'Financial Services', summary: 'Full Salesforce CRM implementation for a pan-African business finance division — unifying 12 regional offices.', metric1_num: '62%', metric1_label: 'Faster deal cycle',       slug: { current: 'stanbic-crm-transformation' } },
-  { _id: '2', client: 'MTN Enterprise',           industry: 'Telecoms',           summary: 'AWS cloud migration cutting infrastructure costs across four data centres while improving uptime.',             metric1_num: '38%', metric1_label: 'Cost reduction',           slug: { current: 'mtn-cloud-migration' } },
-  { _id: '3', client: 'Afreximbank',              industry: 'Banking',            summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework.',                metric1_num: '47',  metric1_label: 'Vulnerabilities remediated', slug: { current: 'afrexim-security-audit' } },
+  { _id: '1', client: 'Stanbic Business Finance', industry: 'Financial Services', summary: 'Full Salesforce CRM implementation for a pan-African business finance division — unifying 12 regional offices.', metric1_num: '62%', metric1_label: 'Faster deal cycle',       metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'stanbic-crm-transformation' } },
+  { _id: '2', client: 'MTN Enterprise',           industry: 'Telecoms',           summary: 'AWS cloud migration cutting infrastructure costs across four data centres while improving uptime.',             metric1_num: '38%', metric1_label: 'Cost reduction',           metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'mtn-cloud-migration' } },
+  { _id: '3', client: 'Afreximbank',              industry: 'Banking',            summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework.',                metric1_num: '47',  metric1_label: 'Vulnerabilities remediated', metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'afrexim-security-audit' } },
 ]
 
 const FALLBACK_TESTIMONIALS = [
@@ -54,8 +56,8 @@ const FALLBACK_TESTIMONIALS = [
 ]
 
 export default async function HomePage() {
-  let testimonials: any[] = []
-  let caseStudies: any[]   = []
+  let testimonials: Testimonial[] = []
+  let caseStudies: CaseStudy[]   = []
   try {
     const [t, cs] = await Promise.all([getTestimonials(), getCaseStudies()])
     if (t?.length)  testimonials = t
@@ -276,7 +278,7 @@ export default async function HomePage() {
             </div>
 
             <div className="mb-7">
-              <img src="/astabill-logo-white.svg" alt="AstaBill" className="h-9 w-auto" />
+              <Image src="/astabill-logo-white.svg" alt="AstaBill" width={137} height={36} className="h-9 w-auto" />
             </div>
 
             <h2
@@ -468,9 +470,11 @@ export default async function HomePage() {
                 key={name}
                 className="bg-[var(--color-bg)] flex items-center justify-center py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-300"
               >
-                <img
+                <Image
                   src={logo}
                   alt={name}
+                  width={110}
+                  height={32}
                   className="h-8 w-auto max-w-[110px] object-contain grayscale brightness-[0.4] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300"
                 />
               </div>

@@ -14,13 +14,16 @@ export interface CaseStudy {
   metric2_label: string
   metric3_num: string
   metric3_label: string
-  accent: 'purple' | 'cyan' | 'gold'
+  accent?: string
+  image?: string
+  coverImage?: unknown
 }
 
 export interface CaseStudyDetail extends CaseStudy {
   challenge: string
   solution: string
   results: string
+  services?: string[]
   seoTitle?: string
   seoDescription?: string
 }
@@ -34,12 +37,15 @@ export interface Insight {
   excerpt: string
   publishedAt: string
   readTime: string
+  image?: string
+  coverImage?: unknown
 }
 
 export interface InsightDetail extends Insight {
   body: string
   seoTitle?: string
   seoDescription?: string
+  relatedServices?: { title: string; slug: string }[]
 }
 
 export interface Service {
@@ -50,7 +56,7 @@ export interface Service {
   tagline: string
   description: string
   outcomes: string[]
-  price: string
+  price?: string
 }
 
 export interface ServiceStat {
@@ -80,6 +86,15 @@ export interface Testimonial {
   initials?: string
   photo?: { asset: { _id: string; url: string } }
   featured: boolean
+}
+
+export interface TeamMember {
+  _id?: string
+  name: string
+  role?: string
+  bio?: string
+  image?: string
+  photo?: unknown
 }
 
 export interface Career {

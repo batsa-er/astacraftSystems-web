@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { getCareers } from '@/sanity/queries'
+import type { Career } from '@/sanity/types'
 import { Briefcase, Clock, MapPin } from 'lucide-react'
 
 export const revalidate = 3600
@@ -32,7 +33,7 @@ const fallbackCareers = [
 ]
 
 export default async function CareersPage() {
-  let careers = fallbackCareers as any[]
+  let careers: Career[] = fallbackCareers
   try {
     const c = await getCareers()
     if (c?.length) careers = c
@@ -63,7 +64,7 @@ export default async function CareersPage() {
             </div>
           ) : (
           <div className="space-y-6">
-            {careers.map((job: any, i: number) => (
+            {careers.map((job, i: number) => (
               <div
                 key={job._id}
                 className="relative border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-10 overflow-hidden group card-glow hover:border-[rgba(var(--ch-accent),0.30)] reveal"

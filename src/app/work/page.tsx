@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCaseStudies } from '@/sanity/queries'
+import type { CaseStudy } from '@/sanity/types'
 
 export const revalidate = 3600
 
@@ -72,7 +73,7 @@ const fallback = [
 export default async function WorkPage({ searchParams }: { searchParams: Promise<{ industry?: string }> }) {
   const { industry } = await searchParams
 
-  let caseStudies = fallback as any[]
+  let caseStudies: CaseStudy[] = fallback
   try {
     const cs = await getCaseStudies()
     if (cs?.length) caseStudies = cs

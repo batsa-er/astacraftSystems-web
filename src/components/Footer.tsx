@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { LinkedInIcon, XIcon, FacebookIcon, InstagramIcon } from '@/components/Icons'
 import { getSiteSettings } from '@/sanity/queries'
 
@@ -52,10 +53,11 @@ export default async function Footer() {
             {/* Brand column */}
             <div>
               <Link href="/" className="inline-block mb-4" aria-label="Astacraft Systems">
-                <img
+                <Image
                   src="/astacraft-logo-white.svg"
                   alt="Astacraft Systems"
-                  height={28}
+                  width={173}
+                  height={40}
                   className="h-10 w-auto"
                 />
               </Link>

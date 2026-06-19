@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getTeamMembers } from '@/sanity/queries'
+import type { TeamMember } from '@/sanity/types'
 
 export const revalidate = 3600
 
@@ -63,7 +64,7 @@ const values = [
 ]
 
 export default async function AboutPage() {
-  let team = fallbackTeam as any[]
+  let team: TeamMember[] = fallbackTeam
   try {
     const t = await getTeamMembers()
     if (t?.length) team = t
@@ -166,7 +167,7 @@ export default async function AboutPage() {
             Engineers. Architects. Strategists.
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member: any, i: number) => {
+            {team.map((member, i: number) => {
               const photoSrc = member.photo
                 ? urlFor(member.photo).width(400).height(500).url()
                 : member.image

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck } from 'lucide-react'
 
@@ -144,10 +145,11 @@ export default function Nav() {
         }`}>
 
           <Link href="/" className="shrink-0" aria-label="Astacraft Systems">
-            <img
+            <Image
               src={isDarkPage && !scrolled ? '/astacraft-logo-white.svg' : '/astacraft-logo.svg'}
               alt="Astacraft Systems"
-              height={32}
+              width={191}
+              height={44}
               className="h-11 w-auto transition-opacity duration-300"
             />
           </Link>
@@ -364,8 +366,8 @@ export default function Nav() {
                 >
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <img src="/astabill-logo.svg"       alt="AstaBill" className="h-7 w-auto dark:hidden" />
-                      <img src="/astabill-logo-white.svg" alt="AstaBill" className="h-7 w-auto hidden dark:block" />
+                      <Image src="/astabill-logo.svg"       alt="AstaBill" width={106} height={28} className="h-7 w-auto dark:hidden" />
+                      <Image src="/astabill-logo-white.svg" alt="AstaBill" width={106} height={28} className="h-7 w-auto hidden dark:block" />
                       <span className="font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Live</span>
                     </div>
                     <p className="text-[12px] text-[rgba(var(--ch-text),0.45)]">Invoicing & payment platform for African businesses</p>

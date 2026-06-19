@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getInsights } from '@/sanity/queries'
+import type { Insight } from '@/sanity/types'
 import PageHero from '@/components/PageHero'
 import { InsightsGrid } from '@/components/InsightsGrid'
 
@@ -53,7 +54,7 @@ const fallback = [
 ]
 
 export default async function InsightsPage() {
-  let insights = fallback as any[]
+  let insights: Insight[] = fallback
   try {
     const i = await getInsights()
     if (i?.length) insights = i

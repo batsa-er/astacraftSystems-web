@@ -5,20 +5,21 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { urlFor } from '@/sanity/client'
 import { Calendar, Clock } from 'lucide-react'
+import type { Insight } from '@/sanity/types'
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-function imgSrc(ins: any, w: number, h: number): string {
-  return ins.coverImage ? urlFor(ins.coverImage).width(w).height(h).url() : ins.image
+function imgSrc(ins: Insight, w: number, h: number): string {
+  return ins.coverImage ? urlFor(ins.coverImage).width(w).height(h).url() : ins.image ?? ''
 }
 
-export function InsightsGrid({ insights }: { insights: any[] }) {
-  const tags = Array.from(new Set(insights.map((i: any) => i.tag).filter(Boolean))) as string[]
+export function InsightsGrid({ insights }: { insights: Insight[] }) {
+  const tags = Array.from(new Set(insights.map((i) => i.tag).filter(Boolean))) as string[]
   const [active, setActive] = useState<string | null>(null)
 
-  const filtered = active ? insights.filter((i: any) => i.tag === active) : insights
+  const filtered = active ? insights.filter((i) => i.tag === active) : insights
   const featured = filtered[0] ?? null
   const rest = filtered.slice(1)
 
@@ -134,7 +135,7 @@ export function InsightsGrid({ insights }: { insights: any[] }) {
       {/* Grid */}
       {rest.length > 0 && (
         <div key={active ?? 'all'} className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
-          {rest.map((ins: any, i: number) => (
+          {rest.map((ins, i: number) => (
             <Link
               key={ins._id}
               href={`/insights/${ins.slug?.current || ins.slug}`}

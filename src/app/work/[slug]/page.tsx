@@ -3,11 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getCaseStudy, getCaseStudies } from '@/sanity/queries'
+import type { CaseStudy, CaseStudyDetail } from '@/sanity/types'
 import { JsonLd } from '@/components/JsonLd'
 
 export const revalidate = 3600
 
-const fallback: Record<string, any> = {
+const fallback: Record<string, Omit<CaseStudyDetail, '_id' | 'slug'>> = {
   'stanbic-crm-transformation': {
     client: 'Stanbic Business Finance',
     industry: 'Financial Services',
@@ -91,7 +92,7 @@ const fallback: Record<string, any> = {
 export async function generateStaticParams() {
   try {
     const cs = await getCaseStudies()
-    return cs.map((c: any) => ({ slug: c.slug?.current || c.slug }))
+    return cs.map((c) => ({ slug: c.slug.current }))
   } catch {
     return Object.keys(fallback).map((slug) => ({ slug }))
   }
@@ -99,9 +100,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  let cs: any = null
+  let cs: CaseStudyDetail | null = null
   try { cs = await getCaseStudy(slug) } catch {}
-  if (!cs) cs = fallback[slug]
+  if (!cs) cs = (fallback[slug] as CaseStudyDetail | undefined) ?? null
   if (!cs) return { title: 'Case Study | Astacraft Systems' }
 
   const title = `${cs.client} | Astacraft Systems`
@@ -117,12 +118,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  let cs: any = null
+  let cs: CaseStudyDetail | null = null
   try { cs = await getCaseStudy(slug) } catch {}
-  if (!cs) cs = fallback[slug]
+  if (!cs) cs = (fallback[slug] as CaseStudyDetail | undefined) ?? null
   if (!cs) notFound()
 
-  const coverSrc: string | null = cs.coverImage ?? cs.image ?? null
+  const coverSrc: string | null = (cs.coverImage as string | undefined) ?? cs.image ?? null
   const services: string[] = cs.services ?? []
   const metrics = [
     { num: cs.metric1_num, label: cs.metric1_label },
@@ -130,17 +131,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     { num: cs.metric3_num, label: cs.metric3_label },
   ].filter((m) => m.num && m.label)
 
-  let relatedWork: any[] = []
+  let relatedWork: CaseStudy[] = []
   try {
     const all = await getCaseStudies()
-    const sameIndustry = all.filter((c: any) => (c.slug?.current || c.slug) !== slug && c.industry === cs.industry)
-    const others = all.filter((c: any) => (c.slug?.current || c.slug) !== slug && c.industry !== cs.industry)
+    const sameIndustry = all.filter((c) => c.slug.current !== slug && c.industry === cs!.industry)
+    const others = all.filter((c) => c.slug.current !== slug && c.industry !== cs!.industry)
     relatedWork = [...sameIndustry, ...others].slice(0, 2)
   } catch {
     relatedWork = Object.entries(fallback)
       .filter(([key]) => key !== slug)
       .slice(0, 2)
-      .map(([key, val]: [string, any]) => ({ slug: key, ...val }))
+      .map(([key, val]) => ({ ...val, slug: { current: key }, _id: key } as CaseStudy))
   }
 
   return (
@@ -310,9 +311,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {relatedWork.map((related: any) => {
-                const relSlug = related.slug?.current ?? related.slug
-                const relImg: string | null = related.coverImage ?? related.image ?? null
+              {relatedWork.map((related) => {
+                const relSlug = related.slug.current
+                const relImg: string | null = (related.coverImage as string | undefined) ?? related.image ?? null
                 return (
                   <Link
                     key={relSlug}

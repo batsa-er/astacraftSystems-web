@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getServices } from '@/sanity/queries'
+import type { Service } from '@/sanity/types'
 
 export const revalidate = 3600
 
@@ -92,7 +93,7 @@ const fallback = [
 ]
 
 export default async function ServicesPage() {
-  let services = fallback as any[]
+  let services: Service[] = fallback
   try {
     const s = await getServices()
     if (s?.length) services = s
@@ -110,8 +111,8 @@ export default async function ServicesPage() {
       {/* Services list */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] pb-28">
         <div className="max-w-[1280px] mx-auto space-y-6">
-          {services.map((s: any, i: number) => {
-            const slug = s.slug?.current || s.slug || ''
+          {services.map((s, i: number) => {
+            const slug = s.slug.current
             const Icon = getServiceIcon(slug)
             return (
               <div
