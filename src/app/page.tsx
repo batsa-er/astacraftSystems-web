@@ -454,26 +454,26 @@ export default async function HomePage() {
               We work across the world&apos;s leading cloud and enterprise platforms — so your stack works with us from day one.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
             {[
-              { name: 'Amazon Web Services', abbr: 'AWS' },
-              { name: 'Microsoft Azure',     abbr: 'Azure' },
-              { name: 'Google Cloud',        abbr: 'GCP' },
-              { name: 'Salesforce',          abbr: 'CRM' },
-              { name: 'Odoo',                abbr: 'ERP' },
-              { name: 'SAP',                 abbr: 'SAP' },
-            ].map(({ name, abbr }) => (
+              { name: 'Amazon Web Services', logo: '/logos/aws.svg' },
+              { name: 'Microsoft Azure',     logo: '/logos/azure.svg' },
+              { name: 'Google Cloud',        logo: '/logos/gcp.svg' },
+              { name: 'Salesforce',          logo: '/logos/salesforce.svg' },
+              { name: 'Odoo',                logo: '/logos/odoo.svg' },
+              { name: 'SAP',                 logo: '/logos/sap.svg' },
+              { name: 'Zoho',                logo: '/logos/zoho.svg' },
+            ].map(({ name, logo }) => (
               <div
                 key={name}
-                className="bg-[var(--color-bg)] flex flex-col items-center justify-center gap-2 py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-200"
+                className="bg-[var(--color-bg)] flex flex-col items-center justify-center gap-3 py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-300"
               >
-                <span
-                  className="font-serif font-black text-[rgba(var(--ch-text),0.12)] group-hover:text-[rgba(var(--ch-accent),0.20)] transition-colors duration-200"
-                  style={{ fontSize: 'clamp(20px,2vw,28px)' }}
-                >
-                  {abbr}
-                </span>
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.55)] text-center leading-tight">
+                <img
+                  src={logo}
+                  alt={name}
+                  className="h-8 w-auto max-w-[110px] object-contain grayscale brightness-[0.4] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300"
+                />
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.40)] group-hover:text-[rgba(var(--ch-text),0.65)] text-center leading-tight transition-colors duration-300">
                   {name}
                 </span>
               </div>
