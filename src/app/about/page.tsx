@@ -184,7 +184,7 @@ export default async function AboutPage() {
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(6,12,24,0.80)] via-[rgba(6,12,24,0.10)] to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,52,0.80)] via-[rgba(10,22,52,0.10)] to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-5">
                         <h3 className="font-serif text-[18px] font-bold text-white mb-1">{member.name}</h3>
                         <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#55AA49]">{member.role}</p>

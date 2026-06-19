@@ -95,7 +95,7 @@ export function IndustriesWork({
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-[rgba(6,12,24,0.52)]" />
+                  <div className="absolute inset-0 bg-[rgba(10,22,52,0.55)]" />
                 </div>
 
                 <div className="absolute inset-0 hero-grid opacity-10 pointer-events-none" />

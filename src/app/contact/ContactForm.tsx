@@ -105,7 +105,7 @@ export default function ContactForm() {
       ) : (
         <>
           {/* ── Panel header ── */}
-          <div className="bg-[var(--color-dark)] px-8 py-7">
+          <div className="bg-[#1D4776] px-8 py-7">
             <span className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.20em] uppercase text-[#55AA49] border border-[rgba(85,170,73,0.28)] px-3 py-1.5 mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#55AA49] animate-status" />
               Free · 45 min · No commitment

@@ -92,7 +92,7 @@ export default function ParticlesBackground() {
   return (
     <div
       id="particles-js"
-      className="fixed inset-0 w-full h-full -z-10 transition-colors duration-500 bg-gradient-to-tr from-[#0B0F14] via-[#0D1A2E] to-[#1B4E8C] dark:from-[#0B0F14] dark:via-[#0D1A2E] dark:to-[#1B4E8C]"
+      className="fixed inset-0 w-full h-full -z-10 transition-colors duration-500 bg-gradient-to-tr from-[#0A1628] via-[#0D1A2E] to-[#1B4E8C] dark:from-[#0A1628] dark:via-[#0D1A2E] dark:to-[#1B4E8C]"
     />
   )
 }
