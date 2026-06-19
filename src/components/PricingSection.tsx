@@ -122,7 +122,7 @@ export function PricingSection() {
           <div className="flex items-center gap-6 flex-wrap justify-center">
             {['No credit card required', 'Cancel anytime', 'Trusted by businesses across Ghana'].map(t => (
               <span key={t} className="flex items-center gap-1.5 text-[13px] text-[var(--color-text-2)]">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-green)] stroke-[1.8]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-green)]" />
                 {t}
               </span>
             ))}
@@ -187,7 +187,7 @@ export function PricingSection() {
                 <ul className="space-y-3 flex-1">
                   {features.map(f => (
                     <li key={f} className="flex items-start gap-2.5">
-                      <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 stroke-[1.6] ${popular ? 'text-white/70' : 'text-[var(--color-green)]'}`} />
+                      <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${popular ? 'text-white/70' : 'text-[var(--color-green)]'}`} />
                       <span className={`text-[13px] leading-snug ${popular ? 'text-white/70' : 'text-[var(--color-text-2)]'}`}>{f}</span>
                     </li>
                   ))}

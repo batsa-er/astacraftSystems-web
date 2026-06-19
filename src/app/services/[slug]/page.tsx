@@ -5,10 +5,7 @@ import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
 
 export const revalidate = 3600
-import {
-  CodeIcon, ZapIcon, ServerIcon, ShieldCheckIcon,
-  DatabaseIcon, MegaphoneIcon, BrushIcon, ConsultIcon,
-} from '@/components/Icons'
+import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck } from 'lucide-react'
 
 export async function generateStaticParams() {
   try {
@@ -23,14 +20,14 @@ export async function generateStaticParams() {
 }
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  'software-development':   CodeIcon,
-  'digital-transformation': ZapIcon,
-  'cloud-solutions':        ServerIcon,
-  'cybersecurity':          ShieldCheckIcon,
-  'crm-erp':                DatabaseIcon,
-  'digital-marketing':      MegaphoneIcon,
-  'brand-design':           BrushIcon,
-  'it-consulting':          ConsultIcon,
+  'software-development':   Code2,
+  'digital-transformation': Zap,
+  'cloud-solutions':        Server,
+  'cybersecurity':          ShieldCheck,
+  'crm-erp':                Database,
+  'digital-marketing':      Megaphone,
+  'brand-design':           Paintbrush,
+  'it-consulting':          MonitorCheck,
 }
 
 const fallbackServices: Record<string, any> = {

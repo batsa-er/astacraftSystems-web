@@ -15,25 +15,21 @@ export const metadata: Metadata = {
     type: 'website',
   },
 }
-import {
-  CodeIcon, ZapIcon, ServerIcon, ShieldCheckIcon,
-  DatabaseIcon, MegaphoneIcon, BrushIcon, ConsultIcon,
-  CheckIcon,
-} from '@/components/Icons'
+import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck, Check } from 'lucide-react'
 import PageHero from '@/components/PageHero'
 
 function getServiceIcon(slug: string) {
   const map: Record<string, React.ComponentType<{ className?: string }>> = {
-    'software-development': CodeIcon,
-    'digital-transformation': ZapIcon,
-    'cloud-solutions': ServerIcon,
-    'cybersecurity': ShieldCheckIcon,
-    'crm-erp': DatabaseIcon,
-    'digital-marketing': MegaphoneIcon,
-    'brand-design': BrushIcon,
-    'it-consulting': ConsultIcon,
+    'software-development': Code2,
+    'digital-transformation': Zap,
+    'cloud-solutions': Server,
+    'cybersecurity': ShieldCheck,
+    'crm-erp': Database,
+    'digital-marketing': Megaphone,
+    'brand-design': Paintbrush,
+    'it-consulting': MonitorCheck,
   }
-  return map[slug] ?? ConsultIcon
+  return map[slug] ?? MonitorCheck
 }
 
 const fallback = [
@@ -151,7 +147,7 @@ export default async function ServicesPage() {
                     <ul className="space-y-3">
                       {(s.outcomes || []).map((o: string) => (
                         <li key={o} className="flex items-start gap-3">
-                          <CheckIcon className="text-[var(--color-accent)] shrink-0 mt-0.5 w-3.5 h-3.5" />
+                          <Check className="text-[var(--color-accent)] shrink-0 mt-0.5 w-3.5 h-3.5" />
                           <span className="font-mono text-[12px] tracking-[0.06em] text-[rgba(var(--ch-text),0.55)]">{o}</span>
                         </li>
                       ))}

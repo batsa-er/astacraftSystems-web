@@ -1,15 +1,13 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import {
-  TrendingUpIcon, UsersIcon, CurrencyIcon, ShieldCheckIcon,
-} from '@/components/Icons'
+import { TrendingUp, Users, DollarSign, ShieldCheck } from 'lucide-react'
 
 const stats = [
-  { Icon: TrendingUpIcon, num: '200+',  label: 'Businesses served across Africa' },
-  { Icon: UsersIcon,      num: '50+',   label: 'Certified technology professionals' },
-  { Icon: CurrencyIcon,   num: '$28M',  label: 'In client revenue powered by our systems' },
-  { Icon: ShieldCheckIcon,num: '98%',   label: 'Client satisfaction rate' },
+  { Icon: TrendingUp,  num: '200+',  label: 'Businesses served across Africa' },
+  { Icon: Users,       num: '50+',   label: 'Certified technology professionals' },
+  { Icon: DollarSign,  num: '$28M',  label: 'In client revenue powered by our systems' },
+  { Icon: ShieldCheck, num: '98%',   label: 'Client satisfaction rate' },
 ]
 
 function parse(raw: string): { prefix: string; value: number; suffix: string; decimals: number } {

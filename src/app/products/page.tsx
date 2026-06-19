@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { JsonLd } from '@/components/JsonLd'
-import { CheckIcon } from '@/components/Icons'
-import { FileText, Receipt, ClipboardList, Smartphone, BarChart3, Users } from 'lucide-react'
+import { Check, Users, FileText, Receipt, ClipboardList, Smartphone, BarChart3 } from 'lucide-react'
 import { PricingSection } from '@/components/PricingSection'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 
@@ -177,7 +176,7 @@ export default function ProductsPage() {
                 <ul className="space-y-2">
                   {features.map(f => (
                     <li key={f} className="flex items-start gap-2">
-                      <CheckIcon className="text-[var(--color-green)] mt-0.5 shrink-0 w-3 h-3" />
+                      <Check className="text-[var(--color-green)] mt-0.5 shrink-0 w-3 h-3" />
                       <span className="font-mono text-[11px] tracking-[0.06em] text-[rgba(var(--ch-text),0.50)]">{f}</span>
                     </li>
                   ))}

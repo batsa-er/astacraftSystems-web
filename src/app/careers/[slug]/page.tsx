@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getCareerBySlug } from '@/sanity/queries'
-import { BriefcaseIcon, ClockIcon, MapPinIcon, CheckIcon } from '@/components/Icons'
+import { Briefcase, Clock, MapPin, Check } from 'lucide-react'
 
 export const revalidate = 3600
 
@@ -105,13 +105,13 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[#55AA49] border border-[rgba(85,170,73,0.35)]">
-              <BriefcaseIcon className="w-3 h-3" />{job.department}
+              <Briefcase className="w-3 h-3" />{job.department}
             </span>
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(255,255,255,0.50)] border border-[rgba(255,255,255,0.12)]">
-              <ClockIcon className="w-3 h-3" />{job.type}
+              <Clock className="w-3 h-3" />{job.type}
             </span>
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.40)]">
-              <MapPinIcon className="w-3 h-3" />{job.location}
+              <MapPin className="w-3 h-3" />{job.location}
             </span>
           </div>
 
@@ -156,7 +156,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
                 <ul className="space-y-3">
                   {job.responsibilities.map((r: string) => (
                     <li key={r} className="flex items-start gap-3">
-                      <CheckIcon className="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0 mt-1" />
+                      <Check className="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0 mt-1" />
                       <span className="text-[14px] text-[rgba(var(--ch-text),0.70)] leading-relaxed">{r}</span>
                     </li>
                   ))}
@@ -170,7 +170,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
                 <ul className="space-y-3">
                   {job.requirements.map((r: string) => (
                     <li key={r} className="flex items-start gap-3">
-                      <CheckIcon className="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0 mt-1" />
+                      <Check className="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0 mt-1" />
                       <span className="text-[14px] text-[rgba(var(--ch-text),0.70)] leading-relaxed">{r}</span>
                     </li>
                   ))}
@@ -216,7 +216,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
                 <ul className="space-y-3">
                   {job.benefits.map((b: string) => (
                     <li key={b} className="flex items-start gap-3">
-                      <CheckIcon className="w-3 h-3 text-[var(--color-green)] shrink-0 mt-1" />
+                      <Check className="w-3 h-3 text-[var(--color-green)] shrink-0 mt-1" />
                       <span className="text-[13px] text-[rgba(var(--ch-text),0.65)] leading-relaxed">{b}</span>
                     </li>
                   ))}

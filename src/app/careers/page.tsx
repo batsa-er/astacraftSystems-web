@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { getCareers } from '@/sanity/queries'
-import { BriefcaseIcon, ClockIcon, MapPinIcon } from '@/components/Icons'
+import { Briefcase, Clock, MapPin } from 'lucide-react'
 
 export const revalidate = 3600
 
@@ -98,13 +98,13 @@ export default async function CareersPage() {
 
                 <div className="relative border-t border-[rgba(var(--ch-accent),0.08)] pt-5 flex flex-wrap items-center gap-3">
                   <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">
-                    <BriefcaseIcon className="w-3 h-3" />{job.department}
+                    <Briefcase className="w-3 h-3" />{job.department}
                   </span>
                   <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(var(--ch-text),0.55)] border border-[rgba(var(--ch-border),0.10)]">
-                    <ClockIcon className="w-3 h-3" />{job.type}
+                    <Clock className="w-3 h-3" />{job.type}
                   </span>
                   <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.40)] ml-auto">
-                    <MapPinIcon className="w-3 h-3" />{job.location}
+                    <MapPin className="w-3 h-3" />{job.location}
                   </span>
                 </div>
               </div>

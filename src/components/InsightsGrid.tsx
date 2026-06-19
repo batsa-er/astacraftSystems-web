@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { urlFor } from '@/sanity/client'
-import { CalendarIcon, ClockIcon } from '@/components/Icons'
+import { Calendar, Clock } from 'lucide-react'
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -105,11 +105,11 @@ export function InsightsGrid({ insights }: { insights: any[] }) {
 
               <div className="flex items-center gap-4 border-t border-[rgba(var(--ch-accent),0.08)] pt-6 mt-auto">
                 <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.45)]">
-                  <CalendarIcon className="w-3.5 h-3.5" />{formatDate(featured.publishedAt)}
+                  <Calendar className="w-3.5 h-3.5" />{formatDate(featured.publishedAt)}
                 </span>
                 <span className="text-[rgba(var(--ch-text),0.20)]">·</span>
                 <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.45)]">
-                  <ClockIcon className="w-3.5 h-3.5" />{featured.readTime}
+                  <Clock className="w-3.5 h-3.5" />{featured.readTime}
                 </span>
                 <span className="ml-auto font-mono text-[11px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.22)] group-hover:text-[var(--color-accent)] group-hover:translate-x-0.5 transition-all duration-200">
                   Read →
@@ -163,11 +163,11 @@ export function InsightsGrid({ insights }: { insights: any[] }) {
                 </p>
                 <div className="flex items-center gap-3 border-t border-[rgba(var(--ch-accent),0.08)] pt-5">
                   <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.40)]">
-                    <CalendarIcon className="w-3 h-3" />{formatDate(ins.publishedAt)}
+                    <Calendar className="w-3 h-3" />{formatDate(ins.publishedAt)}
                   </span>
                   <span className="text-[rgba(var(--ch-text),0.20)]">·</span>
                   <span className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.1em] text-[rgba(var(--ch-text),0.40)]">
-                    <ClockIcon className="w-3 h-3" />{ins.readTime}
+                    <Clock className="w-3 h-3" />{ins.readTime}
                   </span>
                 </div>
               </div>

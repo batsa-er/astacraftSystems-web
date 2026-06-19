@@ -3,27 +3,24 @@
 import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  CodeIcon, ZapIcon, ServerIcon, ShieldCheckIcon,
-  DatabaseIcon, MegaphoneIcon, BrushIcon, ConsultIcon,
-} from '@/components/Icons'
+import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck } from 'lucide-react'
 
 type DropdownId = 'solutions' | 'products' | null
 
 const DARK_PAGES = ['/']
 
 const solutionsTech = [
-  { Icon: CodeIcon,        href: '/services/software-development',   title: 'Software Development',   desc: 'Web, mobile, SaaS & enterprise apps' },
-  { Icon: ZapIcon,         href: '/services/digital-transformation', title: 'Digital Transformation', desc: 'Process automation & modernization' },
-  { Icon: ServerIcon,      href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure', desc: 'Hosting, migration & managed infra' },
-  { Icon: ShieldCheckIcon, href: '/services/cybersecurity',          title: 'Cybersecurity',          desc: 'Audits, protection & compliance' },
+  { Icon: Code2,        href: '/services/software-development',   title: 'Software Development',   desc: 'Web, mobile, SaaS & enterprise apps' },
+  { Icon: Zap,          href: '/services/digital-transformation', title: 'Digital Transformation', desc: 'Process automation & modernization' },
+  { Icon: Server,       href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure', desc: 'Hosting, migration & managed infra' },
+  { Icon: ShieldCheck,  href: '/services/cybersecurity',          title: 'Cybersecurity',          desc: 'Audits, protection & compliance' },
 ]
 
 const solutionsBusiness = [
-  { Icon: DatabaseIcon,  href: '/services/crm-erp',           title: 'CRM & ERP Solutions',   desc: 'Salesforce, Odoo, SAP & custom CRM' },
-  { Icon: MegaphoneIcon, href: '/services/digital-marketing', title: 'Digital Marketing',     desc: 'SEO, paid ads & lead generation' },
-  { Icon: BrushIcon,     href: '/services/brand-design',      title: 'Brand & Design',        desc: 'Identity, product design & creative' },
-  { Icon: ConsultIcon,   href: '/services/it-consulting',     title: 'IT Strategy',           desc: 'Technology roadmaps & advisory' },
+  { Icon: Database,      href: '/services/crm-erp',           title: 'CRM & ERP Solutions',   desc: 'Salesforce, Odoo, SAP & custom CRM' },
+  { Icon: Megaphone,     href: '/services/digital-marketing', title: 'Digital Marketing',     desc: 'SEO, paid ads & lead generation' },
+  { Icon: Paintbrush,    href: '/services/brand-design',      title: 'Brand & Design',        desc: 'Identity, product design & creative' },
+  { Icon: MonitorCheck,  href: '/services/it-consulting',     title: 'IT Strategy',           desc: 'Technology roadmaps & advisory' },
 ]
 
 function ChevronDown({ open }: { open: boolean }) {
