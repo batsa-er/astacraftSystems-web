@@ -40,7 +40,7 @@ export async function POST(req: Request) {
   const serviceLabel = humanize(service)
   const budgetLabel  = budget ? (BUDGET_LABELS[budget] ?? humanize(budget)) : '—'
 
-  await resend.emails.send({
+  const internalEmail = resend.emails.send({
     from: 'Astacraft Systems <onboarding@resend.dev>',
     to: TO,
     replyTo: email,
@@ -69,6 +69,72 @@ export async function POST(req: Request) {
       </div>
     `,
   })
+
+  const autoReply = resend.emails.send({
+    from: 'Astacraft Systems <onboarding@resend.dev>',
+    to: email,
+    subject: `We've received your enquiry, ${name.split(' ')[0]}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#0B0F14">
+
+        <div style="background:#1D4776;padding:32px">
+          <img src="https://astacraftsystems.com/astacraft-logo-white.svg" alt="Astacraft Systems" height="36" style="display:block;margin-bottom:0" />
+        </div>
+
+        <div style="padding:40px 32px;background:#ffffff;border:1px solid #e2e8f0;border-top:none">
+          <p style="font-size:13px;color:#64748b;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px">Enquiry confirmed</p>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 12px;color:#080C14;line-height:1.3">
+            Thanks, ${name.split(' ')[0]}. You&rsquo;re all set.
+          </h1>
+          <p style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 32px">
+            We&rsquo;ve received your message and a senior member of our team will be in touch within <strong>24 hours</strong> to confirm your complimentary strategy call.
+          </p>
+
+          <div style="background:#F6F7FB;border:1px solid #e2e8f0;padding:24px;margin-bottom:32px">
+            <p style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px">What happens next</p>
+            ${[
+              ['01', 'Calendar invite from our team', 'We&rsquo;ll send a calendar invite for a time that works for you.'],
+              ['02', 'Brief prep questions (optional)', 'To make the call as useful as possible, we may send a short list of questions beforehand.'],
+              ['03', '45 minutes with a senior advisor', 'We review your systems, identify opportunities, and map a clear technology path forward.'],
+            ].map(([n, title, body]) => `
+              <div style="display:flex;gap:16px;margin-bottom:20px">
+                <span style="font-size:20px;font-weight:800;color:#1D477626;min-width:32px;line-height:1">${n}</span>
+                <div>
+                  <p style="font-size:14px;font-weight:600;color:#0B0F14;margin:0 0 4px">${title}</p>
+                  <p style="font-size:13px;color:#64748b;margin:0;line-height:1.6">${body}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div style="background:#F6F7FB;border:1px solid #e2e8f0;border-left:3px solid #1D4776;padding:16px 20px;margin-bottom:32px">
+            <p style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 12px">Your submission</p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px">
+              ${company ? `<tr><td style="padding:4px 0;color:#94a3b8;width:100px">Company</td><td style="padding:4px 0;color:#0B0F14">${company}</td></tr>` : ''}
+              ${service ? `<tr><td style="padding:4px 0;color:#94a3b8">Looking for</td><td style="padding:4px 0;color:#0B0F14">${serviceLabel}</td></tr>` : ''}
+            </table>
+          </div>
+
+          <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px">
+            In the meantime, feel free to reply to this email if you have any questions.
+          </p>
+          <p style="font-size:14px;color:#475569;margin:0">
+            — The Astacraft Systems Team
+          </p>
+        </div>
+
+        <div style="padding:20px 32px;background:#F6F7FB;border:1px solid #e2e8f0;border-top:none;text-align:center">
+          <p style="font-size:11px;color:#94a3b8;margin:0">
+            Astacraft Systems Limited &middot; Accra, Ghana &middot;
+            <a href="https://astacraftsystems.com" style="color:#1D4776;text-decoration:none">astacraftsystems.com</a>
+          </p>
+        </div>
+
+      </div>
+    `,
+  })
+
+  await Promise.all([internalEmail, autoReply])
 
   return NextResponse.json({ ok: true })
 }
