@@ -12,7 +12,7 @@ const DARK_PAGES = ['/']
 
 const productPlatforms = [
   { Icon: Receipt, href: '/products',                      title: 'AstaBill',               desc: 'Invoicing & payments for African businesses' },
-  { Icon: Users,   href: '/services/crm-erp',              title: 'CRM & Business Systems', desc: 'Purpose-built automation & customer platforms' },
+  { Icon: Users,   href: '/products/crm',                  title: 'CRM & Business Systems', desc: 'Purpose-built automation & customer platforms' },
   { Icon: Zap,     href: '/services/api-automation',       title: 'API & Automation',       desc: 'Connect systems, automate workflows end-to-end' },
 ]
 

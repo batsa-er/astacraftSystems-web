@@ -2,7 +2,7 @@ import { createElement } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getServices, getServiceBySlug } from '@/sanity/queries'
-import type { ServiceDetail } from '@/sanity/types'
+import type { ServiceDetail, ProcessStep } from '@/sanity/types'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
 
@@ -39,7 +39,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'We build SaaS products, enterprise applications, and custom platforms — from initial architecture through production deployment. Purpose-built for African market realities and global performance standards.',
     detail: 'Building software in Africa is not the same as building software for a homogeneous market. Our engineering team designs for real-world African constraints: mobile-first platforms that perform on variable network conditions, integrations with MTN Mobile Money, Telecel Cash, and Paystack, and architectures that remain responsive even when bandwidth is constrained.\n\nWe work in modern stacks — React, Next.js, Node.js, Python, Go — and ship in two-week agile sprints with client demos after each cycle. Whether you are building your first SaaS product, modernizing a legacy enterprise platform, or launching a mobile application for your operations team, we apply the same engineering discipline: understand the business problem deeply, design the right architecture, and deliver with precision. Every system we hand over is documented, tested, and built to be maintained — by us or by your own team.',
     outcomes: ['SaaS product development', 'Custom web & mobile applications', 'API design & platform integrations', 'Enterprise software engineering', 'Legacy system modernization', 'Ongoing maintenance & support'],
-    process: ['Discovery & requirements', 'System architecture design', 'UI/UX design & prototyping', 'Agile development sprints', 'QA, testing & security review', 'Deployment, launch & handoff'],
+    process: [
+      { title: 'Discovery & requirements',     body: 'We run structured workshops with your product and technical stakeholders to map business goals, user needs, and system constraints before a line of code is written.' },
+      { title: 'System architecture design',   body: 'We design the data model, system boundaries, API contracts, and infrastructure blueprint — reviewed and signed off before build begins.' },
+      { title: 'UI/UX design & prototyping',   body: 'Interactive prototypes in Figma, tested with real users. You see and approve the full user experience before development starts.' },
+      { title: 'Agile development sprints',    body: 'Two-week sprints with a live demo at the end of each cycle. You see working software every fortnight — not just status updates.' },
+      { title: 'QA, testing & security review', body: 'Automated testing, manual QA, and a security review covering OWASP Top 10 vulnerabilities before any system goes live.' },
+      { title: 'Deployment, launch & handoff', body: 'Managed deployment to production, post-launch monitoring, full documentation, and a knowledge transfer session for your team.' },
+    ],
     stats: [{ num: '200+', label: 'Systems built' }, { num: '98%', label: 'On-time delivery' }, { num: '8+', label: 'Years in development' }],
     faq: [
       {
@@ -65,7 +72,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'We design and build custom APIs, workflow automation systems, and integrations that eliminate manual work and connect every part of your business — from internal tools to enterprise systems and third-party platforms.',
     detail: 'Manual processes and disconnected systems are a hidden tax on your business. Every time a team member copies data from one system to another, chases an approval via email, or re-enters information that already exists elsewhere, you are paying in time, accuracy, and speed. We build the automation infrastructure that eliminates these friction points — APIs that expose your core business logic cleanly, workflow engines that route tasks, approvals, and notifications automatically, and integrations that make your existing systems work as one.\n\nOur automation work spans the full stack: REST and GraphQL APIs built for performance and security, Zapier and Make integrations for rapid workflow automation, webhook systems for real-time event processing, and custom orchestration layers for complex enterprise workflows. We work with whatever you already have — Salesforce, Odoo, SAP, QuickBooks, local ERP systems, mobile apps, or bespoke internal tools — and build the connective tissue that makes them function as a single platform.',
     outcomes: ['Custom REST & GraphQL API development', 'Workflow automation (Zapier, Make, n8n)', 'System integrations & data pipelines', 'Webhook design & event-driven systems', 'ERP & CRM API connectors', 'Automated reporting & document generation'],
-    process: ['Systems audit & integration mapping', 'API design & data model definition', 'Workflow design & automation logic', 'Build & test in staging environment', 'Go-live & monitoring setup', 'Ongoing optimization & expansion'],
+    process: [
+      { title: 'Systems audit & integration mapping', body: 'We map every system, data source, and manual handoff in your current environment to identify exactly where automation will deliver the highest return.' },
+      { title: 'API design & data model definition',  body: 'We design data contracts, endpoint structures, and authentication models before writing a line of code — so integrations are maintainable and extensible.' },
+      { title: 'Workflow design & automation logic',  body: 'We document the exact logic for each automation: triggers, conditions, data transformations, error handling, and escalation paths.' },
+      { title: 'Build & test in staging',             body: 'All automations are built and thoroughly tested in a staging environment that mirrors production — including edge cases and failure scenarios.' },
+      { title: 'Go-live & monitoring setup',          body: 'Managed go-live with monitoring dashboards and alerting configured so you know immediately if any automation fails or behaves unexpectedly.' },
+      { title: 'Ongoing optimization & expansion',    body: 'As your business grows we expand coverage — adding new triggers, systems, and workflows on a retained basis.' },
+    ],
     stats: [{ num: '120+', label: 'Integrations delivered' }, { num: '85%', label: 'Avg. manual work eliminated' }, { num: '48h', label: 'Time to first working prototype' }],
     faq: [
       {
@@ -91,7 +105,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
     detail: 'Digital transformation is not a one-time project — it is a fundamental shift in how an organization uses technology to operate and compete. We guide businesses through every stage of that journey: diagnosing where manual processes and legacy systems are creating friction, designing the target operating model, and executing change in phases that maintain business continuity.\n\nFor Ghanaian organizations, this often means replacing paper-based workflows with digitized systems, connecting siloed departments onto shared platforms, and building the data infrastructure that executive teams need to make faster decisions. We have led transformations across banking, telecoms, healthcare, NGOs, and government agencies in Ghana and across West Africa — and we understand the change management challenges that are unique to African organizational cultures.',
     outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
-    process: ['Current state assessment', 'Gap analysis & opportunity mapping', 'Roadmap & business case', 'Pilot implementation', 'Full rollout & change management', 'Optimization & continuous improvement'],
+    process: [
+      { title: 'Current state assessment',          body: 'A structured discovery of your existing processes, systems, and pain points — identifying where manual work, legacy systems, and data silos are costing the most.' },
+      { title: 'Gap analysis & opportunity mapping', body: 'We map the delta between your current state and the target operating model, quantifying the value of each opportunity to prioritize effort.' },
+      { title: 'Roadmap & business case',           body: 'A phased transformation roadmap with a clear business case for each initiative — so leadership can approve and fund phases with confidence.' },
+      { title: 'Pilot implementation',              body: 'We start with the highest-value, lowest-risk change to prove the model and build organizational confidence before scaling.' },
+      { title: 'Full rollout & change management',  body: 'Phased rollout with structured change management, staff training, and communication plans to drive genuine adoption across the organization.' },
+      { title: 'Optimization & continuous improvement', body: 'Post-rollout measurement against agreed KPIs, iterative improvements, and regular reviews to ensure the transformation delivers its promised return.' },
+    ],
     stats: [{ num: '60%', label: 'Avg. process efficiency gain' }, { num: '40+', label: 'Transformations delivered' }, { num: '18mo', label: 'Avg. transformation timeline' }],
     faq: [
       {
@@ -117,7 +138,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'Cloud architecture, migration, and managed services on AWS, Microsoft Azure, and Google Cloud. Secure, reliable, cost-optimized infrastructure for businesses at any scale.',
     detail: 'Cloud infrastructure is the backbone of every modern business. We help organizations migrate from on-premise servers to cloud, architect new cloud-native systems from scratch, and manage ongoing infrastructure with the reliability of a dedicated team. Our certified cloud architects work across AWS, Azure, and GCP — designing infrastructure that matches your actual workload, not the workload you might hypothetically have one day.\n\nFor Ghana-based businesses, cloud adoption brings particular advantages: eliminating the cost and risk of maintaining physical servers in a country where reliable power and cooling are challenges, accessing global infrastructure with Verifiable uptime SLAs, and enabling remote teams to work from anywhere. We also address the data sovereignty and latency considerations that matter most to African businesses — including which cloud regions minimize latency for users in West Africa and how to structure data storage to meet Ghana\'s regulatory requirements.',
     outcomes: ['Cloud migration & lift-and-shift', 'Architecture design (AWS/Azure/GCP)', 'Managed cloud services', 'DevOps & CI/CD pipelines', 'Cost optimization & governance', 'Disaster recovery & backup'],
-    process: ['Cloud readiness assessment', 'Architecture design & costing', 'Migration planning & phasing', 'Execution & cutover', 'Performance optimization', 'Ongoing managed services'],
+    process: [
+      { title: 'Cloud readiness assessment',    body: 'We audit your current infrastructure, applications, and data to determine what can migrate as-is, what needs re-architecting, and what to retire.' },
+      { title: 'Architecture design & costing', body: 'A detailed cloud architecture blueprint with a full cost model — so you know exactly what you will pay before committing to the migration.' },
+      { title: 'Migration planning & phasing',  body: 'We sequence the migration to minimize risk: non-critical workloads first, mission-critical systems last, with a parallel-run period for each.' },
+      { title: 'Execution & cutover',           body: 'Managed migration with real-time monitoring and rollback capability at every stage. Final cutover scheduled during your lowest-traffic window.' },
+      { title: 'Performance optimization',      body: 'Post-migration tuning of compute, storage, and networking to hit the performance and cost targets defined in the architecture phase.' },
+      { title: 'Ongoing managed services',      body: 'Continuous monitoring, patching, cost governance, and capacity planning — cloud infrastructure managed like an internal team, without the headcount.' },
+    ],
     stats: [{ num: '35%', label: 'Avg. infrastructure cost reduction' }, { num: '99.9%', label: 'Uptime SLA' }, { num: '50+', label: 'Cloud migrations completed' }],
     faq: [
       {
@@ -143,7 +171,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'Security audits, penetration testing, compliance frameworks, and 24/7 monitoring — designed to protect your business from modern threats and meet regulatory requirements.',
     detail: 'Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana\'s cybersecurity directives, Ghana\'s Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur certified security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We work with financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.',
     outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', 'SOC monitoring & incident response', 'Employee security awareness training', 'Security policy development'],
-    process: ['Security baseline assessment', 'Threat & risk modelling', 'Penetration testing', 'Remediation prioritization', 'Controls implementation', 'Continuous monitoring & reporting'],
+    process: [
+      { title: 'Security baseline assessment', body: 'A comprehensive review of your current security posture — network architecture, access controls, data handling, and existing policies — to establish what we are working with.' },
+      { title: 'Threat & risk modelling',      body: 'We build a threat model specific to your industry, data assets, and operating environment so remediation effort is focused where risk is highest.' },
+      { title: 'Penetration testing',          body: 'Simulated attacks against your systems — web applications, internal networks, and cloud infrastructure — conducted by certified ethical hackers.' },
+      { title: 'Remediation prioritization',   body: 'A prioritized report telling you exactly what to fix, in what order, with severity ratings and remediation guidance for every finding.' },
+      { title: 'Controls implementation',      body: 'We implement the recommended controls — patching, access hardening, encryption, monitoring — working with your IT team or handling it entirely.' },
+      { title: 'Continuous monitoring',        body: '24/7 SOC monitoring with defined escalation procedures, monthly threat reports, and quarterly security reviews to keep your posture current.' },
+    ],
     stats: [{ num: '0', label: 'Client breaches post-engagement' }, { num: 'ISO', label: '27001 compliance advisory' }, { num: '24/7', label: 'SOC monitoring capability' }],
     faq: [
       {
@@ -169,7 +204,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'We implement, customize, and integrate CRM and ERP platforms — Salesforce, Odoo, SAP — configured as business automation systems, not just software installations. Built for how African enterprises actually operate.',
     detail: 'Most CRM and ERP implementations fail not because of the technology, but because the system is configured for a generic business — not yours. We bring deep implementation experience across Salesforce, Odoo, Microsoft Dynamics, and SAP, with particular expertise in configuring these platforms as genuine business automation engines for African organizations.\n\nFor Ghana and West Africa, that means multi-currency support with GHS as the primary currency, GRA tax compliance built directly into invoicing and financial workflows, Mobile Money integrations, and user interfaces designed for the devices and network conditions your team actually works with. We treat adoption as the real success metric — a system your team does not use delivers zero ROI. Our implementations include dedicated change management, staff training, and a post-launch optimization period to ensure the platform is genuinely embedded in how your business operates.',
     outcomes: ['CRM implementation & configuration', 'ERP deployment & business automation', 'Workflow design & process integration', 'Data migration & cleansing', 'Staff training & adoption support', 'Ongoing system optimization'],
-    process: ['Requirements analysis', 'Platform selection & scoping', 'Configuration & customization', 'Data migration & testing', 'Team training & adoption', 'Post-launch support & optimization'],
+    process: [
+      { title: 'Requirements analysis',          body: 'We run structured workshops with sales, operations, and finance leaders to map processes, data flows, and automation requirements before selecting a platform.' },
+      { title: 'Platform selection & scoping',   body: 'We match your requirements to the right platform — Salesforce, Odoo, SAP, or HubSpot — and produce a detailed scope and cost estimate.' },
+      { title: 'Configuration & customization',  body: 'We configure the platform in a staging environment — modules, custom fields, automations, and integrations — with milestone reviews throughout.' },
+      { title: 'Data migration & testing',       body: 'Existing customer, pipeline, and financial data is cleaned, mapped, and migrated with full validation before go-live. No data loss, no surprises.' },
+      { title: 'Team training & adoption',       body: 'Role-specific training sessions for every user group — from admin configuration to daily use — before the system goes live.' },
+      { title: 'Post-launch support & optimization', body: 'Thirty days of dedicated post-launch support, followed by iterative optimization as your team uncovers new automation opportunities.' },
+    ],
     stats: [{ num: '80+', label: 'CRM/ERP implementations' }, { num: '94%', label: 'User adoption rate' }, { num: '3mo', label: 'Avg. go-live timeline' }],
     faq: [
       {
@@ -195,7 +237,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'SEO, paid advertising, content strategy, and marketing automation — all tied to measurable growth. We build marketing systems that generate qualified leads and compounding revenue.',
     detail: 'Marketing without measurement is just spending. We build marketing systems that are fully instrumented from day one — every channel, campaign, and piece of content is tied back to qualified leads and revenue. Our approach combines creative content with rigorous data analysis, and we report on the metrics that actually matter to your business: cost per qualified lead, pipeline contribution, and revenue influenced.\n\nIn Ghana and across West Africa, effective digital marketing requires understanding the local landscape: which platforms your target audience actually uses (LinkedIn for B2B, Facebook and Instagram for B2C, WhatsApp for direct engagement), how Ghanaian buyers research and evaluate vendors, and how to optimize for local search intent. We build campaigns and SEO strategies specifically for the Ghanaian market — not templates imported from markets with different audience behaviors and competitive dynamics.',
     outcomes: ['SEO strategy & implementation', 'Paid advertising (Google, Meta, LinkedIn)', 'Content marketing & strategy', 'Marketing automation setup', 'Analytics & performance reporting', 'CRO & landing page optimization'],
-    process: ['Marketing audit & baseline', 'Strategy & channel selection', 'Asset creation & campaign setup', 'Launch & A/B testing', 'Performance optimization', 'Monthly reporting & scaling'],
+    process: [
+      { title: 'Marketing audit & baseline',    body: 'A full audit of your current digital presence — search rankings, ad performance, content quality, and analytics setup — to establish the starting point.' },
+      { title: 'Strategy & channel selection',  body: 'We select channels and tactics that match your audience, budget, and growth goals — with a 90-day plan and clear KPIs before any spend is committed.' },
+      { title: 'Asset creation & campaign setup', body: 'We create the content, ad copy, landing pages, and tracking infrastructure needed to launch campaigns that are properly instrumented from day one.' },
+      { title: 'Launch & A/B testing',          body: 'Campaigns go live with A/B tests built in from the start — so we are learning and improving from day one, not waiting for a full reporting cycle.' },
+      { title: 'Performance optimization',      body: 'Weekly optimization of bids, audiences, creative, and landing pages based on live data — eliminating spend on what is not working and scaling what is.' },
+      { title: 'Monthly reporting & scaling',   body: 'Monthly reports tied to revenue metrics, with recommendations for the next month. Winning campaigns are scaled; underperformers are replaced.' },
+    ],
     stats: [{ num: '3.2×', label: 'Avg. ROAS for paid clients' }, { num: '180%', label: 'Avg. organic traffic growth' }, { num: '90d', label: 'To measurable results' }],
     faq: [
       {
@@ -221,7 +270,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'Corporate brand identity, UI/UX design, and design systems — built to position your business as a credible, premium operator in your market and online.',
     detail: 'A brand is more than a logo — it is the sum of every impression your business makes on a potential client or partner. We design brand identities built to scale: clear, consistent, and distinctive enough to hold their own in competitive markets. Every identity we deliver comes with a comprehensive system for use across digital and physical touchpoints — not just a logo file and a colour palette, but a full brand guide, template library, and implementation support.\n\nFor businesses in Ghana and across West Africa, brand positioning carries particular weight. In markets where trust is built on reputation and referral, a credible, professional brand is a direct commercial asset — it shortens sales cycles, supports premium pricing, and signals to partners and investors that you operate at a serious level. We have designed brands for Ghanaian startups, established enterprises, NGOs, and government agencies — and we understand how to position organizations credibly in both local and international contexts.',
     outcomes: ['Brand identity & logo design', 'Corporate brand guidelines', 'UI/UX design for web & mobile', 'Design systems & component libraries', 'Corporate profiles & presentations', 'Website & app visual design'],
-    process: ['Discovery & market research', 'Positioning & creative direction', 'Identity design exploration', 'Refinement & system build', 'Brand guidelines & asset delivery', 'Rollout & implementation support'],
+    process: [
+      { title: 'Discovery & market research',     body: 'We research your market, competitors, and target audience to understand the landscape your brand must stand out in — before any creative work begins.' },
+      { title: 'Positioning & creative direction', body: 'We define your brand positioning and present two or three distinct creative directions — each showing how your brand could look and feel across key touchpoints.' },
+      { title: 'Identity design exploration',     body: 'Detailed development of your chosen direction: primary and secondary logos, colour system, typography, and icon style in full fidelity.' },
+      { title: 'Refinement & system build',       body: 'One round of structured revisions, then we build the full brand system: every lockup, colour combination, and usage rule your team will need.' },
+      { title: 'Brand guidelines & asset delivery', body: 'A comprehensive brand guidelines document and a complete asset library — delivered in every format your team and print suppliers will need.' },
+      { title: 'Rollout & implementation support', body: 'We support the rollout across digital and physical touchpoints — from website updates to signage, stationery, and social profiles.' },
+    ],
     stats: [{ num: '150+', label: 'Brands designed' }, { num: '4.8/5', label: 'Client satisfaction score' }, { num: '3wk', label: 'Avg. identity turnaround' }],
     faq: [
       {
@@ -247,7 +303,14 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
     detail: 'Most technology failures begin not with bad engineering, but with poor strategy: choosing the wrong platform, under-specifying a system, moving too fast before the organization is ready, or investing in technology before the business processes it is meant to support are well-defined. Our consulting practice works at the intersection of business and technology — helping leadership teams understand their options, evaluate trade-offs honestly, and build roadmaps they can actually execute and fund.\n\nFor organizations in Ghana and across West Africa, the stakes of poor technology decisions are particularly high: technology budgets are limited, implementation partners are harder to evaluate, and the consequences of a failed system implementation — lost productivity, data loss, staff frustration — can set an organization back by years. We bring independent, conflict-free advice. We do not sell software licences. We do not have preferred vendor relationships that influence our recommendations. We tell you what the right answer is for your organization — and then help you execute it.',
     outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
-    process: ['Current state discovery', 'Stakeholder & requirement alignment', 'Options analysis & recommendation', 'Roadmap development', 'Implementation guidance', 'Advisory retainer & review cadence'],
+    process: [
+      { title: 'Current state discovery',            body: 'We interview key stakeholders, review your existing technology stack, and document current-state systems, costs, and pain points without assumptions.' },
+      { title: 'Stakeholder & requirement alignment', body: 'We facilitate alignment sessions with leadership, IT, and operations to ensure the strategy is built on shared priorities — not just the loudest voice in the room.' },
+      { title: 'Options analysis & recommendation',  body: 'We evaluate credible options against your requirements, budget, and risk tolerance — and deliver a clear recommendation with a documented rationale.' },
+      { title: 'Roadmap development',                body: 'A phased technology roadmap with estimated costs, timelines, dependencies, and decision points — built to be presented to leadership and board.' },
+      { title: 'Implementation guidance',            body: 'We oversee implementation partners, review proposals, and provide technical governance throughout delivery — keeping your interests front and centre.' },
+      { title: 'Advisory retainer & review cadence', body: 'Ongoing strategic advice on retainer: quarterly roadmap reviews, vendor negotiations, and on-demand access to a senior technology advisor.' },
+    ],
     stats: [{ num: '$4M+', label: 'In client tech spend advised' }, { num: '100+', label: 'Architecture reviews' }, { num: '12+', label: 'Countries served' }],
     faq: [
       {
@@ -446,27 +509,36 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       {process.length > 0 && (
         <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
           <div className="max-w-[1280px] mx-auto">
-            <div className="mb-14 reveal">
+            <div className="mb-16 reveal">
               <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">How We Work</p>
               <h2
-                className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.03em]"
-                style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}
+                className="font-serif font-bold text-[var(--color-text)] leading-tight"
+                style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}
               >
                 The engagement process.
               </h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {process.map((step: string, i: number) => (
-                <div key={step} className="relative reveal" style={{ transitionDelay: `${i * 60}ms` }}>
-                  {i < process.length - 1 && (
-                    <div className="hidden lg:block absolute top-5 left-[calc(50%+24px)] right-0 h-px border-t border-dashed border-[rgba(var(--ch-accent),0.20)]" />
-                  )}
-                  <div className="w-10 h-10 border border-[rgba(var(--ch-accent),0.20)] flex items-center justify-center mb-4">
-                    <span className="font-mono text-[10px] font-bold text-[var(--color-accent)]">{String(i + 1).padStart(2, '0')}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[rgba(var(--ch-accent),0.10)]">
+              {process.map((step: ProcessStep, i: number) => {
+                const title = typeof step === 'string' ? step : step.title
+                const body  = typeof step === 'string' ? null  : step.body
+                return (
+                  <div
+                    key={i}
+                    className="group bg-[var(--color-surface)] p-10 reveal hover:bg-[var(--color-panel)] transition-colors duration-300"
+                    style={{ transitionDelay: `${i * 70}ms` }}
+                  >
+                    <p
+                      className="font-serif font-black leading-none mb-6 select-none text-[rgba(var(--ch-accent),0.12)] group-hover:text-[rgba(var(--ch-accent),0.22)] transition-colors duration-300"
+                      style={{ fontSize: 'clamp(48px,5vw,72px)' }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </p>
+                    <h3 className="font-serif text-[20px] font-bold mb-3 leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300">{title}</h3>
+                    {body && <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed">{body}</p>}
                   </div>
-                  <p className="text-[12px] text-[rgba(var(--ch-text),0.58)] leading-snug">{step}</p>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>

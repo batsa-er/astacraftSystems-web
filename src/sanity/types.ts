@@ -76,9 +76,11 @@ export interface ServiceFaq {
   a: string
 }
 
+export type ProcessStep = string | { title: string; body: string }
+
 export interface ServiceDetail extends Service {
   detail: string
-  process?: string[]
+  process?: ProcessStep[]
   stats?: ServiceStat[]
   faq?: ServiceFaq[]
   seoTitle?: string
