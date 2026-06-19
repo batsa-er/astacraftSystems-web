@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   title: 'Terms of Use | Astacraft Systems',
   description: 'Terms governing use of the Astacraft Systems website and services.',
   robots: { index: true, follow: true },
+  alternates: { canonical: 'https://astacraftsystems.com/terms' },
+  openGraph: {
+    title: 'Terms of Use | Astacraft Systems',
+    description: 'Terms governing use of the Astacraft Systems website and services.',
+    url: 'https://astacraftsystems.com/terms',
+    type: 'website',
+  },
 }
 
 const sections = [

@@ -43,7 +43,7 @@ export default function PageHero({ eyebrow, title, description, image, cta }: Pr
           <div className="mt-10 hero-in hero-in-4">
             <Link
               href={cta.href}
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
               {cta.label}
             </Link>

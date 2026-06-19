@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | Astacraft Systems',
   description: 'How Astacraft Systems collects, uses, and protects your personal information.',
   robots: { index: true, follow: true },
+  alternates: { canonical: 'https://astacraftsystems.com/privacy' },
+  openGraph: {
+    title: 'Privacy Policy | Astacraft Systems',
+    description: 'How Astacraft Systems collects, uses, and protects your personal information.',
+    url: 'https://astacraftsystems.com/privacy',
+    type: 'website',
+  },
 }
 
 const sections = [

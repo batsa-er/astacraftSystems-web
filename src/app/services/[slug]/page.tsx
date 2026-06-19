@@ -1,3 +1,4 @@
+import { createElement } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getServices, getServiceBySlug } from '@/sanity/queries'
@@ -6,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
 
 export const revalidate = 3600
-import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck } from 'lucide-react'
+import { getServiceIcon } from '@/config/services'
 
 export async function generateStaticParams() {
   try {
@@ -15,28 +16,29 @@ export async function generateStaticParams() {
   } catch {
     return [
       'software-development', 'digital-transformation', 'cloud-solutions', 'cybersecurity',
-      'crm-erp', 'digital-marketing', 'brand-design', 'it-consulting',
+      'crm-erp', 'api-automation', 'digital-marketing', 'brand-design', 'it-consulting',
     ].map(slug => ({ slug }))
   }
 }
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  'software-development':   Code2,
-  'digital-transformation': Zap,
-  'cloud-solutions':        Server,
-  'cybersecurity':          ShieldCheck,
-  'crm-erp':                Database,
-  'digital-marketing':      Megaphone,
-  'brand-design':           Paintbrush,
-  'it-consulting':          MonitorCheck,
+const categoryMap: Record<string, { label: string; color: string; colorRgb: string }> = {
+  'software-development':   { label: 'Product Platform',  color: 'var(--color-green)',  colorRgb: 'var(--ch-green)' },
+  'crm-erp':                { label: 'Product Platform',  color: 'var(--color-green)',  colorRgb: 'var(--ch-green)' },
+  'api-automation':         { label: 'Product Platform',  color: 'var(--color-green)',  colorRgb: 'var(--ch-green)' },
+  'cloud-solutions':        { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
+  'digital-transformation': { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
+  'cybersecurity':          { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
+  'it-consulting':          { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
+  'digital-marketing':      { label: 'Growth Service',    color: 'rgba(255,255,255,0.40)', colorRgb: '255,255,255' },
+  'brand-design':           { label: 'Growth Service',    color: 'rgba(255,255,255,0.40)', colorRgb: '255,255,255' },
 }
 
 const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
   'software-development': {
-    number: '01', title: 'Software Development', tagline: 'Custom software engineered for scale.',
-    description: 'Full-stack web, mobile, and enterprise application development. From MVPs to large-scale systems, we architect, build, and maintain software that performs reliably at scale.',
-    detail: 'We build software end-to-end — from initial architecture to production deployment and long-term maintenance. Our engineering team works in modern stacks (React, Next.js, Node.js, Python, Go) and follows agile practices that keep projects on time and on budget. Every system we build is designed for reliability, security, and long-term maintainability.\n\nOperating across Ghana and West Africa, we bring specific expertise to the challenges African businesses face: building mobile-first platforms that perform on variable network conditions, integrating with local payment providers such as MTN Mobile Money, Vodafone Cash, and AirtelTigo, and architecting systems that remain fast even when bandwidth is constrained. Whether you are a Ghana-based startup shipping your first product or an enterprise modernizing a legacy platform, we apply the same engineering discipline — understand the business problem deeply, design the right architecture, and ship with precision.',
-    outcomes: ['Custom web application development', 'Mobile apps (iOS & Android)', 'Enterprise software integration', 'API design & development', 'Legacy system modernization', 'Ongoing maintenance & support'],
+    number: '01', title: 'Software Development', tagline: 'SaaS platforms and enterprise software, built to scale.',
+    description: 'We build SaaS products, enterprise applications, and custom platforms — from initial architecture through production deployment. Purpose-built for African market realities and global performance standards.',
+    detail: 'Building software in Africa is not the same as building software for a homogeneous market. Our engineering team designs for real-world African constraints: mobile-first platforms that perform on variable network conditions, integrations with MTN Mobile Money, Telecel Cash, and Paystack, and architectures that remain responsive even when bandwidth is constrained.\n\nWe work in modern stacks — React, Next.js, Node.js, Python, Go — and ship in two-week agile sprints with client demos after each cycle. Whether you are building your first SaaS product, modernizing a legacy enterprise platform, or launching a mobile application for your operations team, we apply the same engineering discipline: understand the business problem deeply, design the right architecture, and deliver with precision. Every system we hand over is documented, tested, and built to be maintained — by us or by your own team.',
+    outcomes: ['SaaS product development', 'Custom web & mobile applications', 'API design & platform integrations', 'Enterprise software engineering', 'Legacy system modernization', 'Ongoing maintenance & support'],
     process: ['Discovery & requirements', 'System architecture design', 'UI/UX design & prototyping', 'Agile development sprints', 'QA, testing & security review', 'Deployment, launch & handoff'],
     stats: [{ num: '200+', label: 'Systems built' }, { num: '98%', label: 'On-time delivery' }, { num: '8+', label: 'Years in development' }],
     faq: [
@@ -55,6 +57,32 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       {
         q: 'Do you provide ongoing support and maintenance after the project launches?',
         a: 'Yes. Every engagement includes a post-launch warranty period, and we offer ongoing maintenance retainers for clients who need dedicated engineering support for updates, security patches, and new features. Most clients continue working with us well beyond the initial launch date.',
+      },
+    ],
+  },
+  'api-automation': {
+    number: '03', title: 'API & Automation', tagline: 'Connect your systems. Automate your operations.',
+    description: 'We design and build custom APIs, workflow automation systems, and integrations that eliminate manual work and connect every part of your business — from internal tools to enterprise systems and third-party platforms.',
+    detail: 'Manual processes and disconnected systems are a hidden tax on your business. Every time a team member copies data from one system to another, chases an approval via email, or re-enters information that already exists elsewhere, you are paying in time, accuracy, and speed. We build the automation infrastructure that eliminates these friction points — APIs that expose your core business logic cleanly, workflow engines that route tasks, approvals, and notifications automatically, and integrations that make your existing systems work as one.\n\nOur automation work spans the full stack: REST and GraphQL APIs built for performance and security, Zapier and Make integrations for rapid workflow automation, webhook systems for real-time event processing, and custom orchestration layers for complex enterprise workflows. We work with whatever you already have — Salesforce, Odoo, SAP, QuickBooks, local ERP systems, mobile apps, or bespoke internal tools — and build the connective tissue that makes them function as a single platform.',
+    outcomes: ['Custom REST & GraphQL API development', 'Workflow automation (Zapier, Make, n8n)', 'System integrations & data pipelines', 'Webhook design & event-driven systems', 'ERP & CRM API connectors', 'Automated reporting & document generation'],
+    process: ['Systems audit & integration mapping', 'API design & data model definition', 'Workflow design & automation logic', 'Build & test in staging environment', 'Go-live & monitoring setup', 'Ongoing optimization & expansion'],
+    stats: [{ num: '120+', label: 'Integrations delivered' }, { num: '85%', label: 'Avg. manual work eliminated' }, { num: '48h', label: 'Time to first working prototype' }],
+    faq: [
+      {
+        q: 'What is the difference between an API and workflow automation?',
+        a: 'An API (Application Programming Interface) is a connection point that allows two systems to exchange data programmatically — think of it as a standardized doorway between software systems. Workflow automation is the logic built on top of those connections: routing data, triggering actions, sending notifications, and moving information through a defined process without human intervention. Most automation projects need both — the API to connect systems, and the workflow to orchestrate what happens when data moves between them.',
+      },
+      {
+        q: 'Can you automate processes that involve our existing ERP or CRM?',
+        a: 'Yes. This is where most of our automation work starts. We build connectors and integration layers for Salesforce, Odoo, SAP, QuickBooks, and most major enterprise platforms — as well as custom-built internal systems. We begin by mapping your current data flows and identifying which manual steps can be replaced with automated logic, then build and deploy the integrations in phases so you see results quickly without disrupting live operations.',
+      },
+      {
+        q: 'How long does an automation project take?',
+        a: 'A focused automation — such as connecting two systems, automating an approval workflow, or building a single API endpoint — can be live in 2–4 weeks. More complex automation programs covering multiple systems and workflows typically run 8–16 weeks. We always start with a scoping session that maps your current processes, identifies the highest-value automation opportunities, and produces a clear timeline and cost estimate before any build work begins.',
+      },
+      {
+        q: 'Do you build automations using platforms like Zapier and Make, or do you code everything from scratch?',
+        a: 'Both, and we choose based on what is right for your situation. For straightforward workflow automations between cloud tools, Zapier and Make are faster and cheaper to build and maintain — and your team can manage them going forward. For high-volume, performance-sensitive, or security-critical automations — or when you need custom business logic that platforms cannot express — we build directly in code. Many of our projects combine both: a custom API layer we build, wired to workflow tools your team can operate independently.',
       },
     ],
   },
@@ -85,7 +113,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'cloud-solutions': {
-    number: '03', title: 'Cloud Solutions', tagline: 'Infrastructure that scales with you.',
+    number: '03', title: 'Cloud & Infrastructure', tagline: 'Infrastructure that scales with you.',
     description: 'Cloud architecture, migration, and managed services on AWS, Microsoft Azure, and Google Cloud. Secure, reliable, cost-optimized infrastructure for businesses at any scale.',
     detail: 'Cloud infrastructure is the backbone of every modern business. We help organizations migrate from on-premise servers to cloud, architect new cloud-native systems from scratch, and manage ongoing infrastructure with the reliability of a dedicated team. Our certified cloud architects work across AWS, Azure, and GCP — designing infrastructure that matches your actual workload, not the workload you might hypothetically have one day.\n\nFor Ghana-based businesses, cloud adoption brings particular advantages: eliminating the cost and risk of maintaining physical servers in a country where reliable power and cooling are challenges, accessing global infrastructure with Verifiable uptime SLAs, and enabling remote teams to work from anywhere. We also address the data sovereignty and latency considerations that matter most to African businesses — including which cloud regions minimize latency for users in West Africa and how to structure data storage to meet Ghana\'s regulatory requirements.',
     outcomes: ['Cloud migration & lift-and-shift', 'Architecture design (AWS/Azure/GCP)', 'Managed cloud services', 'DevOps & CI/CD pipelines', 'Cost optimization & governance', 'Disaster recovery & backup'],
@@ -137,10 +165,10 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'crm-erp': {
-    number: '05', title: 'CRM & ERP Systems', tagline: 'Systems that run your business.',
-    description: 'Implementation, customization, and integration of CRM and ERP platforms — Salesforce, Microsoft Dynamics, SAP, Odoo — configured for how African businesses actually operate.',
-    detail: 'A poorly implemented CRM or ERP can cost more than it saves — in staff frustration, data inconsistency, and the hidden cost of maintaining workarounds around a system that does not fit how your business actually works. We bring deep implementation experience across Salesforce, Odoo, Microsoft Dynamics, and SAP, with particular expertise in configuring these platforms for African market realities.\n\nFor Ghana and West Africa, that means configuring multi-currency support with GHS as the primary currency, building GRA tax compliance directly into invoicing and financial workflows, integrating with local payment providers including Mobile Money, and designing user interfaces that work on the devices and network conditions your team actually has. Our implementations are built for adoption — we prioritize staff training and change management as heavily as we prioritize the technical configuration, because a system that your team does not use is worth nothing.',
-    outcomes: ['CRM implementation & configuration', 'ERP deployment & customization', 'Data migration & cleansing', 'Third-party system integrations', 'Staff training & adoption support', 'Ongoing system administration'],
+    number: '02', title: 'CRM & Business Systems', tagline: 'The platform your operations run on.',
+    description: 'We implement, customize, and integrate CRM and ERP platforms — Salesforce, Odoo, SAP — configured as business automation systems, not just software installations. Built for how African enterprises actually operate.',
+    detail: 'Most CRM and ERP implementations fail not because of the technology, but because the system is configured for a generic business — not yours. We bring deep implementation experience across Salesforce, Odoo, Microsoft Dynamics, and SAP, with particular expertise in configuring these platforms as genuine business automation engines for African organizations.\n\nFor Ghana and West Africa, that means multi-currency support with GHS as the primary currency, GRA tax compliance built directly into invoicing and financial workflows, Mobile Money integrations, and user interfaces designed for the devices and network conditions your team actually works with. We treat adoption as the real success metric — a system your team does not use delivers zero ROI. Our implementations include dedicated change management, staff training, and a post-launch optimization period to ensure the platform is genuinely embedded in how your business operates.',
+    outcomes: ['CRM implementation & configuration', 'ERP deployment & business automation', 'Workflow design & process integration', 'Data migration & cleansing', 'Staff training & adoption support', 'Ongoing system optimization'],
     process: ['Requirements analysis', 'Platform selection & scoping', 'Configuration & customization', 'Data migration & testing', 'Team training & adoption', 'Post-launch support & optimization'],
     stats: [{ num: '80+', label: 'CRM/ERP implementations' }, { num: '94%', label: 'User adoption rate' }, { num: '3mo', label: 'Avg. go-live timeline' }],
     faq: [
@@ -215,7 +243,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'it-consulting': {
-    number: '08', title: 'IT Consulting', tagline: 'Strategy before software.',
+    number: '06', title: 'IT Strategy & Advisory', tagline: 'Strategy before software.',
     description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
     detail: 'Most technology failures begin not with bad engineering, but with poor strategy: choosing the wrong platform, under-specifying a system, moving too fast before the organization is ready, or investing in technology before the business processes it is meant to support are well-defined. Our consulting practice works at the intersection of business and technology — helping leadership teams understand their options, evaluate trade-offs honestly, and build roadmaps they can actually execute and fund.\n\nFor organizations in Ghana and across West Africa, the stakes of poor technology decisions are particularly high: technology budgets are limited, implementation partners are harder to evaluate, and the consequences of a failed system implementation — lost productivity, data loss, staff frustration — can set an organization back by years. We bring independent, conflict-free advice. We do not sell software licences. We do not have preferred vendor relationships that influence our recommendations. We tell you what the right answer is for your organization — and then help you execute it.',
     outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
@@ -264,6 +292,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       url: `https://astacraftsystems.com/services/${slug}`,
       type: 'website',
+      images: [{ url: 'https://astacraftsystems.com/opengraph-image.png', width: 1200, height: 630 }],
     },
   }
 }
@@ -278,14 +307,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!svc) svc = (fallbackServices[slug] as ServiceDetail | undefined) ?? null
   if (!svc) notFound()
 
-  const Icon    = iconMap[slug] ?? MonitorCheck
-  const stats   = svc.stats   || fallbackServices[slug]?.stats   || []
-  const process = svc.process || fallbackServices[slug]?.process || []
+  const category = categoryMap[slug] ?? { label: 'Service', color: 'rgba(255,255,255,0.40)' }
+  const stats    = svc.stats   || fallbackServices[slug]?.stats   || []
+  const process  = svc.process || fallbackServices[slug]?.process || []
 
   const idx     = ALL_SLUGS.indexOf(slug)
   const related = [1, 2, 3].map(offset => {
     const s = ALL_SLUGS[(idx + offset) % ALL_SLUGS.length]
-    return { ...fallbackServices[s], slug: s, Icon: iconMap[s] ?? MonitorCheck }
+    return { ...fallbackServices[s], slug: s, Icon: getServiceIcon(s) }
   })
 
   return (
@@ -335,9 +364,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </Link>
 
           <div className="hero-in hero-in-2">
-            <span className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(85,170,73,0.25)] text-[#55AA49] mb-8 w-fit">
-              <Icon className="w-3 h-3" />
-              Service {svc.number}
+            <span
+              className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border mb-8 w-fit"
+              style={{ borderColor: `rgba(${category.colorRgb},0.27)`, color: category.color }}
+            >
+              {createElement(getServiceIcon(slug), { className: 'w-3 h-3' })}
+              {category.label}
             </span>
           </div>
 
@@ -361,7 +393,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* ─── STATS STRIP ─── */}
       {stats.length > 0 && (
-        <section className="bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-14">
+        <section className="bg-[var(--color-accent)] px-[clamp(24px,5vw,80px)] py-14">
           <div className="max-w-[860px] mx-auto grid grid-cols-3 gap-0">
             {stats.map(({ num, label }: { num: string; label: string }, i: number) => (
               <div
@@ -538,7 +570,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
               Start a Project →
             </Link>

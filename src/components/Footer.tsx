@@ -38,7 +38,7 @@ export default async function Footer() {
           </div>
           <Link
             href="/contact"
-            className="inline-block font-mono text-[10px] tracking-[0.16em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-7 py-3.5 hover:border-[#55AA49] hover:text-[#55AA49] transition-colors duration-200 shrink-0"
+            className="inline-block font-mono text-[10px] tracking-[0.16em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-7 py-3.5 hover:border-[var(--color-green)] hover:text-[var(--color-green)] transition-colors duration-200 shrink-0"
           >
             Submit RFP →
           </Link>
@@ -62,7 +62,7 @@ export default async function Footer() {
                 />
               </Link>
               <p className="text-[13px] text-[rgba(255,255,255,0.65)] leading-relaxed max-w-[38ch] mb-6">
-                Technology, software, cloud, and digital transformation solutions helping African organizations modernize and scale.
+                SaaS platforms and enterprise systems that power business automation and digital transformation across Africa.
               </p>
               <p className="font-mono text-[10px] tracking-[0.10em] text-[rgba(255,255,255,0.50)]">
                 {address}
@@ -70,32 +70,40 @@ export default async function Footer() {
               {phone && (
                 <a
                   href={`tel:${phone.replace(/\s/g, '')}`}
-                  className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.50)] hover:text-[#55AA49] transition-colors duration-200 mt-1 block"
+                  className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.50)] hover:text-[var(--color-green)] transition-colors duration-200 mt-1 block"
                 >
                   {phone}
                 </a>
               )}
               <a
                 href={`mailto:${email}`}
-                className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.50)] hover:text-[#55AA49] transition-colors duration-200 mt-1 block"
+                className="font-mono text-[10px] tracking-[0.08em] text-[rgba(255,255,255,0.50)] hover:text-[var(--color-green)] transition-colors duration-200 mt-1 block"
               >
                 {email}
               </a>
             </div>
 
-            {/* Services column */}
+            {/* Solutions column */}
             <div>
               <h4 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.50)] mb-6">
-                Services
+                Solutions
               </h4>
               <ul className="space-y-3.5">
+                <li>
+                  <a
+                    href="https://astabill.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[13px] text-[rgba(255,255,255,0.65)] hover:text-white transition-colors duration-200"
+                  >
+                    AstaBill
+                  </a>
+                </li>
                 {[
-                  ['Software Development', '/services/software-development'],
+                  ['Software Development',  '/services/software-development'],
                   ['Cloud & Infrastructure', '/services/cloud-solutions'],
-                  ['Cybersecurity', '/services/cybersecurity'],
-                  ['CRM & ERP Systems', '/services/crm-erp'],
+                  ['CRM & ERP Systems',      '/services/crm-erp'],
                   ['Digital Transformation', '/services/digital-transformation'],
-                  ['IT Consulting', '/services/it-consulting'],
                 ].map(([label, href]) => (
                   <li key={href}>
                     <Link
@@ -150,14 +158,14 @@ export default async function Footer() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 text-[13px] text-[rgba(255,255,255,0.65)] hover:text-white transition-colors duration-200 group"
                   >
-                    <Icon className="w-4 h-4 text-[rgba(255,255,255,0.45)] group-hover:text-[#55AA49] transition-colors duration-200 shrink-0" />
+                    <Icon className="w-4 h-4 text-[rgba(255,255,255,0.45)] group-hover:text-[var(--color-green)] transition-colors duration-200 shrink-0" />
                     {label}
                   </a>
                 ))}
               </div>
               <Link
                 href="/contact"
-                className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-5 py-3 hover:bg-[#489A3E] transition-colors duration-200"
+                className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-5 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
               >
                 Start a Project →
               </Link>

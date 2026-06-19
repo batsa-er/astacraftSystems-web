@@ -111,7 +111,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description,
     alternates: { canonical: `https://astacraftsystems.com/work/${slug}` },
-    openGraph: { title, description, url: `https://astacraftsystems.com/work/${slug}`, type: 'article' },
+    openGraph: {
+      title,
+      description,
+      url: `https://astacraftsystems.com/work/${slug}`,
+      type: 'article',
+      images: [{ url: 'https://astacraftsystems.com/opengraph-image.png', width: 1200, height: 630 }],
+    },
   }
 }
 
@@ -209,7 +215,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* ── Metrics strip ── */}
-      <section className="bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-14">
+      <section className="bg-[var(--color-accent)] px-[clamp(24px,5vw,80px)] py-14">
         <div className="max-w-[1280px] mx-auto">
           <div className={`grid gap-0 ${metrics.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
             {metrics.map(({ num, label }, i) => (
@@ -279,7 +285,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <div className="space-y-2.5">
                   {services.map((s: string) => (
                     <div key={s} className="flex items-center gap-2.5">
-                      <span className="w-1 h-1 rounded-full bg-[#55AA49] shrink-0" />
+                      <span className="w-1 h-1 rounded-full bg-[var(--color-green)] shrink-0" />
                       <span className="text-[13px] text-[rgba(var(--ch-text),0.65)]">{s}</span>
                     </div>
                   ))}
@@ -289,7 +295,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             <Link
               href="/contact"
-              className="block font-mono text-[10px] tracking-[0.16em] uppercase text-center bg-[#55AA49] text-white py-4 px-6 hover:bg-[#489A3E] transition-colors duration-200"
+              className="block font-mono text-[10px] tracking-[0.16em] uppercase text-center bg-[var(--color-green)] text-white py-4 px-6 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
               Start a Similar Project →
             </Link>
@@ -346,7 +352,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                       <div className="flex items-center gap-6 border-t border-[rgba(var(--ch-accent),0.08)] pt-5">
                         <div>
                           <p
-                            className="font-serif font-black text-[#1D4776] leading-none"
+                            className="font-serif font-black text-[var(--color-accent)] leading-none"
                             style={{ fontSize: 'clamp(20px,2vw,28px)' }}
                           >
                             {related.metric1_num}
@@ -384,7 +390,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </p>
           <Link
             href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
           >
             Start a Project →
           </Link>

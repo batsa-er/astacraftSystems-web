@@ -84,7 +84,7 @@ export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies
                   ].filter(([n]) => n).map(([num, label]) => (
                     <div key={label}>
                       <p
-                        className="font-serif font-black text-[#1D4776] leading-none mb-1"
+                        className="font-serif font-black text-[var(--color-accent)] leading-none mb-1"
                         style={{ fontSize: 'clamp(18px,2vw,26px)' }}
                       >
                         {num}

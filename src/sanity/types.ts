@@ -2,6 +2,13 @@ export interface SanitySlug {
   current: string
 }
 
+export interface SanityImage {
+  _type: 'image'
+  asset: { _ref: string; _type: 'reference' }
+  hotspot?: { x: number; y: number; height: number; width: number }
+  crop?: { top: number; bottom: number; left: number; right: number }
+}
+
 export interface CaseStudy {
   _id: string
   slug: SanitySlug
@@ -16,7 +23,7 @@ export interface CaseStudy {
   metric3_label: string
   accent?: string
   image?: string
-  coverImage?: unknown
+  coverImage?: SanityImage
 }
 
 export interface CaseStudyDetail extends CaseStudy {
@@ -38,7 +45,7 @@ export interface Insight {
   publishedAt: string
   readTime: string
   image?: string
-  coverImage?: unknown
+  coverImage?: SanityImage
 }
 
 export interface InsightDetail extends Insight {
@@ -94,7 +101,7 @@ export interface TeamMember {
   role?: string
   bio?: string
   image?: string
-  photo?: unknown
+  photo?: SanityImage
 }
 
 export interface Career {

@@ -4,29 +4,29 @@ import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck } from 'lucide-react'
+import { Code2, Server, Database, Users, Receipt, RefreshCw, Zap } from 'lucide-react'
 
 type DropdownId = 'solutions' | 'products' | null
 
 const DARK_PAGES = ['/']
 
-const solutionsTech = [
-  { Icon: Code2,        href: '/services/software-development',   title: 'Software Development',   desc: 'Web, mobile, SaaS & enterprise apps' },
-  { Icon: Zap,          href: '/services/digital-transformation', title: 'Digital Transformation', desc: 'Process automation & modernization' },
-  { Icon: Server,       href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure', desc: 'Hosting, migration & managed infra' },
-  { Icon: ShieldCheck,  href: '/services/cybersecurity',          title: 'Cybersecurity',          desc: 'Audits, protection & compliance' },
+const productPlatforms = [
+  { Icon: Receipt, href: '/products',                      title: 'AstaBill',               desc: 'Invoicing & payments for African businesses' },
+  { Icon: Users,   href: '/services/crm-erp',              title: 'CRM & Business Systems', desc: 'Purpose-built automation & customer platforms' },
+  { Icon: Zap,     href: '/services/api-automation',       title: 'API & Automation',       desc: 'Connect systems, automate workflows end-to-end' },
 ]
 
-const solutionsBusiness = [
-  { Icon: Database,      href: '/services/crm-erp',           title: 'CRM & ERP Solutions',   desc: 'Salesforce, Odoo, SAP & custom CRM' },
-  { Icon: Megaphone,     href: '/services/digital-marketing', title: 'Digital Marketing',     desc: 'SEO, paid ads & lead generation' },
-  { Icon: Paintbrush,    href: '/services/brand-design',      title: 'Brand & Design',        desc: 'Identity, product design & creative' },
-  { Icon: MonitorCheck,  href: '/services/it-consulting',     title: 'IT Strategy',           desc: 'Technology roadmaps & advisory' },
+const enterpriseSystems = [
+  { Icon: Code2,       href: '/services/software-development',   title: 'Software Development',      desc: 'Web, mobile, SaaS & enterprise apps' },
+  { Icon: Server,      href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure',     desc: 'Hosting, migration & managed infra' },
+  { Icon: RefreshCw,   href: '/services/digital-transformation', title: 'Digital Transformation',     desc: 'Process redesign & modernization' },
+  { Icon: Database,    href: '/services/crm-erp',                title: 'CRM & ERP Implementation',  desc: 'Salesforce, Odoo & SAP deployments' },
 ]
 
 function ChevronDown({ open }: { open: boolean }) {
   return (
     <svg
+      aria-hidden="true"
       className={`w-3 h-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
       viewBox="0 0 12 12" fill="none"
     >
@@ -82,6 +82,12 @@ export default function Nav() {
       keyboardOpen.current = false
     }
   }, [dropdown])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    const first = mobileDialogRef.current?.querySelector<HTMLElement>('a, button')
+    first?.focus()
+  }, [mobileOpen])
 
   useEffect(() => {
     if (!mobileOpen) return
@@ -222,7 +228,7 @@ export default function Nav() {
                 href="/contact"
                 className={`font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 transition-colors duration-200 ${
                   isDarkPage && !scrolled
-                    ? 'bg-[#55AA49] text-white hover:bg-[#489A3E]'
+                    ? 'bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)]'
                     : 'bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)]'
                 }`}
               >
@@ -266,13 +272,36 @@ export default function Nav() {
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
               <div className="grid grid-cols-[1fr_1fr_300px] gap-10">
 
-                {/* Column 1: Technology */}
+                {/* Column 1: Product Platforms */}
                 <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Technology</p>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-green)] mb-6">Product Platforms</p>
                   <div>
-                    {solutionsTech.map(({ Icon, href, title, desc }) => (
+                    {productPlatforms.map(({ Icon, href, title, desc }) => (
                       <Link
-                        key={href}
+                        key={href + title}
+                        href={href}
+                        role="menuitem"
+                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
+                      >
+                        <div className="w-9 h-9 border border-[rgba(var(--ch-green),0.18)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-green)] group-hover:bg-[rgba(var(--ch-green),0.06)] transition-all duration-150">
+                          <Icon className="w-4 h-4 text-[rgba(var(--ch-green),0.50)] group-hover:text-[var(--color-green)] transition-colors duration-150" />
+                        </div>
+                        <div>
+                          <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-green)] transition-colors duration-150">{title}</p>
+                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Column 2: Enterprise Systems */}
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Enterprise Systems</p>
+                  <div>
+                    {enterpriseSystems.map(({ Icon, href, title, desc }) => (
+                      <Link
+                        key={href + title}
                         href={href}
                         role="menuitem"
                         className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
@@ -289,55 +318,43 @@ export default function Nav() {
                   </div>
                 </div>
 
-                {/* Column 2: Business Solutions */}
-                <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Business Solutions</p>
+                {/* Column 3: Navy CTA panel */}
+                <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
                   <div>
-                    {solutionsBusiness.map(({ Icon, href, title, desc }) => (
-                      <Link
-                        key={href}
-                        href={href}
-                        role="menuitem"
-                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
-                      >
-                        <div className="w-9 h-9 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
-                          <Icon className="w-4 h-4 text-[rgba(var(--ch-accent),0.45)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
-                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Column 3: Enterprise — navy panel */}
-                <div className="bg-[#1D4776] p-8 flex flex-col justify-between">
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Enterprise</p>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Get Started</p>
                     <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
-                      End-to-end digital<br />transformation.
+                      SaaS-first.<br />Enterprise-grade.
                     </h3>
                     <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
-                      From strategy through deployment — we manage the full technology lifecycle for your organization.
+                      Start with AstaBill free, or talk to us about a full enterprise systems engagement.
                     </p>
                     <ul className="space-y-2.5 mb-8">
-                      {['Technology roadmapping', 'Vendor selection & management', 'Change management support'].map(item => (
+                      {['Free to start with AstaBill', 'Enterprise systems on demand', 'African businesses, global standards'].map(item => (
                         <li key={item} className="flex items-center gap-2.5">
-                          <span className="w-1 h-1 rounded-full bg-[#55AA49] shrink-0" />
+                          <span className="w-1 h-1 rounded-full bg-[var(--color-green)] shrink-0" />
                           <span className="text-[12px] text-[rgba(255,255,255,0.45)]">{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <Link
-                    href="/contact"
-                    role="menuitem"
-                    className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-6 py-3 hover:bg-[#489A3E] transition-colors duration-200 self-start"
-                  >
-                    Start a Project →
-                  </Link>
+                  <div className="space-y-3">
+                    <a
+                      href="https://astabill.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
+                    >
+                      Try AstaBill Free →
+                    </a>
+                    <Link
+                      href="/contact"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-6 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
+                    >
+                      Start a Project
+                    </Link>
+                  </div>
                 </div>
 
               </div>
@@ -390,7 +407,7 @@ export default function Nav() {
                 </Link>
 
                 {/* Navy CTA panel */}
-                <div className="bg-[#1D4776] p-7 flex flex-col justify-between">
+                <div className="bg-[var(--color-accent)] p-7 flex flex-col justify-between">
                   <div>
                     <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Get Started</p>
                     <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
@@ -403,7 +420,7 @@ export default function Nav() {
                       target="_blank"
                       rel="noopener noreferrer"
                       role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-5 py-3 hover:bg-[#489A3E] transition-colors duration-200 text-center"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-5 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
                     >
                       Try Free →
                     </a>
@@ -440,11 +457,10 @@ export default function Nav() {
             { href: '/about',     label: 'About' },
             { href: '/careers',   label: 'Careers' },
             { href: '/insights',  label: 'Insights' },
-          ].map((l, i) => (
+          ].map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              autoFocus={i === 0}
               className="font-serif text-[clamp(28px,6vw,48px)] font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-200"
             >
               {l.label}

@@ -105,7 +105,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
           </Link>
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[#55AA49] border border-[rgba(85,170,73,0.35)]">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-green)] border border-[rgba(var(--ch-green),0.35)]">
               <Briefcase className="w-3 h-3" />{job.department}
             </span>
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[rgba(255,255,255,0.50)] border border-[rgba(255,255,255,0.12)]">
@@ -131,7 +131,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
 
           <a
             href={job.applyUrl || `mailto:careers@astacraftsystems.com?subject=${encodeURIComponent('Application: ' + job.title)}`}
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
           >
             Apply for this Role →
           </a>

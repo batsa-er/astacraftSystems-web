@@ -29,8 +29,28 @@ const BUDGET_LABELS: Record<string, string> = {
 }
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null)
-  const parsed = schema.safeParse(body)
+  let rawFields: Record<string, unknown>
+  let attachment: { filename: string; content: Buffer } | undefined
+
+  const ct = req.headers.get('content-type') ?? ''
+  if (ct.includes('multipart/form-data')) {
+    const fd = await req.formData().catch(() => null)
+    if (!fd) return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    rawFields = Object.fromEntries(
+      ['name', 'email', 'company', 'phone', 'service', 'budget', 'message'].map(k => [k, fd.get(k) ?? undefined])
+    )
+    const f = fd.get('file')
+    if (f instanceof File && f.size > 0) {
+      if (f.size > 10 * 1024 * 1024) {
+        return NextResponse.json({ error: 'File too large' }, { status: 413 })
+      }
+      attachment = { filename: f.name, content: Buffer.from(await f.arrayBuffer()) }
+    }
+  } else {
+    rawFields = await req.json().catch(() => null) ?? {}
+  }
+
+  const parsed = schema.safeParse(rawFields)
 
   if (!parsed.success) {
     return NextResponse.json({ error: 'Invalid request', details: parsed.error.flatten() }, { status: 400 })
@@ -45,6 +65,7 @@ export async function POST(req: Request) {
     to: TO,
     replyTo: email,
     subject: `New enquiry from ${name}`,
+    ...(attachment && { attachments: [attachment] }),
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#0B0F14">
         <div style="background:#1D4776;padding:24px 32px">

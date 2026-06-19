@@ -222,6 +222,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       url: `https://astacraftsystems.com/insights/${slug}`,
       type: 'article',
+      images: [{ url: 'https://astacraftsystems.com/opengraph-image.png', width: 1200, height: 630 }],
       ...(ins.publishedAt && { publishedTime: ins.publishedAt }),
     },
   }
@@ -323,7 +324,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2.5">
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${coverSrc ? 'bg-white/20' : 'bg-[#1D4776]'}`}>
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${coverSrc ? 'bg-white/20' : 'bg-[var(--color-accent)]'}`}>
                   <span className="font-mono text-[9px] font-bold text-white leading-none">AS</span>
                 </div>
                 <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.65)]' : 'text-[rgba(var(--ch-text),0.50)]'}`}>
@@ -442,7 +443,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* CTA */}
-      <section className="bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-24 text-center">
+      <section className="bg-[var(--color-accent)] px-[clamp(24px,5vw,80px)] py-24 text-center">
         <div className="max-w-[700px] mx-auto">
           <h2 className="font-serif font-bold text-white mb-4" style={{ fontSize: 'clamp(24px,3vw,40px)' }}>
             Want this applied to your business?
@@ -452,7 +453,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
           </p>
           <Link
             href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-white text-[#1D4776] px-10 py-4 hover:bg-[#F6F7FB] transition-colors duration-200"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-white text-[var(--color-accent)] px-10 py-4 hover:bg-[#F6F7FB] transition-colors duration-200"
           >
             Book Strategy Call →
           </Link>

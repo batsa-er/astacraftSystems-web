@@ -7,12 +7,12 @@ import type { TeamMember } from '@/sanity/types'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'About Astacraft Systems | Technology Partner for Africa',
-  description: 'Astacraft Systems Limited is a technology and digital transformation company based in Accra, Ghana. Meet the team of engineers, architects, and strategists building technology for Africa.',
+  title: 'About Astacraft Systems | SaaS & Enterprise Systems for Africa',
+  description: 'Astacraft Systems Limited is a SaaS and enterprise technology company based in Accra, Ghana. Meet the team building software products and systems for African businesses.',
   alternates: { canonical: 'https://astacraftsystems.com/about' },
   openGraph: {
-    title: 'About Astacraft Systems | Technology Partner for Africa',
-    description: 'Astacraft Systems Limited is a technology and digital transformation company based in Accra, Ghana. Meet the team of engineers, architects, and strategists building technology for Africa.',
+    title: 'About Astacraft Systems | SaaS & Enterprise Systems for Africa',
+    description: 'Astacraft Systems Limited is a SaaS and enterprise technology company based in Accra, Ghana. Meet the team building software products and systems for African businesses.',
     url: 'https://astacraftsystems.com/about',
     type: 'website',
   },
@@ -109,7 +109,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Recognition band */}
-      <section className="bg-[#1D4776] border-y border-[rgba(255,255,255,0.08)] px-[clamp(24px,5vw,80px)] py-12">
+      <section className="bg-[var(--color-accent)] border-y border-[rgba(255,255,255,0.08)] px-[clamp(24px,5vw,80px)] py-12">
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(255,255,255,0.08)]">
             {[
@@ -118,7 +118,7 @@ export default async function AboutPage() {
               { num: 'GRA',      label: 'Compliant & certified' },
               { num: '12+',      label: 'Countries served' },
             ].map(({ num, label }) => (
-              <div key={label} className="bg-[#1D4776] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
+              <div key={label} className="bg-[var(--color-accent)] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
                 <p className="font-serif font-black text-white" style={{ fontSize: 'clamp(16px,2vw,24px)' }}>{num}</p>
                 <p className="font-mono text-[10px] tracking-[0.20em] uppercase text-[rgba(255,255,255,0.55)]">{label}</p>
               </div>
@@ -183,12 +183,13 @@ export default async function AboutPage() {
                         src={photoSrc}
                         alt={member.name}
                         fill
+                        loading="lazy"
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,52,0.80)] via-[rgba(10,22,52,0.10)] to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-5">
                         <h3 className="font-serif text-[18px] font-bold text-white mb-1">{member.name}</h3>
-                        <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#55AA49]">{member.role}</p>
+                        <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-green)]">{member.role}</p>
                       </div>
                     </div>
                   )}
@@ -216,7 +217,7 @@ export default async function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
             <Link
               href="/contact"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
               Start a Project →
             </Link>

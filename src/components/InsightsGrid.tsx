@@ -33,7 +33,7 @@ export function InsightsGrid({ insights }: { insights: Insight[] }) {
           className={[
             'font-mono text-[10px] tracking-[0.18em] uppercase px-4 py-2 border transition-colors duration-200',
             !active
-              ? 'bg-[#1D4776] text-white border-[#1D4776]'
+              ? 'bg-[var(--color-accent)] text-white border-[var(--color-accent)]'
               : 'border-[rgba(var(--ch-accent),0.20)] text-[rgba(var(--ch-text),0.50)] hover:border-[rgba(var(--ch-accent),0.40)] hover:text-[var(--color-accent)]',
           ].join(' ')}
         >
@@ -46,7 +46,7 @@ export function InsightsGrid({ insights }: { insights: Insight[] }) {
             className={[
               'font-mono text-[10px] tracking-[0.18em] uppercase px-4 py-2 border transition-colors duration-200',
               active === tag
-                ? 'bg-[#1D4776] text-white border-[#1D4776]'
+                ? 'bg-[var(--color-accent)] text-white border-[var(--color-accent)]'
                 : 'border-[rgba(var(--ch-accent),0.20)] text-[rgba(var(--ch-text),0.50)] hover:border-[rgba(var(--ch-accent),0.40)] hover:text-[var(--color-accent)]',
             ].join(' ')}
           >

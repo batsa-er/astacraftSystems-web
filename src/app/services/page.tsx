@@ -6,91 +6,150 @@ import type { Service } from '@/sanity/types'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Technology Services in Ghana | Astacraft Systems',
-  description: 'Software development, cloud infrastructure, cybersecurity, CRM & ERP implementation, digital marketing, and IT consulting — delivered by Astacraft Systems for businesses across Ghana and Africa.',
+  title: 'SaaS Platforms & Enterprise Systems | Astacraft Systems',
+  description: 'Software products, cloud infrastructure, CRM & ERP implementation, and digital transformation — delivered by Astacraft Systems for businesses across Ghana and Africa.',
   alternates: { canonical: 'https://astacraftsystems.com/services' },
   openGraph: {
-    title: 'Technology Services in Ghana | Astacraft Systems',
-    description: 'Software development, cloud infrastructure, cybersecurity, CRM & ERP implementation, digital marketing, and IT consulting — delivered by Astacraft Systems for businesses across Ghana and Africa.',
+    title: 'SaaS Platforms & Enterprise Systems | Astacraft Systems',
+    description: 'Software products, cloud infrastructure, CRM & ERP implementation, and digital transformation — delivered by Astacraft Systems for businesses across Ghana and Africa.',
     url: 'https://astacraftsystems.com/services',
     type: 'website',
   },
 }
-import { Code2, Zap, Server, ShieldCheck, Database, Megaphone, Paintbrush, MonitorCheck, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import PageHero from '@/components/PageHero'
-
-function getServiceIcon(slug: string) {
-  const map: Record<string, React.ComponentType<{ className?: string }>> = {
-    'software-development': Code2,
-    'digital-transformation': Zap,
-    'cloud-solutions': Server,
-    'cybersecurity': ShieldCheck,
-    'crm-erp': Database,
-    'digital-marketing': Megaphone,
-    'brand-design': Paintbrush,
-    'it-consulting': MonitorCheck,
-  }
-  return map[slug] ?? MonitorCheck
-}
+import { PLATFORM_SLUGS, ENTERPRISE_SLUGS, getServiceIcon } from '@/config/services'
 
 const fallback = [
   {
-    _id: '1', slug: { current: 'software-development' }, number: '01',
-    title: 'Software Development',
-    tagline: 'Custom software engineered for scale.',
-    description: 'Full-stack web, mobile, and enterprise application development. From MVPs to large-scale systems, we architect, build, and maintain software that performs reliably at scale.',
-    outcomes: ['Custom web application development', 'Mobile apps (iOS & Android)', 'Enterprise software integration', 'API design & development', 'Legacy system modernization', 'Ongoing maintenance & support'],
+    _id: '1', slug: { current: 'crm-erp' }, number: '01',
+    title: 'CRM & Business Systems',
+    tagline: 'The platform your operations run on.',
+    description: 'Purpose-built CRM and business automation platforms configured for how African enterprises actually operate — with Salesforce, Odoo, and SAP at the core.',
+    outcomes: ['CRM implementation & configuration', 'ERP deployment & customization', 'Workflow automation & integration', 'Data migration & cleansing', 'Staff training & adoption support', 'Ongoing system administration'],
   },
   {
-    _id: '2', slug: { current: 'digital-transformation' }, number: '02',
-    title: 'Digital Transformation',
-    tagline: 'Modernize operations. Accelerate growth.',
-    description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing costs and unlocking new capability.',
-    outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
+    _id: '9', slug: { current: 'api-automation' }, number: '03',
+    title: 'API & Automation',
+    tagline: 'Connect your systems. Automate your operations.',
+    description: 'We design and build custom APIs, workflow automation systems, and integrations that eliminate manual work and connect every part of your business — from internal tools to enterprise systems and third-party platforms.',
+    outcomes: ['Custom REST & GraphQL API development', 'Workflow automation (Zapier, Make, n8n)', 'System integrations & data pipelines', 'Webhook design & event-driven systems', 'ERP & CRM API connectors', 'Automated reporting & document generation'],
+  },
+  {
+    _id: '2', slug: { current: 'software-development' }, number: '04',
+    title: 'Software Development',
+    tagline: 'SaaS platforms and enterprise software, built to scale.',
+    description: 'Full-stack web, mobile, and SaaS application development. From product MVPs to enterprise-grade systems, we architect, build, and maintain software that performs at scale.',
+    outcomes: ['SaaS product development', 'Custom web & mobile applications', 'API design & platform integrations', 'Enterprise software engineering', 'Legacy system modernization', 'Ongoing maintenance & support'],
   },
   {
     _id: '3', slug: { current: 'cloud-solutions' }, number: '03',
-    title: 'Cloud Solutions',
+    title: 'Cloud & Infrastructure',
     tagline: 'Infrastructure that scales with you.',
     description: 'Cloud architecture, migration, and managed services on AWS, Microsoft Azure, and Google Cloud. Secure, reliable, cost-optimized infrastructure for businesses at any scale.',
     outcomes: ['Cloud migration & lift-and-shift', 'Architecture design (AWS/Azure/GCP)', 'Managed cloud services', 'DevOps & CI/CD pipelines', 'Cost optimization & governance', 'Disaster recovery & backup'],
   },
   {
-    _id: '4', slug: { current: 'cybersecurity' }, number: '04',
+    _id: '4', slug: { current: 'digital-transformation' }, number: '04',
+    title: 'Digital Transformation',
+    tagline: 'Modernize operations. Accelerate growth.',
+    description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
+    outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
+  },
+  {
+    _id: '5', slug: { current: 'cybersecurity' }, number: '05',
     title: 'Cybersecurity',
     tagline: 'Enterprise-grade protection.',
     description: 'Security audits, penetration testing, compliance frameworks, and 24/7 monitoring — designed to protect your business from modern threats and meet regulatory requirements.',
     outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', 'SOC monitoring & incident response', 'Employee security awareness training', 'Security policy development'],
   },
   {
-    _id: '5', slug: { current: 'crm-erp' }, number: '05',
-    title: 'CRM & ERP Systems',
-    tagline: 'Systems that run your business.',
-    description: 'Implementation, customization, and integration of CRM and ERP platforms — Salesforce, Microsoft Dynamics, SAP, Odoo — configured for how African businesses actually operate.',
-    outcomes: ['CRM implementation & configuration', 'ERP deployment & customization', 'Data migration & cleansing', 'Third-party system integrations', 'Staff training & adoption support', 'Ongoing system administration'],
+    _id: '6', slug: { current: 'it-consulting' }, number: '06',
+    title: 'IT Strategy & Advisory',
+    tagline: 'Strategy before software.',
+    description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
+    outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
   },
   {
-    _id: '6', slug: { current: 'digital-marketing' }, number: '06',
+    _id: '7', slug: { current: 'digital-marketing' }, number: '07',
     title: 'Digital Marketing',
     tagline: 'Growth-driven. Data-backed.',
     description: 'SEO, paid advertising, content strategy, and marketing automation — all tied to measurable growth. We build marketing systems that generate qualified leads and compounding revenue.',
     outcomes: ['SEO strategy & implementation', 'Paid advertising (Google, Meta, LinkedIn)', 'Content marketing & strategy', 'Marketing automation setup', 'Analytics & performance reporting', 'CRO & landing page optimization'],
   },
   {
-    _id: '7', slug: { current: 'brand-design' }, number: '07',
+    _id: '8', slug: { current: 'brand-design' }, number: '08',
     title: 'Brand & Design',
     tagline: 'Identity systems built to last.',
     description: 'Corporate brand identity, UI/UX design, and design systems — built to position your business as a credible, premium operator in your market and online.',
     outcomes: ['Brand identity & logo design', 'Corporate brand guidelines', 'UI/UX design for web & mobile', 'Design systems & component libraries', 'Corporate profiles & presentations', 'Website & app visual design'],
   },
-  {
-    _id: '8', slug: { current: 'it-consulting' }, number: '08',
-    title: 'IT Consulting',
-    tagline: 'Strategy before software.',
-    description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
-    outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
-  },
 ]
+
+function ServiceCard({ s, i, accent, Icon }: { s: Service; i: number; accent: 'green' | 'navy' | 'muted'; Icon: React.ComponentType<{ className?: string }> }) {
+  const slug = s.slug.current
+  const accentColor = accent === 'green' ? 'var(--color-green)' : accent === 'navy' ? 'var(--color-accent)' : 'rgba(var(--ch-text),0.30)'
+  const checkColor  = accent === 'green' ? 'text-[var(--color-green)]' : accent === 'navy' ? 'text-[var(--color-accent)]' : 'text-[rgba(var(--ch-text),0.30)]'
+
+  return (
+    <div
+      className="relative border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-10 md:p-12 overflow-hidden group hover:border-[rgba(var(--ch-accent),0.28)] transition-all duration-300 reveal"
+      style={{ transitionDelay: `${i * 60}ms` }}
+    >
+      <span className="absolute bottom-6 right-10 font-serif font-bold text-[160px] leading-none text-[rgba(var(--ch-accent),0.04)] select-none pointer-events-none group-hover:text-[rgba(var(--ch-accent),0.07)] transition-colors duration-300">
+        {s.number}
+      </span>
+
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <div
+            className="w-11 h-11 border flex items-center justify-center mb-6"
+            style={{ borderColor: `${accentColor}33` }}
+          >
+            <Icon className="w-6 h-6" style={{ color: accentColor }} />
+          </div>
+          <h2 className="font-serif text-[clamp(24px,3vw,40px)] font-bold text-[var(--color-text)] mb-2">{s.title}</h2>
+          <p className="font-mono text-[12px] tracking-[0.08em] italic text-[rgba(var(--ch-text),0.55)] mb-6">{s.tagline}</p>
+          <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-8">{s.description}</p>
+          <Link
+            href={`/services/${slug}`}
+            className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.25)] text-[rgba(var(--ch-text),0.60)] px-6 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-200"
+          >
+            Explore {s.title} →
+          </Link>
+        </div>
+
+        <div>
+          <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.30)] mb-5">Deliverables</p>
+          <ul className="space-y-3">
+            {(s.outcomes || []).map((o: string) => (
+              <li key={o} className="flex items-start gap-3">
+                <Check className={`${checkColor} shrink-0 mt-0.5 w-3.5 h-3.5`} />
+                <span className="font-mono text-[12px] tracking-[0.06em] text-[rgba(var(--ch-text),0.55)]">{o}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function SectionHeader({ label, accent, description }: { label: string; accent: string; description: string }) {
+  return (
+    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pt-16 reveal">
+      <div>
+        <span className="font-mono text-[11px] tracking-[0.26em] uppercase font-medium" style={{ color: accent }}>
+          {label}
+        </span>
+        <div className="mt-2 h-px w-12" style={{ backgroundColor: accent, opacity: 0.4 }} />
+      </div>
+      <p className="mt-4 md:mt-0 text-[13px] text-[rgba(var(--ch-text),0.45)] max-w-[44ch] leading-relaxed">
+        {description}
+      </p>
+    </div>
+  )
+}
 
 export default async function ServicesPage() {
   let services: Service[] = fallback
@@ -99,65 +158,62 @@ export default async function ServicesPage() {
     if (s?.length) services = s
   } catch {}
 
+  const platforms   = services.filter(s => PLATFORM_SLUGS.includes(s.slug.current))
+  const enterprise  = services.filter(s => ENTERPRISE_SLUGS.includes(s.slug.current))
+  const additional  = services.filter(s => !PLATFORM_SLUGS.includes(s.slug.current) && !ENTERPRISE_SLUGS.includes(s.slug.current))
+
   return (
     <>
       <PageHero
-        eyebrow="Technology Services"
-        title={<>Eight capabilities.<br />One technology partner.</>}
-        description="From software development and cloud infrastructure to cybersecurity and digital marketing — Astacraft delivers end-to-end technology capability so your business can focus on growth."
+        eyebrow="Platforms & Systems"
+        title={<>What we build<br />and deploy.</>}
+        description="From SaaS platforms and cloud infrastructure to CRM and ERP implementation — AstaCraft Systems builds software products and enterprise-grade systems that power African businesses."
         image={{ src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Astacraft Systems technology services' }}
       />
 
-      {/* Services list */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] pb-28">
-        <div className="max-w-[1280px] mx-auto space-y-6">
-          {services.map((s, i: number) => {
-            const slug = s.slug.current
-            const Icon = getServiceIcon(slug)
-            return (
-              <div
-                key={s._id}
-                className="relative border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-12 overflow-hidden group hover:border-[rgba(var(--ch-accent),0.30)] transition-all duration-300 reveal"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <span className="absolute bottom-6 right-10 font-serif font-bold text-[160px] leading-none text-[rgba(var(--ch-accent),0.04)] select-none pointer-events-none group-hover:text-[rgba(var(--ch-accent),0.07)] transition-colors duration-300">
-                  {s.number || String(i + 1).padStart(2, '0')}
-                </span>
+        <div className="max-w-[1280px] mx-auto">
 
-                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div>
-                    <div className="w-11 h-11 border border-[rgba(var(--ch-accent),0.20)] flex items-center justify-center mb-6">
-                      <Icon className="w-6 h-6 text-[var(--color-accent)]" />
-                    </div>
-                    <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-accent)] mb-4">
-                      {s.number || String(i + 1).padStart(2, '0')}
-                    </p>
-                    <h2 className="font-serif text-[clamp(28px,3.5vw,48px)] font-bold text-[var(--color-text)] mb-2">{s.title}</h2>
-                    <p className="font-mono text-[12px] tracking-[0.08em] italic text-[rgba(var(--ch-text),0.60)] mb-6">{s.tagline}</p>
-                    <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-8">{s.description}</p>
-                    <Link
-                      href={`/services/${slug}`}
-                      className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.25)] text-[rgba(var(--ch-text),0.60)] px-6 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-200"
-                    >
-                      Explore {s.title} →
-                    </Link>
-                  </div>
+          {/* ── Product Platforms ── */}
+          <SectionHeader
+            label="Product Platforms"
+            accent="var(--color-green)"
+            description="Software platforms you adopt and automate your operations with."
+          />
+          <div className="space-y-6">
+            {platforms.map((s, i) => (
+              <ServiceCard key={s._id} s={s} i={i} accent="green" Icon={getServiceIcon(s.slug.current)} />
+            ))}
+          </div>
 
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.30)] mb-5">Deliverables</p>
-                    <ul className="space-y-3">
-                      {(s.outcomes || []).map((o: string) => (
-                        <li key={o} className="flex items-start gap-3">
-                          <Check className="text-[var(--color-accent)] shrink-0 mt-0.5 w-3.5 h-3.5" />
-                          <span className="font-mono text-[12px] tracking-[0.06em] text-[rgba(var(--ch-text),0.55)]">{o}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+          {/* ── Enterprise Systems ── */}
+          <SectionHeader
+            label="Enterprise Systems"
+            accent="var(--color-accent)"
+            description="Infrastructure, security, and transformation capabilities for enterprise-scale organizations."
+          />
+          <div className="space-y-6">
+            {enterprise.map((s, i) => (
+              <ServiceCard key={s._id} s={s} i={i} accent="navy" Icon={getServiceIcon(s.slug.current)} />
+            ))}
+          </div>
+
+          {/* ── Additional Services ── */}
+          {additional.length > 0 && (
+            <>
+              <SectionHeader
+                label="Additional Services"
+                accent="rgba(var(--ch-text),0.28)"
+                description="Complementary capabilities available as part of a broader engagement."
+              />
+              <div className="space-y-6">
+                {additional.map((s, i) => (
+                  <ServiceCard key={s._id} s={s} i={i} accent="muted" Icon={getServiceIcon(s.slug.current)} />
+                ))}
               </div>
-            )
-          })}
+            </>
+          )}
+
         </div>
       </section>
 
@@ -176,7 +232,7 @@ export default async function ServicesPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[#55AA49] text-white px-10 py-4 hover:bg-[#489A3E] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
               Start a Project →
             </Link>
