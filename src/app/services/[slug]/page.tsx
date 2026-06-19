@@ -363,17 +363,21 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* ─── STATS STRIP ─── */}
       {stats.length > 0 && (
-        <section className="bg-[var(--color-dark-deep)] border-b border-[rgba(255,255,255,0.05)] px-[clamp(24px,5vw,80px)] py-14">
-          <div className="max-w-[860px] mx-auto grid grid-cols-3 gap-8">
+        <section className="bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-14">
+          <div className="max-w-[860px] mx-auto grid grid-cols-3 gap-0">
             {stats.map(({ num, label }: { num: string; label: string }, i: number) => (
-              <div key={label} className="text-center reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
+              <div
+                key={label}
+                className={`reveal-scale text-center ${i < stats.length - 1 ? 'border-r border-[rgba(255,255,255,0.12)]' : ''}`}
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
                 <p
-                  className="stat-display font-serif font-black leading-none mb-2"
+                  className="font-serif font-black text-white leading-none mb-2"
                   style={{ fontSize: 'clamp(32px,4vw,56px)' }}
                 >
                   {num}
                 </p>
-                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(255,255,255,0.28)]">{label}</p>
+                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(255,255,255,0.50)]">{label}</p>
               </div>
             ))}
           </div>
@@ -472,7 +476,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </h3>
                 <p className="font-mono text-[11px] tracking-[0.06em] italic text-[rgba(var(--ch-text),0.35)] mb-4">{tagline}</p>
                 <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-relaxed mb-6 line-clamp-3">{description}</p>
-                <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.30)] group-hover:text-[var(--color-green)] transition-colors duration-200">
+                <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.30)] group-hover:text-[var(--color-accent)] transition-colors duration-200">
                   Explore {title} →
                 </span>
               </Link>

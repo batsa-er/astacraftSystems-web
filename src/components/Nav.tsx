@@ -313,8 +313,8 @@ export default function Nav() {
                   </div>
                 </div>
 
-                {/* Column 3: Enterprise — dark panel */}
-                <div className="bg-[var(--color-dark)] p-8 flex flex-col justify-between">
+                {/* Column 3: Enterprise — navy panel */}
+                <div className="bg-[#1D4776] p-8 flex flex-col justify-between">
                   <div>
                     <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Enterprise</p>
                     <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
@@ -390,8 +390,8 @@ export default function Nav() {
                   </p>
                 </Link>
 
-                {/* Dark CTA panel */}
-                <div className="bg-[var(--color-dark)] p-7 flex flex-col justify-between">
+                {/* Navy CTA panel */}
+                <div className="bg-[#1D4776] p-7 flex flex-col justify-between">
                   <div>
                     <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Get Started</p>
                     <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">

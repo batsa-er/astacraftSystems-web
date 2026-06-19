@@ -140,7 +140,7 @@ export default async function ServicesPage() {
                     <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-8">{s.description}</p>
                     <Link
                       href={`/services/${slug}`}
-                      className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.25)] text-[rgba(var(--ch-text),0.60)] px-6 py-3 hover:border-[var(--color-green)] hover:text-[var(--color-green)] transition-colors duration-200"
+                      className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(var(--ch-accent),0.25)] text-[rgba(var(--ch-text),0.60)] px-6 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-200"
                     >
                       Explore {s.title} →
                     </Link>
