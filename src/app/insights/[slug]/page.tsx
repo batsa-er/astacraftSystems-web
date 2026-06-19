@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { getInsight, getInsights } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
+import { urlFor } from '@/sanity/client'
 
 export async function generateStaticParams() {
   try {
@@ -19,6 +21,7 @@ const fallbackInsights: Record<string, any> = {
   'brand-consistency-africa': {
     title: 'Why Brand Consistency Is the Highest-Leverage Investment for African Businesses',
     tag: 'Brand Strategy', publishedAt: '2025-01-15', readTime: '7 min read',
+    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=1200&h=514&q=80&auto=format&fit=crop',
     excerpt: 'Most growing companies underinvest in brand consistency. Here is what happens to customer perception — and revenue — when you get it right across every touchpoint.',
     relatedServices: [
       { title: 'Brand & Design', slug: 'brand-design' },
@@ -51,6 +54,7 @@ Enforce it at every new touchpoint before launch. The investment is smaller than
   'website-conversion-fundamentals': {
     title: 'The 5 Website Fundamentals That Drive Conversions in African Markets',
     tag: 'Web & Digital', publishedAt: '2024-12-10', readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&h=514&q=80&auto=format&fit=crop',
     excerpt: 'Most business websites in Africa are information sites, not conversion tools. The gap between the two is where leads and deals are lost.',
     relatedServices: [
       { title: 'Software Development', slug: 'software-development' },
@@ -84,6 +88,7 @@ Count the steps between a visitor and a conversation with your team. Every unnec
   'crm-implementation-guide-ghana': {
     title: 'CRM Implementation in Ghana: A Complete Guide for Business Leaders',
     tag: 'CRM & ERP', publishedAt: '2025-02-10', readTime: '10 min read',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=514&q=80&auto=format&fit=crop',
     excerpt: 'Choosing and implementing a CRM system is one of the most impactful technology decisions a Ghana business can make. Here is what to know before you start.',
     relatedServices: [
       { title: 'CRM & ERP Systems', slug: 'crm-erp' },
@@ -123,6 +128,7 @@ The investment pays for itself quickly. The question is not whether to implement
   'b2b-social-creative-lessons': {
     title: 'What Actually Works in B2B Social Media Creative — Lessons from 50+ Campaigns',
     tag: 'Marketing', publishedAt: '2024-11-20', readTime: '8 min read',
+    image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&h=514&q=80&auto=format&fit=crop',
     excerpt: 'B2B social content in Africa tends to be too formal or too promotional. Here is what we have learned about creative that builds trust and drives enquiries.',
     relatedServices: [
       { title: 'Digital Marketing', slug: 'digital-marketing' },
@@ -159,6 +165,7 @@ If you cannot answer all three, the brief is not ready. The most common failure 
   'rebrand-checklist': {
     title: 'The Rebrand Checklist: When to Rebrand, When to Refresh, and When to Leave It Alone',
     tag: 'Brand Identity', publishedAt: '2024-10-05', readTime: '9 min read',
+    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=514&q=80&auto=format&fit=crop',
     excerpt: 'Not every brand problem needs a full rebrand. A strategic framework for diagnosing what your brand actually needs — and what it would cost to get it wrong.',
     relatedServices: [
       { title: 'Brand & Design', slug: 'brand-design' },
@@ -235,6 +242,23 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
   const bodyText: string = ins.body || ins.excerpt || ''
 
+  const allFallback = Object.entries(fallbackInsights)
+    .filter(([key]) => key !== slug)
+    .slice(0, 2)
+    .map(([key, val]: [string, any]) => ({ slug: key, ...val }))
+
+  let readNext: any[] = allFallback
+  try {
+    const list = await getInsights()
+    if (list?.length) {
+      readNext = list.filter((i: any) => (i.slug?.current || i.slug) !== slug).slice(0, 2)
+    }
+  } catch {}
+
+  const coverSrc = ins.coverImage
+    ? urlFor(ins.coverImage).width(1200).height(514).url()
+    : ins.image ?? null
+
   return (
     <>
       <JsonLd data={[
@@ -262,24 +286,58 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
         },
       ]} />
 
-      {/* Header */}
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] pt-40 pb-16">
-        <div className="max-w-[800px] mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <Link href="/insights" className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors">
-              ← Insights
-            </Link>
-            <span className="text-[rgba(var(--ch-text),0.20)]">/</span>
-            <span className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.30)]">{ins.tag}</span>
-          </div>
-          <h1 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6"
-            style={{ fontSize: 'clamp(32px,5vw,64px)' }}>{ins.title}</h1>
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.35)]">{formatDate(ins.publishedAt)}</span>
-            <span className="text-[rgba(var(--ch-text),0.15)]">·</span>
-            <span className="font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.35)]">{ins.readTime}</span>
-            <span className="text-[rgba(var(--ch-text),0.15)]">·</span>
-            <span className="font-mono text-[10px] tracking-[0.1em] text-[rgba(var(--ch-text),0.35)]">Apex Growth</span>
+      {/* Hero — image as background, text overlaid */}
+      <section
+        className={`relative overflow-hidden flex flex-col justify-end ${coverSrc ? 'bg-[var(--color-dark)]' : 'bg-[var(--color-bg)]'}`}
+        style={{ minHeight: coverSrc ? '520px' : undefined }}
+      >
+        {coverSrc && (
+          <>
+            <Image src={coverSrc} alt={ins.title} fill className="object-cover" priority />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,30,64,0.95)] via-[rgba(13,30,64,0.60)] to-[rgba(13,30,64,0.20)]" />
+          </>
+        )}
+
+        <div className={`relative z-10 px-[clamp(24px,5vw,80px)] pb-14 ${coverSrc ? 'pt-36' : 'pt-40'}`}>
+          <div className="max-w-[800px] mx-auto">
+            <div className="flex items-center gap-3 mb-8">
+              <Link
+                href="/insights"
+                className={`font-mono text-[10px] tracking-[0.16em] uppercase transition-colors ${coverSrc ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)]'}`}
+              >
+                ← Insights
+              </Link>
+              <span className={coverSrc ? 'text-[rgba(255,255,255,0.25)]' : 'text-[rgba(var(--ch-text),0.20)]'}>/</span>
+              <span className={`font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-1 border ${coverSrc ? 'text-white border-[rgba(255,255,255,0.35)]' : 'text-[var(--color-accent)] border-[rgba(var(--ch-accent),0.30)]'}`}>
+                {ins.tag}
+              </span>
+            </div>
+
+            <h1
+              className={`font-serif font-bold leading-tight mb-6 ${coverSrc ? 'text-white' : 'text-[var(--color-text)]'}`}
+              style={{ fontSize: 'clamp(32px,5vw,56px)' }}
+            >
+              {ins.title}
+            </h1>
+
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2.5">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${coverSrc ? 'bg-white/20' : 'bg-[#1D4776]'}`}>
+                  <span className="font-mono text-[9px] font-bold text-white leading-none">AS</span>
+                </div>
+                <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.65)]' : 'text-[rgba(var(--ch-text),0.50)]'}`}>
+                  Astacraft Systems
+                </span>
+              </div>
+              <span className={coverSrc ? 'text-[rgba(255,255,255,0.30)]' : 'text-[rgba(var(--ch-text),0.15)]'}>·</span>
+              <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.55)]' : 'text-[rgba(var(--ch-text),0.35)]'}`}>
+                {formatDate(ins.publishedAt)}
+              </span>
+              <span className={coverSrc ? 'text-[rgba(255,255,255,0.30)]' : 'text-[rgba(var(--ch-text),0.15)]'}>·</span>
+              <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.55)]' : 'text-[rgba(var(--ch-text),0.35)]'}`}>
+                {ins.readTime}
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -291,34 +349,88 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             <div className="prose-custom space-y-6">
               {bodyText.split('\n\n').map((para, i) => {
                 if (para.startsWith('**') && para.endsWith('**')) {
-                  return <h2 key={i} className="font-serif text-[24px] font-bold text-[var(--color-text)] mt-10">{para.replace(/\*\*/g, '')}</h2>
+                  return (
+                    <h2 key={i} className="font-serif text-[26px] font-bold text-[var(--color-text)] mt-12 mb-2 leading-snug">
+                      {para.replace(/\*\*/g, '')}
+                    </h2>
+                  )
                 }
                 if (para.startsWith('**')) {
                   const parts = para.split('**')
                   return (
-                    <p key={i} className="text-[16px] text-[rgba(var(--ch-text),0.70)] leading-[1.85]">
+                    <p key={i} className="text-[16px] text-[rgba(var(--ch-text),0.82)] leading-[1.85]">
                       {parts.map((p, j) => j % 2 === 1 ? <strong key={j} className="text-[var(--color-text)] font-semibold">{p}</strong> : p)}
                     </p>
                   )
                 }
-                return <p key={i} className="text-[16px] text-[rgba(var(--ch-text),0.70)] leading-[1.85]">{para}</p>
+                if (i === 0) {
+                  return (
+                    <p key={i} className="text-[19px] text-[var(--color-text)] leading-[1.75] font-medium">
+                      {para}
+                    </p>
+                  )
+                }
+                return <p key={i} className="text-[16px] text-[rgba(var(--ch-text),0.82)] leading-[1.85]">{para}</p>
               })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Related Services */}
-      {(ins.relatedServices || []).length > 0 && (
+      {/* Read next */}
+      {readNext.length > 0 && (
         <section className="bg-[var(--color-surface)] border-t border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-16">
           <div className="max-w-[800px] mx-auto">
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6">Related Services</p>
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-8">Read next</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {readNext.map((next: any) => {
+                const nextSlug = next.slug?.current ?? next.slug
+                const nextImg = next.coverImage
+                  ? urlFor(next.coverImage).width(600).height(340).url()
+                  : next.image ?? null
+                return (
+                  <Link
+                    key={nextSlug}
+                    href={`/insights/${nextSlug}`}
+                    className="group flex flex-col border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-panel)] hover:border-[rgba(var(--ch-accent),0.30)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+                  >
+                    {nextImg && (
+                      <div className="relative w-full aspect-[16/9] overflow-hidden">
+                        <Image src={nextImg} alt={next.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                      </div>
+                    )}
+                    <div className="p-6 flex flex-col flex-1">
+                      {next.tag && (
+                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent)] mb-3 self-start">
+                          {next.tag}
+                        </span>
+                      )}
+                      <h3 className="font-serif font-semibold text-[17px] text-[var(--color-text)] leading-snug group-hover:text-[var(--color-accent)] transition-colors duration-200 mb-3">
+                        {next.title}
+                      </h3>
+                      <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.30)] group-hover:text-[var(--color-accent)] mt-auto transition-colors duration-200">
+                        Read article →
+                      </span>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related Services */}
+      {(ins.relatedServices || []).length > 0 && (
+        <section className="bg-[var(--color-surface)] border-t border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-12">
+          <div className="max-w-[800px] mx-auto">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[rgba(var(--ch-text),0.35)] mb-5">Related services</p>
             <div className="flex flex-wrap gap-3">
               {(ins.relatedServices as { title: string; slug: string }[]).map(({ title, slug: svcSlug }) => (
                 <Link
                   key={svcSlug}
                   href={`/services/${svcSlug}`}
-                  className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] uppercase border border-[rgba(var(--ch-accent),0.20)] text-[rgba(var(--ch-text),0.60)] px-5 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-200"
+                  className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] uppercase border border-[rgba(var(--ch-accent),0.20)] text-[rgba(var(--ch-text),0.55)] px-5 py-3 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-200"
                 >
                   {title} →
                 </Link>
@@ -329,19 +441,19 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* CTA */}
-      <section className="bg-[var(--color-surface)] border-t border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-24 text-center">
+      <section className="bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-24 text-center">
         <div className="max-w-[700px] mx-auto">
-          <h2 className="font-serif font-bold text-[var(--color-text)] mb-4" style={{ fontSize: 'clamp(24px,3vw,40px)' }}>
+          <h2 className="font-serif font-bold text-white mb-4" style={{ fontSize: 'clamp(24px,3vw,40px)' }}>
             Want this applied to your business?
           </h2>
-          <p className="text-[rgba(var(--ch-text),0.55)] mb-8">
-            Book a strategy call and we will show you how these principles apply to your specific market and stage.
+          <p className="text-[rgba(255,255,255,0.60)] mb-8 text-[15px] leading-relaxed">
+            Book a complimentary strategy call and we will show you how these principles apply to your specific market and stage.
           </p>
           <Link
             href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-accent)] text-white px-10 py-4 hover:bg-[var(--color-accent-hover)] transition-colors duration-200"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-white text-[#1D4776] px-10 py-4 hover:bg-[#F6F7FB] transition-colors duration-200"
           >
-            Book Strategy Call
+            Book Strategy Call →
           </Link>
         </div>
       </section>
