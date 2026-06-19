@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
 import ParticlesBackground from '@/components/ui/particles-bg'
+import { IndustriesWork } from '@/components/IndustriesWork'
 
 export const revalidate = 3600
 
@@ -421,149 +421,9 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────
-          INDUSTRIES — image card grid
+          INDUSTRIES + WORK — unified interactive section
       ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1D4776] mb-5">Industries</p>
-              <h2
-                className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.035em]"
-                style={{ fontSize: 'clamp(28px,4vw,52px)' }}
-              >
-                We work where<br />it matters most.
-              </h2>
-            </div>
-            <Link
-              href="/work"
-              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.55)] hover:text-[#1D4776] transition-colors duration-200"
-            >
-              All case studies →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 reveal" style={{ transitionDelay: '80ms' }}>
-            {INDUSTRIES.map(({ name, img }, i) => (
-              <Link
-                key={name}
-                href={`/work?industry=${encodeURIComponent(name)}`}
-                className="group relative overflow-hidden aspect-[4/3] bg-[var(--color-dark)] block"
-                style={{ transitionDelay: `${i * 40}ms` }}
-              >
-                {/* Image — hidden below the card, slides up on hover */}
-                <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out will-change-transform">
-                  <Image
-                    src={img}
-                    alt={name}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-[rgba(6,12,24,0.52)]" />
-                </div>
-
-                {/* Subtle grid texture on dark bg */}
-                <div className="absolute inset-0 hero-grid opacity-10 pointer-events-none" />
-
-                {/* Faint watermark number */}
-                <span
-                  className="absolute -bottom-3 -right-2 font-serif font-black leading-none select-none pointer-events-none text-[rgba(255,255,255,0.05)]"
-                  style={{ fontSize: 'clamp(72px,7vw,108px)' }}
-                  aria-hidden="true"
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
-                {/* Content — stays above image via z-10 */}
-                <div className="relative z-10 h-full flex flex-col justify-between p-5">
-                  <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.22)]">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <p
-                      className="font-serif font-bold text-white mb-2.5 leading-tight"
-                      style={{ fontSize: 'clamp(15px,1.5vw,20px)' }}
-                    >
-                      {name}
-                    </p>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0)] group-hover:text-[rgba(255,255,255,0.75)] transition-colors duration-300 delay-300">
-                      View work
-                      <span className="group-hover:translate-x-0.5 transition-transform duration-300">→</span>
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────────
-          CASE STUDIES — dark canvas, large green metric callouts
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-dark-deep)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
-            <div className="relative">
-              <span className="absolute -top-6 left-0 font-serif font-black leading-none select-none pointer-events-none text-[rgba(255,255,255,0.04)]" style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">02</span>
-              <p className="relative font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.40)] mb-5">Selected Work</p>
-              <h2
-                className="relative font-serif font-black text-white leading-[0.90] tracking-[-0.035em]"
-                style={{ fontSize: 'clamp(32px,5vw,64px)' }}
-              >
-                Results speak.
-              </h2>
-            </div>
-            <Link
-              href="/work"
-              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(255,255,255,0.28)] hover:text-white transition-colors duration-200"
-            >
-              All case studies →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {displayCases.map((cs: any, i: number) => (
-              <Link
-                key={cs._id}
-                href={`/work/${cs.slug?.current || cs.slug}`}
-                className="group block border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.025)] hover:border-[rgba(255,255,255,0.18)] hover:bg-[rgba(255,255,255,0.035)] transition-all duration-300 reveal"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="p-7">
-                  <div className="flex items-center justify-between mb-8">
-                    <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.26)] border border-[rgba(255,255,255,0.09)] px-3 py-1.5">
-                      {cs.industry}
-                    </span>
-                    <span className="font-mono text-[12px] text-[rgba(255,255,255,0.18)] group-hover:text-white group-hover:translate-x-1 transition-all duration-200">
-                      →
-                    </span>
-                  </div>
-                  <h3
-                    className="font-serif font-bold text-white mb-3 group-hover:text-[rgba(255,255,255,0.80)] transition-colors duration-200"
-                    style={{ fontSize: 'clamp(17px,1.8vw,21px)' }}
-                  >
-                    {cs.client}
-                  </h3>
-                  <p className="text-[13px] text-[rgba(255,255,255,0.32)] leading-relaxed mb-8 max-w-[42ch]">{cs.summary}</p>
-                  <div className="pt-6 border-t border-[rgba(255,255,255,0.07)]">
-                    <p
-                      className="stat-display font-serif font-black leading-none mb-1.5"
-                      style={{ fontSize: 'clamp(32px,3.5vw,48px)' }}
-                    >
-                      {cs.metric1_num}
-                    </p>
-                    <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)]">
-                      {cs.metric1_label}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <IndustriesWork industries={INDUSTRIES} caseStudies={displayCases} />
 
       {/* ─────────────────────────────────────────────────────────────────
           TESTIMONIALS — large editorial quote carousel

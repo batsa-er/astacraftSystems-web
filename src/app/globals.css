@@ -83,6 +83,9 @@ body::before {
   opacity: 0.025;
   pointer-events: none;
   z-index: 9999;
+  /* Own compositor layer so it doesn't compete with GPU-promoted children */
+  transform: translateZ(0);
+  isolation: isolate;
 }
 
 /* ── Hero entrance ── */
