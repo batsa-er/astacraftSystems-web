@@ -466,16 +466,13 @@ export default async function HomePage() {
             ].map(({ name, logo }) => (
               <div
                 key={name}
-                className="bg-[var(--color-bg)] flex flex-col items-center justify-center gap-3 py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-300"
+                className="bg-[var(--color-bg)] flex items-center justify-center py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-300"
               >
                 <img
                   src={logo}
                   alt={name}
                   className="h-8 w-auto max-w-[110px] object-contain grayscale brightness-[0.4] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300"
                 />
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.40)] group-hover:text-[rgba(var(--ch-text),0.65)] text-center leading-tight transition-colors duration-300">
-                  {name}
-                </span>
               </div>
             ))}
           </div>
