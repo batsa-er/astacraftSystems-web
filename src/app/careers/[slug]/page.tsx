@@ -7,76 +7,10 @@ import { Briefcase, Clock, MapPin, Check } from 'lucide-react'
 
 export const revalidate = 3600
 
-const fallbackCareers: Record<string, Career> = {
-  'senior-software-engineer': {
-    _id: '1', title: 'Senior Software Engineer', department: 'Engineering', type: 'Full-time', location: 'Accra / Remote',
-    excerpt: 'Lead complex software projects across web, mobile, and enterprise platforms. Strong TypeScript and cloud integration experience required.',
-    description: 'We are looking for a Senior Software Engineer to join our engineering team and lead the design and delivery of complex software systems for clients across Africa. You will work closely with architects, project managers, and client stakeholders to define requirements and deliver reliable, scalable solutions.',
-    responsibilities: [
-      'Lead the architecture and development of client-facing web and mobile applications',
-      'Mentor and code-review junior engineers on the team',
-      'Collaborate with project managers and clients to translate business requirements into technical specifications',
-      'Ensure code quality through testing, documentation, and peer reviews',
-      'Maintain and improve existing systems and infrastructure',
-    ],
-    requirements: [
-      '5+ years of professional software engineering experience',
-      'Strong proficiency in TypeScript, React, and Node.js',
-      'Experience designing and consuming REST and GraphQL APIs',
-      'Familiarity with cloud platforms (AWS, Azure, or GCP)',
-      'Excellent communication and stakeholder management skills',
-    ],
-    niceToHave: [
-      'Experience with Next.js or similar SSR frameworks',
-      'Prior work in fintech, logistics, or enterprise software',
-      'Open source contributions',
-    ],
-    benefits: [
-      'Competitive salary benchmarked to international rates',
-      'Flexible remote-first working arrangement',
-      'Learning & development budget',
-      'Health insurance coverage',
-      'Work on high-impact projects across multiple African markets',
-    ],
-  },
-  'cloud-infrastructure-engineer': {
-    _id: '2', title: 'Cloud Infrastructure Engineer', department: 'Cloud', type: 'Full-time', location: 'Accra / Remote',
-    excerpt: 'Design and manage cloud infrastructure for client deployments on AWS and Azure. AWS or Azure certification preferred.',
-    description: 'We are hiring a Cloud Infrastructure Engineer to design, deploy, and manage scalable, secure cloud environments for our clients. You will own infrastructure-as-code, CI/CD pipelines, and cloud cost governance across multiple client accounts.',
-    responsibilities: [
-      'Design and implement cloud architectures on AWS and Azure',
-      'Write and maintain infrastructure-as-code using Terraform or Bicep',
-      'Set up and manage CI/CD pipelines for client engineering teams',
-      'Monitor cloud spend and implement cost-optimization strategies',
-      'Respond to infrastructure incidents and lead root cause analysis',
-    ],
-    requirements: [
-      '3+ years of cloud infrastructure or DevOps engineering experience',
-      'Hands-on experience with AWS or Azure (both is a plus)',
-      'Proficiency with Terraform, Ansible, or equivalent IaC tooling',
-      'Strong understanding of networking, IAM, and security best practices',
-      'Experience with containerization (Docker, Kubernetes)',
-    ],
-    niceToHave: [
-      'AWS Solutions Architect or Azure Administrator certification',
-      'Experience with multi-cloud or hybrid environments',
-      'Background in managed services or consulting',
-    ],
-    benefits: [
-      'Competitive salary benchmarked to international rates',
-      'Flexible remote-first working arrangement',
-      'Learning & development budget + certification support',
-      'Health insurance coverage',
-      'Work on infrastructure across multiple African markets',
-    ],
-  },
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   let job: Career | null = null
   try { job = await getCareerBySlug(slug) } catch {}
-  if (!job) job = fallbackCareers[slug] ?? null
   if (!job) return { title: 'Role Not Found | Astacraft Systems' }
   return {
     title: `${job.title} | Careers at Astacraft Systems`,
@@ -89,7 +23,6 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
   const { slug } = await params
   let job: Career | null = null
   try { job = await getCareerBySlug(slug) } catch {}
-  if (!job) job = fallbackCareers[slug] ?? null
   if (!job) notFound()
 
   return (

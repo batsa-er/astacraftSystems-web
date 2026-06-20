@@ -19,21 +19,8 @@ export const metadata: Metadata = {
   },
 }
 
-const fallbackCareers = [
-  {
-    _id: '1', slug: { current: 'senior-software-engineer' },
-    title: 'Senior Software Engineer', department: 'Engineering', type: 'Full-time', location: 'Accra / Remote',
-    excerpt: 'Lead complex software projects across web, mobile, and enterprise platforms. Strong TypeScript and cloud integration experience required.',
-  },
-  {
-    _id: '2', slug: { current: 'cloud-infrastructure-engineer' },
-    title: 'Cloud Infrastructure Engineer', department: 'Cloud', type: 'Full-time', location: 'Accra / Remote',
-    excerpt: 'Design and manage cloud infrastructure for client deployments on AWS and Azure. AWS or Azure certification preferred.',
-  },
-]
-
 export default async function CareersPage() {
-  let careers: Career[] = fallbackCareers
+  let careers: Career[] = []
   try {
     const c = await getCareers()
     if (c?.length) careers = c
