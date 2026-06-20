@@ -90,6 +90,11 @@ export default function Nav() {
   }, [mobileOpen])
 
   useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
+  useEffect(() => {
     if (!mobileOpen) return
     const el = mobileDialogRef.current
     if (!el) return

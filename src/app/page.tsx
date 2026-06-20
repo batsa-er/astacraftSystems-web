@@ -548,11 +548,10 @@ export default async function HomePage() {
               { num: '50+',  label: 'Enterprise clients',  sub: 'Across 12 countries'   },
               { num: '200+', label: 'Projects delivered',  sub: 'On time, on budget'    },
               { num: '98%',  label: 'Client retention',    sub: 'Long-term partnerships' },
-            ].map(({ num, label, sub }, i) => (
+            ].map(({ num, label, sub }) => (
               <div
                 key={label}
                 className="border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.025)] p-6"
-                style={{ transitionDelay: `${120 + i * 60}ms` }}
               >
                 <p
                   className="font-serif font-black text-white leading-none mb-2"
