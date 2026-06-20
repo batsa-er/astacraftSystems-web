@@ -29,64 +29,50 @@ const fallback = [
     outcomes: ['CRM implementation & configuration', 'ERP deployment & customization', 'Workflow automation & integration', 'Data migration & cleansing', 'Staff training & adoption support', 'Ongoing system administration'],
   },
   {
-    _id: '9', slug: { current: 'api-automation' }, number: '03',
+    _id: '9', slug: { current: 'api-automation' }, number: '02',
     title: 'API & Automation',
     tagline: 'Connect your systems. Automate your operations.',
     description: 'We design and build custom APIs, workflow automation systems, and integrations that eliminate manual work and connect every part of your business — from internal tools to enterprise systems and third-party platforms.',
     outcomes: ['Custom REST & GraphQL API development', 'Workflow automation (Zapier, Make, n8n)', 'System integrations & data pipelines', 'Webhook design & event-driven systems', 'ERP & CRM API connectors', 'Automated reporting & document generation'],
   },
   {
-    _id: '2', slug: { current: 'software-development' }, number: '04',
+    _id: '2', slug: { current: 'software-development' }, number: '03',
     title: 'Software Development',
     tagline: 'SaaS platforms and enterprise software, built to scale.',
     description: 'Full-stack web, mobile, and SaaS application development. From product MVPs to enterprise-grade systems, we architect, build, and maintain software that performs at scale.',
     outcomes: ['SaaS product development', 'Custom web & mobile applications', 'API design & platform integrations', 'Enterprise software engineering', 'Legacy system modernization', 'Ongoing maintenance & support'],
   },
   {
-    _id: '3', slug: { current: 'cloud-solutions' }, number: '03',
+    _id: '3', slug: { current: 'cloud-solutions' }, number: '04',
     title: 'Cloud & Infrastructure',
     tagline: 'Infrastructure that scales with you.',
     description: 'Cloud architecture, migration, and managed services on AWS, Microsoft Azure, and Google Cloud. Secure, reliable, cost-optimized infrastructure for businesses at any scale.',
     outcomes: ['Cloud migration & lift-and-shift', 'Architecture design (AWS/Azure/GCP)', 'Managed cloud services', 'DevOps & CI/CD pipelines', 'Cost optimization & governance', 'Disaster recovery & backup'],
   },
   {
-    _id: '4', slug: { current: 'digital-transformation' }, number: '04',
+    _id: '4', slug: { current: 'digital-transformation' }, number: '05',
     title: 'Digital Transformation',
     tagline: 'Modernize operations. Accelerate growth.',
     description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
     outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
   },
   {
-    _id: '5', slug: { current: 'cybersecurity' }, number: '05',
+    _id: '5', slug: { current: 'cybersecurity' }, number: '06',
     title: 'Cybersecurity',
     tagline: 'Enterprise-grade protection.',
     description: 'Security audits, penetration testing, compliance frameworks, and 24/7 monitoring — designed to protect your business from modern threats and meet regulatory requirements.',
     outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', 'SOC monitoring & incident response', 'Employee security awareness training', 'Security policy development'],
   },
   {
-    _id: '6', slug: { current: 'it-consulting' }, number: '06',
+    _id: '6', slug: { current: 'it-consulting' }, number: '07',
     title: 'IT Strategy & Advisory',
     tagline: 'Strategy before software.',
     description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
     outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
   },
-  {
-    _id: '7', slug: { current: 'digital-marketing' }, number: '07',
-    title: 'Digital Marketing',
-    tagline: 'Growth-driven. Data-backed.',
-    description: 'SEO, paid advertising, content strategy, and marketing automation — all tied to measurable growth. We build marketing systems that generate qualified leads and compounding revenue.',
-    outcomes: ['SEO strategy & implementation', 'Paid advertising (Google, Meta, LinkedIn)', 'Content marketing & strategy', 'Marketing automation setup', 'Analytics & performance reporting', 'CRO & landing page optimization'],
-  },
-  {
-    _id: '8', slug: { current: 'brand-design' }, number: '08',
-    title: 'Brand & Design',
-    tagline: 'Identity systems built to last.',
-    description: 'Corporate brand identity, UI/UX design, and design systems — built to position your business as a credible, premium operator in your market and online.',
-    outcomes: ['Brand identity & logo design', 'Corporate brand guidelines', 'UI/UX design for web & mobile', 'Design systems & component libraries', 'Corporate profiles & presentations', 'Website & app visual design'],
-  },
 ]
 
-function ServiceCard({ s, i, accent, Icon }: { s: Service; i: number; accent: 'green' | 'navy' | 'muted'; Icon: React.ComponentType<{ className?: string }> }) {
+function ServiceCard({ s, i, accent, Icon }: { s: Service; i: number; accent: 'green' | 'navy' | 'muted'; Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }) {
   const slug = s.slug.current
   const accentColor = accent === 'green' ? 'var(--color-green)' : accent === 'navy' ? 'var(--color-accent)' : 'rgba(var(--ch-text),0.30)'
   const checkColor  = accent === 'green' ? 'text-[var(--color-green)]' : accent === 'navy' ? 'text-[var(--color-accent)]' : 'text-[rgba(var(--ch-text),0.30)]'
@@ -234,14 +220,16 @@ export default async function ServicesPage() {
               href="/contact"
               className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
-              Start a Project →
+              Book a Technology Call →
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href="https://astabill.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
-              Submit RFP
-            </Link>
+              Try AstaBill Free
+            </a>
           </div>
         </div>
       </section>

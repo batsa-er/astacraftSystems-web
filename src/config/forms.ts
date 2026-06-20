@@ -1,13 +1,12 @@
 export const CONTACT_SERVICES = [
+  { value: 'astabill',               label: 'AstaBill — Billing & Payments' },
   { value: 'software-development',   label: 'Software Development' },
+  { value: 'api-automation',         label: 'API & Automation' },
+  { value: 'crm-erp',                label: 'CRM & ERP Systems' },
   { value: 'digital-transformation', label: 'Digital Transformation' },
   { value: 'cloud-solutions',        label: 'Cloud & Infrastructure' },
   { value: 'cybersecurity',          label: 'Cybersecurity' },
-  { value: 'crm-erp',                label: 'CRM & ERP Systems' },
-  { value: 'digital-marketing',      label: 'Digital Marketing' },
-  { value: 'brand-design',           label: 'Brand & Design' },
-  { value: 'it-consulting',          label: 'IT Strategy & Consulting' },
-  { value: 'astabill',               label: 'AstaBill' },
+  { value: 'it-consulting',          label: 'IT Strategy & Advisory' },
   { value: 'other',                  label: 'Not sure yet' },
 ]
 

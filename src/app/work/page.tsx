@@ -6,12 +6,12 @@ import type { CaseStudy } from '@/sanity/types'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Our Work | Technology Case Studies — Astacraft Systems',
-  description: 'Explore how Astacraft Systems has delivered CRM implementations, software development, cloud migrations, and digital transformation for businesses across Ghana and Africa.',
+  title: 'Customers | Technology Case Studies — Astacraft Systems',
+  description: 'How Astacraft Systems has delivered CRM implementations, cloud migrations, cybersecurity frameworks, and digital transformation for enterprises across Ghana and Africa.',
   alternates: { canonical: 'https://astacraftsystems.com/work' },
   openGraph: {
-    title: 'Our Work | Technology Case Studies — Astacraft Systems',
-    description: 'Explore how Astacraft Systems has delivered CRM implementations, software development, cloud migrations, and digital transformation for businesses across Ghana and Africa.',
+    title: 'Customers | Technology Case Studies — Astacraft Systems',
+    description: 'How Astacraft Systems has delivered CRM implementations, cloud migrations, cybersecurity frameworks, and digital transformation for enterprises across Ghana and Africa.',
     url: 'https://astacraftsystems.com/work',
     type: 'website',
   },
@@ -82,11 +82,11 @@ export default async function WorkPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <PageHero
-        eyebrow="Selected Work"
+        eyebrow="Customer Results"
         title={<>Results, not just<br />delivery.</>}
         description="Every engagement is measured by one thing: business outcomes. Here's a selection of what we've built and transformed for clients across Africa."
         image={{ src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Astacraft Systems client work' }}
-        cta={{ label: 'Start a Project →', href: '/contact' }}
+        cta={{ label: 'Book a Technology Call →', href: '/contact' }}
       />
 
       <WorkGrid caseStudies={caseStudies} defaultIndustry={industry} />
@@ -104,7 +104,7 @@ export default async function WorkPage({ searchParams }: { searchParams: Promise
             href="/contact"
             className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
           >
-            Start a Project →
+            Book a Technology Call →
           </Link>
         </div>
       </section>

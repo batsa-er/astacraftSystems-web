@@ -187,6 +187,105 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      {/* Competitive comparison */}
+      <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-28">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="text-center mb-14 reveal">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Why AstaBill</p>
+            <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
+              Built for Africa. Not adapted for it.
+            </h2>
+          </div>
+          <div className="overflow-x-auto reveal" style={{ transitionDelay: '80ms' }}>
+            <table className="w-full min-w-[640px] border-collapse text-[13px]">
+              <colgroup>
+                <col className="w-[38%]" />
+                <col />
+                <col />
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr className="border-b border-[rgba(var(--ch-accent),0.12)]">
+                  <th className="text-left py-4 pr-6 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.40)] w-[38%]">Feature</th>
+                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-green)] text-center">AstaBill</th>
+                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] text-center">Wave</th>
+                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] text-center">QuickBooks</th>
+                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] text-center">Zoho Books</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { feature: 'Mobile Money (MTN, Telecel, AT Money)', astabill: true,  wave: false, qbo: false, zoho: false },
+                  { feature: 'GHS currency & GRA-compliant receipts',  astabill: true,  wave: false, qbo: false, zoho: false },
+                  { feature: 'Paystack payment integration',           astabill: true,  wave: false, qbo: false, zoho: false },
+                  { feature: 'Invoice-to-payment in one flow',         astabill: true,  wave: true,  qbo: true,  zoho: true  },
+                  { feature: 'Free tier available',                    astabill: true,  wave: true,  qbo: false, zoho: true  },
+                  { feature: 'Real-time cash flow dashboard',          astabill: true,  wave: true,  qbo: true,  zoho: true  },
+                  { feature: 'WhatsApp & SMS payment reminders',       astabill: true,  wave: false, qbo: false, zoho: false },
+                  { feature: 'Multi-business support',                 astabill: true,  wave: false, qbo: false, zoho: true  },
+                  { feature: 'Africa-local support team',              astabill: true,  wave: false, qbo: false, zoho: false },
+                ].map(({ feature, astabill, wave, qbo, zoho }, i) => (
+                  <tr key={feature} className={`border-b border-[rgba(var(--ch-accent),0.06)] ${i % 2 === 0 ? 'bg-[rgba(var(--ch-accent),0.015)]' : ''}`}>
+                    <td className="py-3.5 pr-6 text-[rgba(var(--ch-text),0.65)]">{feature}</td>
+                    {[
+                      { val: astabill, green: true },
+                      { val: wave,     green: false },
+                      { val: qbo,      green: false },
+                      { val: zoho,     green: false },
+                    ].map(({ val, green }, j) => (
+                      <td key={j} className="py-3.5 px-4 text-center">
+                        {val ? (
+                          <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full ${green ? 'bg-[rgba(34,166,86,0.15)] text-[var(--color-green)]' : 'bg-[rgba(var(--ch-text),0.06)] text-[rgba(var(--ch-text),0.40)]'}`}>
+                            <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center justify-center w-5 h-5 text-[rgba(var(--ch-text),0.18)]">—</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform suite teaser */}
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-3">The Astacraft Platform</p>
+              <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight" style={{ fontSize: 'clamp(26px,3vw,42px)' }}>
+                AstaBill is just the start.
+              </h2>
+            </div>
+            <a href="https://astabill.com" target="_blank" rel="noopener noreferrer" className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.45)] hover:text-[var(--color-accent)] transition-colors duration-200">
+              Try AstaBill free →
+            </a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal" style={{ transitionDelay: '60ms' }}>
+            {[
+              { status: 'Live',         label: 'AstaBill',   desc: 'Invoicing, receipts, payments, expenses, and cash flow — the financial operating system for African businesses.' },
+              { status: 'Coming Soon',  label: 'AstaBooks',  desc: 'Full double-entry accounting, bank reconciliation, and financial reporting built for African compliance requirements.' },
+              { status: 'Coming Soon',  label: 'AstaHR',     desc: 'Payroll, leave management, SSNIT deductions, and people operations for growing teams across Africa.' },
+              { status: 'Coming Soon',  label: 'AstaPay',    desc: 'Payment infrastructure and disbursement tools — collect, split, and send money across multiple channels and currencies.' },
+            ].map(({ status, label, desc }, i) => (
+              <div key={label} className="border border-[rgba(var(--ch-accent),0.10)] bg-[var(--color-surface)] p-6 reveal" style={{ transitionDelay: `${i * 70}ms` }}>
+                <span className={`inline-block font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-1 mb-4 ${
+                  status === 'Live'        ? 'bg-[rgba(34,166,86,0.12)] text-[var(--color-green)] border border-[rgba(34,166,86,0.25)]' :
+                  'bg-[rgba(var(--ch-accent),0.10)] text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.20)]'
+                }`}>{status}</span>
+                <h3 className="font-serif font-bold text-[var(--color-text)] mb-2" style={{ fontSize: 'clamp(16px,1.5vw,20px)' }}>{label}</h3>
+                <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-28">
         <div className="max-w-[1280px] mx-auto reveal">

@@ -95,7 +95,7 @@ export default async function AboutPage() {
             {[
               { Icon: Users,       num: '200+', label: 'Businesses Served' },
               { Icon: Layers,      num: '500+', label: 'Systems Deployed' },
-              { Icon: Clock,       num: '8+',   label: 'Years in Technology' },
+              { Icon: Clock,       num: '2026', label: 'Year Founded' },
               { Icon: ShieldCheck, num: '98%',  label: 'Client Satisfaction' },
             ].map(({ Icon, num, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
@@ -113,10 +113,10 @@ export default async function AboutPage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(255,255,255,0.08)]">
             {[
-              { num: 'Est. 2016', label: '8+ years in operation' },
-              { num: 'ISO 27001', label: 'Pursuing certification' },
-              { num: 'GRA',      label: 'Compliant & certified' },
-              { num: '12+',      label: 'Countries served' },
+              { num: 'Est. 2026', label: 'Founded in Accra' },
+              { num: 'GRA',       label: 'Compliant & certified' },
+              { num: 'ISO 27001', label: 'Certification roadmap' },
+              { num: '12+',       label: 'Countries served' },
             ].map(({ num, label }) => (
               <div key={label} className="bg-[var(--color-accent)] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
                 <p className="font-serif font-black text-white" style={{ fontSize: 'clamp(16px,2vw,24px)' }}>{num}</p>
@@ -219,7 +219,7 @@ export default async function AboutPage() {
               href="/contact"
               className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
             >
-              Start a Project →
+              Contact Sales →
             </Link>
             <Link
               href="/careers"

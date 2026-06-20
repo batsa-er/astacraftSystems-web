@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               'https://www.linkedin.com/company/astacraftsystems',
               'https://twitter.com/astacraftsys',
             ],
-            foundingDate: '2016',
+            foundingDate: '2026',
             knowsAbout: [
               'Software Development',
               'Digital Transformation',

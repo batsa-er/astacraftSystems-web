@@ -16,7 +16,7 @@ const SERVICE_GROUPS = [
     items: [
       { num: '01', href: '/products',                      title: 'AstaBill — Billing & Payments', desc: 'Send invoices, collect payments via Mobile Money and card, and track cash flow — all in one platform.' },
       { num: '02', href: '/services/crm-erp',              title: 'CRM & Business Systems',        desc: 'Purpose-built CRM and business automation platforms tailored to how African enterprises operate.' },
-      { num: '03', href: '/services/software-development', title: 'API & Automation Platforms',    desc: 'Custom APIs, workflow automation, and integrations that connect your systems and eliminate manual work.' },
+      { num: '03', href: '/services/api-automation',        title: 'API & Automation Platforms',    desc: 'Custom APIs, workflow automation, and integrations that connect your systems and eliminate manual work.' },
     ],
   },
   {
@@ -32,7 +32,7 @@ const SERVICE_GROUPS = [
 ]
 
 const STATS = [
-  { prefix: '',  value: 200, suffix: '+',  label: 'Engagements delivered' },
+  { prefix: '',  value: 200, suffix: '+',  label: 'Clients served' },
   { prefix: '$', value: 28,  suffix: 'M+', label: 'Client revenue influenced' },
   { prefix: '',  value: 50,  suffix: '+',  label: 'Enterprise clients' },
   { prefix: '',  value: 98,  suffix: '%',  label: 'Client retention rate' },
@@ -62,7 +62,9 @@ const FALLBACK_CASES: CaseStudy[] = [
 
 const FALLBACK_TESTIMONIALS = [
   { quote: "Astacraft didn't just deliver a system — they changed how we run our entire business. The team thinks like operators, not just engineers.", name: 'Kwame Asante',   role: 'CEO, QuickMart Retail',          initials: 'KA' },
+  { quote: 'The payment link changed everything. We send the invoice, the client pays on their phone, and the receipt is already waiting for them.',     name: 'Ama Darko',      role: 'Brand Strategist, Accra',         initials: 'AD' },
   { quote: 'The cloud migration they ran for us was flawless. Zero downtime, costs dropped 38% in the first quarter. Genuinely impressive.',          name: 'Abena Mensah',   role: 'CTO, MTN Enterprise Ghana',      initials: 'AM' },
+  { quote: 'AstaBill removed the spreadsheet lag from our week. The dashboard tells me what is paid, what is due, and what needs follow-up.',          name: 'Kofi Mensah',    role: 'IT Consultant, Kumasi',           initials: 'KM' },
   { quote: 'We have worked with many tech firms across Africa. Astacraft is the only one that treats our problems as their own.',                      name: 'Emmanuel Ofori', role: 'Head of Technology, Afreximbank', initials: 'EO' },
 ]
 
@@ -97,11 +99,11 @@ export default async function HomePage() {
           <div className="badge-announce inline-flex items-center gap-3 border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-sm w-fit">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-green)] animate-status shrink-0" />
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.55)]">
-              Systems online · Accra, Ghana
+              Systems online
             </span>
             <span className="w-px h-3 bg-[rgba(255,255,255,0.14)]" />
             <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">
-              Est. 2016 · Pursuing ISO 27001
+              Est. 2026 · 12 Countries
             </span>
           </div>
         </div>
@@ -149,12 +151,12 @@ export default async function HomePage() {
                   href="/contact"
                   className="inline-block border border-[rgba(255,255,255,0.35)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.60)] transition-colors duration-200"
                 >
-                  Start a Project
+                  Contact Sales
                 </Link>
               </div>
               <div className="flex flex-wrap gap-x-8 gap-y-2 hero-in hero-in-4">
                 {[
-                  { num: '200+', label: 'projects delivered' },
+                  { num: '200+', label: 'clients served' },
                   { num: '12',   label: 'countries served' },
                   { num: '98%',  label: 'client retention' },
                 ].map(({ num, label }) => (
@@ -239,9 +241,9 @@ export default async function HomePage() {
 
             <div className="flex gap-8 mb-10 pb-10 border-b border-[rgba(255,255,255,0.07)]">
               {[
-                { stat: '500+',    label: 'Invoices sent' },
-                { stat: 'GHS 2M+', label: 'Collected' },
-                { stat: 'Free',    label: 'To start' },
+                { stat: 'GH₵ 2M+', label: 'Payments processed' },
+                { stat: '~5 min',   label: 'To first invoice' },
+                { stat: 'Free',     label: 'To get started' },
               ].map(({ stat, label }) => (
                 <div key={label}>
                   <p className="font-serif font-black text-white leading-none mb-1" style={{ fontSize: 'clamp(22px,2.2vw,32px)' }}>{stat}</p>
@@ -471,7 +473,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <p className="text-[13px] text-[rgba(var(--ch-text),0.62)] max-w-[40ch] leading-relaxed">
-              We work across the world&apos;s leading cloud and enterprise platforms — so your stack works with us from day one.
+              We build on certified cloud and enterprise platforms — so your existing stack integrates from day one.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
@@ -524,7 +526,7 @@ export default async function HomePage() {
               className="text-[rgba(255,255,255,0.50)] leading-relaxed mb-5 max-w-[52ch]"
               style={{ fontSize: 'clamp(14px,1.3vw,17px)' }}
             >
-              Since 2016, Astacraft Systems has been the technology partner of choice for enterprises, governments, and organizations across Africa navigating digital change.
+              Astacraft Systems is the technology partner for enterprises, governments, and organizations across Africa navigating digital change.
             </p>
             <p
               className="text-[rgba(255,255,255,0.34)] leading-relaxed mb-10 max-w-[52ch]"
@@ -542,7 +544,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '120ms' }}>
             {[
-              { num: '8+',   label: 'Years in operation', sub: 'Est. 2016, Accra Ghana' },
+              { num: '2026', label: 'Founded',             sub: 'Accra, Ghana'          },
               { num: '50+',  label: 'Enterprise clients',  sub: 'Across 12 countries'   },
               { num: '200+', label: 'Projects delivered',  sub: 'On time, on budget'    },
               { num: '98%',  label: 'Client retention',    sub: 'Long-term partnerships' },
@@ -578,31 +580,34 @@ export default async function HomePage() {
 
         <div className="relative max-w-[1280px] mx-auto reveal">
           <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.24)] mb-9">
-            Start a Conversation
+            Africa&apos;s Business Software Platform
           </p>
           <h2
-            className="font-serif font-black text-white leading-[0.88] tracking-[-0.04em] mb-12"
+            className="font-serif font-black text-white leading-[0.88] tracking-[-0.04em] mb-8"
             style={{ fontSize: 'clamp(44px,9vw,124px)' }}
           >
-            Let&apos;s build<br />
-            something<br />
-            <span className="text-gradient italic">extraordinary.</span>
+            Africa runs<br />
+            on AstaBill.<br />
+            <span className="text-gradient italic">Scale further.</span>
           </h2>
+          <p className="text-[rgba(255,255,255,0.45)] mb-12 max-w-[52ch]" style={{ fontSize: 'clamp(15px,1.3vw,18px)' }}>
+            Start with AstaBill free — our invoicing and payments platform for African businesses. Or talk to us about building enterprise systems, cloud infrastructure, and digital transformation at scale.
+          </p>
           <div className="flex flex-wrap gap-4 mb-12">
-            <Link
-              href="/contact"
-              className="btn-shimmer inline-block bg-[var(--color-green)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-            >
-              Start a Project →
-            </Link>
             <a
               href="https://astabill.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="btn-shimmer inline-block bg-[var(--color-green)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+            >
+              Try AstaBill Free →
+            </a>
+            <Link
+              href="/contact"
               className="inline-block border border-[rgba(255,255,255,0.35)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:border-[rgba(255,255,255,0.60)] transition-colors duration-200"
             >
-              Try AstaBill Free
-            </a>
+              Book a Technology Call
+            </Link>
           </div>
           <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.16)]">
             Astacraft Systems Limited · Accra, Ghana ·{' '}

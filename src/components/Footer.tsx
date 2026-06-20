@@ -25,26 +25,6 @@ export default async function Footer() {
   return (
     <footer className="bg-[var(--color-dark)]">
 
-      {/* ── Submit RFP enterprise banner ── */}
-      <div className="border-b border-[rgba(255,255,255,0.06)] px-[clamp(24px,5vw,80px)] py-8">
-        <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-          <div>
-            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.50)] mb-1">
-              Enterprise Procurement
-            </p>
-            <p className="text-[15px] font-medium text-white">
-              Ready to start a formal engagement?
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-block font-mono text-[10px] tracking-[0.16em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-7 py-3.5 hover:border-[var(--color-green)] hover:text-[var(--color-green)] transition-colors duration-200 shrink-0"
-          >
-            Submit RFP →
-          </Link>
-        </div>
-      </div>
-
       {/* ── Main grid ── */}
       <div className="px-[clamp(24px,5vw,80px)] pt-16 pb-12">
         <div className="max-w-[1280px] mx-auto">
@@ -86,7 +66,7 @@ export default async function Footer() {
             {/* Solutions column */}
             <div>
               <h4 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.50)] mb-6">
-                Solutions
+                Enterprise
               </h4>
               <ul className="space-y-3.5">
                 <li>
@@ -126,8 +106,9 @@ export default async function Footer() {
                 {[
                   ['About Us',       '/about'],
                   ['Careers',        '/careers'],
-                  ['Our Work',       '/work'],
+                  ['Case Studies',   '/work'],
                   ['AstaBill',       '/products'],
+                  ['Security',       '/security'],
                   ['Insights',       '/insights'],
                   ['Contact',        '/contact'],
                   ['Privacy Policy', '/privacy'],
@@ -167,7 +148,7 @@ export default async function Footer() {
                 href="/contact"
                 className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-5 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
               >
-                Start a Project →
+                Contact Sales →
               </Link>
             </div>
 

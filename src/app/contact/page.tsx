@@ -38,7 +38,7 @@ const STEPS = [
 
 const TRUST = [
   { stat: '98%',  label: 'Client retention' },
-  { stat: '200+', label: 'Engagements' },
+  { stat: '200+', label: 'Clients served' },
   { stat: '24h',  label: 'Response time' },
 ]
 
@@ -57,7 +57,35 @@ export default async function ContactPage() {
         description="Book a complimentary 45-minute Technology Strategy Call. We will review your current systems, identify the biggest opportunities, and map the right path forward — no commitment required."
       />
 
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
+      {/* ── Product vs Enterprise path selector ── */}
+      <section className="bg-[var(--color-surface)] border-b border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-10">
+        <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row gap-4">
+          <a
+            href="https://astabill.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 border border-[rgba(34,166,86,0.25)] bg-[rgba(34,166,86,0.04)] p-5 hover:border-[rgba(34,166,86,0.50)] hover:bg-[rgba(34,166,86,0.08)] transition-all duration-200 group"
+          >
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-green)] mb-2">Looking for AstaBill?</p>
+            <p className="text-[15px] font-medium text-[var(--color-text)] mb-1 group-hover:text-[var(--color-green)] transition-colors duration-200">
+              Start free at astabill.com →
+            </p>
+            <p className="text-[13px] text-[rgba(var(--ch-text),0.50)]">No credit card required · Set up in under 5 minutes</p>
+          </a>
+          <div className="sm:hidden flex items-center justify-center text-[rgba(var(--ch-text),0.35)] font-mono text-[11px] py-1">or</div>
+          <div className="hidden sm:flex items-center text-[rgba(var(--ch-text),0.40)] font-mono text-[11px]">or</div>
+          <a
+            href="#contact-form"
+            className="flex-1 border border-[rgba(var(--ch-accent),0.15)] bg-[rgba(var(--ch-accent),0.03)] p-5 hover:border-[rgba(var(--ch-accent),0.30)] hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-200 group"
+          >
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-2">Enterprise engagement?</p>
+            <p className="text-[15px] font-medium text-[var(--color-text)] mb-1 group-hover:text-[var(--color-accent)] transition-colors duration-200">Use the form below →</p>
+            <p className="text-[13px] text-[rgba(var(--ch-text),0.50)]">Book a strategy call · We respond within 24 hours</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="contact-form" className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24 scroll-mt-[72px]">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-16 xl:gap-24 items-start">
 
           {/* Left — process + trust + direct contact */}

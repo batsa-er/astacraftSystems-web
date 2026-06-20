@@ -139,6 +139,18 @@ export default function Nav() {
     if (e.key === 'Tab')       { setDropdown(null) }
   }
 
+  const linkCls = (active: boolean) => `font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 block transition-colors duration-200 ${
+    active
+      ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
+      : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
+  }`
+
+  const dropdownBtnCls = (active: boolean) => `flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
+    active
+      ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
+      : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
+  }`
+
   return (
     <>
       <div ref={wrapRef} className="fixed top-0 left-0 right-0 z-50">
@@ -161,29 +173,9 @@ export default function Nav() {
           </Link>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1 list-none">
+          <ul className="hidden lg:flex items-center gap-1 list-none">
 
-            {/* Solutions */}
-            <li
-              onMouseEnter={() => openDropdown('solutions')}
-              onMouseLeave={scheduleClose}
-            >
-              <button
-                onClick={() => setDropdown(dropdown === 'solutions' ? null : 'solutions')}
-                onKeyDown={e => handleTriggerKeyDown(e, 'solutions')}
-                aria-haspopup="menu"
-                aria-expanded={dropdown === 'solutions'}
-                className={`flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
-                  dropdown === 'solutions' || pathname.startsWith('/services')
-                    ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
-                    : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
-                }`}
-              >
-                Solutions <ChevronDown open={dropdown === 'solutions'} />
-              </button>
-            </li>
-
-            {/* Products */}
+            {/* Products — first, SaaS-first positioning */}
             <li
               onMouseEnter={() => openDropdown('products')}
               onMouseLeave={scheduleClose}
@@ -193,53 +185,69 @@ export default function Nav() {
                 onKeyDown={e => handleTriggerKeyDown(e, 'products')}
                 aria-haspopup="menu"
                 aria-expanded={dropdown === 'products'}
-                className={`flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 transition-colors duration-200 ${
-                  dropdown === 'products' || pathname.startsWith('/products')
-                    ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
-                    : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
-                }`}
+                className={dropdownBtnCls(dropdown === 'products' || pathname.startsWith('/products'))}
               >
                 Products <ChevronDown open={dropdown === 'products'} />
               </button>
             </li>
 
+            {/* Enterprise — was Solutions */}
+            <li
+              onMouseEnter={() => openDropdown('solutions')}
+              onMouseLeave={scheduleClose}
+            >
+              <button
+                onClick={() => setDropdown(dropdown === 'solutions' ? null : 'solutions')}
+                onKeyDown={e => handleTriggerKeyDown(e, 'solutions')}
+                aria-haspopup="menu"
+                aria-expanded={dropdown === 'solutions'}
+                className={dropdownBtnCls(dropdown === 'solutions' || pathname.startsWith('/services'))}
+              >
+                Enterprise <ChevronDown open={dropdown === 'solutions'} />
+              </button>
+            </li>
+
             {[
-              { href: '/work',     label: 'Work' },
+              { href: '/work',     label: 'Customers' },
               { href: '/about',    label: 'About' },
-              { href: '/careers',  label: 'Careers' },
               { href: '/insights', label: 'Insights' },
             ].map(l => (
               <li key={l.href} onMouseEnter={() => openDropdown(null)}>
                 <Link
                   href={l.href}
-                  className={`font-mono text-[11px] tracking-[0.12em] uppercase px-4 py-2.5 block transition-colors duration-200 ${
-                    pathname.startsWith(l.href)
-                      ? isDarkPage && !scrolled ? 'text-white' : 'text-[var(--color-accent)]'
-                      : isDarkPage && !scrolled ? 'text-[rgba(255,255,255,0.55)] hover:text-white' : 'text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)]'
-                  }`}
+                  className={linkCls(pathname.startsWith(l.href))}
                 >
                   {l.label}
                 </Link>
               </li>
             ))}
 
-            <li className="ml-3" onMouseEnter={() => openDropdown(null)}>
+            {/* Dual CTAs */}
+            <li className="ml-3 flex items-center gap-2" onMouseEnter={() => openDropdown(null)}>
+              <a
+                href="https://astabill.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+              >
+                Try AstaBill →
+              </a>
               <Link
                 href="/contact"
-                className={`font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 transition-colors duration-200 ${
+                className={`font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 border transition-colors duration-200 ${
                   isDarkPage && !scrolled
-                    ? 'bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)]'
-                    : 'bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)]'
+                    ? 'border-[rgba(255,255,255,0.30)] text-[rgba(255,255,255,0.70)] hover:border-[rgba(255,255,255,0.60)] hover:text-white'
+                    : 'border-[rgba(var(--ch-accent),0.30)] text-[rgba(var(--ch-text),0.70)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]'
                 }`}
               >
-                Start a Project →
+                Contact Sales
               </Link>
             </li>
           </ul>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col gap-[5px] cursor-pointer p-3 -mr-3 min-w-[44px] min-h-[44px] items-center justify-center"
+            className="lg:hidden flex flex-col gap-[5px] cursor-pointer p-3 -mr-3 min-w-[44px] min-h-[44px] items-center justify-center"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
@@ -259,7 +267,84 @@ export default function Nav() {
           </button>
         </nav>
 
-        {/* ── Solutions mega-dropdown ── */}
+        {/* ── Products dropdown ── */}
+        {dropdown === 'products' && (
+          <div
+            ref={dropdownContainerRef}
+            role="menu"
+            className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
+            onMouseEnter={() => openDropdown('products')}
+            onMouseLeave={scheduleClose}
+            onKeyDown={handleMenuKeyDown}
+          >
+            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
+              <div className="grid grid-cols-[1fr_260px] gap-0 max-w-[720px]">
+
+                {/* AstaBill card */}
+                <Link
+                  href="/products"
+                  role="menuitem"
+                  className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-7 hover:border-[rgba(34,166,86,0.40)] transition-colors duration-200 group"
+                >
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <Image src="/astabill-logo.svg"       alt="AstaBill" width={106} height={28} className="h-7 w-auto dark:hidden" />
+                      <Image src="/astabill-logo-white.svg" alt="AstaBill" width={106} height={28} className="h-7 w-auto hidden dark:block" />
+                      <span className="font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Live</span>
+                    </div>
+                    <p className="text-[12px] text-[rgba(var(--ch-text),0.45)]">Invoicing & payment platform for African businesses</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 mb-6">
+                    {[
+                      { stat: 'GH₵ 2M+', label: 'Processed' },
+                      { stat: '<5 min',   label: 'To first invoice' },
+                      { stat: 'Free',     label: 'To start' },
+                    ].map(({ stat, label }) => (
+                      <div key={label} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-bg)] p-3 text-center">
+                        <p className="font-serif font-bold text-[var(--color-text)] text-[15px] mb-0.5">{stat}</p>
+                        <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-accent)] group-hover:text-[var(--color-green)] transition-colors duration-200">
+                    View product →
+                  </p>
+                </Link>
+
+                {/* Navy CTA panel */}
+                <div className="bg-[var(--color-accent)] p-7 flex flex-col justify-between">
+                  <div>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Get Started</p>
+                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
+                      Free to start. See how AstaBill handles invoicing and payments end-to-end.
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    <a
+                      href="https://astabill.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-5 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
+                    >
+                      Try Free →
+                    </a>
+                    <Link
+                      href="/contact"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-5 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
+                    >
+                      Book Demo
+                    </Link>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Enterprise mega-dropdown ── */}
         {dropdown === 'solutions' && (
           <div
             ref={dropdownContainerRef}
@@ -321,7 +406,7 @@ export default function Nav() {
                 {/* Column 3: Navy CTA panel */}
                 <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Get Started</p>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Enterprise Engagements</p>
                     <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
                       SaaS-first.<br />Enterprise-grade.
                     </h3>
@@ -352,84 +437,7 @@ export default function Nav() {
                       role="menuitem"
                       className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-6 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
                     >
-                      Start a Project
-                    </Link>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ── Products dropdown ── */}
-        {dropdown === 'products' && (
-          <div
-            ref={dropdownContainerRef}
-            role="menu"
-            className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
-            onMouseEnter={() => openDropdown('products')}
-            onMouseLeave={scheduleClose}
-            onKeyDown={handleMenuKeyDown}
-          >
-            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="grid grid-cols-[1fr_260px] gap-0 max-w-[720px]">
-
-                {/* AstaBill card */}
-                <Link
-                  href="/products"
-                  role="menuitem"
-                  className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-7 hover:border-[rgba(34,166,86,0.40)] transition-colors duration-200 group"
-                >
-                  <div className="mb-6">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Image src="/astabill-logo.svg"       alt="AstaBill" width={106} height={28} className="h-7 w-auto dark:hidden" />
-                      <Image src="/astabill-logo-white.svg" alt="AstaBill" width={106} height={28} className="h-7 w-auto hidden dark:block" />
-                      <span className="font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Live</span>
-                    </div>
-                    <p className="text-[12px] text-[rgba(var(--ch-text),0.45)]">Invoicing & payment platform for African businesses</p>
-                  </div>
-                  <div className="grid grid-cols-3 gap-3 mb-6">
-                    {[
-                      { stat: '500+',    label: 'Invoices sent' },
-                      { stat: 'GHS 2M+', label: 'Collected' },
-                      { stat: 'Free',    label: 'To start' },
-                    ].map(({ stat, label }) => (
-                      <div key={label} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-bg)] p-3 text-center">
-                        <p className="font-serif font-bold text-[var(--color-text)] text-[15px] mb-0.5">{stat}</p>
-                        <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-accent)] group-hover:text-[var(--color-green)] transition-colors duration-200">
-                    View product →
-                  </p>
-                </Link>
-
-                {/* Navy CTA panel */}
-                <div className="bg-[var(--color-accent)] p-7 flex flex-col justify-between">
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Get Started</p>
-                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
-                      Free to start. See how AstaBill handles invoicing and payments end-to-end.
-                    </p>
-                  </div>
-                  <div className="space-y-3">
-                    <a
-                      href="https://astabill.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-5 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
-                    >
-                      Try Free →
-                    </a>
-                    <Link
-                      href="/contact"
-                      role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-5 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
-                    >
-                      Book Demo
+                      Book a Technology Call
                     </Link>
                   </div>
                 </div>
@@ -451,11 +459,10 @@ export default function Nav() {
           className="fixed inset-0 bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8"
         >
           {[
-            { href: '/services',  label: 'Solutions' },
             { href: '/products',  label: 'Products' },
-            { href: '/work',      label: 'Work' },
+            { href: '/services',  label: 'Enterprise' },
+            { href: '/work',      label: 'Customers' },
             { href: '/about',     label: 'About' },
-            { href: '/careers',   label: 'Careers' },
             { href: '/insights',  label: 'Insights' },
           ].map((l) => (
             <Link
@@ -466,12 +473,22 @@ export default function Nav() {
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="mt-4 font-mono text-[13px] tracking-[0.12em] uppercase font-medium bg-[var(--color-green)] text-white px-12 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-          >
-            Start a Project
-          </Link>
+          <div className="mt-4 flex flex-col items-center gap-3 w-full px-12">
+            <a
+              href="https://astabill.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full text-center font-mono text-[13px] tracking-[0.12em] uppercase font-medium bg-[var(--color-green)] text-white px-12 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+            >
+              Try AstaBill Free →
+            </a>
+            <Link
+              href="/contact"
+              className="w-full text-center font-mono text-[13px] tracking-[0.12em] uppercase font-medium border border-[rgba(var(--ch-accent),0.35)] text-[var(--color-text)] px-12 py-4 hover:border-[var(--color-accent)] transition-colors duration-200"
+            >
+              Contact Sales →
+            </Link>
+          </div>
         </div>
       )}
     </>

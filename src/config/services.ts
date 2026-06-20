@@ -1,7 +1,7 @@
-import { Code2, Server, ShieldCheck, Megaphone, Paintbrush, MonitorCheck, RefreshCw, Users, Zap, Database } from 'lucide-react'
+import { Code2, Server, ShieldCheck, MonitorCheck, RefreshCw, Users, Zap, Database } from 'lucide-react'
 
-export const PLATFORM_SLUGS  = ['crm-erp', 'software-development', 'api-automation'] as const
-export const ENTERPRISE_SLUGS = ['cloud-solutions', 'digital-transformation', 'cybersecurity', 'it-consulting'] as const
+export const PLATFORM_SLUGS: readonly string[]  = ['crm-erp', 'software-development', 'api-automation']
+export const ENTERPRISE_SLUGS: readonly string[] = ['cloud-solutions', 'digital-transformation', 'cybersecurity', 'it-consulting']
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   'software-development':   Code2,
@@ -10,8 +10,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   'cybersecurity':          ShieldCheck,
   'crm-erp':                Users,
   'api-automation':         Zap,
-  'digital-marketing':      Megaphone,
-  'brand-design':           Paintbrush,
   'it-consulting':          MonitorCheck,
 }
 
