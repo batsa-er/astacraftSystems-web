@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const TO = process.env.CONTACT_TO_EMAIL!
 
 const schema = z.object({
   name:    z.string().min(1).max(100),
@@ -29,6 +28,8 @@ const BUDGET_LABELS: Record<string, string> = {
 }
 
 export async function POST(req: Request) {
+  const FROM = process.env.RESEND_FROM_EMAIL ?? 'Astacraft Systems <onboarding@resend.dev>'
+  const TO = process.env.CONTACT_TO_EMAIL!
   let rawFields: Record<string, unknown>
   let attachment: { filename: string; content: Buffer } | undefined
 
@@ -61,7 +62,7 @@ export async function POST(req: Request) {
   const budgetLabel  = budget ? (BUDGET_LABELS[budget] ?? humanize(budget)) : '—'
 
   const internalEmail = resend.emails.send({
-    from: 'Astacraft Systems <onboarding@resend.dev>',
+    from: FROM,
     to: TO,
     replyTo: email,
     subject: `New enquiry from ${name}`,
@@ -92,7 +93,7 @@ export async function POST(req: Request) {
   })
 
   const autoReply = resend.emails.send({
-    from: 'Astacraft Systems <onboarding@resend.dev>',
+    from: FROM,
     to: email,
     subject: `We've received your enquiry, ${name.split(' ')[0]}`,
     html: `
