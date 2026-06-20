@@ -104,14 +104,13 @@ export default async function Footer() {
               </h4>
               <ul className="space-y-3.5">
                 {[
-                  ['About Us',       '/about'],
-                  ['Careers',        '/careers'],
-                  ['Case Studies',   '/work'],
-                  ['AstaBill',       '/products'],
-                  ['Security',       '/security'],
-                  ['Insights',       '/insights'],
-                  ['Contact',        '/contact'],
-                  ['Privacy Policy', '/privacy'],
+                  ['About Us',     '/about'],
+                  ['Careers',      '/careers'],
+                  ['Case Studies', '/work'],
+                  ['AstaBill',     '/products'],
+                  ['Security',     '/security'],
+                  ['Insights',     '/insights'],
+                  ['Contact',      '/contact'],
                 ].map(([label, href]) => (
                   <li key={href}>
                     <Link
