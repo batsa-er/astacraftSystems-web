@@ -21,29 +21,6 @@ import PageHero from '@/components/PageHero'
 import { urlFor } from '@/sanity/client'
 import { Users, Layers, Clock, ShieldCheck } from 'lucide-react'
 
-const fallbackTeam = [
-  {
-    _id: '1', name: 'Kwame Asante', role: 'Founder & CEO',
-    bio: 'Founded Astacraft Systems to address the technology gap facing African businesses. 15+ years in enterprise software, systems architecture, and digital transformation across West Africa.',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=600&q=80&auto=format&fit=crop&crop=face',
-  },
-  {
-    _id: '2', name: 'Adaeze Okonkwo', role: 'Head of Software Engineering',
-    bio: 'Leads our engineering practice with deep expertise in enterprise systems, cloud architecture, and scalable API design. Previously led engineering teams across EMEA.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=600&q=80&auto=format&fit=crop&crop=face',
-  },
-  {
-    _id: '3', name: 'Seun Bankole', role: 'Head of Cybersecurity',
-    bio: 'Certified security architect with 10+ years in enterprise security, risk management, and compliance. Former security lead at a pan-African financial institution.',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&q=80&auto=format&fit=crop&crop=face',
-  },
-  {
-    _id: '4', name: 'Yemi Adesanya', role: 'Head of Cloud & Infrastructure',
-    bio: 'AWS and Azure certified cloud architect with a track record of complex cloud migrations and managed infrastructure deployments across 12+ countries.',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&q=80&auto=format&fit=crop&crop=face',
-  },
-]
-
 const values = [
   {
     num: '01', title: 'Client Results First',
@@ -64,7 +41,7 @@ const values = [
 ]
 
 export default async function AboutPage() {
-  let team: TeamMember[] = fallbackTeam
+  let team: TeamMember[] = []
   try {
     const t = await getTeamMembers()
     if (t?.length) team = t
@@ -87,16 +64,19 @@ export default async function AboutPage() {
             <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
               Closing the technology gap for Africa&apos;s businesses.
             </h2>
-            <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed">
+            <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-4">
               We believe Africa&apos;s best businesses deserve the same calibre of technology capability that top global enterprises take for granted. That means world-class engineering, reliable infrastructure, and systems built for African market realities.
+            </p>
+            <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed">
+              AstaBill — our invoicing, receipts, and payments platform — is already trusted by businesses across 12 countries and is the first of a suite of products we are building for the continent.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-6">
             {[
-              { Icon: Users,       num: '200+', label: 'Businesses Served' },
-              { Icon: Layers,      num: '500+', label: 'Systems Deployed' },
+              { Icon: Users,       num: '50+',  label: 'Enterprise Clients' },
+              { Icon: Layers,      num: '12+',  label: 'Countries Served' },
               { Icon: Clock,       num: '2026', label: 'Year Founded' },
-              { Icon: ShieldCheck, num: '98%',  label: 'Client Satisfaction' },
+              { Icon: ShieldCheck, num: 'GRA',  label: 'Certified' },
             ].map(({ Icon, num, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
                 <Icon className="w-5 h-5 text-[rgba(29,71,118,0.45)] mb-3" />
@@ -113,10 +93,10 @@ export default async function AboutPage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(255,255,255,0.08)]">
             {[
-              { num: 'Est. 2026', label: 'Founded in Accra' },
-              { num: 'GRA',       label: 'Compliant & certified' },
-              { num: 'ISO 27001', label: 'Certification roadmap' },
-              { num: '12+',       label: 'Countries served' },
+              { num: 'AstaBill',  label: 'Live SaaS product' },
+              { num: 'GRA',       label: 'Tax compliant' },
+              { num: 'ISO 27001', label: 'Security roadmap' },
+              { num: 'GDPR',      label: 'Data practices aligned' },
             ].map(({ num, label }) => (
               <div key={label} className="bg-[var(--color-accent)] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
                 <p className="font-serif font-black text-white" style={{ fontSize: 'clamp(16px,2vw,24px)' }}>{num}</p>
@@ -166,6 +146,19 @@ export default async function AboutPage() {
           <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-16 reveal" style={{ fontSize: 'clamp(32px,4vw,56px)' }}>
             Engineers. Architects. Strategists.
           </h2>
+          {team.length === 0 ? (
+            <div className="border border-[rgba(var(--ch-accent),0.10)] bg-[var(--color-bg)] p-16 reveal">
+              <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] leading-relaxed mb-8 max-w-lg">
+                We are a small, focused team of engineers and strategists based in Accra. We will introduce ourselves properly soon.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-8 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+              >
+                Get in Touch →
+              </Link>
+            </div>
+          ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i: number) => {
               const photoSrc = member.photo
@@ -200,6 +193,7 @@ export default async function AboutPage() {
               )
             })}
           </div>
+          )}
         </div>
       </section>
 
@@ -222,10 +216,10 @@ export default async function AboutPage() {
               Contact Sales →
             </Link>
             <Link
-              href="/careers"
+              href="/work"
               className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.35)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
-              View Careers
+              View Our Work →
             </Link>
           </div>
         </div>

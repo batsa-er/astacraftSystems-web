@@ -479,11 +479,11 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
             {[
               { name: 'Amazon Web Services', logo: '/logos/aws.svg' },
-              { name: 'Microsoft Azure',     logo: '/logos/azure.svg' },
+              { name: 'Microsoft',           logo: '/logos/microsoft.svg' },
               { name: 'Google Cloud',        logo: '/logos/gcp.svg' },
               { name: 'Salesforce',          logo: '/logos/salesforce.svg' },
+              { name: 'HubSpot',             logo: '/logos/hubspot.svg' },
               { name: 'Odoo',                logo: '/logos/odoo.svg' },
-              { name: 'SAP',                 logo: '/logos/sap.svg' },
               { name: 'Zoho',                logo: '/logos/zoho.svg' },
             ].map(({ name, logo }) => (
               <div
