@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Manrope, DM_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -141,6 +142,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           },
         ]} />
       </head>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-7J9CQZBTMD" strategy="afterInteractive" />
+      <Script id="ga4-init" strategy="afterInteractive">{`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7J9CQZBTMD');
+      `}</Script>
       <body className={`${manrope.variable} ${dmMono.variable} antialiased`}>
         <a
           href="#main-content"
