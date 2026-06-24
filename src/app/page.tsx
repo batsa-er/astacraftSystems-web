@@ -1,13 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import type { Testimonial, CaseStudy } from '@/sanity/types'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
 import { IndustriesWork } from '@/components/IndustriesWork'
-
-const ParticlesBackground = dynamic(() => import('@/components/ui/particles-bg'), { ssr: false })
+import { ParticlesWrapper } from '@/components/ui/particles-wrapper'
 
 export const revalidate = 3600
 
@@ -89,7 +87,7 @@ export default async function HomePage() {
           HERO
       ───────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[100dvh] flex flex-col overflow-hidden">
-        <ParticlesBackground />
+        <ParticlesWrapper />
         <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-accent),0.30)_0%,transparent_60%)] animate-orb-1 pointer-events-none" />
         <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-green),0.12)_0%,transparent_60%)] animate-orb-2 pointer-events-none" />
         <div className="absolute bottom-[-8%] right-[25%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-accent),0.14)_0%,transparent_60%)] animate-orb-3 pointer-events-none" />
