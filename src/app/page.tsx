@@ -14,19 +14,20 @@ const SERVICE_GROUPS = [
     label: 'Product Platforms',
     accent: 'var(--color-green)',
     items: [
-      { num: '01', href: '/products',                      title: 'AstaBill — Billing & Payments', desc: 'Send invoices, collect payments via Mobile Money and card, and track cash flow — all in one platform.' },
-      { num: '02', href: '/services/crm-erp',              title: 'CRM & Business Systems',        desc: 'Purpose-built CRM and business automation platforms tailored to how African enterprises operate.' },
-      { num: '03', href: '/services/api-automation',        title: 'API & Automation Platforms',    desc: 'Custom APIs, workflow automation, and integrations that connect your systems and eliminate manual work.' },
+      { num: '01', href: '/products',               title: 'AstaBill — Billing & Payments',        desc: 'Send invoices, collect payments via Mobile Money and card, and track cash flow — all in one platform.' },
+      { num: '02', href: '/services/crm-erp',        title: 'CRM & ERP Implementation',             desc: 'Salesforce, Odoo, and SAP implementations configured for how African enterprises operate.' },
+      { num: '03', href: '/services/api-automation', title: 'System Integration & Automation',      desc: 'Custom APIs, workflow automation, and integrations that connect your systems and eliminate manual work.' },
     ],
   },
   {
     label: 'Enterprise Systems',
     accent: 'var(--color-accent)',
     items: [
-      { num: '04', href: '/services/software-development',  title: 'Software Development',      desc: 'Custom platforms, mobile apps, and scalable backends engineered for enterprise performance.' },
-      { num: '05', href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure',    desc: 'Architecture, migrations, and managed services on AWS, Azure, and GCP.' },
-      { num: '06', href: '/services/digital-transformation', title: 'Digital Transformation',    desc: 'We redesign how your business operates — processes, data, and the tools your teams rely on.' },
-      { num: '07', href: '/services/crm-erp',                title: 'CRM & ERP Implementation', desc: 'Salesforce, Odoo, and SAP implementations that connect every part of your business.' },
+      { num: '04', href: '/services/software-development',   title: 'Software Development',             desc: 'Custom platforms, mobile apps, and scalable backends engineered for enterprise performance.' },
+      { num: '05', href: '/services/cloud-solutions',         title: 'Cloud & Infrastructure',           desc: 'Architecture, migrations, and managed services on AWS, Azure, and GCP.' },
+      { num: '06', href: '/services/digital-transformation',  title: 'Business Process Transformation',  desc: 'We redesign how your business operates — processes, data, and the tools your teams rely on.' },
+      { num: '07', href: '/services/cybersecurity',           title: 'Cybersecurity & SOC Monitoring',   desc: 'Security audits, penetration testing, and 24/7 threat monitoring for enterprise organisations.' },
+      { num: '08', href: '/services/it-consulting',           title: 'IT Consulting & Managed Services', desc: 'Technology strategy, architecture advisory, and fully managed IT operations.' },
     ],
   },
 ]

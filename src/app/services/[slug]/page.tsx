@@ -16,8 +16,7 @@ export async function generateStaticParams() {
   } catch {
     return [
       'software-development', 'digital-transformation', 'cloud-solutions', 'cybersecurity',
-      'crm-erp', 'api-automation', 'digital-marketing', 'brand-design', 'it-consulting',
-      'managed-it-services', 'soc-monitoring',
+      'crm-erp', 'api-automation', 'it-consulting',
     ].map(slug => ({ slug }))
   }
 }
@@ -30,10 +29,6 @@ const categoryMap: Record<string, { label: string; color: string; colorRgb: stri
   'digital-transformation': { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
   'cybersecurity':          { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
   'it-consulting':          { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
-  'managed-it-services':    { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
-  'soc-monitoring':         { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
-  'digital-marketing':      { label: 'Growth Service',    color: 'rgba(255,255,255,0.40)', colorRgb: '255,255,255' },
-  'brand-design':           { label: 'Growth Service',    color: 'rgba(255,255,255,0.40)', colorRgb: '255,255,255' },
 }
 
 const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
@@ -71,7 +66,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'api-automation': {
-    number: '03', title: 'API & Automation', tagline: 'Connect your systems. Automate your operations.',
+    number: '03', title: 'System Integration & Automation', tagline: 'Connect everything. Automate the rest.',
     description: 'We design and build custom APIs, workflow automation systems, and integrations that eliminate manual work and connect every part of your business — from internal tools to enterprise systems and third-party platforms.',
     detail: 'Manual processes and disconnected systems are a hidden tax on your business. Every time a team member copies data from one system to another, chases an approval via email, or re-enters information that already exists elsewhere, you are paying in time, accuracy, and speed. We build the automation infrastructure that eliminates these friction points — APIs that expose your core business logic cleanly, workflow engines that route tasks, approvals, and notifications automatically, and integrations that make your existing systems work as one.\n\nOur automation work spans the full stack: REST and GraphQL APIs built for performance and security, Zapier and Make integrations for rapid workflow automation, webhook systems for real-time event processing, and custom orchestration layers for complex enterprise workflows. We work with whatever you already have — Salesforce, Odoo, SAP, QuickBooks, local ERP systems, mobile apps, or bespoke internal tools — and build the connective tissue that makes them function as a single platform.',
     outcomes: ['Custom REST & GraphQL API development', 'Workflow automation (Zapier, Make, n8n)', 'System integrations & data pipelines', 'Webhook design & event-driven systems', 'ERP & CRM API connectors', 'Automated reporting & document generation'],
@@ -104,7 +99,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'digital-transformation': {
-    number: '02', title: 'Digital Transformation', tagline: 'Modernize operations. Accelerate growth.',
+    number: '02', title: 'Business Process Transformation', tagline: 'Redesign how your business operates.',
     description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
     detail: 'Digital transformation is not a one-time project — it is a fundamental shift in how an organization uses technology to operate and compete. We guide businesses through every stage of that journey: diagnosing where manual processes and legacy systems are creating friction, designing the target operating model, and executing change in phases that maintain business continuity.\n\nFor Ghanaian organizations, this often means replacing paper-based workflows with digitized systems, connecting siloed departments onto shared platforms, and building the data infrastructure that executive teams need to make faster decisions. We have led transformations across banking, telecoms, healthcare, NGOs, and government agencies in Ghana and across West Africa — and we understand the change management challenges that are unique to African organizational cultures.',
     outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
@@ -170,10 +165,10 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'cybersecurity': {
-    number: '04', title: 'Cybersecurity', tagline: 'Enterprise-grade protection.',
-    description: 'Security audits, penetration testing, compliance frameworks, and 24/7 monitoring — designed to protect your business from modern threats and meet regulatory requirements.',
-    detail: 'Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana\'s cybersecurity directives, Ghana\'s Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur certified security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We work with financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.',
-    outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', 'SOC monitoring & incident response', 'Employee security awareness training', 'Security policy development'],
+    number: '04', title: 'Cybersecurity & SOC Monitoring', tagline: 'Enterprise-grade protection. 24/7.',
+    description: 'Security audits, penetration testing, compliance frameworks, and 24/7 Security Operations Centre monitoring — designed to protect your business from modern threats and meet Bank of Ghana and Data Protection Act requirements.',
+    detail: 'Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana\'s cybersecurity directives, Ghana\'s Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur certified security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We work with financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.\n\nFor organizations that need continuous coverage, our Security Operations Centre (SOC) monitoring service provides 24/7 threat detection across your entire environment — endpoints, network, cloud, and applications — with analyst-reviewed escalations, real-time alerting, and the monthly reports and audit-ready evidence packs that Bank of Ghana examinations and compliance audits require.',
+    outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', '24/7 SOC monitoring & incident response', 'Endpoint Detection & Response (EDR)', 'Employee security awareness training', 'Security policy development', 'Monthly threat reports & audit evidence packs'],
     process: [
       { title: 'Security baseline assessment', body: 'A comprehensive review of your current security posture — network architecture, access controls, data handling, and existing policies — to establish what we are working with.' },
       { title: 'Threat & risk modelling',      body: 'We build a threat model specific to your industry, data assets, and operating environment so remediation effort is focused where risk is highest.' },
@@ -203,7 +198,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
     ],
   },
   'crm-erp': {
-    number: '02', title: 'CRM & Business Systems', tagline: 'The platform your operations run on.',
+    number: '02', title: 'CRM & ERP Implementation', tagline: 'The platform your operations run on.',
     description: 'We implement, customize, and integrate CRM and ERP platforms — Salesforce, Odoo, SAP — configured as business automation systems, not just software installations. Built for how African enterprises actually operate.',
     detail: 'Most CRM and ERP implementations fail not because of the technology, but because the system is configured for a generic business — not yours. We bring deep implementation experience across Salesforce, Odoo, Microsoft Dynamics, and SAP, with particular expertise in configuring these platforms as genuine business automation engines for African organizations.\n\nFor Ghana and West Africa, that means multi-currency support with GHS as the primary currency, GRA tax compliance built directly into invoicing and financial workflows, Mobile Money integrations, and user interfaces designed for the devices and network conditions your team actually works with. We treat adoption as the real success metric — a system your team does not use delivers zero ROI. Our implementations include dedicated change management, staff training, and a post-launch optimization period to ensure the platform is genuinely embedded in how your business operates.',
     outcomes: ['CRM implementation & configuration', 'ERP deployment & business automation', 'Workflow design & process integration', 'Data migration & cleansing', 'Staff training & adoption support', 'Ongoing system optimization'],
@@ -235,143 +230,11 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
     ],
   },
-  'digital-marketing': {
-    number: '06', title: 'Digital Marketing', tagline: 'Growth-driven. Data-backed.',
-    description: 'SEO, paid advertising, content strategy, and marketing automation — all tied to measurable growth. We build marketing systems that generate qualified leads and compounding revenue.',
-    detail: 'Marketing without measurement is just spending. We build marketing systems that are fully instrumented from day one — every channel, campaign, and piece of content is tied back to qualified leads and revenue. Our approach combines creative content with rigorous data analysis, and we report on the metrics that actually matter to your business: cost per qualified lead, pipeline contribution, and revenue influenced.\n\nIn Ghana and across West Africa, effective digital marketing requires understanding the local landscape: which platforms your target audience actually uses (LinkedIn for B2B, Facebook and Instagram for B2C, WhatsApp for direct engagement), how Ghanaian buyers research and evaluate vendors, and how to optimize for local search intent. We build campaigns and SEO strategies specifically for the Ghanaian market — not templates imported from markets with different audience behaviors and competitive dynamics.',
-    outcomes: ['SEO strategy & implementation', 'Paid advertising (Google, Meta, LinkedIn)', 'Content marketing & strategy', 'Marketing automation setup', 'Analytics & performance reporting', 'CRO & landing page optimization'],
-    process: [
-      { title: 'Marketing audit & baseline',    body: 'A full audit of your current digital presence — search rankings, ad performance, content quality, and analytics setup — to establish the starting point.' },
-      { title: 'Strategy & channel selection',  body: 'We select channels and tactics that match your audience, budget, and growth goals — with a 90-day plan and clear KPIs before any spend is committed.' },
-      { title: 'Asset creation & campaign setup', body: 'We create the content, ad copy, landing pages, and tracking infrastructure needed to launch campaigns that are properly instrumented from day one.' },
-      { title: 'Launch & A/B testing',          body: 'Campaigns go live with A/B tests built in from the start — so we are learning and improving from day one, not waiting for a full reporting cycle.' },
-      { title: 'Performance optimization',      body: 'Weekly optimization of bids, audiences, creative, and landing pages based on live data — eliminating spend on what is not working and scaling what is.' },
-      { title: 'Monthly reporting & scaling',   body: 'Monthly reports tied to revenue metrics, with recommendations for the next month. Winning campaigns are scaled; underperformers are replaced.' },
-    ],
-    stats: [{ num: '3.2×', label: 'Avg. ROAS for paid clients' }, { num: '180%', label: 'Avg. organic traffic growth' }, { num: '90d', label: 'To measurable results' }],
-    faq: [
-      {
-        q: 'How long does SEO take to show results for a Ghana business?',
-        a: 'For a new website targeting Ghana-specific keywords — such as "CRM implementation Ghana" or "cloud solutions Accra" — you can expect to see meaningful ranking improvements within 60–90 days, and significant organic traffic growth within 4–6 months. The Ghana SEO landscape is significantly less competitive than UK or US markets, which means well-optimized pages can rank quickly. We prioritize keywords where ranking potential is highest relative to the effort required, so you see results as early as possible.',
-      },
-      {
-        q: 'Which social media platform works best for B2B marketing in Ghana?',
-        a: 'LinkedIn is the primary channel for reaching business decision-makers in Ghana — particularly in financial services, telecoms, government, and enterprise. Facebook still reaches a broad professional audience and works well for brand awareness campaigns. WhatsApp Business is increasingly important for direct engagement and sales conversations. We assess your specific target audience and recommend channel allocation based on where your buyers actually spend their attention, not where the platform is easiest to run campaigns.',
-      },
-      {
-        q: 'What is a realistic monthly budget for digital marketing in Ghana?',
-        a: 'A meaningful B2B digital marketing program in Ghana can be run effectively from GH₵ 8,000–15,000 per month covering content creation, paid advertising, and management. Enterprise campaigns with broader geographic coverage and multiple channels typically run GH₵ 25,000–60,000 per month. We scope campaigns to your budget and focus spend on the channels that give you the highest return — rather than spreading budget thinly across every available platform.',
-      },
-      {
-        q: 'How do you measure digital marketing ROI?',
-        a: 'We set measurement frameworks before any campaign launches, not after. This means agreeing on the key metrics upfront — cost per qualified lead, lead-to-opportunity conversion rate, pipeline value attributed to marketing, and revenue influenced — and putting tracking in place to capture those numbers accurately. Monthly reporting shows you exactly what is working and what is not, and we make optimization decisions based on data rather than instinct.',
-      },
-    ],
-  },
-  'brand-design': {
-    number: '07', title: 'Brand & Design', tagline: 'Identity systems built to last.',
-    description: 'Corporate brand identity, UI/UX design, and design systems — built to position your business as a credible, premium operator in your market and online.',
-    detail: 'A brand is more than a logo — it is the sum of every impression your business makes on a potential client or partner. We design brand identities built to scale: clear, consistent, and distinctive enough to hold their own in competitive markets. Every identity we deliver comes with a comprehensive system for use across digital and physical touchpoints — not just a logo file and a colour palette, but a full brand guide, template library, and implementation support.\n\nFor businesses in Ghana and across West Africa, brand positioning carries particular weight. In markets where trust is built on reputation and referral, a credible, professional brand is a direct commercial asset — it shortens sales cycles, supports premium pricing, and signals to partners and investors that you operate at a serious level. We have designed brands for Ghanaian startups, established enterprises, NGOs, and government agencies — and we understand how to position organizations credibly in both local and international contexts.',
-    outcomes: ['Brand identity & logo design', 'Corporate brand guidelines', 'UI/UX design for web & mobile', 'Design systems & component libraries', 'Corporate profiles & presentations', 'Website & app visual design'],
-    process: [
-      { title: 'Discovery & market research',     body: 'We research your market, competitors, and target audience to understand the landscape your brand must stand out in — before any creative work begins.' },
-      { title: 'Positioning & creative direction', body: 'We define your brand positioning and present two or three distinct creative directions — each showing how your brand could look and feel across key touchpoints.' },
-      { title: 'Identity design exploration',     body: 'Detailed development of your chosen direction: primary and secondary logos, colour system, typography, and icon style in full fidelity.' },
-      { title: 'Refinement & system build',       body: 'One round of structured revisions, then we build the full brand system: every lockup, colour combination, and usage rule your team will need.' },
-      { title: 'Brand guidelines & asset delivery', body: 'A comprehensive brand guidelines document and a complete asset library — delivered in every format your team and print suppliers will need.' },
-      { title: 'Rollout & implementation support', body: 'We support the rollout across digital and physical touchpoints — from website updates to signage, stationery, and social profiles.' },
-    ],
-    stats: [{ num: '150+', label: 'Brands designed' }, { num: '4.8/5', label: 'Client satisfaction score' }, { num: '3wk', label: 'Avg. identity turnaround' }],
-    faq: [
-      {
-        q: 'How much does a brand identity cost for a Ghana business?',
-        a: 'A professional brand identity — covering logo design, colour system, typography, core brand guidelines, and key application templates — typically ranges from GH₵ 12,000 to GH₵ 45,000 depending on scope and the complexity of the business. Startups and SMEs typically need a focused package. Enterprise clients with multiple product lines, international markets, and extensive application requirements invest more. We scope every project individually and provide a detailed proposal after a brief discovery conversation.',
-      },
-      {
-        q: 'When should a Ghana business rebrand versus refresh?',
-        a: 'A refresh — updating the visual execution while preserving the core identity — is right when your brand looks dated, you have expanded into new markets, or execution quality has drifted across formats. It is typically 4–6 weeks and a fraction of the cost of a full rebrand. A full rebrand is necessary when the business has fundamentally changed — new ownership, a merger, a deliberate move upmarket, or when the existing brand carries negative associations that cannot be overcome with better execution. We help you diagnose which situation you are actually in before recommending an approach.',
-      },
-      {
-        q: 'What is included in a brand identity package?',
-        a: 'A full identity package from Astacraft includes: primary and secondary logo versions, a colour system with accessibility-compliant combinations, typography selection and usage rules, an icon and illustration style guide, photography and imagery direction, and a brand guidelines document. Application templates — business cards, letterhead, email signatures, presentation decks, social media templates — are included in most packages. Website design and development are quoted separately.',
-      },
-      {
-        q: 'How long does a brand identity project take?',
-        a: 'A focused identity project typically takes 3–5 weeks from kick-off to final delivery. This includes a discovery phase to understand your business and market, a creative direction presentation with two or three distinct approaches, a refinement round based on your feedback, and final asset production and delivery. More complex brand systems — covering multiple sub-brands, product lines, or a full design system — take 8–12 weeks.',
-      },
-    ],
-  },
-  'managed-it-services': {
-    number: '08', title: 'Managed IT Services', tagline: 'Your IT department, fully managed.',
-    description: 'End-to-end IT management — infrastructure monitoring, helpdesk support, security patching, vendor management, and strategic IT oversight — delivered as a service for businesses across Ghana and Africa.',
-    detail: 'Running a reliable IT environment requires constant attention: systems that need patching, users who need support, networks that need monitoring, and vendors who need managing. For most Ghanaian businesses, building a full internal IT team with the breadth of skills this requires is neither practical nor cost-effective. Managed IT Services give you the equivalent of a dedicated IT department — proactively managing your technology environment so your team can focus on the business.\n\nOur managed services model is built around prevention rather than reaction. We monitor your infrastructure continuously, identify and resolve issues before they become outages, apply security patches on schedule, and manage your technology vendors on your behalf. You get a single point of accountability for your entire IT environment, with defined response time SLAs, monthly reporting, and a senior technology advisor assigned to your account.\n\nFor growing businesses in Ghana, managed IT services also provide a critical capability: strategic technology oversight. We review your IT roadmap quarterly, make recommendations ahead of capacity constraints, and help you plan technology investments at the right time — so you are not making urgent decisions under pressure.',
-    outcomes: ['24/7 infrastructure monitoring & alerting', 'Helpdesk support (remote & on-site)', 'Security patching & vulnerability management', 'Network management & optimization', 'Vendor management & procurement support', 'IT asset management & lifecycle planning', 'Monthly reporting & quarterly technology reviews', 'Strategic IT advisory & roadmap planning'],
-    process: [
-      { title: 'Environment audit & onboarding',    body: 'We document your complete IT environment — devices, servers, software, vendors, and support processes — establishing the baseline we manage from.' },
-      { title: 'Monitoring & alerting setup',        body: 'We deploy monitoring agents, configure alerting thresholds, and establish the escalation procedures that ensure no issue goes undetected.' },
-      { title: 'Helpdesk integration',              body: 'Your team gets a dedicated support channel — email, phone, or ticketing system — with defined response SLAs matched to issue severity.' },
-      { title: 'Patch management & hardening',      body: 'A scheduled patching programme keeps operating systems, applications, and firmware up to date, with change management controls for production systems.' },
-      { title: 'Vendor management handoff',         body: 'We take over management of your existing technology vendors — ISPs, software providers, hardware suppliers — coordinating renewals, escalations, and SLA enforcement.' },
-      { title: 'Monthly reporting & quarterly reviews', body: 'You receive a monthly report covering incidents, patch status, asset changes, and open items — plus a quarterly strategic review with your dedicated IT advisor.' },
-    ],
-    stats: [{ num: '99.5%', label: 'Avg. infrastructure uptime' }, { num: '<2h', label: 'Critical issue response SLA' }, { num: '40%', label: 'Avg. IT cost reduction vs in-house' }],
-    faq: [
-      {
-        q: 'What is included in Managed IT Services for a Ghana business?',
-        a: 'Our managed IT service covers continuous monitoring of your servers, network, and endpoints; helpdesk support for your team via phone, email, and remote access; scheduled security patching across operating systems and applications; vendor management for your ISPs and software providers; IT asset tracking and lifecycle planning; and a monthly report plus quarterly strategic review. The exact scope is tailored to your environment during the onboarding audit.',
-      },
-      {
-        q: 'How is Managed IT Services different from having an in-house IT team?',
-        a: 'An in-house IT person or team handles the day-to-day — but typically has a limited skills range, is unavailable outside working hours, and cannot provide strategic oversight while also responding to helpdesk tickets. Our managed service gives you a team with specialist skills across networking, security, cloud, and strategy, available 24/7 for monitoring and with defined SLAs for support. For most Ghanaian businesses, managed IT costs significantly less than a fully capable in-house team and provides broader coverage.',
-      },
-      {
-        q: 'How much do Managed IT Services cost in Ghana?',
-        a: 'Pricing depends on the size of your environment — number of devices, servers, users, and sites. Managed IT services for a 20-50 person business in Ghana typically range from GH₵ 5,000–15,000 per month, covering monitoring, helpdesk, patching, and vendor management. We provide a detailed quote after the initial environment audit. Most clients find the managed service costs less than a single mid-level IT hire while providing significantly broader capability.',
-      },
-      {
-        q: 'Can you manage cloud infrastructure as part of Managed IT Services?',
-        a: 'Yes. Cloud infrastructure management — AWS, Azure, and GCP — is a core part of our managed services offering. This includes cost monitoring and optimisation, security configuration reviews, availability monitoring, backup validation, and capacity planning. Many clients use us to manage a hybrid environment covering both on-premise infrastructure and cloud workloads under a single managed service agreement.',
-      },
-    ],
-  },
-  'soc-monitoring': {
-    number: '09', title: 'SOC Monitoring', tagline: '24/7 threat detection, before damage is done.',
-    description: '24/7 Security Operations Centre monitoring — continuous threat detection, real-time alerting, and expert incident response for enterprise and financial services organisations across Ghana and Africa.',
-    detail: 'Most cyberattacks succeed not because defences are absent, but because threats go undetected long enough to do serious damage. The average time between initial compromise and detection in African enterprises is measured in weeks — not hours. By the time an attack is noticed, data has been exfiltrated, systems have been encrypted, and the recovery cost dwarfs what proper monitoring would have cost.\n\nOur Security Operations Centre provides continuous monitoring of your digital environment — network traffic, endpoint activity, authentication events, application logs, and cloud workloads — using a combination of SIEM technology and human analyst review. When a threat indicator appears, it is investigated immediately. If it is a confirmed incident, your team is notified and containment begins within minutes, not hours.\n\nFor regulated industries in Ghana — financial institutions operating under Bank of Ghana cybersecurity directives, healthcare organisations handling patient data, and government agencies under the Cybersecurity Act 2020 — 24/7 SOC monitoring is not just best practice. It is an increasingly explicit regulatory expectation. We provide the compliance documentation, monthly threat reports, and audit-ready evidence packs that enterprise procurement and compliance teams require.',
-    outcomes: ['24/7 SIEM-powered threat monitoring', 'Real-time security alerting & escalation', 'Incident investigation & response coordination', 'Endpoint Detection & Response (EDR) management', 'Network traffic analysis & anomaly detection', 'Monthly threat intelligence reports', 'Compliance-ready audit logs & evidence packs', 'Quarterly security posture reviews'],
-    process: [
-      { title: 'Environment scoping & data source onboarding', body: 'We identify every log source — endpoints, firewalls, servers, cloud platforms, and applications — and onboard them into the SIEM platform with appropriate correlation rules.' },
-      { title: 'Baseline & detection rule configuration',       body: 'We establish a behavioural baseline for your environment and configure detection rules tuned to your specific infrastructure, reducing false positives and ensuring relevant threats surface quickly.' },
-      { title: 'Alert triage & escalation design',             body: 'We define and document the escalation workflow: which alerts go to which analysts, what triggers client notification, and who has authority to initiate containment actions.' },
-      { title: 'Go-live & parallel monitoring period',         body: 'A two-week parallel monitoring period where we tune detection rules against live traffic before full handover — catching environment-specific noise before it reaches your escalation channel.' },
-      { title: 'Ongoing 24/7 monitoring operations',           body: 'Round-the-clock monitoring with analyst-reviewed escalations, documented response actions, and a shared incident tracking dashboard your team can access in real time.' },
-      { title: 'Monthly reporting & quarterly posture review', body: 'Monthly threat reports covering alerts, confirmed incidents, and threat intelligence relevant to your industry. Quarterly posture reviews assess whether detection coverage needs to expand as your environment changes.' },
-    ],
-    stats: [{ num: '24/7', label: 'Continuous monitoring' }, { num: '<15 min', label: 'Mean time to alert' }, { num: '0', label: 'Client breaches post-engagement' }],
-    faq: [
-      {
-        q: 'What is a Security Operations Centre (SOC) and does my Ghana business need one?',
-        a: 'A Security Operations Centre is a team and technology environment dedicated to continuously monitoring your IT systems for security threats. It combines SIEM software — which aggregates and analyses logs from across your environment — with human analysts who investigate alerts and respond to confirmed threats. You need SOC monitoring if you handle sensitive customer data, operate under Bank of Ghana or healthcare sector security requirements, have experienced a security incident in the past, or operate infrastructure that would cause serious business damage if compromised. For regulated financial services and healthcare organisations in Ghana, some level of continuous monitoring is becoming a regulatory expectation rather than an option.',
-      },
-      {
-        q: 'What is the difference between SOC monitoring and a cybersecurity audit?',
-        a: 'A cybersecurity audit is a point-in-time assessment — it tells you what vulnerabilities exist in your environment at the moment the audit is conducted, and recommends remediation. SOC monitoring is continuous — it detects active threats happening in real time, whether they exploit known vulnerabilities or represent novel attack patterns. The two are complementary: an audit identifies what to fix, SOC monitoring detects when someone is trying to exploit what you have not yet fixed. Most enterprise security programmes do both: periodic audits to maintain a strong security baseline, and continuous SOC monitoring to detect and respond to live threats.',
-      },
-      {
-        q: 'How does SOC monitoring meet Bank of Ghana cybersecurity directive requirements?',
-        a: 'The Bank of Ghana Cybersecurity Directive requires licensed financial institutions to implement continuous monitoring of their IT environments, maintain security event logs, and have documented incident response procedures. Our SOC service directly satisfies these requirements: we provide 24/7 monitoring, maintain compliant audit log archives with defined retention periods, and produce the monthly security reports and incident documentation that Bank of Ghana examinations require. We can provide compliance documentation packs as part of the service to support your regulatory submissions.',
-      },
-      {
-        q: 'Can SOC monitoring detect insider threats, not just external attacks?',
-        a: 'Yes. User Behaviour Analytics (UBA) is a core component of our SIEM deployment. We establish normal behaviour patterns for each user account and alert on anomalies: access to systems outside normal working hours, large data downloads, access to resources the user does not normally interact with, and lateral movement between systems. Insider threats — whether malicious or accidental — are often the hardest to detect with perimeter controls alone, and are one of the strongest cases for continuous monitoring.',
-      },
-    ],
-  },
   'it-consulting': {
-    number: '06', title: 'IT Strategy & Advisory', tagline: 'Strategy before software.',
-    description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
-    detail: 'Most technology failures begin not with bad engineering, but with poor strategy: choosing the wrong platform, under-specifying a system, moving too fast before the organization is ready, or investing in technology before the business processes it is meant to support are well-defined. Our consulting practice works at the intersection of business and technology — helping leadership teams understand their options, evaluate trade-offs honestly, and build roadmaps they can actually execute and fund.\n\nFor organizations in Ghana and across West Africa, the stakes of poor technology decisions are particularly high: technology budgets are limited, implementation partners are harder to evaluate, and the consequences of a failed system implementation — lost productivity, data loss, staff frustration — can set an organization back by years. We bring independent, conflict-free advice. We do not sell software licences. We do not have preferred vendor relationships that influence our recommendations. We tell you what the right answer is for your organization — and then help you execute it.',
-    outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
+    number: '06', title: 'IT Consulting & Managed Services', tagline: 'Strategy, oversight, and day-to-day IT — under one roof.',
+    description: 'Technology strategy, IT governance, architecture reviews, and fully managed IT services — giving leadership teams clarity on decisions and continuous management of their technology environment.',
+    detail: 'Most technology failures begin not with bad engineering, but with poor strategy: choosing the wrong platform, under-specifying a system, moving too fast before the organization is ready, or investing in technology before the business processes it is meant to support are well-defined. Our consulting practice works at the intersection of business and technology — helping leadership teams understand their options, evaluate trade-offs honestly, and build roadmaps they can actually execute and fund.\n\nFor organizations in Ghana and across West Africa, the stakes of poor technology decisions are particularly high: technology budgets are limited, implementation partners are harder to evaluate, and the consequences of a failed system implementation — lost productivity, data loss, staff frustration — can set an organization back by years. We bring independent, conflict-free advice. We do not sell software licences. We do not have preferred vendor relationships that influence our recommendations. We tell you what the right answer is for your organization — and then help you execute it.\n\nBeyond strategy, we offer Managed IT Services for organizations that want a single trusted partner to handle their entire technology environment on an ongoing basis. This covers 24/7 infrastructure monitoring, helpdesk support for your team, security patching and vulnerability management, vendor management, and a dedicated senior technology advisor assigned to your account — giving you the equivalent of a fully capable internal IT department without the cost of building one.',
+    outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', '24/7 infrastructure monitoring & helpdesk', 'Security patching & vulnerability management', 'Technology team structuring', 'Budget planning & TCO analysis'],
     process: [
       { title: 'Current state discovery',            body: 'We interview key stakeholders, review your existing technology stack, and document current-state systems, costs, and pain points without assumptions.' },
       { title: 'Stakeholder & requirement alignment', body: 'We facilitate alignment sessions with leadership, IT, and operations to ensure the strategy is built on shared priorities — not just the loudest voice in the room.' },
@@ -420,10 +283,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     'digital-transformation': 'Digital Transformation Consulting Ghana | Astacraft Systems',
     'api-automation':         'API Integration & Workflow Automation Ghana | Astacraft Systems',
     'it-consulting':          'IT Consulting & Technology Strategy Ghana | Astacraft Systems',
-    'managed-it-services':    'Managed IT Services Ghana — Outsourced IT Support | Astacraft Systems',
-    'soc-monitoring':         'SOC Monitoring Ghana — 24/7 Security Operations Centre | Astacraft Systems',
-    'digital-marketing':      'Digital Marketing Services Ghana — SEO & Paid Ads | Astacraft Systems',
-    'brand-design':           'Brand Identity & Design Services Ghana | Astacraft Systems',
   }
   const title = titleMap[slug] ?? `${svc.title} in Ghana | Astacraft Systems`
   const description = (svc.seoDescription || svc.tagline || svc.description || '').slice(0, 160)

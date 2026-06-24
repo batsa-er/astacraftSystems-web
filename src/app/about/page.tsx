@@ -106,7 +106,7 @@ export default async function AboutPage() {
               { num: 'AstaBill',  label: 'Live SaaS product' },
               { num: 'GRA',       label: 'Tax compliant' },
               { num: 'ISO 27001', label: 'Security roadmap' },
-              { num: 'GDPR',      label: 'Data practices aligned' },
+              { num: 'GDPR / DPA', label: 'Data practices aligned' },
             ].map(({ num, label }) => (
               <div key={label} className="bg-[var(--color-accent)] flex flex-col items-center justify-center gap-2 py-8 px-6 text-center">
                 <p className="font-serif font-black text-white" style={{ fontSize: 'clamp(16px,2vw,24px)' }}>{num}</p>

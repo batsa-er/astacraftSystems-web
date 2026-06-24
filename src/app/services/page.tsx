@@ -23,15 +23,15 @@ import { PLATFORM_SLUGS, ENTERPRISE_SLUGS, getServiceIcon } from '@/config/servi
 const fallback = [
   {
     _id: '1', slug: { current: 'crm-erp' }, number: '01',
-    title: 'CRM & Business Systems',
+    title: 'CRM & ERP Implementation',
     tagline: 'The platform your operations run on.',
     description: 'Purpose-built CRM and business automation platforms configured for how African enterprises actually operate — with Salesforce, Odoo, and SAP at the core.',
     outcomes: ['CRM implementation & configuration', 'ERP deployment & customization', 'Workflow automation & integration', 'Data migration & cleansing', 'Staff training & adoption support', 'Ongoing system administration'],
   },
   {
     _id: '9', slug: { current: 'api-automation' }, number: '02',
-    title: 'API & Automation',
-    tagline: 'Connect your systems. Automate your operations.',
+    title: 'System Integration & Automation',
+    tagline: 'Connect everything. Automate the rest.',
     description: 'We design and build custom APIs, workflow automation systems, and integrations that eliminate manual work and connect every part of your business — from internal tools to enterprise systems and third-party platforms.',
     outcomes: ['Custom REST & GraphQL API development', 'Workflow automation (Zapier, Make, n8n)', 'System integrations & data pipelines', 'Webhook design & event-driven systems', 'ERP & CRM API connectors', 'Automated reporting & document generation'],
   },
@@ -51,24 +51,24 @@ const fallback = [
   },
   {
     _id: '4', slug: { current: 'digital-transformation' }, number: '05',
-    title: 'Digital Transformation',
-    tagline: 'Modernize operations. Accelerate growth.',
+    title: 'Business Process Transformation',
+    tagline: 'Redesign how your business operates.',
     description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
     outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
   },
   {
     _id: '5', slug: { current: 'cybersecurity' }, number: '06',
-    title: 'Cybersecurity',
-    tagline: 'Enterprise-grade protection.',
-    description: 'Security audits, penetration testing, compliance frameworks, and 24/7 monitoring — designed to protect your business from modern threats and meet regulatory requirements.',
-    outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', 'SOC monitoring & incident response', 'Employee security awareness training', 'Security policy development'],
+    title: 'Cybersecurity & SOC Monitoring',
+    tagline: 'Enterprise-grade protection. 24/7.',
+    description: 'Security audits, penetration testing, compliance frameworks, and 24/7 Security Operations Centre monitoring — designed to protect your business and meet Bank of Ghana and Data Protection Act requirements.',
+    outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', '24/7 SOC monitoring & incident response', 'Endpoint Detection & Response (EDR)', 'Security policy development'],
   },
   {
     _id: '6', slug: { current: 'it-consulting' }, number: '07',
-    title: 'IT Strategy & Advisory',
-    tagline: 'Strategy before software.',
-    description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
-    outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', 'Technology team structuring', 'Budget planning & TCO analysis'],
+    title: 'IT Consulting & Managed Services',
+    tagline: 'Strategy, oversight, and day-to-day IT — under one roof.',
+    description: 'Technology strategy, IT governance, architecture reviews, and fully managed IT services — giving leadership teams clarity on decisions and continuous management of their technology environment.',
+    outcomes: ['Technology strategy & roadmaps', 'IT governance & policy frameworks', 'Architecture reviews & audits', 'Vendor selection & management', '24/7 infrastructure monitoring & helpdesk', 'Budget planning & TCO analysis'],
   },
 ]
 

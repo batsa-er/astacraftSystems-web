@@ -8,12 +8,8 @@ const FALLBACK_SERVICE_SLUGS = [
   'digital-transformation',
   'cloud-solutions',
   'cybersecurity',
-  'managed-it-services',
-  'soc-monitoring',
   'crm-erp',
   'api-automation',
-  'digital-marketing',
-  'brand-design',
   'it-consulting',
 ]
 

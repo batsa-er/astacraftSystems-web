@@ -4,23 +4,24 @@ import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Code2, Server, Database, Users, Receipt, RefreshCw, Zap } from 'lucide-react'
+import { Code2, Server, Users, Receipt, RefreshCw, Zap, ShieldCheck, MonitorCheck } from 'lucide-react'
 
 type DropdownId = 'solutions' | 'products' | null
 
 const DARK_PAGES = ['/']
 
 const productPlatforms = [
-  { Icon: Receipt, href: '/products',                      title: 'AstaBill',               desc: 'Invoicing & payments for African businesses' },
-  { Icon: Users,   href: '/products/crm',                  title: 'CRM & Business Systems', desc: 'Purpose-built automation & customer platforms' },
-  { Icon: Zap,     href: '/services/api-automation',       title: 'API & Automation',       desc: 'Connect systems, automate workflows end-to-end' },
+  { Icon: Receipt, href: '/products',              title: 'AstaBill',                        desc: 'Invoicing & payments for African businesses' },
+  { Icon: Users,   href: '/services/crm-erp',      title: 'CRM & ERP Implementation',        desc: 'Salesforce, Odoo & SAP deployments' },
+  { Icon: Zap,     href: '/services/api-automation', title: 'System Integration & Automation', desc: 'Connect systems, automate workflows end-to-end' },
 ]
 
 const enterpriseSystems = [
-  { Icon: Code2,       href: '/services/software-development',   title: 'Software Development',      desc: 'Web, mobile, SaaS & enterprise apps' },
-  { Icon: Server,      href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure',     desc: 'Hosting, migration & managed infra' },
-  { Icon: RefreshCw,   href: '/services/digital-transformation', title: 'Digital Transformation',     desc: 'Process redesign & modernization' },
-  { Icon: Database,    href: '/services/crm-erp',                title: 'CRM & ERP Implementation',  desc: 'Salesforce, Odoo & SAP deployments' },
+  { Icon: Code2,     href: '/services/software-development',   title: 'Software Development',           desc: 'Web, mobile, SaaS & enterprise apps' },
+  { Icon: Server,    href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure',          desc: 'Hosting, migration & managed infra' },
+  { Icon: RefreshCw, href: '/services/digital-transformation', title: 'Business Process Transformation', desc: 'Process redesign & digitization' },
+  { Icon: ShieldCheck, href: '/services/cybersecurity',        title: 'Cybersecurity & SOC Monitoring',  desc: 'Audits, pen testing & 24/7 monitoring' },
+  { Icon: MonitorCheck, href: '/services/it-consulting',       title: 'IT Consulting & Managed Services', desc: 'Strategy, advisory & managed IT' },
 ]
 
 function ChevronDown({ open }: { open: boolean }) {
@@ -384,7 +385,7 @@ export default function Nav() {
 
                 {/* Column 2: Enterprise Systems */}
                 <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Enterprise Systems</p>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Enterprise Solutions</p>
                   <div>
                     {enterpriseSystems.map(({ Icon, href, title, desc }) => (
                       <Link
@@ -408,7 +409,7 @@ export default function Nav() {
                 {/* Column 3: Navy CTA panel */}
                 <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Enterprise Engagements</p>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Our Solutions</p>
                     <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
                       SaaS-first.<br />Enterprise-grade.
                     </h3>
