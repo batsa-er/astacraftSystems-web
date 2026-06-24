@@ -81,7 +81,6 @@ export function IndustriesWork({
                 ].join(' ')}
                 style={{ transitionDelay: `${i * 25}ms` }}
               >
-                {/* Photo — slides up on hover, stays revealed when active */}
                 <div
                   className={[
                     'absolute inset-0 transition-transform duration-700 ease-out',

@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   },
 }
 import PageHero from '@/components/PageHero'
+import { JsonLd } from '@/components/JsonLd'
 import { urlFor } from '@/sanity/client'
 import { Users, Layers, Clock, ShieldCheck } from 'lucide-react'
 
@@ -49,6 +50,15 @@ export default async function AboutPage() {
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        '@id': 'https://astacraftsystems.com/about#aboutpage',
+        url: 'https://astacraftsystems.com/about',
+        name: 'About Astacraft Systems',
+        description: 'Astacraft Systems Limited is a SaaS and enterprise technology company based in Accra, Ghana, serving businesses across Africa.',
+        mainEntity: { '@id': 'https://astacraftsystems.com/#organization' },
+      }} />
       <PageHero
         eyebrow="About Astacraft Systems"
         title={<>Technology partner<br />for Africa&apos;s<br />most ambitious teams.</>}

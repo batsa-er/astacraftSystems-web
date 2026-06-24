@@ -9,7 +9,7 @@ export default async function Footer() {
 
   const email        = settings?.email        || 'info@astacraftsystems.com'
   const phone        = settings?.phone        || '+233 24 918 7555'
-  const address      = settings?.address      || 'North Ridge, Accra, Ghana'
+  const address      = settings?.address      || 'Sam Nujoma Street, North Ridge, Accra'
   const linkedinUrl  = settings?.linkedinUrl  || 'https://linkedin.com/company/astacraftsystems'
   const twitterUrl   = settings?.twitterUrl   || 'https://x.com/astacraftsys'
   const facebookUrl  = settings?.facebookUrl  || null

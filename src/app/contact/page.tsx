@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 import { getSiteSettings } from '@/sanity/queries'
 import PageHero from '@/components/PageHero'
 import ContactForm from './ContactForm'
+import { JsonLd } from '@/components/JsonLd'
 
 const STEPS = [
   {
@@ -47,10 +48,20 @@ export default async function ContactPage() {
   try { settings = await getSiteSettings() } catch {}
 
   const email   = settings?.email   || 'info@astacraftsystems.com'
-  const address = settings?.address || 'Accra, Ghana · Remote-first'
+  const phone   = settings?.phone   || '+233 24 918 7555'
+  const address = settings?.address || 'Sam Nujoma Street, North Ridge, Accra, Ghana'
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        '@id': 'https://astacraftsystems.com/contact#contactpage',
+        url: 'https://astacraftsystems.com/contact',
+        name: 'Contact Astacraft Systems',
+        description: 'Book a complimentary Technology Strategy Call or reach us directly.',
+        mainEntity: { '@id': 'https://astacraftsystems.com/#organization' },
+      }} />
       <PageHero
         eyebrow="Contact"
         title={<>Let&apos;s talk<br />technology.</>}
@@ -146,6 +157,7 @@ export default async function ContactPage() {
               <div className="space-y-3.5">
                 {[
                   { label: 'Email',    value: email,   href: `mailto:${email}` },
+                  { label: 'Phone',    value: phone,   href: `tel:${phone.replace(/\s/g, '')}` },
                   { label: 'Location', value: address, href: undefined },
                 ].map(({ label, value, href }) => (
                   <div key={label} className="flex items-center gap-4">

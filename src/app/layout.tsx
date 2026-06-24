@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'Astacraft Systems | Technology, Cloud & Digital Transformation — Ghana',
-  description: 'Astacraft Systems Limited delivers software development, cloud infrastructure, cybersecurity, CRM/ERP implementation, and digital transformation solutions for African businesses.',
+  description: 'Astacraft Systems delivers enterprise software, cloud infrastructure, cybersecurity, and CRM/ERP solutions for businesses in Ghana and across Africa.',
   metadataBase: new URL('https://astacraftsystems.com'),
   keywords: 'Software Development Ghana, Digital Transformation Ghana, Cloud Solutions Ghana, Cybersecurity Ghana, CRM Implementation Ghana, ERP Solutions Ghana, SaaS Development Ghana, Technology Consulting Ghana, Business Automation Ghana, IT Services Accra',
   authors: [{ name: 'Astacraft Systems Limited' }],
@@ -53,7 +53,6 @@ export const metadata: Metadata = {
     'geo.position': '5.6037;-0.1870',
     'ICBM': '5.6037, -0.1870',
     'language': 'English',
-    'revisit-after': '7 days',
   },
 }
 
@@ -61,6 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <JsonLd data={[
@@ -77,8 +78,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             image: 'https://astacraftsystems.com/opengraph-image',
             description: 'Technology, software development, cloud, cybersecurity, CRM/ERP, and digital transformation solutions for businesses in Ghana and across Africa.',
             email: 'info@astacraftsystems.com',
+            telephone: '+233249187555',
             address: {
               '@type': 'PostalAddress',
+              streetAddress: 'Sam Nujoma Street',
               addressLocality: 'Accra',
               addressRegion: 'Greater Accra',
               addressCountry: 'GH',
@@ -91,8 +94,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             areaServed: [
               { '@type': 'Country', name: 'Ghana' },
               { '@type': 'Country', name: 'Nigeria' },
+              { '@type': 'Country', name: 'Kenya' },
+              { '@type': 'Country', name: 'South Africa' },
               { '@type': 'Country', name: 'Ivory Coast' },
               { '@type': 'Country', name: 'Senegal' },
+              { '@type': 'Country', name: 'Rwanda' },
+              { '@type': 'Country', name: 'Tanzania' },
+              { '@type': 'Country', name: 'Uganda' },
+              { '@type': 'Country', name: 'Ethiopia' },
+              { '@type': 'Country', name: 'Cameroon' },
+              { '@type': 'Country', name: 'Zambia' },
             ],
             sameAs: [
               'https://www.linkedin.com/company/astacraftsystems',
@@ -118,14 +129,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             name: 'Astacraft Systems',
             description: 'Technology and digital transformation solutions for African businesses.',
             publisher: { '@id': 'https://astacraftsystems.com/#organization' },
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: {
-                '@type': 'EntryPoint',
-                urlTemplate: 'https://astacraftsystems.com/insights?q={search_term_string}',
-              },
-              'query-input': 'required name=search_term_string',
-            },
           },
         ]} />
       </head>

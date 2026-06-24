@@ -550,11 +550,20 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2.5">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${coverSrc ? 'bg-white/20' : 'bg-[var(--color-accent)]'}`}>
-                  <span className="font-mono text-[9px] font-bold text-white leading-none">AS</span>
+                  <span className="font-mono text-[9px] font-bold text-white leading-none">
+                    {ins.author ? ins.author.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase() : 'AS'}
+                  </span>
                 </div>
-                <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.65)]' : 'text-[rgba(var(--ch-text),0.50)]'}`}>
-                  Astacraft Systems
-                </span>
+                <div className="flex flex-col leading-none gap-0.5">
+                  <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.65)]' : 'text-[rgba(var(--ch-text),0.50)]'}`}>
+                    {ins.author ?? 'Astacraft Systems'}
+                  </span>
+                  {ins.authorRole && (
+                    <span className={`font-mono text-[9px] tracking-[0.08em] ${coverSrc ? 'text-[rgba(255,255,255,0.38)]' : 'text-[rgba(var(--ch-text),0.30)]'}`}>
+                      {ins.authorRole}
+                    </span>
+                  )}
+                </div>
               </div>
               <span className={coverSrc ? 'text-[rgba(255,255,255,0.30)]' : 'text-[rgba(var(--ch-text),0.15)]'}>·</span>
               <span className={`font-mono text-[10px] tracking-[0.1em] ${coverSrc ? 'text-[rgba(255,255,255,0.55)]' : 'text-[rgba(var(--ch-text),0.35)]'}`}>

@@ -42,6 +42,8 @@ export interface Insight {
   tag: string
   label?: string
   excerpt: string
+  author?: string
+  authorRole?: string
   publishedAt: string
   readTime: string
   image?: string

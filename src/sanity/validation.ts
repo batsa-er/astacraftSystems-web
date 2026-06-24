@@ -53,6 +53,8 @@ export const InsightSchema = z.object({
   tag: z.string().default(''),
   label: z.string().optional(),
   excerpt: z.string().default(''),
+  author: z.string().optional(),
+  authorRole: z.string().optional(),
   publishedAt: z.string().default(''),
   readTime: z.string().default(''),
 }) satisfies z.ZodType<Insight>

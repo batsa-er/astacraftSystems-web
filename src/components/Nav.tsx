@@ -218,10 +218,7 @@ export default function Nav() {
               { href: '/insights', label: 'Insights' },
             ].map(l => (
               <li key={l.href} onMouseEnter={() => openDropdown(null)}>
-                <Link
-                  href={l.href}
-                  className={linkCls(pathname.startsWith(l.href))}
-                >
+                <Link href={l.href} className={linkCls(pathname.startsWith(l.href))}>
                   {l.label}
                 </Link>
               </li>

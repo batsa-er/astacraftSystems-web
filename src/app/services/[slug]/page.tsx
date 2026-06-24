@@ -17,6 +17,7 @@ export async function generateStaticParams() {
     return [
       'software-development', 'digital-transformation', 'cloud-solutions', 'cybersecurity',
       'crm-erp', 'api-automation', 'digital-marketing', 'brand-design', 'it-consulting',
+      'managed-it-services', 'soc-monitoring',
     ].map(slug => ({ slug }))
   }
 }
@@ -29,6 +30,8 @@ const categoryMap: Record<string, { label: string; color: string; colorRgb: stri
   'digital-transformation': { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
   'cybersecurity':          { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
   'it-consulting':          { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
+  'managed-it-services':    { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
+  'soc-monitoring':         { label: 'Enterprise System', color: 'var(--color-accent)', colorRgb: 'var(--ch-accent)' },
   'digital-marketing':      { label: 'Growth Service',    color: 'rgba(255,255,255,0.40)', colorRgb: '255,255,255' },
   'brand-design':           { label: 'Growth Service',    color: 'rgba(255,255,255,0.40)', colorRgb: '255,255,255' },
 }
@@ -298,6 +301,72 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
     ],
   },
+  'managed-it-services': {
+    number: '08', title: 'Managed IT Services', tagline: 'Your IT department, fully managed.',
+    description: 'End-to-end IT management — infrastructure monitoring, helpdesk support, security patching, vendor management, and strategic IT oversight — delivered as a service for businesses across Ghana and Africa.',
+    detail: 'Running a reliable IT environment requires constant attention: systems that need patching, users who need support, networks that need monitoring, and vendors who need managing. For most Ghanaian businesses, building a full internal IT team with the breadth of skills this requires is neither practical nor cost-effective. Managed IT Services give you the equivalent of a dedicated IT department — proactively managing your technology environment so your team can focus on the business.\n\nOur managed services model is built around prevention rather than reaction. We monitor your infrastructure continuously, identify and resolve issues before they become outages, apply security patches on schedule, and manage your technology vendors on your behalf. You get a single point of accountability for your entire IT environment, with defined response time SLAs, monthly reporting, and a senior technology advisor assigned to your account.\n\nFor growing businesses in Ghana, managed IT services also provide a critical capability: strategic technology oversight. We review your IT roadmap quarterly, make recommendations ahead of capacity constraints, and help you plan technology investments at the right time — so you are not making urgent decisions under pressure.',
+    outcomes: ['24/7 infrastructure monitoring & alerting', 'Helpdesk support (remote & on-site)', 'Security patching & vulnerability management', 'Network management & optimization', 'Vendor management & procurement support', 'IT asset management & lifecycle planning', 'Monthly reporting & quarterly technology reviews', 'Strategic IT advisory & roadmap planning'],
+    process: [
+      { title: 'Environment audit & onboarding',    body: 'We document your complete IT environment — devices, servers, software, vendors, and support processes — establishing the baseline we manage from.' },
+      { title: 'Monitoring & alerting setup',        body: 'We deploy monitoring agents, configure alerting thresholds, and establish the escalation procedures that ensure no issue goes undetected.' },
+      { title: 'Helpdesk integration',              body: 'Your team gets a dedicated support channel — email, phone, or ticketing system — with defined response SLAs matched to issue severity.' },
+      { title: 'Patch management & hardening',      body: 'A scheduled patching programme keeps operating systems, applications, and firmware up to date, with change management controls for production systems.' },
+      { title: 'Vendor management handoff',         body: 'We take over management of your existing technology vendors — ISPs, software providers, hardware suppliers — coordinating renewals, escalations, and SLA enforcement.' },
+      { title: 'Monthly reporting & quarterly reviews', body: 'You receive a monthly report covering incidents, patch status, asset changes, and open items — plus a quarterly strategic review with your dedicated IT advisor.' },
+    ],
+    stats: [{ num: '99.5%', label: 'Avg. infrastructure uptime' }, { num: '<2h', label: 'Critical issue response SLA' }, { num: '40%', label: 'Avg. IT cost reduction vs in-house' }],
+    faq: [
+      {
+        q: 'What is included in Managed IT Services for a Ghana business?',
+        a: 'Our managed IT service covers continuous monitoring of your servers, network, and endpoints; helpdesk support for your team via phone, email, and remote access; scheduled security patching across operating systems and applications; vendor management for your ISPs and software providers; IT asset tracking and lifecycle planning; and a monthly report plus quarterly strategic review. The exact scope is tailored to your environment during the onboarding audit.',
+      },
+      {
+        q: 'How is Managed IT Services different from having an in-house IT team?',
+        a: 'An in-house IT person or team handles the day-to-day — but typically has a limited skills range, is unavailable outside working hours, and cannot provide strategic oversight while also responding to helpdesk tickets. Our managed service gives you a team with specialist skills across networking, security, cloud, and strategy, available 24/7 for monitoring and with defined SLAs for support. For most Ghanaian businesses, managed IT costs significantly less than a fully capable in-house team and provides broader coverage.',
+      },
+      {
+        q: 'How much do Managed IT Services cost in Ghana?',
+        a: 'Pricing depends on the size of your environment — number of devices, servers, users, and sites. Managed IT services for a 20-50 person business in Ghana typically range from GH₵ 5,000–15,000 per month, covering monitoring, helpdesk, patching, and vendor management. We provide a detailed quote after the initial environment audit. Most clients find the managed service costs less than a single mid-level IT hire while providing significantly broader capability.',
+      },
+      {
+        q: 'Can you manage cloud infrastructure as part of Managed IT Services?',
+        a: 'Yes. Cloud infrastructure management — AWS, Azure, and GCP — is a core part of our managed services offering. This includes cost monitoring and optimisation, security configuration reviews, availability monitoring, backup validation, and capacity planning. Many clients use us to manage a hybrid environment covering both on-premise infrastructure and cloud workloads under a single managed service agreement.',
+      },
+    ],
+  },
+  'soc-monitoring': {
+    number: '09', title: 'SOC Monitoring', tagline: '24/7 threat detection, before damage is done.',
+    description: '24/7 Security Operations Centre monitoring — continuous threat detection, real-time alerting, and expert incident response for enterprise and financial services organisations across Ghana and Africa.',
+    detail: 'Most cyberattacks succeed not because defences are absent, but because threats go undetected long enough to do serious damage. The average time between initial compromise and detection in African enterprises is measured in weeks — not hours. By the time an attack is noticed, data has been exfiltrated, systems have been encrypted, and the recovery cost dwarfs what proper monitoring would have cost.\n\nOur Security Operations Centre provides continuous monitoring of your digital environment — network traffic, endpoint activity, authentication events, application logs, and cloud workloads — using a combination of SIEM technology and human analyst review. When a threat indicator appears, it is investigated immediately. If it is a confirmed incident, your team is notified and containment begins within minutes, not hours.\n\nFor regulated industries in Ghana — financial institutions operating under Bank of Ghana cybersecurity directives, healthcare organisations handling patient data, and government agencies under the Cybersecurity Act 2020 — 24/7 SOC monitoring is not just best practice. It is an increasingly explicit regulatory expectation. We provide the compliance documentation, monthly threat reports, and audit-ready evidence packs that enterprise procurement and compliance teams require.',
+    outcomes: ['24/7 SIEM-powered threat monitoring', 'Real-time security alerting & escalation', 'Incident investigation & response coordination', 'Endpoint Detection & Response (EDR) management', 'Network traffic analysis & anomaly detection', 'Monthly threat intelligence reports', 'Compliance-ready audit logs & evidence packs', 'Quarterly security posture reviews'],
+    process: [
+      { title: 'Environment scoping & data source onboarding', body: 'We identify every log source — endpoints, firewalls, servers, cloud platforms, and applications — and onboard them into the SIEM platform with appropriate correlation rules.' },
+      { title: 'Baseline & detection rule configuration',       body: 'We establish a behavioural baseline for your environment and configure detection rules tuned to your specific infrastructure, reducing false positives and ensuring relevant threats surface quickly.' },
+      { title: 'Alert triage & escalation design',             body: 'We define and document the escalation workflow: which alerts go to which analysts, what triggers client notification, and who has authority to initiate containment actions.' },
+      { title: 'Go-live & parallel monitoring period',         body: 'A two-week parallel monitoring period where we tune detection rules against live traffic before full handover — catching environment-specific noise before it reaches your escalation channel.' },
+      { title: 'Ongoing 24/7 monitoring operations',           body: 'Round-the-clock monitoring with analyst-reviewed escalations, documented response actions, and a shared incident tracking dashboard your team can access in real time.' },
+      { title: 'Monthly reporting & quarterly posture review', body: 'Monthly threat reports covering alerts, confirmed incidents, and threat intelligence relevant to your industry. Quarterly posture reviews assess whether detection coverage needs to expand as your environment changes.' },
+    ],
+    stats: [{ num: '24/7', label: 'Continuous monitoring' }, { num: '<15 min', label: 'Mean time to alert' }, { num: '0', label: 'Client breaches post-engagement' }],
+    faq: [
+      {
+        q: 'What is a Security Operations Centre (SOC) and does my Ghana business need one?',
+        a: 'A Security Operations Centre is a team and technology environment dedicated to continuously monitoring your IT systems for security threats. It combines SIEM software — which aggregates and analyses logs from across your environment — with human analysts who investigate alerts and respond to confirmed threats. You need SOC monitoring if you handle sensitive customer data, operate under Bank of Ghana or healthcare sector security requirements, have experienced a security incident in the past, or operate infrastructure that would cause serious business damage if compromised. For regulated financial services and healthcare organisations in Ghana, some level of continuous monitoring is becoming a regulatory expectation rather than an option.',
+      },
+      {
+        q: 'What is the difference between SOC monitoring and a cybersecurity audit?',
+        a: 'A cybersecurity audit is a point-in-time assessment — it tells you what vulnerabilities exist in your environment at the moment the audit is conducted, and recommends remediation. SOC monitoring is continuous — it detects active threats happening in real time, whether they exploit known vulnerabilities or represent novel attack patterns. The two are complementary: an audit identifies what to fix, SOC monitoring detects when someone is trying to exploit what you have not yet fixed. Most enterprise security programmes do both: periodic audits to maintain a strong security baseline, and continuous SOC monitoring to detect and respond to live threats.',
+      },
+      {
+        q: 'How does SOC monitoring meet Bank of Ghana cybersecurity directive requirements?',
+        a: 'The Bank of Ghana Cybersecurity Directive requires licensed financial institutions to implement continuous monitoring of their IT environments, maintain security event logs, and have documented incident response procedures. Our SOC service directly satisfies these requirements: we provide 24/7 monitoring, maintain compliant audit log archives with defined retention periods, and produce the monthly security reports and incident documentation that Bank of Ghana examinations require. We can provide compliance documentation packs as part of the service to support your regulatory submissions.',
+      },
+      {
+        q: 'Can SOC monitoring detect insider threats, not just external attacks?',
+        a: 'Yes. User Behaviour Analytics (UBA) is a core component of our SIEM deployment. We establish normal behaviour patterns for each user account and alert on anomalies: access to systems outside normal working hours, large data downloads, access to resources the user does not normally interact with, and lateral movement between systems. Insider threats — whether malicious or accidental — are often the hardest to detect with perimeter controls alone, and are one of the strongest cases for continuous monitoring.',
+      },
+    ],
+  },
   'it-consulting': {
     number: '06', title: 'IT Strategy & Advisory', tagline: 'Strategy before software.',
     description: 'Technology strategy, IT governance, architecture reviews, and digital roadmaps — giving leadership teams the clarity to make high-confidence technology decisions.',
@@ -343,7 +412,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!svc) svc = (fallbackServices[slug] as ServiceDetail | undefined) ?? null
   if (!svc) return { title: 'Service | Astacraft Systems' }
 
-  const title = `${svc.title} in Ghana | Astacraft Systems`
+  const titleMap: Record<string, string> = {
+    'software-development':   'Custom Software Development Ghana | Astacraft Systems',
+    'cloud-solutions':        'Cloud Infrastructure & Migration Services Ghana | Astacraft Systems',
+    'cybersecurity':          'Cybersecurity Services Ghana — Penetration Testing & SOC | Astacraft Systems',
+    'crm-erp':                'CRM & ERP Implementation Ghana — Salesforce, Odoo | Astacraft Systems',
+    'digital-transformation': 'Digital Transformation Consulting Ghana | Astacraft Systems',
+    'api-automation':         'API Integration & Workflow Automation Ghana | Astacraft Systems',
+    'it-consulting':          'IT Consulting & Technology Strategy Ghana | Astacraft Systems',
+    'managed-it-services':    'Managed IT Services Ghana — Outsourced IT Support | Astacraft Systems',
+    'soc-monitoring':         'SOC Monitoring Ghana — 24/7 Security Operations Centre | Astacraft Systems',
+    'digital-marketing':      'Digital Marketing Services Ghana — SEO & Paid Ads | Astacraft Systems',
+    'brand-design':           'Brand Identity & Design Services Ghana | Astacraft Systems',
+  }
+  const title = titleMap[slug] ?? `${svc.title} in Ghana | Astacraft Systems`
   const description = (svc.seoDescription || svc.tagline || svc.description || '').slice(0, 160)
 
   return {
@@ -390,7 +472,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           name: svc.title,
           description: svc.description,
           provider: { '@id': 'https://astacraftsystems.com/#organization' },
-          areaServed: { '@type': 'Country', name: 'Ghana' },
+          areaServed: [
+            { '@type': 'Country', name: 'Ghana' },
+            { '@type': 'Country', name: 'Nigeria' },
+            { '@type': 'Country', name: 'Kenya' },
+            { '@type': 'Country', name: 'South Africa' },
+            { '@type': 'Country', name: 'Ivory Coast' },
+            { '@type': 'Country', name: 'Senegal' },
+            { '@type': 'Country', name: 'Rwanda' },
+            { '@type': 'Country', name: 'Tanzania' },
+            { '@type': 'Country', name: 'Uganda' },
+            { '@type': 'Country', name: 'Ethiopia' },
+            { '@type': 'Country', name: 'Cameroon' },
+            { '@type': 'Country', name: 'Zambia' },
+          ],
           url: `https://astacraftsystems.com/services/${slug}`,
         },
         {

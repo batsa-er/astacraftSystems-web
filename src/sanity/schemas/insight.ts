@@ -11,6 +11,8 @@ export default defineType({
     defineField({ name: 'label', title: 'Label (sub-tag)', type: 'string' }),
     defineField({ name: 'excerpt', title: 'Excerpt', type: 'text', rows: 3 }),
     defineField({ name: 'body', title: 'Body', type: 'text', rows: 20 }),
+    defineField({ name: 'author', title: 'Author Name', type: 'string', placeholder: 'e.g. Kwame Asante' }),
+    defineField({ name: 'authorRole', title: 'Author Role / Title', type: 'string', placeholder: 'e.g. Head of Technology' }),
     defineField({ name: 'publishedAt', title: 'Published At', type: 'date' }),
     defineField({ name: 'readTime', title: 'Read Time', type: 'string', placeholder: 'e.g. 8 min read' }),
     defineField({ name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } }),

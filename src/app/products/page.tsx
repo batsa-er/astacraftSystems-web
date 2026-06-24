@@ -33,10 +33,38 @@ const TESTIMONIALS = [
   },
 ]
 
+const ASTABILL_FAQ = [
+  {
+    q: 'Is AstaBill free to use?',
+    a: 'Yes. AstaBill has a free plan that lets you send invoices, issue receipts, and collect payments with no credit card required. Paid plans start from GH₵ 69/month and unlock higher invoice volumes, team access, and advanced features.',
+  },
+  {
+    q: 'Does AstaBill support Mobile Money payments?',
+    a: 'Yes. AstaBill accepts MTN Mobile Money, Telecel Cash, and AT Money directly from the invoice payment page — no third-party checkout or redirect required. Card payments via Visa and Mastercard are also supported through Paystack.',
+  },
+  {
+    q: 'Is AstaBill compliant with Ghana Revenue Authority (GRA) requirements?',
+    a: 'Yes. AstaBill generates GRA-compliant invoices and receipts by default, including the required fields for digital documentation under Ghana Revenue Authority regulations.',
+  },
+  {
+    q: 'Can I use AstaBill for my team or multiple businesses?',
+    a: 'Yes. AstaBill supports multi-business workspaces and team access with owner, admin, and member permission levels. You can manage separate businesses from a single account and control what each team member can see and do.',
+  },
+  {
+    q: 'How long does it take to send my first invoice on AstaBill?',
+    a: 'Most businesses send their first invoice within 5 minutes of signing up. You create the invoice in one workspace, share a payment link with your client, and they pay directly from their phone — no account or app required on their end.',
+  },
+  {
+    q: 'Does AstaBill work for walk-in customers and cash sales?',
+    a: 'Yes. AstaBill includes a sales receipt feature for walk-in and cash transactions. You issue the receipt in seconds and share it by email or a shareable link — no printing required.',
+  },
+]
+
 export default function ProductsPage() {
   return (
     <>
-      <JsonLd data={{
+      <JsonLd data={[
+        {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
         '@id': 'https://astacraftsystems.com/products#astabill',
@@ -64,7 +92,17 @@ export default function ProductsPage() {
         ],
         areaServed: { '@type': 'Country', name: 'Ghana' },
         screenshot: 'https://astacraftsystems.com/opengraph-image',
-      }} />
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: ASTABILL_FAQ.map(({ q, a }) => ({
+            '@type': 'Question',
+            name: q,
+            acceptedAnswer: { '@type': 'Answer', text: a },
+          })),
+        },
+      ]} />
       <PageHero
         eyebrow="Products"
         title={<>Invoice smart.<br />Get paid faster.</>}
@@ -295,6 +333,35 @@ export default function ProductsPage() {
       </section>
 
       <PricingSection />
+
+      {/* FAQ */}
+      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
+        <div className="max-w-[860px] mx-auto">
+          <div className="mb-12 reveal">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Common Questions</p>
+            <h2 className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.03em]" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
+              Frequently asked questions.
+            </h2>
+          </div>
+          <div className="space-y-px">
+            {ASTABILL_FAQ.map(({ q, a }, i) => (
+              <details
+                key={i}
+                className="group border border-[rgba(var(--ch-accent),0.10)] bg-[var(--color-bg)] reveal"
+                style={{ transitionDelay: `${i * 60}ms` }}
+              >
+                <summary className="flex items-center justify-between gap-4 px-8 py-6 cursor-pointer select-none list-none">
+                  <span className="font-serif text-[clamp(15px,1.3vw,18px)] font-semibold text-[var(--color-text)] leading-snug">{q}</span>
+                  <span className="font-mono text-[20px] text-[var(--color-accent)] shrink-0 transition-transform duration-200 group-open:rotate-45">+</span>
+                </summary>
+                <div className="px-8 pb-7 border-t border-[rgba(var(--ch-accent),0.07)]">
+                  <p className="text-[14px] text-[rgba(var(--ch-text),0.60)] leading-[1.85] pt-5">{a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">

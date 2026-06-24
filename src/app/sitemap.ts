@@ -8,7 +8,10 @@ const FALLBACK_SERVICE_SLUGS = [
   'digital-transformation',
   'cloud-solutions',
   'cybersecurity',
+  'managed-it-services',
+  'soc-monitoring',
   'crm-erp',
+  'api-automation',
   'digital-marketing',
   'brand-design',
   'it-consulting',
@@ -34,13 +37,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE,                  lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/about`,       lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/services`,    lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/products`,    lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/work`,        lastModified: now, changeFrequency: 'weekly',  priority: 0.7 },
-    { url: `${BASE}/insights`,    lastModified: now, changeFrequency: 'daily',   priority: 0.8 },
-    { url: `${BASE}/contact`,     lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: BASE,                       lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE}/about`,            lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/services`,         lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/products`,         lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE}/products/crm`,     lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/work`,             lastModified: now, changeFrequency: 'weekly',  priority: 0.7 },
+    { url: `${BASE}/insights`,         lastModified: now, changeFrequency: 'daily',   priority: 0.8 },
+    { url: `${BASE}/contact`,          lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/security`,         lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/careers`,          lastModified: now, changeFrequency: 'weekly',  priority: 0.6 },
+    { url: `${BASE}/privacy`,          lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
+    { url: `${BASE}/terms`,            lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
   ]
 
   const serviceRoutes: MetadataRoute.Sitemap = serviceSlugs.map(slug => ({
@@ -61,13 +69,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ? insights.map(i => ({
         url: `${BASE}/insights/${i.slug.current}`,
         lastModified: i.publishedAt ? new Date(i.publishedAt) : now,
-        changeFrequency: 'never' as const,
+        changeFrequency: 'yearly' as const,
         priority: 0.6,
       }))
     : FALLBACK_INSIGHT_SLUGS.map(({ slug, date }) => ({
         url: `${BASE}/insights/${slug}`,
         lastModified: new Date(date),
-        changeFrequency: 'never' as const,
+        changeFrequency: 'yearly' as const,
         priority: 0.6,
       }))
 

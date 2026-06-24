@@ -114,7 +114,7 @@ export default async function HomePage() {
               className="font-serif font-black text-white leading-[0.88] tracking-[-0.035em]"
               style={{ fontSize: 'clamp(52px,9.5vw,132px)' }}
             >
-              {['SaaS platforms', 'and enterprise'].map((word, i) => (
+              {['Enterprise software', 'and cloud systems'].map((word, i) => (
                 <span key={word} className="block overflow-hidden">
                   <span
                     className="block clip-reveal"
@@ -126,7 +126,7 @@ export default async function HomePage() {
               ))}
               <span className="block overflow-hidden">
                 <span className="block clip-reveal text-gradient italic" style={{ animationDelay: '0.40s' }}>
-                  systems.
+                  for Africa.
                 </span>
               </span>
             </h1>

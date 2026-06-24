@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getCareerBySlug } from '@/sanity/queries'
 import type { Career } from '@/sanity/types'
 import { Briefcase, Clock, MapPin, Check } from 'lucide-react'
+import { JsonLd } from '@/components/JsonLd'
 
 export const revalidate = 3600
 
@@ -27,6 +28,36 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'JobPosting',
+        '@id': `https://astacraftsystems.com/careers/${slug}#jobposting`,
+        title: job.title,
+        description: job.description || job.excerpt,
+        identifier: {
+          '@type': 'PropertyValue',
+          name: 'Astacraft Systems',
+          value: slug,
+        },
+        hiringOrganization: {
+          '@type': 'Organization',
+          name: 'Astacraft Systems Limited',
+          sameAs: 'https://astacraftsystems.com',
+          logo: 'https://astacraftsystems.com/astacraft-logo-white.svg',
+        },
+        jobLocation: {
+          '@type': 'Place',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: job.location || 'Accra',
+            addressCountry: 'GH',
+          },
+        },
+        employmentType: job.type || 'FULL_TIME',
+        datePosted: new Date().toISOString().split('T')[0],
+        url: `https://astacraftsystems.com/careers/${slug}`,
+        applicantLocationRequirements: { '@type': 'Country', name: 'Ghana' },
+      }} />
       {/* Header */}
       <section className="bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] pt-40 pb-20">
         <div className="max-w-[1280px] mx-auto">

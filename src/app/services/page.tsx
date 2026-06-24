@@ -6,12 +6,12 @@ import type { Service } from '@/sanity/types'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'SaaS Platforms & Enterprise Systems | Astacraft Systems',
-  description: 'Software products, cloud infrastructure, CRM & ERP implementation, and digital transformation — delivered by Astacraft Systems for businesses across Ghana and Africa.',
+  title: 'Enterprise Software & IT Services Ghana | Astacraft Systems',
+  description: 'Software development, cloud infrastructure, CRM & ERP implementation, cybersecurity, and digital transformation services for businesses across Ghana and Africa.',
   alternates: { canonical: 'https://astacraftsystems.com/services' },
   openGraph: {
-    title: 'SaaS Platforms & Enterprise Systems | Astacraft Systems',
-    description: 'Software products, cloud infrastructure, CRM & ERP implementation, and digital transformation — delivered by Astacraft Systems for businesses across Ghana and Africa.',
+    title: 'Enterprise Software & IT Services Ghana | Astacraft Systems',
+    description: 'Software development, cloud infrastructure, CRM & ERP implementation, cybersecurity, and digital transformation services for businesses across Ghana and Africa.',
     url: 'https://astacraftsystems.com/services',
     type: 'website',
   },
