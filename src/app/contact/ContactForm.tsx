@@ -102,6 +102,15 @@ export default function ContactForm() {
             ))}
           </div>
 
+          <a
+            href="https://calendly.com/payledge/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-8 py-3.5 hover:bg-[var(--color-green-hover)] transition-colors duration-200 mb-6"
+          >
+            Book your call now →
+          </a>
+          <br />
           <Link
             href="/"
             className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-200"

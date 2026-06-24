@@ -137,6 +137,13 @@ export async function POST(req: Request) {
             </table>
           </div>
 
+          <div style="text-align:center;margin-bottom:32px">
+            <p style="font-size:13px;color:#64748b;margin:0 0 16px">Prefer to skip the wait and book directly?</p>
+            <a href="https://calendly.com/payledge/30min" style="display:inline-block;background:#55AD3D;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 32px">
+              Book Your Strategy Call →
+            </a>
+          </div>
+
           <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px">
             In the meantime, feel free to reply to this email if you have any questions.
           </p>
