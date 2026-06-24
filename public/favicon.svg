@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="86 100 302 212" width="302" height="212"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <style>
+      .icon-primary { fill: #1d4776; }
+      .icon-accent  { fill: #55aa49; }
+      @media (prefers-color-scheme: dark) {
+        .icon-primary { fill: #ffffff; }
+      }
+    </style>
+  </defs><polygon class="icon-primary" points="269.9 185 263.2 191.7 226.8 190.7 213 160.1 209.3 151.8 149.8 284.1 86 310.7 190.1 102.3 228.1 102.3 228.1 102.5 228.6 102.3 257.4 160.1 269.9 185"></polygon><path class="icon-accent" d="M386.9,160.1h-173.9l13.8,30.7h7l36.4.9,76,1.9-6.5,17.9,55.2,7.7,10.8-29.2-18.9-29.9ZM364.9,230.4l-91.4-17,4.1-9.6-18.9-.7-19.6-.7-19.1-.7-6.9,18.9,16.5,18.9,93.3,18.7-8.6,22-64.1-2.9,6.7-17.5-55.5-7.7-10.3,28.7,18.7,29.9h121.5l41.1-29.9,11.2-31.3-18.7-19.1h0Z"></path></svg>
