@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import type { Testimonial, CaseStudy } from '@/sanity/types'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
-import ParticlesBackground from '@/components/ui/particles-bg'
 import { IndustriesWork } from '@/components/IndustriesWork'
+
+const ParticlesBackground = dynamic(() => import('@/components/ui/particles-bg'), { ssr: false })
 
 export const revalidate = 3600
 

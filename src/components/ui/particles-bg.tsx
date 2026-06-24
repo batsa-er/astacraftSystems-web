@@ -64,12 +64,7 @@ export default function ParticlesBackground() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
-    script.async = true
-    document.body.appendChild(script)
-
-    script.onload = () => {
+    import('particles.js').then(() => {
       const html = document.documentElement
       const detectDark = () =>
         html.classList.contains('dark') ||
@@ -82,11 +77,7 @@ export default function ParticlesBackground() {
         attributes: true,
         attributeFilter: ['class', 'data-theme'],
       })
-    }
-
-    return () => {
-      if (document.body.contains(script)) document.body.removeChild(script)
-    }
+    })
   }, [initParticles])
 
   return (
