@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { TrendingUp, Users, Mail, Zap, MessageSquare, BarChart3, ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
+import { SolutionStickyBar } from '@/components/SolutionStickyBar'
 
 export const revalidate = 3600
 
@@ -359,6 +360,7 @@ export default function GrowthPage() {
           </div>
         </div>
       </section>
+      <SolutionStickyBar bundle="growth" name="Astacraft Growth™" price="from GH₵ 5,500" />
     </>
   )
 }

@@ -17,6 +17,7 @@ const solutionBundles = [
     title: 'Astacraft Launch™',
     desc: 'Domain, website, email & hosting for startups',
     tag: 'Startups',
+    price: 'from GH₵ 2,500',
   },
   {
     Icon: TrendingUp,
@@ -24,6 +25,7 @@ const solutionBundles = [
     title: 'Astacraft Growth™',
     desc: 'CRM, automation & collaboration for scaling SMEs',
     tag: 'SMEs',
+    price: 'from GH₵ 5,500',
   },
   {
     Icon: Workflow,
@@ -31,6 +33,7 @@ const solutionBundles = [
     title: 'Astacraft Operations™',
     desc: 'Workflow automation, portals & document management',
     tag: 'Digitization',
+    price: 'from GH₵ 8,500',
   },
   {
     Icon: ShieldCheck,
@@ -38,6 +41,7 @@ const solutionBundles = [
     title: 'Astacraft Secure™',
     desc: 'Cybersecurity, endpoint protection & compliance',
     tag: 'Security',
+    price: 'from GH₵ 2,000/mo',
   },
   {
     Icon: Globe,
@@ -45,6 +49,7 @@ const solutionBundles = [
     title: 'Astacraft Enterprise™',
     desc: 'Cloud migration, custom software & transformation',
     tag: 'Enterprise',
+    price: 'from GH₵ 5,000',
   },
 ]
 
@@ -362,7 +367,7 @@ export default function Nav() {
                 <div>
                   <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-accent)] mb-6">Business Lifecycle</p>
                   <div className="grid grid-cols-1 gap-0">
-                    {solutionBundles.map(({ Icon, href, title, desc, tag }) => (
+                    {solutionBundles.map(({ Icon, href, title, desc, tag, price }) => (
                       <Link
                         key={href}
                         href={href}
@@ -376,6 +381,7 @@ export default function Nav() {
                           <div className="flex items-center gap-2 mb-0.5">
                             <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
                             <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-1.5 py-0.5 bg-[rgba(var(--ch-accent),0.08)] text-[rgba(var(--ch-accent),0.60)] border border-[rgba(var(--ch-accent),0.12)]">{tag}</span>
+                            <span className="ml-auto font-mono text-[10px] text-[rgba(var(--ch-text),0.30)] group-hover:text-[rgba(var(--ch-accent),0.55)] transition-colors duration-150 shrink-0">{price}</span>
                           </div>
                           <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
                         </div>
@@ -403,13 +409,22 @@ export default function Nav() {
                       ))}
                     </ul>
                   </div>
-                  <Link
-                    href="/contact"
-                    role="menuitem"
-                    className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
-                  >
-                    Start a Project →
-                  </Link>
+                  <div className="space-y-2.5">
+                    <Link
+                      href="/contact"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
+                    >
+                      Start a Project →
+                    </Link>
+                    <Link
+                      href="/contact?ref=help-me-choose"
+                      role="menuitem"
+                      className="block font-mono text-[10px] tracking-[0.12em] uppercase border border-[rgba(255,255,255,0.20)] text-[rgba(255,255,255,0.50)] px-6 py-3 hover:border-[rgba(255,255,255,0.40)] hover:text-white transition-colors duration-200 text-center"
+                    >
+                      Not sure? We&apos;ll help →
+                    </Link>
+                  </div>
                 </div>
 
               </div>

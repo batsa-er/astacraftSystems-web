@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Globe, Cloud, Code2, Network, Map, Users2, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
+import { SolutionStickyBar } from '@/components/SolutionStickyBar'
 
 export const revalidate = 3600
 
@@ -327,6 +328,7 @@ export default function EnterprisePage() {
           </div>
         </div>
       </section>
+      <SolutionStickyBar bundle="enterprise" name="Astacraft Enterprise™" price="from GH₵ 5,000" />
     </>
   )
 }

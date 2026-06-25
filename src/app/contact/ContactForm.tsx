@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Paperclip, X } from 'lucide-react'
-import { CONTACT_SERVICES, CONTACT_BUDGETS } from '@/config/forms'
+import { CONTACT_SERVICES, CONTACT_BUDGETS, BUNDLE_SERVICE_MAP, BUNDLE_LABEL_MAP } from '@/config/forms'
 
 const inputCls = 'w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(--ch-accent),0.15)] px-4 py-3 text-[14px] text-[var(--color-text)] placeholder:text-[rgba(var(--ch-text),0.25)] hover:border-[rgba(var(--ch-accent),0.35)] focus:outline-none focus:border-[var(--color-accent)] transition-colors duration-200'
 const labelCls = 'block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.38)] mb-2'
@@ -16,8 +17,19 @@ function formatBytes(b: number) {
 }
 
 export default function ContactForm() {
+  const params      = useSearchParams()
+  const bundleSlug  = params.get('bundle') ?? ''
+  const ref         = params.get('ref')    ?? ''
+
+  const bundleLabel   = useMemo(() => BUNDLE_LABEL_MAP[bundleSlug]   ?? '', [bundleSlug])
+  const bundleService = useMemo(() => BUNDLE_SERVICE_MAP[bundleSlug] ?? '', [bundleSlug])
+
+  const isHelpMeChoose = ref === 'help-me-choose'
+
   const [form, setForm] = useState({
-    name: '', email: '', company: '', service: '', budget: '', message: '',
+    name: '', email: '', company: '',
+    service: bundleService,
+    budget: '', message: '',
   })
   const [file,      setFile]      = useState<File | null>(null)
   const [fileError, setFileError] = useState<string | null>(null)
@@ -131,12 +143,27 @@ export default function ContactForm() {
               className="font-serif font-bold text-white leading-tight"
               style={{ fontSize: 'clamp(20px,2vw,26px)' }}
             >
-              Book a Strategy Call
+              {isHelpMeChoose ? "Let's find the right bundle for you." : 'Book a Strategy Call'}
             </h2>
             <p className="text-[13px] text-[rgba(255,255,255,0.42)] mt-1.5">
-              A senior technology advisor. Your systems, challenges, and goals.
+              {isHelpMeChoose
+                ? 'Tell us about your business and we\'ll recommend the right bundle.'
+                : 'A senior technology advisor. Your systems, challenges, and goals.'}
             </p>
           </div>
+
+          {/* ── Bundle context banner ── */}
+          {bundleLabel && (
+            <div className="mx-8 mt-5 flex items-center justify-between border border-[rgba(var(--ch-accent),0.18)] bg-[rgba(var(--ch-accent),0.04)] px-4 py-3">
+              <div>
+                <p className="font-mono text-[9px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] mb-0.5">Enquiring about</p>
+                <p className="font-mono text-[12px] font-medium text-[var(--color-accent)]">{bundleLabel}</p>
+              </div>
+              <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-2 py-0.5 bg-[rgba(var(--ch-accent),0.08)] text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.15)]">
+                Pre-selected
+              </span>
+            </div>
+          )}
 
           {/* ── Form body ── */}
           <form onSubmit={handleSubmit} className="p-8 space-y-5">

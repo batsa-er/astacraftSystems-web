@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Rocket, TrendingUp, Settings2, ShieldCheck, Building2 } from 'lucide-react'
 import { getTestimonials, getCaseStudies } from '@/sanity/queries'
 import type { Testimonial, CaseStudy } from '@/sanity/types'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
@@ -67,6 +68,64 @@ const FALLBACK_TESTIMONIALS = [
   { quote: 'The cloud migration they ran for us was flawless. Zero downtime, costs dropped 38% in the first quarter. Genuinely impressive.',          name: 'Abena Mensah',   role: 'CTO, MTN Enterprise Ghana',      initials: 'AM' },
   { quote: 'AstaBill removed the spreadsheet lag from our week. The dashboard tells me what is paid, what is due, and what needs follow-up.',          name: 'Kofi Mensah',    role: 'IT Consultant, Kumasi',           initials: 'KM' },
   { quote: 'We have worked with many tech firms across Africa. Astacraft is the only one that treats our problems as their own.',                      name: 'Emmanuel Ofori', role: 'Head of Technology, Afreximbank', initials: 'EO' },
+]
+
+const SOLUTION_BUNDLES = [
+  {
+    num: '01',
+    href: '/solutions/launch',
+    name: 'Astacraft Launch™',
+    tag: 'Startups',
+    tagline: 'Domain, website & email — everything to go live with confidence.',
+    price: 'from GH₵ 2,500',
+    accent: 'var(--color-green)',
+    accentRgb: 'var(--ch-green)',
+    icon: Rocket,
+  },
+  {
+    num: '02',
+    href: '/solutions/growth',
+    name: 'Astacraft Growth™',
+    tag: 'SMEs',
+    tagline: 'CRM, automation & collaboration to scale without scaling headcount.',
+    price: 'from GH₵ 5,500',
+    accent: 'var(--color-accent)',
+    accentRgb: 'var(--ch-accent)',
+    icon: TrendingUp,
+  },
+  {
+    num: '03',
+    href: '/solutions/operations',
+    name: 'Astacraft Operations™',
+    tag: 'Digitization',
+    tagline: 'Workflow automation & portals to eliminate paper-based processes.',
+    price: 'from GH₵ 8,500',
+    accent: 'var(--color-accent)',
+    accentRgb: 'var(--ch-accent)',
+    icon: Settings2,
+  },
+  {
+    num: '04',
+    href: '/solutions/secure',
+    name: 'Astacraft Secure™',
+    tag: 'Security',
+    tagline: '24/7 SOC monitoring, endpoint protection & compliance.',
+    price: 'from GH₵ 2,000/mo',
+    accent: '#C0392B',
+    accentRgb: '192,57,43',
+    icon: ShieldCheck,
+  },
+  {
+    num: '05',
+    href: '/solutions/enterprise',
+    name: 'Astacraft Enterprise™',
+    tag: 'Enterprise',
+    tagline: 'Cloud migration, custom software & a dedicated delivery team.',
+    price: 'from GH₵ 5,000',
+    accent: 'var(--color-accent)',
+    accentRgb: 'var(--ch-accent)',
+    icon: Building2,
+  },
 ]
 
 export default async function HomePage() {
@@ -370,6 +429,117 @@ export default async function HomePage() {
               <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.32)]">{label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────────
+          SOLUTION BUNDLES
+      ───────────────────────────────────────────────────────────────── */}
+      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
+        <div className="max-w-[1280px] mx-auto">
+
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-5">
+                Business Lifecycle Bundles
+              </p>
+              <h2
+                className="font-serif font-black text-[var(--color-text)] leading-[0.90] tracking-[-0.035em]"
+                style={{ fontSize: 'clamp(36px,5.5vw,72px)' }}
+              >
+                Technology for where<br />
+                <span className="text-gradient italic">your business is today.</span>
+              </h2>
+            </div>
+            <p className="text-[14px] text-[rgba(var(--ch-text),0.52)] max-w-[38ch] leading-relaxed md:text-right shrink-0">
+              Five productized bundles — each built for a specific stage of growth. Fixed scope, clear pricing, fully managed. Start with Launch and upgrade to Enterprise without changing provider.
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
+            {SOLUTION_BUNDLES.map(({ num, href, name, tag, tagline, price, accent, accentRgb, icon: Icon }) => (
+              <Link
+                key={num}
+                href={href}
+                className="group relative flex flex-col bg-[var(--color-surface)] p-7 hover:bg-white transition-colors duration-300 overflow-hidden"
+              >
+                {/* Decorative background number */}
+                <span
+                  className="absolute -bottom-3 -right-1 font-serif font-black leading-none select-none pointer-events-none"
+                  style={{ fontSize: 'clamp(72px,6vw,96px)', color: accent, opacity: 0.06 }}
+                  aria-hidden="true"
+                >
+                  {num}
+                </span>
+
+                {/* Stage + icon */}
+                <div className="flex items-center justify-between mb-7">
+                  <span className="font-mono text-[10px] tracking-[0.18em] text-[rgba(var(--ch-text),0.22)]">{num}</span>
+                  <Icon
+                    className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{ color: accent }}
+                  />
+                </div>
+
+                {/* Name */}
+                <h3
+                  className="font-serif font-bold text-[var(--color-text)] leading-tight mb-3"
+                  style={{ fontSize: 'clamp(15px,1.15vw,18px)' }}
+                >
+                  {name}
+                </h3>
+
+                {/* Tag chip */}
+                <span
+                  className="inline-block font-mono text-[9px] tracking-[0.16em] uppercase px-2 py-0.5 border mb-5 w-fit"
+                  style={{
+                    color: accent,
+                    borderColor: `rgba(${accentRgb},0.28)`,
+                    backgroundColor: `rgba(${accentRgb},0.07)`,
+                  }}
+                >
+                  {tag}
+                </span>
+
+                {/* Tagline */}
+                <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed flex-1 mb-7">
+                  {tagline}
+                </p>
+
+                {/* Price + arrow */}
+                <div className="flex items-center justify-between border-t border-[rgba(var(--ch-border),0.08)] pt-5">
+                  <span className="font-mono text-[11px] font-semibold" style={{ color: accent }}>
+                    {price}
+                  </span>
+                  <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.18)] group-hover:translate-x-1 group-hover:text-[var(--color-accent)] transition-all duration-200">
+                    →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Footer row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-7 reveal" style={{ transitionDelay: '160ms' }}>
+            <p className="text-[13px] text-[rgba(var(--ch-text),0.42)]">
+              Not sure which bundle fits your business?{' '}
+              <Link
+                href="/contact?ref=help-me-choose"
+                className="text-[var(--color-accent)] underline underline-offset-2 decoration-[rgba(var(--ch-accent),0.30)] hover:decoration-[var(--color-accent)] transition-colors duration-200"
+              >
+                Help me choose →
+              </Link>
+            </p>
+            <Link
+              href="/solutions"
+              className="shrink-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.45)] hover:text-[var(--color-accent)] transition-colors duration-200"
+            >
+              View all bundles and pricing →
+            </Link>
+          </div>
+
         </div>
       </section>
 

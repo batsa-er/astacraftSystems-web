@@ -1,4 +1,9 @@
 export const CONTACT_SERVICES = [
+  { value: 'bundle-launch',          label: 'Astacraft Launch™ Bundle' },
+  { value: 'bundle-growth',          label: 'Astacraft Growth™ Bundle' },
+  { value: 'bundle-operations',      label: 'Astacraft Operations™ Bundle' },
+  { value: 'bundle-secure',          label: 'Astacraft Secure™ Bundle' },
+  { value: 'bundle-enterprise',      label: 'Astacraft Enterprise™ Bundle' },
   { value: 'astabill',               label: 'AstaBill — Billing & Payments' },
   { value: 'software-development',   label: 'Software Development' },
   { value: 'api-automation',         label: 'API & Automation' },
@@ -9,6 +14,22 @@ export const CONTACT_SERVICES = [
   { value: 'it-consulting',          label: 'IT Strategy & Advisory' },
   { value: 'other',                  label: 'Not sure yet' },
 ]
+
+export const BUNDLE_SERVICE_MAP: Record<string, string> = {
+  launch:      'bundle-launch',
+  growth:      'bundle-growth',
+  operations:  'bundle-operations',
+  secure:      'bundle-secure',
+  enterprise:  'bundle-enterprise',
+}
+
+export const BUNDLE_LABEL_MAP: Record<string, string> = {
+  launch:      'Astacraft Launch™',
+  growth:      'Astacraft Growth™',
+  operations:  'Astacraft Operations™',
+  secure:      'Astacraft Secure™',
+  enterprise:  'Astacraft Enterprise™',
+}
 
 export const CONTACT_BUDGETS = [
   { value: 'under-10k',  label: 'Under GH₵ 10,000' },

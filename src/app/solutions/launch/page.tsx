@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Rocket, Globe, Mail, Server, ShieldCheck, Headphones, ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
+import { SolutionStickyBar } from '@/components/SolutionStickyBar'
 
 export const revalidate = 3600
 
@@ -370,6 +371,7 @@ export default function LaunchPage() {
           </div>
         </div>
       </section>
+      <SolutionStickyBar bundle="launch" name="Astacraft Launch™" price="GH₵ 2,500" />
     </>
   )
 }

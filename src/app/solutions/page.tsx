@@ -209,6 +209,20 @@ export default function SolutionsPage() {
               </Link>
             ))}
           </div>
+
+          {/* "Not sure?" inline prompt */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 border border-[rgba(var(--ch-border),0.10)] bg-[var(--color-surface)] px-8 py-5 reveal">
+            <div>
+              <p className="font-serif font-medium text-[16px] text-[var(--color-text)]">Not sure which bundle fits your business?</p>
+              <p className="text-[13px] text-[rgba(var(--ch-text),0.45)] mt-0.5">Book a free 30-minute call and we&apos;ll recommend the right one.</p>
+            </div>
+            <Link
+              href="/contact?ref=help-me-choose"
+              className="shrink-0 font-mono text-[10px] tracking-[0.14em] uppercase font-medium border border-[rgba(var(--ch-accent),0.25)] text-[var(--color-accent)] px-6 py-3 hover:bg-[var(--color-accent)] hover:text-white hover:border-[var(--color-accent)] transition-all duration-200"
+            >
+              Help Me Choose →
+            </Link>
+          </div>
         </div>
       </section>
 

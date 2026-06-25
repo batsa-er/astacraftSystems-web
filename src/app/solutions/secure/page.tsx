@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ShieldCheck, Eye, HardDrive, ClipboardList, BookOpen, AlertTriangle, ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
+import { SolutionStickyBar } from '@/components/SolutionStickyBar'
 
 export const revalidate = 3600
 
@@ -383,6 +384,7 @@ export default function SecurePage() {
           </div>
         </div>
       </section>
+      <SolutionStickyBar bundle="secure" name="Astacraft Secure™" price="from GH₵ 2,000/mo" />
     </>
   )
 }
