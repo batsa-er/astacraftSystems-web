@@ -23,7 +23,7 @@ export default async function Footer() {
   ]
 
   return (
-    <footer className="bg-[var(--color-dark)]">
+    <footer className="bg-[var(--color-accent)]">
 
       {/* ── Main grid ── */}
       <div className="px-[clamp(24px,5vw,80px)] pt-16 pb-12">
@@ -154,7 +154,7 @@ export default async function Footer() {
           </div>
 
           {/* ── Bottom strip ── */}
-          <div className="border-t border-[rgba(255,255,255,0.06)] pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="border-t border-[rgba(255,255,255,0.12)] pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <p className="font-mono text-[10px] tracking-[0.06em] text-[rgba(255,255,255,0.40)]">
               © {new Date().getFullYear()} Astacraft Systems Limited · Accra, Ghana
             </p>

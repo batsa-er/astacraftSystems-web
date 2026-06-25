@@ -677,17 +677,20 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* CTA */}
-      <section className="bg-[var(--color-accent)] px-[clamp(24px,5vw,80px)] py-24 text-center">
-        <div className="max-w-[700px] mx-auto">
-          <h2 className="font-serif font-bold text-white mb-4" style={{ fontSize: 'clamp(24px,3vw,40px)' }}>
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden text-center">
+        <div className="absolute inset-0 hero-grid opacity-40 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(29,71,118,0.14),transparent)] pointer-events-none" />
+        <div className="relative max-w-[700px] mx-auto">
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.30)] mb-4">Let&apos;s talk strategy</p>
+          <h2 className="font-serif font-bold text-white mb-4" style={{ fontSize: 'clamp(28px,3vw,48px)' }}>
             Want this applied to your business?
           </h2>
-          <p className="text-[rgba(255,255,255,0.60)] mb-8 text-[15px] leading-relaxed">
+          <p className="text-[rgba(255,255,255,0.50)] mb-10 text-[15px] leading-relaxed max-w-[44ch] mx-auto">
             Book a complimentary strategy call and we will show you how these principles apply to your specific market and stage.
           </p>
           <Link
             href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-white text-[var(--color-accent)] px-10 py-4 hover:bg-[#F6F7FB] transition-colors duration-200"
+            className="btn-shimmer inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
           >
             Book Strategy Call →
           </Link>

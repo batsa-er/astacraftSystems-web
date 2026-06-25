@@ -4,11 +4,70 @@ import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Code2, Server, Users, Receipt, RefreshCw, Zap, ShieldCheck, MonitorCheck } from 'lucide-react'
+import { Code2, Server, Users, Receipt, RefreshCw, Zap, ShieldCheck, MonitorCheck, Rocket, TrendingUp, Workflow, Globe, BookOpen, Users2, CreditCard } from 'lucide-react'
 
-type DropdownId = 'solutions' | 'products' | null
+type DropdownId = 'solutions' | 'products' | 'bundles' | null
 
 const DARK_PAGES = ['/']
+
+const solutionBundles = [
+  {
+    Icon: Rocket,
+    href: '/solutions/launch',
+    title: 'Astacraft Launch™',
+    desc: 'Domain, website, email & hosting for startups',
+    tag: 'Startups',
+  },
+  {
+    Icon: TrendingUp,
+    href: '/solutions/growth',
+    title: 'Astacraft Growth™',
+    desc: 'CRM, automation & collaboration for scaling SMEs',
+    tag: 'SMEs',
+  },
+  {
+    Icon: Workflow,
+    href: '/solutions/operations',
+    title: 'Astacraft Operations™',
+    desc: 'Workflow automation, portals & document management',
+    tag: 'Digitization',
+  },
+  {
+    Icon: ShieldCheck,
+    href: '/solutions/secure',
+    title: 'Astacraft Secure™',
+    desc: 'Cybersecurity, endpoint protection & compliance',
+    tag: 'Security',
+  },
+  {
+    Icon: Globe,
+    href: '/solutions/enterprise',
+    title: 'Astacraft Enterprise™',
+    desc: 'Cloud migration, custom software & transformation',
+    tag: 'Enterprise',
+  },
+]
+
+const comingSoonProducts = [
+  {
+    Icon: BookOpen,
+    title: 'AstaBooks',
+    desc: 'Accounting, bookkeeping & financial reporting for African SMEs',
+    status: 'In Development',
+  },
+  {
+    Icon: Users2,
+    title: 'AstaHR',
+    desc: 'HR management, payroll & leave tracking',
+    status: 'In Design',
+  },
+  {
+    Icon: CreditCard,
+    title: 'AstaPay',
+    desc: 'Business payments, bulk disbursements & treasury',
+    status: 'Planned',
+  },
+]
 
 const productPlatforms = [
   { Icon: Receipt, href: '/products',              title: 'AstaBill',                        desc: 'Invoicing & payments for African businesses' },
@@ -181,6 +240,22 @@ export default function Nav() {
           {/* Desktop links */}
           <ul className="hidden lg:flex items-center gap-1 list-none">
 
+            {/* Solutions — lifecycle bundles */}
+            <li
+              onMouseEnter={() => openDropdown('bundles')}
+              onMouseLeave={scheduleClose}
+            >
+              <button
+                onClick={() => setDropdown(dropdown === 'bundles' ? null : 'bundles')}
+                onKeyDown={e => handleTriggerKeyDown(e, 'bundles')}
+                aria-haspopup="menu"
+                aria-expanded={dropdown === 'bundles'}
+                className={dropdownBtnCls(dropdown === 'bundles' || pathname.startsWith('/solutions'))}
+              >
+                Solutions <ChevronDown open={dropdown === 'bundles'} />
+              </button>
+            </li>
+
             {/* Products — first, SaaS-first positioning */}
             <li
               onMouseEnter={() => openDropdown('products')}
@@ -270,6 +345,78 @@ export default function Nav() {
           </button>
         </nav>
 
+        {/* ── Solutions bundles dropdown ── */}
+        {dropdown === 'bundles' && (
+          <div
+            ref={dropdownContainerRef}
+            role="menu"
+            className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
+            onMouseEnter={() => openDropdown('bundles')}
+            onMouseLeave={scheduleClose}
+            onKeyDown={handleMenuKeyDown}
+          >
+            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
+              <div className="grid grid-cols-[1fr_280px] gap-10">
+
+                {/* Bundle list */}
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-accent)] mb-6">Business Lifecycle</p>
+                  <div className="grid grid-cols-1 gap-0">
+                    {solutionBundles.map(({ Icon, href, title, desc, tag }) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        role="menuitem"
+                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
+                      >
+                        <div className="w-9 h-9 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
+                          <Icon className="w-4 h-4 text-[rgba(var(--ch-accent),0.45)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-0.5">
+                            <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
+                            <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-1.5 py-0.5 bg-[rgba(var(--ch-accent),0.08)] text-[rgba(var(--ch-accent),0.60)] border border-[rgba(var(--ch-accent),0.12)]">{tag}</span>
+                          </div>
+                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA panel */}
+                <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
+                  <div>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Find Your Bundle</p>
+                    <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
+                      From startup<br />to enterprise.
+                    </h3>
+                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
+                      Every Astacraft bundle is designed for a specific stage of business growth. Start where you are — scale as you grow.
+                    </p>
+                    <ul className="space-y-2.5 mb-8">
+                      {['Fixed-price bundles', 'Managed & supported', 'Upgrade at any stage'].map(item => (
+                        <li key={item} className="flex items-center gap-2.5">
+                          <span className="w-1 h-1 rounded-full bg-[var(--color-green)] shrink-0" />
+                          <span className="text-[12px] text-[rgba(255,255,255,0.45)]">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Link
+                    href="/contact"
+                    role="menuitem"
+                    className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
+                  >
+                    Start a Project →
+                  </Link>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── Products dropdown ── */}
         {dropdown === 'products' && (
           <div
@@ -280,49 +427,134 @@ export default function Nav() {
             onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
-            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="grid grid-cols-[1fr_260px] gap-0 max-w-[720px]">
+            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-0">
+              <div className="grid grid-cols-[1fr_272px] gap-0">
 
-                {/* AstaBill card */}
-                <Link
-                  href="/products"
-                  role="menuitem"
-                  className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-7 hover:border-[rgba(34,166,86,0.40)] transition-colors duration-200 group"
-                >
-                  <div className="mb-6">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Image src="/astabill-logo.svg"       alt="AstaBill" width={106} height={28} className="h-7 w-auto dark:hidden" />
-                      <Image src="/astabill-logo-white.svg" alt="AstaBill" width={106} height={28} className="h-7 w-auto hidden dark:block" />
-                      <span className="font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.10)] text-[var(--color-green)] border border-[rgba(34,166,86,0.20)]">Live</span>
-                    </div>
-                    <p className="text-[12px] text-[rgba(var(--ch-text),0.45)]">Invoicing & payment platform for African businesses</p>
+                {/* ── Left: product suite ── */}
+                <div className="py-10 pr-10 border-r border-[rgba(var(--ch-border),0.08)]">
+
+                  {/* header row */}
+                  <div className="flex items-center justify-between mb-6">
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.35)]">Product Suite</p>
+                    <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.08)] text-[var(--color-green)] border border-[rgba(34,166,86,0.18)]">
+                      1 live · 3 in development
+                    </span>
                   </div>
-                  <div className="grid grid-cols-3 gap-3 mb-6">
-                    {[
-                      { stat: 'GH₵ 2M+', label: 'Processed' },
-                      { stat: '<5 min',   label: 'To first invoice' },
-                      { stat: 'Free',     label: 'To start' },
-                    ].map(({ stat, label }) => (
-                      <div key={label} className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-bg)] p-3 text-center">
-                        <p className="font-serif font-bold text-[var(--color-text)] text-[15px] mb-0.5">{stat}</p>
-                        <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
+
+                  {/* AstaBill — live featured row */}
+                  <Link
+                    href="/products"
+                    role="menuitem"
+                    className="flex items-center gap-6 border border-[rgba(var(--ch-border),0.10)] bg-[var(--color-surface)] px-5 py-4 mb-7 hover:border-[rgba(34,166,86,0.35)] transition-colors duration-200 group"
+                  >
+                    <div className="shrink-0">
+                      <div className="flex items-center gap-2.5 mb-1">
+                        <Image src="/astabill-logo.svg" alt="AstaBill" width={90} height={24} className="h-[22px] w-auto" />
+                        <span className="flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-green)] animate-pulse shrink-0" />
+                          <span className="font-mono text-[8px] tracking-[0.16em] uppercase text-[var(--color-green)]">Live</span>
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-[rgba(var(--ch-text),0.40)]">Invoicing & payments for African businesses</p>
+                    </div>
+                    <div className="flex items-center gap-6 ml-auto shrink-0">
+                      {[
+                        { stat: 'GH₵ 2M+', label: 'Processed' },
+                        { stat: '<5 min',   label: 'First invoice' },
+                        { stat: 'Free',     label: 'To start' },
+                      ].map(({ stat, label }) => (
+                        <div key={label} className="text-center">
+                          <p className="font-serif font-bold text-[var(--color-text)] text-[14px] leading-none mb-0.5">{stat}</p>
+                          <p className="font-mono text-[8px] tracking-[0.10em] uppercase text-[rgba(var(--ch-text),0.28)]">{label}</p>
+                        </div>
+                      ))}
+                      <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(var(--ch-accent),0.50)] group-hover:text-[var(--color-green)] transition-colors duration-200 ml-1">
+                        View →
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* In development divider */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="font-mono text-[9px] tracking-[0.20em] uppercase text-[rgba(var(--ch-text),0.28)]">In development</span>
+                    <span className="flex-1 h-px bg-[rgba(var(--ch-border),0.10)]" />
+                  </div>
+
+                  {/* Coming soon cards */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {comingSoonProducts.map(({ Icon, title, desc, status }) => (
+                      <div
+                        key={title}
+                        className="border border-[rgba(var(--ch-border),0.10)] bg-[var(--color-surface)] p-5 hover:border-[rgba(var(--ch-accent),0.20)] transition-colors duration-200 cursor-default"
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.12)] bg-[rgba(var(--ch-accent),0.04)] flex items-center justify-center">
+                            <Icon className="w-3.5 h-3.5 text-[rgba(var(--ch-accent),0.30)]" />
+                          </div>
+                          <span className={`font-mono text-[8px] tracking-[0.12em] uppercase px-1.5 py-0.5 border ${
+                            status === 'In Development'
+                              ? 'border-[rgba(var(--ch-accent),0.20)] text-[rgba(var(--ch-accent),0.55)] bg-[rgba(var(--ch-accent),0.05)]'
+                              : status === 'In Design'
+                              ? 'border-[rgba(var(--ch-border),0.18)] text-[rgba(var(--ch-text),0.40)]'
+                              : 'border-[rgba(var(--ch-border),0.12)] text-[rgba(var(--ch-text),0.28)]'
+                          }`}>
+                            {status}
+                          </span>
+                        </div>
+                        <p className="font-mono text-[11px] tracking-[0.04em] font-medium text-[var(--color-text)] mb-1.5">{title}</p>
+                        <p className="text-[11px] text-[rgba(var(--ch-text),0.38)] leading-snug">{desc}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-accent)] group-hover:text-[var(--color-green)] transition-colors duration-200">
-                    View product →
-                  </p>
-                </Link>
 
-                {/* Navy CTA panel */}
-                <div className="bg-[var(--color-accent)] p-7 flex flex-col justify-between">
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Get Started</p>
-                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
-                      Free to start. See how AstaBill handles invoicing and payments end-to-end.
-                    </p>
+                </div>
+
+                {/* ── Right: navy roadmap panel ── */}
+                <div className="bg-[var(--color-accent)] py-10 px-8 relative overflow-hidden flex flex-col justify-between">
+                  <div className="absolute inset-0 hero-grid opacity-[0.12] pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(var(--ch-green),0.10),transparent)] pointer-events-none" />
+
+                  <div className="relative">
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.30)] mb-8">Product Roadmap</p>
+
+                    {/* Timeline */}
+                    <div className="relative">
+                      <div className="absolute left-[7px] top-2 bottom-0 w-px bg-[rgba(255,255,255,0.07)]" />
+                      <div className="space-y-6">
+
+                        {/* AstaBill — live */}
+                        <div className="flex items-start gap-4">
+                          <div className="relative mt-[3px] shrink-0 w-[15px] flex items-center justify-center">
+                            <div className="w-[15px] h-[15px] rounded-full border-2 border-[var(--color-green)] bg-[var(--color-accent)] flex items-center justify-center">
+                              <div className="w-[5px] h-[5px] rounded-full bg-[var(--color-green)]" />
+                            </div>
+                          </div>
+                          <div>
+                            <p className="font-mono text-[8px] tracking-[0.18em] uppercase text-[var(--color-green)] mb-0.5">Now — Live</p>
+                            <p className="font-mono text-[11px] font-medium text-white leading-snug">AstaBill</p>
+                            <p className="text-[11px] text-[rgba(255,255,255,0.28)]">Invoicing & payments</p>
+                          </div>
+                        </div>
+
+                        {comingSoonProducts.map(({ title, desc, status }) => (
+                          <div key={title} className="flex items-start gap-4">
+                            <div className="mt-[3px] shrink-0 w-[15px] flex items-center justify-center">
+                              <div className="w-[13px] h-[13px] rounded-full border border-[rgba(255,255,255,0.18)] bg-[var(--color-accent)]" />
+                            </div>
+                            <div>
+                              <p className="font-mono text-[8px] tracking-[0.16em] uppercase text-[rgba(255,255,255,0.30)] mb-0.5">{status}</p>
+                              <p className="font-mono text-[11px] font-medium text-[rgba(255,255,255,0.55)] leading-snug">{title}</p>
+                              <p className="text-[11px] text-[rgba(255,255,255,0.22)]">{desc.split(',')[0]}</p>
+                            </div>
+                          </div>
+                        ))}
+
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-3">
+
+                  {/* CTAs */}
+                  <div className="relative mt-8 pt-7 border-t border-[rgba(255,255,255,0.07)] space-y-2.5">
                     <a
                       href="https://astabill.com"
                       target="_blank"
@@ -330,16 +562,17 @@ export default function Nav() {
                       role="menuitem"
                       className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-5 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
                     >
-                      Try Free →
+                      Try AstaBill Free →
                     </a>
                     <Link
-                      href="/contact"
+                      href="/contact?ref=product-roadmap"
                       role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-5 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
+                      className="block font-mono text-[10px] tracking-[0.12em] uppercase border border-[rgba(255,255,255,0.15)] text-[rgba(255,255,255,0.45)] px-5 py-3 hover:border-[rgba(255,255,255,0.30)] hover:text-[rgba(255,255,255,0.70)] transition-colors duration-200 text-center"
                     >
-                      Book Demo
+                      Get Early Access
                     </Link>
                   </div>
+
                 </div>
 
               </div>
@@ -462,6 +695,7 @@ export default function Nav() {
           className="fixed inset-0 bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8"
         >
           {[
+            { href: '/solutions', label: 'Solutions' },
             { href: '/products',  label: 'Products' },
             { href: '/services',  label: 'Enterprise' },
             { href: '/work',      label: 'Customers' },

@@ -33,18 +33,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE,                       lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/about`,            lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/services`,         lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/products`,         lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/products/crm`,     lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/work`,             lastModified: now, changeFrequency: 'weekly',  priority: 0.7 },
-    { url: `${BASE}/insights`,         lastModified: now, changeFrequency: 'daily',   priority: 0.8 },
-    { url: `${BASE}/contact`,          lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/security`,         lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE}/careers`,          lastModified: now, changeFrequency: 'weekly',  priority: 0.6 },
-    { url: `${BASE}/privacy`,          lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
-    { url: `${BASE}/terms`,            lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
+    { url: BASE,                                lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE}/about`,                     lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/services`,                  lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/products`,                  lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE}/products/crm`,              lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/solutions`,                 lastModified: now, changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${BASE}/solutions/launch`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/solutions/growth`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/solutions/operations`,      lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/solutions/secure`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/solutions/enterprise`,      lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/work`,                      lastModified: now, changeFrequency: 'weekly',  priority: 0.7 },
+    { url: `${BASE}/insights`,                  lastModified: now, changeFrequency: 'daily',   priority: 0.8 },
+    { url: `${BASE}/contact`,                   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/security`,                  lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/careers`,                   lastModified: now, changeFrequency: 'weekly',  priority: 0.6 },
+    { url: `${BASE}/privacy`,                   lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
+    { url: `${BASE}/terms`,                     lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
   ]
 
   const serviceRoutes: MetadataRoute.Sitemap = serviceSlugs.map(slug => ({
