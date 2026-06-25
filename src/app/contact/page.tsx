@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
 }
 
+import { Suspense } from 'react'
 import { getSiteSettings } from '@/sanity/queries'
 import PageHero from '@/components/PageHero'
 import ContactForm from './ContactForm'
@@ -181,7 +182,9 @@ export default async function ContactPage() {
           </div>
 
           {/* Right — form */}
-          <ContactForm />
+          <Suspense fallback={<div className="h-[640px] border border-[rgba(var(--ch-border),0.10)] bg-[rgba(var(--ch-bg),0.5)] animate-pulse" />}>
+            <ContactForm />
+          </Suspense>
         </div>
       </section>
     </>
