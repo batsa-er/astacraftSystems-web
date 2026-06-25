@@ -59,7 +59,7 @@ const jsonLd = [
 const includes = [
   { Icon: Globe,       title: 'Domain & DNS',     desc: 'Register your business domain and configure DNS records correctly from day one.' },
   { Icon: Rocket,      title: 'Business Website', desc: '3 to 10-page professional website built to your brand, optimised for search.' },
-  { Icon: Mail,        title: 'Business Email',   desc: 'Google Workspace setup with branded email addresses for your team.' },
+  { Icon: Mail,        title: 'Business Email',   desc: 'Zoho Mail (Starter) or Google Workspace (Standard+) — branded email addresses configured and managed for your team. Email hosting is billed directly by the provider.' },
   { Icon: Server,      title: 'Web Hosting',      desc: 'Fast managed hosting on enterprise infrastructure — no technical setup needed.' },
   { Icon: ShieldCheck, title: 'SSL Certificate',  desc: 'HTTPS encryption installed and auto-renewed so your site is always secure.' },
   { Icon: Headphones,  title: 'Setup Support',    desc: 'Hands-on onboarding and setup support after launch.' },
@@ -76,7 +76,7 @@ const tiers = [
     features: [
       { label: '3-page website', included: true },
       { label: 'Domain registration (1 year)', included: true },
-      { label: 'Business email — 2 accounts', included: true },
+      { label: 'Business email — 2 accounts (Zoho Mail)', included: true },
       { label: 'Shared hosting + SSL', included: true },
       { label: '30-day setup support', included: true },
       { label: 'Monthly content updates', included: false },
@@ -95,7 +95,7 @@ const tiers = [
     features: [
       { label: '5-page website', included: true },
       { label: 'Domain registration (1 year)', included: true },
-      { label: 'Business email — 10 accounts', included: true },
+      { label: 'Business email — 10 accounts (Google Workspace)', included: true },
       { label: 'Managed hosting + SSL', included: true },
       { label: '90-day setup support', included: true },
       { label: 'Monthly content updates', included: true },
@@ -114,7 +114,7 @@ const tiers = [
     features: [
       { label: '10-page website + blog', included: true },
       { label: 'Domain registration (1 year)', included: true },
-      { label: 'Business email — unlimited accounts', included: true },
+      { label: 'Business email — unlimited accounts (Google Workspace)', included: true },
       { label: 'Premium hosting + SSL', included: true },
       { label: '6-month setup & onboarding support', included: true },
       { label: 'Bi-weekly content updates', included: true },
@@ -255,7 +255,7 @@ export default function LaunchPage() {
             ))}
           </div>
           <p className="font-mono text-[10px] tracking-[0.10em] text-[rgba(var(--ch-text),0.35)] mt-4">
-            All prices in Ghana Cedis (GH₵). Setup is a one-time fee; monthly covers hosting, managed services, and support. Prices subject to scope.
+            All prices in Ghana Cedis (GH₵). Setup is a one-time fee; monthly covers hosting, managed services, and support. Prices subject to scope. · Email hosting (Zoho Mail / Google Workspace) is billed directly by the provider at their standard per-user rates.
           </p>
         </div>
       </section>
