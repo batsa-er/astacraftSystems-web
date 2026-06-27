@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { LinkedInIcon, XIcon, FacebookIcon, InstagramIcon } from '@/components/Icons'
 import { getSiteSettings } from '@/sanity/queries'
+import { NewsletterCapture } from '@/components/NewsletterCapture'
 
 export default async function Footer() {
   let settings = null
@@ -61,6 +62,7 @@ export default async function Footer() {
               >
                 {email}
               </a>
+              <NewsletterCapture />
             </div>
 
             {/* Solutions column */}

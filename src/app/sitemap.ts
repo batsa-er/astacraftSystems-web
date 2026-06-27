@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getServices, getCaseStudies, getInsights } from '@/sanity/queries'
+import { INDUSTRIES } from '@/config/industries'
 
 const BASE = 'https://astacraftsystems.com'
 
@@ -81,5 +82,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       }))
 
-  return [...staticRoutes, ...serviceRoutes, ...workRoutes, ...insightRoutes]
+  const industryRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE}/industries`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    ...INDUSTRIES.map(i => ({
+      url: `${BASE}/industries/${i.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    })),
+  ]
+
+  return [...staticRoutes, ...industryRoutes, ...serviceRoutes, ...workRoutes, ...insightRoutes]
 }

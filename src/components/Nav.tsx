@@ -4,9 +4,10 @@ import { useState, useEffect, useRef, startTransition } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Code2, Server, Users, Receipt, RefreshCw, Zap, ShieldCheck, MonitorCheck, Rocket, TrendingUp, Workflow, Globe, BookOpen, Users2, CreditCard } from 'lucide-react'
+import { Code2, Server, Users, RefreshCw, Zap, ShieldCheck, MonitorCheck, Rocket, TrendingUp, Workflow, Globe, BookOpen, Users2, CreditCard } from 'lucide-react'
+import { INDUSTRIES } from '@/config/industries'
 
-type DropdownId = 'solutions' | 'products' | 'bundles' | null
+type DropdownId = 'platform' | 'products' | 'industries' | null
 
 const DARK_PAGES = ['/']
 
@@ -74,18 +75,14 @@ const comingSoonProducts = [
   },
 ]
 
-const productPlatforms = [
-  { Icon: Receipt, href: '/products',              title: 'AstaBill',                        desc: 'Invoicing & payments for African businesses' },
-  { Icon: Users,   href: '/services/crm-erp',      title: 'CRM & ERP Implementation',        desc: 'Salesforce, Odoo & SAP deployments' },
-  { Icon: Zap,     href: '/services/api-automation', title: 'System Integration & Automation', desc: 'Connect systems, automate workflows end-to-end' },
-]
-
-const enterpriseSystems = [
-  { Icon: Code2,     href: '/services/software-development',   title: 'Software Development',           desc: 'Web, mobile, SaaS & enterprise apps' },
-  { Icon: Server,    href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure',          desc: 'Hosting, migration & managed infra' },
-  { Icon: RefreshCw, href: '/services/digital-transformation', title: 'Business Process Transformation', desc: 'Process redesign & digitization' },
-  { Icon: ShieldCheck, href: '/services/cybersecurity',        title: 'Cybersecurity & SOC Monitoring',  desc: 'Audits, pen testing & 24/7 monitoring' },
-  { Icon: MonitorCheck, href: '/services/it-consulting',       title: 'IT Consulting & Managed Services', desc: 'Strategy, advisory & managed IT' },
+const capabilities = [
+  { Icon: Code2,        href: '/services/software-development',   title: 'Software Development',   desc: 'Web, mobile, SaaS & enterprise apps' },
+  { Icon: Server,       href: '/services/cloud-solutions',        title: 'Cloud & Infrastructure', desc: 'Hosting, migration & managed infra' },
+  { Icon: Users,        href: '/services/crm-erp',               title: 'CRM & ERP',              desc: 'Salesforce, Odoo & SAP deployments' },
+  { Icon: Zap,          href: '/services/api-automation',         title: 'API & Automation',       desc: 'Connect systems & automate workflows' },
+  { Icon: RefreshCw,    href: '/services/digital-transformation', title: 'Process Transformation', desc: 'Process redesign & digitization' },
+  { Icon: ShieldCheck,  href: '/services/cybersecurity',          title: 'Cybersecurity',          desc: 'Audits, pen testing & SOC monitoring' },
+  { Icon: MonitorCheck, href: '/services/it-consulting',          title: 'IT Consulting',          desc: 'Strategy, advisory & managed IT' },
 ]
 
 function ChevronDown({ open }: { open: boolean }) {
@@ -245,23 +242,23 @@ export default function Nav() {
           {/* Desktop links */}
           <ul className="hidden lg:flex items-center gap-1 list-none">
 
-            {/* Solutions — lifecycle bundles */}
+            {/* Platform — lifecycle bundles + capabilities */}
             <li
-              onMouseEnter={() => openDropdown('bundles')}
+              onMouseEnter={() => openDropdown('platform')}
               onMouseLeave={scheduleClose}
             >
               <button
-                onClick={() => setDropdown(dropdown === 'bundles' ? null : 'bundles')}
-                onKeyDown={e => handleTriggerKeyDown(e, 'bundles')}
+                onClick={() => setDropdown(dropdown === 'platform' ? null : 'platform')}
+                onKeyDown={e => handleTriggerKeyDown(e, 'platform')}
                 aria-haspopup="menu"
-                aria-expanded={dropdown === 'bundles'}
-                className={dropdownBtnCls(dropdown === 'bundles' || pathname.startsWith('/solutions'))}
+                aria-expanded={dropdown === 'platform'}
+                className={dropdownBtnCls(dropdown === 'platform' || pathname.startsWith('/solutions') || pathname.startsWith('/services'))}
               >
-                Solutions <ChevronDown open={dropdown === 'bundles'} />
+                Platform <ChevronDown open={dropdown === 'platform'} />
               </button>
             </li>
 
-            {/* Products — first, SaaS-first positioning */}
+            {/* Products */}
             <li
               onMouseEnter={() => openDropdown('products')}
               onMouseLeave={scheduleClose}
@@ -277,24 +274,23 @@ export default function Nav() {
               </button>
             </li>
 
-            {/* Enterprise — was Solutions */}
+            {/* Industries dropdown */}
             <li
-              onMouseEnter={() => openDropdown('solutions')}
+              onMouseEnter={() => openDropdown('industries')}
               onMouseLeave={scheduleClose}
             >
               <button
-                onClick={() => setDropdown(dropdown === 'solutions' ? null : 'solutions')}
-                onKeyDown={e => handleTriggerKeyDown(e, 'solutions')}
+                onClick={() => setDropdown(dropdown === 'industries' ? null : 'industries')}
+                onKeyDown={e => handleTriggerKeyDown(e, 'industries')}
                 aria-haspopup="menu"
-                aria-expanded={dropdown === 'solutions'}
-                className={dropdownBtnCls(dropdown === 'solutions' || pathname.startsWith('/services'))}
+                aria-expanded={dropdown === 'industries'}
+                className={dropdownBtnCls(dropdown === 'industries' || pathname.startsWith('/industries') || pathname.startsWith('/work'))}
               >
-                Enterprise <ChevronDown open={dropdown === 'solutions'} />
+                Industries <ChevronDown open={dropdown === 'industries'} />
               </button>
             </li>
 
             {[
-              { href: '/work',     label: 'Customers' },
               { href: '/about',    label: 'About' },
               { href: '/insights', label: 'Insights' },
             ].map(l => (
@@ -313,18 +309,20 @@ export default function Nav() {
                 rel="noopener noreferrer"
                 className="font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 bg-[var(--color-green)] text-white hover:bg-[var(--color-green-hover)] transition-colors duration-200"
               >
-                Try AstaBill →
+                Try AstaBill Free →
               </a>
-              <Link
-                href="/contact"
+              <a
+                href="https://calendly.com/astacraftsystems/technology-strategy-call"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`font-mono text-[11px] tracking-[0.12em] uppercase font-medium px-5 py-2.5 border transition-colors duration-200 ${
                   isDarkPage && !scrolled
                     ? 'border-[rgba(255,255,255,0.30)] text-[rgba(255,255,255,0.70)] hover:border-[rgba(255,255,255,0.60)] hover:text-white'
                     : 'border-[rgba(var(--ch-accent),0.30)] text-[rgba(var(--ch-text),0.70)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]'
                 }`}
               >
-                Contact Sales
-              </Link>
+                Book a Call
+              </a>
             </li>
           </ul>
 
@@ -350,20 +348,20 @@ export default function Nav() {
           </button>
         </nav>
 
-        {/* ── Solutions bundles dropdown ── */}
-        {dropdown === 'bundles' && (
+        {/* ── Platform dropdown ── */}
+        {dropdown === 'platform' && (
           <div
             ref={dropdownContainerRef}
             role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
-            onMouseEnter={() => openDropdown('bundles')}
+            onMouseEnter={() => openDropdown('platform')}
             onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="grid grid-cols-[1fr_280px] gap-10">
+              <div className="grid grid-cols-[1fr_1fr_280px] gap-10">
 
-                {/* Bundle list */}
+                {/* Col 1: Business Lifecycle */}
                 <div>
                   <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-accent)] mb-6">Business Lifecycle</p>
                   <div className="grid grid-cols-1 gap-0">
@@ -390,15 +388,38 @@ export default function Nav() {
                   </div>
                 </div>
 
-                {/* CTA panel */}
+                {/* Col 2: Capabilities */}
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.35)] mb-6">Capabilities</p>
+                  <div>
+                    {capabilities.map(({ Icon, href, title, desc }) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        role="menuitem"
+                        className="flex items-start gap-3.5 py-3 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
+                      >
+                        <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.10)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.04)] transition-all duration-150">
+                          <Icon className="w-3.5 h-3.5 text-[rgba(var(--ch-accent),0.35)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
+                        </div>
+                        <div>
+                          <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
+                          <p className="text-[11px] text-[rgba(var(--ch-text),0.40)] leading-snug">{desc}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Col 3: CTA panel */}
                 <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
                   <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Find Your Bundle</p>
+                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Find Your Solution</p>
                     <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
                       From startup<br />to enterprise.
                     </h3>
                     <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
-                      Every Astacraft bundle is designed for a specific stage of business growth. Start where you are — scale as you grow.
+                      Every bundle is designed for a specific stage of business growth. Start where you are — scale as you grow.
                     </p>
                     <ul className="space-y-2.5 mb-8">
                       {['Fixed-price bundles', 'Managed & supported', 'Upgrade at any stage'].map(item => (
@@ -595,104 +616,50 @@ export default function Nav() {
           </div>
         )}
 
-        {/* ── Enterprise mega-dropdown ── */}
-        {dropdown === 'solutions' && (
+        {/* ── Industries dropdown ── */}
+        {dropdown === 'industries' && (
           <div
             ref={dropdownContainerRef}
             role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
-            onMouseEnter={() => openDropdown('solutions')}
+            onMouseEnter={() => openDropdown('industries')}
             onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
-            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="grid grid-cols-[1fr_1fr_300px] gap-10">
-
-                {/* Column 1: Product Platforms */}
-                <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-green)] mb-6">Product Platforms</p>
-                  <div>
-                    {productPlatforms.map(({ Icon, href, title, desc }) => (
-                      <Link
-                        key={href + title}
-                        href={href}
-                        role="menuitem"
-                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
-                      >
-                        <div className="w-9 h-9 border border-[rgba(var(--ch-green),0.18)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-green)] group-hover:bg-[rgba(var(--ch-green),0.06)] transition-all duration-150">
-                          <Icon className="w-4 h-4 text-[rgba(var(--ch-green),0.50)] group-hover:text-[var(--color-green)] transition-colors duration-150" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-green)] transition-colors duration-150">{title}</p>
-                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Column 2: Enterprise Systems */}
-                <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.50)] mb-6">Enterprise Solutions</p>
-                  <div>
-                    {enterpriseSystems.map(({ Icon, href, title, desc }) => (
-                      <Link
-                        key={href + title}
-                        href={href}
-                        role="menuitem"
-                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
-                      >
-                        <div className="w-9 h-9 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
-                          <Icon className="w-4 h-4 text-[rgba(var(--ch-accent),0.45)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
-                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Column 3: Navy CTA panel */}
-                <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-6">Our Solutions</p>
-                    <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
-                      SaaS-first.<br />Enterprise-grade.
-                    </h3>
-                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
-                      Start with AstaBill free, or talk to us about a full enterprise systems engagement.
-                    </p>
-                    <ul className="space-y-2.5 mb-8">
-                      {['Free to start with AstaBill', 'Enterprise systems on demand', 'African businesses, global standards'].map(item => (
-                        <li key={item} className="flex items-center gap-2.5">
-                          <span className="w-1 h-1 rounded-full bg-[var(--color-green)] shrink-0" />
-                          <span className="text-[12px] text-[rgba(255,255,255,0.45)]">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="space-y-3">
-                    <a
-                      href="https://astabill.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
-                    >
-                      Try AstaBill Free →
-                    </a>
-                    <Link
-                      href="/contact"
-                      role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.65)] px-6 py-3 hover:border-[rgba(255,255,255,0.50)] hover:text-white transition-colors duration-200 text-center"
-                    >
-                      Book a Technology Call
-                    </Link>
-                  </div>
-                </div>
-
+            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-8">
+              <div className="grid grid-cols-2 gap-x-10 gap-y-0 mb-6">
+                {INDUSTRIES.map(({ name, slug, desc, Icon }) => (
+                  <Link
+                    key={slug}
+                    href={`/industries/${slug}`}
+                    role="menuitem"
+                    className="flex items-start gap-3.5 py-3 border-b border-[rgba(var(--ch-border),0.07)] group transition-colors duration-150"
+                  >
+                    <div className="w-7 h-7 border border-[rgba(var(--ch-accent),0.10)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.04)] transition-all duration-150">
+                      <Icon className="w-3 h-3 text-[rgba(var(--ch-accent),0.35)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150 leading-none mb-0.5">{name}</p>
+                      <p className="text-[11px] text-[rgba(var(--ch-text),0.38)] leading-snug">{desc}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className="pt-3 border-t border-[rgba(var(--ch-border),0.10)] flex items-center justify-between">
+                <Link
+                  href="/industries"
+                  role="menuitem"
+                  className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                >
+                  All industries →
+                </Link>
+                <Link
+                  href="/work"
+                  role="menuitem"
+                  className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                >
+                  Case studies →
+                </Link>
               </div>
             </div>
           </div>
@@ -710,12 +677,11 @@ export default function Nav() {
           className="fixed inset-0 bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8"
         >
           {[
-            { href: '/solutions', label: 'Solutions' },
-            { href: '/products',  label: 'Products' },
-            { href: '/services',  label: 'Enterprise' },
-            { href: '/work',      label: 'Customers' },
-            { href: '/about',     label: 'About' },
-            { href: '/insights',  label: 'Insights' },
+            { href: '/solutions',  label: 'Platform' },
+            { href: '/products',   label: 'Products' },
+            { href: '/industries', label: 'Industries' },
+            { href: '/about',      label: 'About' },
+            { href: '/insights',   label: 'Insights' },
           ].map((l) => (
             <Link
               key={l.href}
@@ -734,12 +700,14 @@ export default function Nav() {
             >
               Try AstaBill Free →
             </a>
-            <Link
-              href="/contact"
+            <a
+              href="https://calendly.com/astacraftsystems/technology-strategy-call"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full text-center font-mono text-[13px] tracking-[0.12em] uppercase font-medium border border-[rgba(var(--ch-accent),0.35)] text-[var(--color-text)] px-12 py-4 hover:border-[var(--color-accent)] transition-colors duration-200"
             >
-              Contact Sales →
-            </Link>
+              Book a Call →
+            </a>
           </div>
         </div>
       )}

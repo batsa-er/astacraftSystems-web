@@ -7,6 +7,7 @@ import { DesignTestimonial } from '@/components/ui/design-testimonial'
 import { CountUp } from '@/components/CountUp'
 import { IndustriesWork } from '@/components/IndustriesWork'
 import { ParticlesWrapper } from '@/components/ui/particles-wrapper'
+import { INDUSTRIES } from '@/config/industries'
 
 export const revalidate = 3600
 
@@ -45,16 +46,6 @@ const CLIENTS = [
   'QuickMart Retail', 'Nexus Health', 'Ghana Revenue Authority', 'Ecobank',
 ]
 
-const INDUSTRIES = [
-  { name: 'Financial Services', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Telecoms',           img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Energy & Utilities', img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Healthcare',         img: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Retail & Commerce',  img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Government',         img: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Real Estate',        img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=600&q=75&auto=format&fit=crop' },
-  { name: 'Agritech',           img: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&q=75&auto=format&fit=crop' },
-]
 
 const FALLBACK_CASES: CaseStudy[] = [
   { _id: '1', client: 'Stanbic Business Finance', industry: 'Financial Services', summary: 'Full Salesforce CRM implementation for a pan-African business finance division — unifying 12 regional offices.', metric1_num: '62%', metric1_label: 'Faster deal cycle',       metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'stanbic-crm-transformation' } },
@@ -616,7 +607,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           INDUSTRIES + WORK
       ───────────────────────────────────────────────────────────────── */}
-      <IndustriesWork industries={INDUSTRIES} caseStudies={displayCases} />
+      <IndustriesWork industries={INDUSTRIES} />
 
       {/* ─────────────────────────────────────────────────────────────────
           TESTIMONIALS

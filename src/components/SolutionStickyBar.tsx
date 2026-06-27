@@ -52,7 +52,7 @@ export function SolutionStickyBar({ bundle, name, price }: Props) {
             Start a Project →
           </Link>
           <a
-            href="https://calendly.com/payledge/30min"
+            href="https://calendly.com/astacraftsystems/technology-strategy-call"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:block font-mono text-[10px] tracking-[0.12em] uppercase border border-[rgba(255,255,255,0.20)] text-[rgba(255,255,255,0.50)] px-5 py-3 hover:border-[rgba(255,255,255,0.40)] hover:text-[rgba(255,255,255,0.80)] transition-colors duration-200"

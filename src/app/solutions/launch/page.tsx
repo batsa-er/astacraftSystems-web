@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Rocket, Globe, Mail, Server, ShieldCheck, Headphones, ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
 import { SolutionStickyBar } from '@/components/SolutionStickyBar'
+import { SolutionLeadForm } from '@/components/SolutionLeadForm'
 
 export const revalidate = 3600
 
@@ -336,6 +337,24 @@ export default function LaunchPage() {
             >
               View Growth bundle <ArrowRight className="w-3.5 h-3.5" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── INLINE FORM ─── */}
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-20 border-t border-[rgba(var(--ch-border),0.08)]">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start reveal">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.35)] mb-4">Get started</p>
+              <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4" style={{ fontSize: 'clamp(26px,2.5vw,36px)' }}>
+                Get a proposal in 24 hours.
+              </h2>
+              <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] leading-relaxed">
+                Tell us about your business and we&apos;ll be in touch within one business day to confirm your strategy call.
+              </p>
+            </div>
+            <SolutionLeadForm bundle="launch" />
           </div>
         </div>
       </section>

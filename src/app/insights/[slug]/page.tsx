@@ -457,6 +457,24 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+const SERVICE_TO_BUNDLE: Record<string, string> = {
+  'cybersecurity':          'secure',
+  'crm-erp':                'growth',
+  'digital-transformation': 'operations',
+  'api-automation':         'operations',
+  'cloud-solutions':        'enterprise',
+  'software-development':   'enterprise',
+  'it-consulting':          'enterprise',
+}
+
+function bundleFromServices(services: { slug: string }[]): string | null {
+  for (const svc of services) {
+    const b = SERVICE_TO_BUNDLE[svc.slug]
+    if (b) return b
+  }
+  return null
+}
+
 export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
@@ -485,6 +503,9 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   const coverSrc = ins.coverImage
     ? urlFor(ins.coverImage).width(1200).height(514).url()
     : ins.image ?? null
+
+  const ctaBundle = bundleFromServices((ins.relatedServices || []) as { slug: string }[])
+  const ctaHref = ctaBundle ? `/contact?bundle=${ctaBundle}` : '/contact'
 
   return (
     <>
@@ -689,7 +710,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             Book a complimentary strategy call and we will show you how these principles apply to your specific market and stage.
           </p>
           <Link
-            href="/contact"
+            href={ctaHref}
             className="btn-shimmer inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
           >
             Book Strategy Call →

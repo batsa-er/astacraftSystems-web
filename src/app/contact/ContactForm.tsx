@@ -27,7 +27,7 @@ export default function ContactForm() {
   const isHelpMeChoose = ref === 'help-me-choose'
 
   const [form, setForm] = useState({
-    name: '', email: '', company: '',
+    name: '', email: '', company: '', phone: '',
     service: bundleService,
     budget: '', message: '',
   })
@@ -67,6 +67,12 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', { method: 'POST', body: fd })
       if (!res.ok) throw new Error()
       setStatus('sent')
+      window.gtag?.('event', 'form_submit', {
+        event_category: 'Contact',
+        event_label: form.service || 'unknown',
+        bundle: form.service,
+        budget: form.budget,
+      })
     } catch {
       setStatus('error')
     }
@@ -115,7 +121,7 @@ export default function ContactForm() {
           </div>
 
           <a
-            href="https://calendly.com/payledge/30min"
+            href="https://calendly.com/astacraftsystems/technology-strategy-call"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-8 py-3.5 hover:bg-[var(--color-green-hover)] transition-colors duration-200 mb-6"
@@ -188,7 +194,7 @@ export default function ContactForm() {
               </div>
             </div>
 
-            {/* Company + Service */}
+            {/* Company + Phone */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="cf-company" className={labelCls}>Company</label>
@@ -199,20 +205,33 @@ export default function ContactForm() {
                 />
               </div>
               <div>
-                <label htmlFor="cf-service" className={labelCls}>What are you looking for? *</label>
-                <div className="relative">
-                  <select
-                    id="cf-service" required
-                    value={form.service} onChange={set('service')}
-                    className={`${inputCls} appearance-none pr-10 ${form.service ? 'text-[var(--color-text)]' : 'text-[rgba(var(--ch-text),0.35)]'}`}
-                  >
-                    <option value="" disabled>Select a service</option>
-                    {CONTACT_SERVICES.map(({ value, label }) => (
-                      <option key={value} value={value}>{label}</option>
-                    ))}
-                  </select>
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[rgba(var(--ch-text),0.38)] text-[10px]">▾</span>
-                </div>
+                <label htmlFor="cf-phone" className={labelCls}>
+                  Phone{' '}
+                  <span className="text-[rgba(var(--ch-text),0.28)] normal-case tracking-normal">— optional</span>
+                </label>
+                <input
+                  id="cf-phone" type="tel" autoComplete="tel"
+                  value={form.phone} onChange={set('phone')}
+                  className={inputCls} placeholder="+233 XX XXX XXXX"
+                />
+              </div>
+            </div>
+
+            {/* Service */}
+            <div>
+              <label htmlFor="cf-service" className={labelCls}>What are you looking for? *</label>
+              <div className="relative">
+                <select
+                  id="cf-service" required
+                  value={form.service} onChange={set('service')}
+                  className={`${inputCls} appearance-none pr-10 ${form.service ? 'text-[var(--color-text)]' : 'text-[rgba(var(--ch-text),0.35)]'}`}
+                >
+                  <option value="" disabled>Select a service</option>
+                  {CONTACT_SERVICES.map(({ value, label }) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[rgba(var(--ch-text),0.38)] text-[10px]">▾</span>
               </div>
             </div>
 

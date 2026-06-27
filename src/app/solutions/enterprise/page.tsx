@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Globe, Cloud, Code2, Network, Map, Users2, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
 import { SolutionStickyBar } from '@/components/SolutionStickyBar'
+import { SolutionLeadForm } from '@/components/SolutionLeadForm'
 
 export const revalidate = 3600
 
@@ -296,6 +297,24 @@ export default function EnterprisePage() {
                 <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── INLINE FORM ─── */}
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-20 border-t border-[rgba(var(--ch-border),0.08)]">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start reveal">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.35)] mb-4">Get started</p>
+              <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-4" style={{ fontSize: 'clamp(26px,2.5vw,36px)' }}>
+                Start with a discovery call.
+              </h2>
+              <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] leading-relaxed">
+                We scope and price your engagement before any commitment. One call, full clarity.
+              </p>
+            </div>
+            <SolutionLeadForm bundle="enterprise" />
           </div>
         </div>
       </section>
