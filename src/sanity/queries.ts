@@ -78,7 +78,7 @@ export async function getServiceBySlug(slug: string): Promise<ServiceDetail | nu
   const data = await client.fetch(
     `*[_type == "service" && slug.current == $slug][0] {
       _id, slug, number, title, tagline, description, outcomes, price, detail, process, stats,
-      faq[]{ q, a }, seoTitle, seoDescription
+      coverImage, faq[]{ q, a }, seoTitle, seoDescription
     }`,
     { slug },
   )

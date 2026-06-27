@@ -85,6 +85,7 @@ export interface ServiceDetail extends Service {
   process?: ProcessStep[]
   stats?: ServiceStat[]
   faq?: ServiceFaq[]
+  coverImage?: SanityImage
   seoTitle?: string
   seoDescription?: string
 }

@@ -6,8 +6,10 @@ import { getServices, getServiceBySlug } from '@/sanity/queries'
 import type { ServiceDetail, ProcessStep } from '@/sanity/types'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
-import { getServiceIcon, SERVICE_INDUSTRIES } from '@/config/services'
+import { getServiceIcon, SERVICE_INDUSTRIES, SERVICE_HERO_IMAGES } from '@/config/services'
 import { INDUSTRY_MAP } from '@/config/industries'
+import { urlFor } from '@/sanity/client'
+import type { SanityImage } from '@/sanity/types'
 
 export const revalidate = 3600
 
@@ -313,9 +315,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!svc) svc = (fallbackServices[slug] as ServiceDetail | undefined) ?? null
   if (!svc) notFound()
 
-  const category = categoryMap[slug] ?? { label: 'Service', color: 'rgba(255,255,255,0.40)' }
-  const stats    = svc.stats   || fallbackServices[slug]?.stats   || []
-  const process  = svc.process || fallbackServices[slug]?.process || []
+  const category  = categoryMap[slug] ?? { label: 'Service', color: 'rgba(255,255,255,0.40)' }
+  const stats     = svc.stats   || fallbackServices[slug]?.stats   || []
+  const process   = svc.process || fallbackServices[slug]?.process || []
+  const heroImage = svc.coverImage
+    ? urlFor(svc.coverImage as SanityImage).width(1600).height(900).url()
+    : (SERVICE_HERO_IMAGES[slug] ?? null)
 
   const idx     = ALL_SLUGS.indexOf(slug)
   const related = [1, 2, 3].map(offset => {
@@ -374,11 +379,23 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       ]} />
 
       {/* ─── HERO ─── */}
-      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] pt-40 pb-28 overflow-hidden">
-        <div className="absolute inset-0 hero-grid opacity-50 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_60%_-10%,rgba(27,78,140,0.14),transparent)] pointer-events-none" />
+      <section
+        className="relative flex flex-col justify-end bg-[var(--color-dark)] overflow-hidden"
+        style={{ minHeight: '640px' }}
+      >
+        {heroImage && (
+          <Image
+            src={heroImage}
+            alt={svc.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,30,64,0.97)] via-[rgba(13,30,64,0.65)] to-[rgba(13,30,64,0.18)]" />
 
-        <div className="relative max-w-[1000px] mx-auto">
+        <div className="relative z-10 px-[clamp(24px,5vw,80px)] pb-16 pt-40 max-w-[1000px]">
           <Link
             href="/services"
             className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(255,255,255,0.30)] hover:text-[rgba(255,255,255,0.70)] transition-colors mb-10 hero-in hero-in-1"

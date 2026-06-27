@@ -33,6 +33,7 @@ export default defineType({
         preview: { select: { title: 'num', subtitle: 'label' } },
       }],
     }),
+    defineField({ name: 'coverImage', title: 'Hero Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'price', title: 'Price Label', type: 'string', placeholder: 'From $8,000 / mo' }),
     defineField({ name: 'order', title: 'Order',       type: 'number' }),
     defineField({

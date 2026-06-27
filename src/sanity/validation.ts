@@ -92,6 +92,7 @@ export const ServiceDetailSchema = ServiceSchema.extend({
   process:        z.array(z.string()).optional(),
   stats:          z.array(ServiceStatSchema).optional(),
   faq:            z.array(ServiceFaqSchema).optional(),
+  coverImage:     z.any().optional(),
   seoTitle:       z.string().optional(),
   seoDescription: z.string().optional(),
 }) satisfies z.ZodType<ServiceDetail>
