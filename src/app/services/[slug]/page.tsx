@@ -1,13 +1,15 @@
 import { createElement } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getServices, getServiceBySlug } from '@/sanity/queries'
 import type { ServiceDetail, ProcessStep } from '@/sanity/types'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/JsonLd'
+import { getServiceIcon, SERVICE_INDUSTRIES } from '@/config/services'
+import { INDUSTRY_MAP } from '@/config/industries'
 
 export const revalidate = 3600
-import { getServiceIcon } from '@/config/services'
 
 export async function generateStaticParams() {
   try {
@@ -321,6 +323,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     return { ...fallbackServices[s], slug: s, Icon: getServiceIcon(s) }
   })
 
+  const industryVerticals = (SERVICE_INDUSTRIES[slug] ?? [])
+    .map(s => INDUSTRY_MAP[s])
+    .filter(Boolean)
+
   return (
     <>
       <JsonLd data={[
@@ -540,6 +546,65 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
+
+      {/* ─── INDUSTRIES ─── */}
+      {industryVerticals.length > 0 && (
+        <section className="bg-[var(--color-surface)] border-t border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-20">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="flex items-end justify-between mb-10 reveal">
+              <div>
+                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-3">
+                  Industries we deploy this in
+                </p>
+                <h2
+                  className="font-serif font-black text-[var(--color-text)] leading-tight"
+                  style={{ fontSize: 'clamp(22px,2.8vw,36px)' }}
+                >
+                  Where this capability delivers results.
+                </h2>
+              </div>
+              <Link
+                href="/industries"
+                className="hidden md:inline-block font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-200"
+              >
+                All industries →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {industryVerticals.map(({ name, slug: iSlug, desc, img, Icon: IIcon }, i) => (
+                <Link
+                  key={iSlug}
+                  href={`/industries/${iSlug}`}
+                  className="group relative overflow-hidden aspect-[4/3] bg-[var(--color-dark)] reveal"
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  <Image
+                    src={img}
+                    alt={name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover opacity-[0.22] group-hover:opacity-[0.50] transition-opacity duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,52,0.92)] via-[rgba(10,22,52,0.50)] to-[rgba(10,22,52,0.18)]" />
+                  <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                    <div className="w-7 h-7 border border-[rgba(255,255,255,0.14)] flex items-center justify-center group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.15)] transition-all duration-300">
+                      <IIcon className="w-3 h-3 text-[rgba(255,255,255,0.40)] group-hover:text-[var(--color-accent)] transition-colors duration-300" />
+                    </div>
+                    <div>
+                      <p className="font-serif font-bold text-white text-[15px] leading-tight mb-1">{name}</p>
+                      <p className="text-[11px] text-[rgba(255,255,255,0.40)] leading-snug mb-3">{desc}</p>
+                      <span className="inline-flex items-center gap-1 font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0)] group-hover:text-[rgba(255,255,255,0.65)] transition-all duration-300">
+                        Explore →
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── FAQ ─── */}
       {(svc.faq || fallbackServices[slug]?.faq || []).length > 0 && (

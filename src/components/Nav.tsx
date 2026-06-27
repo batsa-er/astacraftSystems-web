@@ -97,7 +97,24 @@ function ChevronDown({ open }: { open: boolean }) {
   )
 }
 
-export default function Nav() {
+export interface NavFeaturedCase {
+  client: string
+  industry: string
+  navMetric: string
+  slug: string
+  imageUrl: string | null
+}
+
+const FALLBACK_CASE: NavFeaturedCase = {
+  client:    'Stanbic Business Finance',
+  industry:  'Financial Services · CRM Implementation',
+  navMetric: '62% faster deal cycle',
+  slug:      'stanbic-crm-transformation',
+  imageUrl:  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=520&h=420&q=75&auto=format&fit=crop',
+}
+
+export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }) {
+  const navCase = featuredCase ?? FALLBACK_CASE
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [dropdown, setDropdown]       = useState<DropdownId>(null)
@@ -358,31 +375,29 @@ export default function Nav() {
             onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
-            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-10">
-              <div className="grid grid-cols-[1fr_1fr_280px] gap-10">
+            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-8">
+              <div className="grid grid-cols-2 gap-16">
 
                 {/* Col 1: Business Lifecycle */}
                 <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-accent)] mb-6">Business Lifecycle</p>
-                  <div className="grid grid-cols-1 gap-0">
-                    {solutionBundles.map(({ Icon, href, title, desc, tag, price }) => (
+                  <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-5">Business Lifecycle</p>
+                  <div>
+                    {solutionBundles.map(({ Icon, href, title }) => (
                       <Link
                         key={href}
                         href={href}
                         role="menuitem"
-                        className="flex items-start gap-4 py-3.5 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
+                        className="flex items-center gap-3 py-3 border-b border-[rgba(var(--ch-border),0.07)] last:border-0 group transition-colors duration-150"
                       >
-                        <div className="w-9 h-9 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
-                          <Icon className="w-4 h-4 text-[rgba(var(--ch-accent),0.45)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
+                        <div className="w-7 h-7 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center shrink-0 group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-150">
+                          <Icon className="w-3 h-3 text-[rgba(var(--ch-accent),0.40)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-0.5">
-                            <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
-                            <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-1.5 py-0.5 bg-[rgba(var(--ch-accent),0.08)] text-[rgba(var(--ch-accent),0.60)] border border-[rgba(var(--ch-accent),0.12)]">{tag}</span>
-                            <span className="ml-auto font-mono text-[10px] text-[rgba(var(--ch-text),0.30)] group-hover:text-[rgba(var(--ch-accent),0.55)] transition-colors duration-150 shrink-0">{price}</span>
-                          </div>
-                          <p className="text-[12px] text-[rgba(var(--ch-text),0.45)] leading-snug">{desc}</p>
-                        </div>
+                        <span className="flex-1 font-mono text-[12px] tracking-[0.04em] text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150">
+                          {title}
+                        </span>
+                        <span className="font-mono text-[11px] text-[rgba(var(--ch-text),0)] group-hover:text-[var(--color-accent)] transition-all duration-150 group-hover:translate-x-0.5">
+                          →
+                        </span>
                       </Link>
                     ))}
                   </div>
@@ -390,64 +405,43 @@ export default function Nav() {
 
                 {/* Col 2: Capabilities */}
                 <div>
-                  <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.35)] mb-6">Capabilities</p>
+                  <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[rgba(var(--ch-text),0.35)] mb-5">Capabilities</p>
                   <div>
-                    {capabilities.map(({ Icon, href, title, desc }) => (
+                    {capabilities.map(({ Icon, href, title }) => (
                       <Link
                         key={href}
                         href={href}
                         role="menuitem"
-                        className="flex items-start gap-3.5 py-3 border-b border-[rgba(var(--ch-border),0.08)] last:border-0 group transition-colors duration-150"
+                        className="flex items-center gap-3 py-3 border-b border-[rgba(var(--ch-border),0.07)] last:border-0 group transition-colors duration-150"
                       >
-                        <div className="w-8 h-8 border border-[rgba(var(--ch-accent),0.10)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.04)] transition-all duration-150">
-                          <Icon className="w-3.5 h-3.5 text-[rgba(var(--ch-accent),0.35)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
+                        <div className="w-7 h-7 border border-[rgba(var(--ch-accent),0.10)] flex items-center justify-center shrink-0 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.04)] transition-all duration-150">
+                          <Icon className="w-3 h-3 text-[rgba(var(--ch-accent),0.35)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
                         </div>
-                        <div>
-                          <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] mb-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-150">{title}</p>
-                          <p className="text-[11px] text-[rgba(var(--ch-text),0.40)] leading-snug">{desc}</p>
-                        </div>
+                        <span className="flex-1 font-mono text-[12px] tracking-[0.04em] text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150">
+                          {title}
+                        </span>
+                        <span className="font-mono text-[11px] text-[rgba(var(--ch-text),0)] group-hover:text-[var(--color-accent)] transition-all duration-150 group-hover:translate-x-0.5">
+                          →
+                        </span>
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                {/* Col 3: CTA panel */}
-                <div className="bg-[var(--color-accent)] p-8 flex flex-col justify-between">
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(255,255,255,0.40)] mb-4">Find Your Solution</p>
-                    <h3 className="font-serif text-[20px] font-bold text-white mb-3 leading-tight">
-                      From startup<br />to enterprise.
-                    </h3>
-                    <p className="text-[13px] text-[rgba(255,255,255,0.50)] leading-relaxed mb-6">
-                      Every bundle is designed for a specific stage of business growth. Start where you are — scale as you grow.
-                    </p>
-                    <ul className="space-y-2.5 mb-8">
-                      {['Fixed-price bundles', 'Managed & supported', 'Upgrade at any stage'].map(item => (
-                        <li key={item} className="flex items-center gap-2.5">
-                          <span className="w-1 h-1 rounded-full bg-[var(--color-green)] shrink-0" />
-                          <span className="text-[12px] text-[rgba(255,255,255,0.45)]">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="space-y-2.5">
-                    <Link
-                      href="/contact"
-                      role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-6 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200 text-center"
-                    >
-                      Start a Project →
-                    </Link>
-                    <Link
-                      href="/contact?ref=help-me-choose"
-                      role="menuitem"
-                      className="block font-mono text-[10px] tracking-[0.12em] uppercase border border-[rgba(255,255,255,0.20)] text-[rgba(255,255,255,0.50)] px-6 py-3 hover:border-[rgba(255,255,255,0.40)] hover:text-white transition-colors duration-200 text-center"
-                    >
-                      Not sure? We&apos;ll help →
-                    </Link>
-                  </div>
-                </div>
+              </div>
 
+              {/* Bottom CTA strip */}
+              <div className="mt-6 pt-5 border-t border-[rgba(var(--ch-border),0.08)] flex items-center justify-between">
+                <p className="text-[12px] text-[rgba(var(--ch-text),0.35)]">Not sure where to start?</p>
+                <a
+                  href="https://calendly.com/astacraftsystems/technology-strategy-call"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="menuitem"
+                  className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                >
+                  Book a free call →
+                </a>
               </div>
             </div>
           </div>
@@ -621,46 +615,84 @@ export default function Nav() {
           <div
             ref={dropdownContainerRef}
             role="menu"
-            className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
+            className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)] overflow-hidden"
             onMouseEnter={() => openDropdown('industries')}
             onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
-            <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-8">
-              <div className="grid grid-cols-2 gap-x-10 gap-y-0 mb-6">
-                {INDUSTRIES.map(({ name, slug, desc, Icon }) => (
+            <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_260px]">
+
+              {/* Left: industry list */}
+              <div className="px-[clamp(24px,5vw,80px)] py-8 pr-10">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-0 mb-6">
+                  {INDUSTRIES.map(({ name, slug, desc, Icon }) => (
+                    <Link
+                      key={slug}
+                      href={`/industries/${slug}`}
+                      role="menuitem"
+                      className="flex items-start gap-3 py-2.5 border-b border-[rgba(var(--ch-border),0.07)] group transition-colors duration-150"
+                    >
+                      <div className="w-6 h-6 border border-[rgba(var(--ch-accent),0.10)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.04)] transition-all duration-150">
+                        <Icon className="w-2.5 h-2.5 text-[rgba(var(--ch-accent),0.35)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
+                      </div>
+                      <div>
+                        <p className="font-mono text-[11px] tracking-[0.04em] font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150 leading-none mb-0.5">{name}</p>
+                        <p className="text-[10px] text-[rgba(var(--ch-text),0.38)] leading-snug">{desc}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="pt-3 border-t border-[rgba(var(--ch-border),0.08)]">
                   <Link
-                    key={slug}
-                    href={`/industries/${slug}`}
+                    href="/industries"
                     role="menuitem"
-                    className="flex items-start gap-3.5 py-3 border-b border-[rgba(var(--ch-border),0.07)] group transition-colors duration-150"
+                    className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-150"
                   >
-                    <div className="w-7 h-7 border border-[rgba(var(--ch-accent),0.10)] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[rgba(var(--ch-accent),0.30)] group-hover:bg-[rgba(var(--ch-accent),0.04)] transition-all duration-150">
-                      <Icon className="w-3 h-3 text-[rgba(var(--ch-accent),0.35)] group-hover:text-[var(--color-accent)] transition-colors duration-150" />
-                    </div>
-                    <div>
-                      <p className="font-mono text-[11px] tracking-[0.06em] font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150 leading-none mb-0.5">{name}</p>
-                      <p className="text-[11px] text-[rgba(var(--ch-text),0.38)] leading-snug">{desc}</p>
-                    </div>
+                    All industries →
                   </Link>
-                ))}
+                </div>
               </div>
-              <div className="pt-3 border-t border-[rgba(var(--ch-border),0.10)] flex items-center justify-between">
-                <Link
-                  href="/industries"
-                  role="menuitem"
-                  className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-150"
-                >
-                  All industries →
-                </Link>
-                <Link
-                  href="/work"
-                  role="menuitem"
-                  className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.40)] hover:text-[var(--color-accent)] transition-colors duration-150"
-                >
-                  Case studies →
-                </Link>
-              </div>
+
+              {/* Right: customer result card */}
+              <Link
+                href="/work"
+                role="menuitem"
+                className="group relative flex flex-col justify-end bg-[var(--color-dark)] overflow-hidden p-7"
+              >
+                {navCase.imageUrl && (
+                  <Image
+                    src={navCase.imageUrl}
+                    alt="Customer results"
+                    fill
+                    sizes="260px"
+                    className="object-cover opacity-[0.28] group-hover:opacity-[0.40] transition-opacity duration-500"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,30,64,0.97)] via-[rgba(13,30,64,0.65)] to-[rgba(13,30,64,0.20)]" />
+
+                <div className="relative z-10">
+                  <p className="font-mono text-[9px] tracking-[0.24em] uppercase text-[var(--color-green)] mb-4">
+                    Customer Result
+                  </p>
+                  <p
+                    className="font-serif font-black text-white leading-none mb-4"
+                    style={{ fontSize: 'clamp(28px,3vw,36px)' }}
+                  >
+                    &ldquo;{navCase.navMetric}&rdquo;
+                  </p>
+                  <p className="font-mono text-[10px] tracking-[0.06em] text-[rgba(255,255,255,0.55)] mb-0.5">
+                    {navCase.client}
+                  </p>
+                  <p className="font-mono text-[9px] tracking-[0.10em] text-[rgba(255,255,255,0.30)] mb-6">
+                    {navCase.industry}
+                  </p>
+                  <div className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.45)] group-hover:text-white transition-colors duration-200">
+                    View all results
+                    <span className="group-hover:translate-x-0.5 transition-transform duration-200">→</span>
+                  </div>
+                </div>
+              </Link>
+
             </div>
           </div>
         )}

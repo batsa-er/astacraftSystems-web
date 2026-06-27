@@ -25,6 +25,19 @@ export default defineType({
     defineField({ name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'published', title: 'Published', type: 'boolean', initialValue: true }),
     defineField({
+      name: 'featured',
+      title: 'Featured in Nav',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Show this case study in the Industries nav dropdown. Only one should be featured at a time.',
+    }),
+    defineField({
+      name: 'navMetric',
+      title: 'Nav Metric',
+      type: 'string',
+      description: 'Short result quote shown in the nav card, e.g. "62% faster deal cycle". Keep under 40 characters.',
+    }),
+    defineField({
       name: 'seoTitle',
       title: 'SEO Title',
       type: 'string',
