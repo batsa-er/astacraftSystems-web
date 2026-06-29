@@ -144,9 +144,6 @@ export default async function HomePage() {
         <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
 
         <div className="relative flex flex-col gap-3 px-[clamp(24px,5vw,80px)] pt-32 hero-in hero-in-1">
-          <p className="font-mono text-[11px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.38)]">
-            SaaS &amp; Enterprise Systems — Accra, Ghana
-          </p>
           <div className="badge-announce inline-flex items-center gap-3 border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-sm w-fit">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-green)] animate-status shrink-0" />
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.55)]">
