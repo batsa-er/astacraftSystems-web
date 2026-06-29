@@ -120,7 +120,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
   const [dropdown, setDropdown]       = useState<DropdownId>(null)
   const pathname  = usePathname()
   const wrapRef              = useRef<HTMLDivElement>(null)
-  const closeTimer           = useRef<ReturnType<typeof setTimeout> | null>(null)
   const keyboardOpen         = useRef(false)
   const dropdownContainerRef = useRef<HTMLDivElement>(null)
   const mobileDialogRef      = useRef<HTMLDivElement>(null)
@@ -195,15 +194,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
     return () => document.removeEventListener('keydown', handler)
   }, [mobileOpen])
 
-  function openDropdown(id: DropdownId) {
-    if (closeTimer.current) clearTimeout(closeTimer.current)
-    setDropdown(id)
-  }
-
-  function scheduleClose() {
-    closeTimer.current = setTimeout(() => setDropdown(null), 120)
-  }
-
   function handleTriggerKeyDown(e: React.KeyboardEvent, id: DropdownId) {
     if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
       e.preventDefault()
@@ -260,10 +250,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
           <ul className="hidden lg:flex items-center gap-1 list-none">
 
             {/* Platform — lifecycle bundles + capabilities */}
-            <li
-              onMouseEnter={() => openDropdown('platform')}
-              onMouseLeave={scheduleClose}
-            >
+            <li>
               <button
                 onClick={() => setDropdown(dropdown === 'platform' ? null : 'platform')}
                 onKeyDown={e => handleTriggerKeyDown(e, 'platform')}
@@ -276,10 +263,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             </li>
 
             {/* Products */}
-            <li
-              onMouseEnter={() => openDropdown('products')}
-              onMouseLeave={scheduleClose}
-            >
+            <li>
               <button
                 onClick={() => setDropdown(dropdown === 'products' ? null : 'products')}
                 onKeyDown={e => handleTriggerKeyDown(e, 'products')}
@@ -292,10 +276,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             </li>
 
             {/* Industries dropdown */}
-            <li
-              onMouseEnter={() => openDropdown('industries')}
-              onMouseLeave={scheduleClose}
-            >
+            <li>
               <button
                 onClick={() => setDropdown(dropdown === 'industries' ? null : 'industries')}
                 onKeyDown={e => handleTriggerKeyDown(e, 'industries')}
@@ -311,7 +292,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
               { href: '/about',    label: 'About' },
               { href: '/insights', label: 'Insights' },
             ].map(l => (
-              <li key={l.href} onMouseEnter={() => openDropdown(null)}>
+              <li key={l.href}>
                 <Link href={l.href} className={linkCls(pathname.startsWith(l.href))}>
                   {l.label}
                 </Link>
@@ -319,7 +300,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             ))}
 
             {/* Dual CTAs */}
-            <li className="ml-3 flex items-center gap-2" onMouseEnter={() => openDropdown(null)}>
+            <li className="ml-3 flex items-center gap-2">
               <a
                 href="https://astabill.com"
                 target="_blank"
@@ -371,8 +352,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             ref={dropdownContainerRef}
             role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
-            onMouseEnter={() => openDropdown('platform')}
-            onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-8">
@@ -453,8 +432,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             ref={dropdownContainerRef}
             role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
-            onMouseEnter={() => openDropdown('products')}
-            onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto px-[clamp(24px,5vw,80px)] py-0">
@@ -616,8 +593,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             ref={dropdownContainerRef}
             role="menu"
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)] overflow-hidden"
-            onMouseEnter={() => openDropdown('industries')}
-            onMouseLeave={scheduleClose}
             onKeyDown={handleMenuKeyDown}
           >
             <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_260px]">

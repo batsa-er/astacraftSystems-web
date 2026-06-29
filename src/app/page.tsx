@@ -242,8 +242,8 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           ASTABILL — flagship product, above the fold before services
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-green),0.10)_0%,transparent_60%)] pointer-events-none" />
+      <section className="relative bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-green),0.15)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
 
         <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">

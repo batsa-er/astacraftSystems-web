@@ -63,7 +63,7 @@ export default async function AboutPage() {
         eyebrow="About Astacraft Systems"
         title={<>Technology partner<br />for Africa&apos;s<br />most ambitious teams.</>}
         description="Astacraft Systems Limited is a technology, software, cloud, and digital transformation company based in Accra, Ghana. We help organizations across Africa modernize operations, automate workflows, and scale through technology."
-        image={{ src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=700&q=85&auto=format&fit=crop', alt: 'Astacraft Systems office' }}
+        image={{ src: '/about-hero.jpg', alt: 'Astacraft Systems team in a client meeting' }}
       />
 
       {/* Mission */}
