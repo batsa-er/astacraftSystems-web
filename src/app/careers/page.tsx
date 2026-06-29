@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { getCareers } from '@/sanity/queries'
@@ -33,6 +34,49 @@ export default async function CareersPage() {
         title={<>Build technology<br />that matters.</>}
         description="We hire engineers, architects, and strategists who care about impact. Every hire at Astacraft has the opportunity to shape technology outcomes for hundreds of businesses across Africa."
       />
+
+      {/* Culture split */}
+      <section className="bg-[var(--color-surface)] overflow-hidden">
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2">
+          {/* Copy */}
+          <div className="flex flex-col justify-center px-[clamp(24px,5vw,80px)] py-24 reveal">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6">Life at Astacraft</p>
+            <h2
+              className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6"
+              style={{ fontSize: 'clamp(28px,3vw,44px)' }}
+            >
+              Small team.<br />Serious work.
+            </h2>
+            <p className="text-[15px] text-[rgba(var(--ch-text),0.55)] leading-relaxed mb-8 max-w-[42ch]">
+              We&apos;re a focused group of engineers and strategists based in Accra. We don&apos;t pad teams — every person here owns a meaningful piece of the work and has direct visibility into outcomes for real businesses across Africa.
+            </p>
+            <ul className="space-y-3">
+              {[
+                'Accra-based, Africa-focused',
+                'Senior-weighted — no large junior pools',
+                'Direct client exposure from day one',
+                'Work that ships, not work that slides',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-[13px] text-[rgba(var(--ch-text),0.50)]">
+                  <span className="mt-[5px] shrink-0 w-1 h-1 rounded-full bg-[var(--color-green)]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Photo */}
+          <div className="relative min-h-[480px] lg:min-h-0">
+            <Image
+              src="/team-at-work.jpg"
+              alt="Astacraft team member at work"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Open roles */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
