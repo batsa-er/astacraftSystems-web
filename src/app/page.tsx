@@ -454,7 +454,7 @@ export default async function HomePage() {
               <Link
                 key={num}
                 href={href}
-                className="group relative flex flex-col bg-[var(--color-surface)] p-7 hover:bg-white transition-colors duration-300 overflow-hidden"
+                className="group relative flex flex-col bg-[var(--color-surface)] p-7 hover:bg-[var(--color-panel)] transition-colors duration-300 overflow-hidden"
               >
                 {/* Decorative background number */}
                 <span
