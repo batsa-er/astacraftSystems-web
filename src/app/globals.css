@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-ink:           #F6F7FB;
-  --color-surface:       #EEF2FF;
+  --color-surface:       #ECEEF6;
   --color-panel:         #FFFFFF;
   --color-border:        rgba(15,23,42,0.10);
   --color-border-strong: rgba(15,23,42,0.18);
@@ -31,6 +30,15 @@
   /* Dark section backgrounds — always dark regardless of light/dark mode */
   --color-dark:         #0A1628;
   --color-dark-deep:    #071020;
+  /* Brand navy — static, used for always-navy sections (e.g. AstaBill) */
+  --color-navy:         #1D4776;
+  /* Semantic status colours */
+  --color-warning:      #D97706;
+  --color-danger:       #F87171;
+  --color-secure:       #C0392B;
+  --ch-warning: 217,119,6;
+  --ch-danger:  248,113,113;
+  --ch-secure:  192,57,43;
   --ch-bg:     244,246,251;
   --ch-text:   8,12,20;
   --ch-border: 8,12,20;
@@ -134,7 +142,7 @@ body::before {
 
 /* ── Dot grid ── */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(37,99,235,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(var(--ch-accent),0.07) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -196,7 +204,7 @@ body::before {
   transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 .card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(29,71,118,0.22), 0 20px 60px rgba(29,71,118,0.08);
+  box-shadow: 0 0 0 1px rgba(var(--ch-accent),0.22), 0 20px 60px rgba(var(--ch-accent),0.08);
   transform: translateY(-2px);
 }
 
@@ -243,7 +251,7 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(29,71,118,0.03);
+  background: rgba(var(--ch-accent),0.03);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);

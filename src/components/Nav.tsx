@@ -443,7 +443,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
                   {/* header row */}
                   <div className="flex items-center justify-between mb-6">
                     <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[rgba(var(--ch-text),0.35)]">Product Suite</p>
-                    <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-2 py-0.5 bg-[rgba(34,166,86,0.08)] text-[var(--color-green)] border border-[rgba(34,166,86,0.18)]">
+                    <span className="font-mono text-[8px] tracking-[0.14em] uppercase px-2 py-0.5 bg-[rgba(var(--ch-green),0.08)] text-[var(--color-green)] border border-[rgba(var(--ch-green),0.18)]">
                       1 live · 3 in development
                     </span>
                   </div>
@@ -452,7 +452,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
                   <Link
                     href="/products"
                     role="menuitem"
-                    className="flex items-center gap-6 border border-[rgba(var(--ch-border),0.10)] bg-[var(--color-surface)] px-5 py-4 mb-7 hover:border-[rgba(34,166,86,0.35)] transition-colors duration-200 group"
+                    className="flex items-center gap-6 border border-[rgba(var(--ch-border),0.10)] bg-[var(--color-surface)] px-5 py-4 mb-7 hover:border-[rgba(var(--ch-green),0.35)] transition-colors duration-200 group"
                   >
                     <div className="shrink-0">
                       <div className="flex items-center gap-2.5 mb-1">

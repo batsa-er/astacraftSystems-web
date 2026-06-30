@@ -102,8 +102,8 @@ const SOLUTION_BUNDLES = [
     tag: 'Security',
     tagline: '24/7 SOC monitoring, endpoint protection & compliance.',
     price: 'from GH₵ 2,000/mo',
-    accent: '#C0392B',
-    accentRgb: '192,57,43',
+    accent: 'var(--color-secure)',
+    accentRgb: 'var(--ch-secure)',
     icon: ShieldCheck,
   },
   {
@@ -239,7 +239,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────────────────────────
           ASTABILL — flagship product, above the fold before services
       ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      <section className="relative bg-[var(--color-navy)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
         <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-green),0.15)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
 
@@ -343,7 +343,7 @@ export default async function HomePage() {
                     <div key={m.label} className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] p-3.5">
                       <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.25)] mb-2">{m.label}</p>
                       <p className="font-serif text-[13px] font-bold text-white leading-none mb-1.5">{m.val}</p>
-                      <p className={`font-mono text-[10px] ${m.green ? 'text-[var(--color-green)]' : 'text-[#D97706]'}`}>{m.note}</p>
+                      <p className={`font-mono text-[10px] ${m.green ? 'text-[var(--color-green)]' : 'text-[var(--color-warning)]'}`}>{m.note}</p>
                     </div>
                   ))}
                 </div>
@@ -368,8 +368,8 @@ export default async function HomePage() {
                         <p className="font-mono text-[11px] text-white mb-0.5">{inv.amount}</p>
                         <span className={`font-mono text-[9px] tracking-[0.1em] uppercase px-1.5 py-0.5 ${
                           inv.status === 'Paid'    ? 'text-[var(--color-green)] bg-[rgba(var(--ch-green),0.10)]' :
-                          inv.status === 'Overdue' ? 'text-[#F87171] bg-[rgba(248,113,113,0.10)]' :
-                          'text-[#D97706] bg-[rgba(217,119,6,0.10)]'
+                          inv.status === 'Overdue' ? 'text-[var(--color-danger)] bg-[rgba(var(--ch-danger),0.10)]' :
+                          'text-[var(--color-warning)] bg-[rgba(var(--ch-warning),0.10)]'
                         }`}>
                           {inv.status}
                         </span>
