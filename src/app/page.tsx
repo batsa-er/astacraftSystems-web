@@ -321,69 +321,152 @@ export default async function HomePage() {
           <div className="reveal lg:pl-4" style={{ transitionDelay: '140ms' }}>
             <div className="border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.025)] shadow-2xl overflow-hidden">
 
-              <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,80,80,0.40)]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,180,0,0.30)]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[rgba(var(--ch-green),0.30)]" />
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+                <span className="w-2 h-2 rounded-full bg-[rgba(255,80,80,0.40)]" />
+                <span className="w-2 h-2 rounded-full bg-[rgba(255,180,0,0.30)]" />
+                <span className="w-2 h-2 rounded-full bg-[rgba(var(--ch-green),0.30)]" />
                 <div className="ml-4 flex-1 bg-[rgba(255,255,255,0.05)] rounded-sm px-3 py-1 flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 opacity-20">
-                    <svg viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="white" strokeWidth="1"/><path d="M5 2v3l2 1" stroke="white" strokeWidth="1" strokeLinecap="round"/></svg>
-                  </span>
+                  <svg className="w-2.5 h-2.5 opacity-20 shrink-0" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="white" strokeWidth="1"/><path d="M5 2v3l2 1" stroke="white" strokeWidth="1" strokeLinecap="round"/></svg>
                   <span className="font-mono text-[10px] text-[rgba(255,255,255,0.25)] tracking-wide">astabill.com/dashboard</span>
                 </div>
               </div>
 
-              <div className="p-5 space-y-3">
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { label: 'Total Revenue',   val: 'GH₵ 84,200', note: '↑ 14% this month', green: true  },
-                    { label: 'Outstanding',     val: 'GH₵ 12,500', note: '3 invoices due',   green: false },
-                    { label: 'Paid This Month', val: 'GH₵ 31,700', note: '↑ 8% vs last',     green: true  },
-                  ].map(m => (
-                    <div key={m.label} className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] p-3.5">
-                      <p className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.25)] mb-2">{m.label}</p>
-                      <p className="font-serif text-[13px] font-bold text-white leading-none mb-1.5">{m.val}</p>
-                      <p className={`font-mono text-[10px] ${m.green ? 'text-[var(--color-green)]' : 'text-[var(--color-warning)]'}`}>{m.note}</p>
-                    </div>
-                  ))}
-                </div>
+              {/* Dashboard: sidebar + main */}
+              <div className="flex h-[490px]">
 
-                <div className="border border-[rgba(255,255,255,0.06)]">
-                  <div className="px-4 py-2.5 border-b border-[rgba(255,255,255,0.05)] flex justify-between items-center">
-                    <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">Recent Invoices</span>
-                    <span className="font-mono text-[10px] text-[var(--color-green)] hover:text-[var(--color-green-hover)] cursor-pointer">View all →</span>
+                {/* Sidebar */}
+                <div className="w-[148px] shrink-0 border-r border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.15)] flex flex-col pt-5 pb-4 px-3">
+                  <div className="px-1.5 mb-5">
+                    <Image src="/astabill-logo-white.svg" alt="AstaBill" width={76} height={20} className="h-[18px] w-auto opacity-80" />
                   </div>
-                  {[
-                    { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', status: 'Paid',    paid: true  },
-                    { id: 'INV-0041', client: 'Kente Exports Co',  amount: 'GH₵ 2,200', status: 'Pending', paid: false },
-                    { id: 'INV-0040', client: 'TechBridge Africa', amount: 'GH₵ 7,500', status: 'Paid',    paid: true  },
-                    { id: 'INV-0039', client: 'Volta Agro Ltd',    amount: 'GH₵ 1,950', status: 'Overdue', paid: false },
-                  ].map(inv => (
-                    <div key={inv.id} className="flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.04)] last:border-0 hover:bg-[rgba(255,255,255,0.02)] transition-colors duration-150">
-                      <div>
-                        <p className="font-mono text-[10px] text-[rgba(255,255,255,0.50)]">{inv.id}</p>
-                        <p className="text-[11px] text-[rgba(255,255,255,0.30)] mt-0.5">{inv.client}</p>
+                  <div className="flex flex-col gap-0.5 flex-1">
+                    {[
+                      { label: 'Overview',  active: true  },
+                      { label: 'Invoices',  active: false },
+                      { label: 'Payments',  active: false },
+                      { label: 'Clients',   active: false },
+                      { label: 'Reports',   active: false },
+                    ].map(({ label, active }) => (
+                      <div
+                        key={label}
+                        className={`flex items-center gap-2.5 px-2.5 py-[7px] ${
+                          active ? 'bg-[rgba(255,255,255,0.08)] text-white' : 'text-[rgba(255,255,255,0.30)]'
+                        }`}
+                      >
+                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${active ? 'bg-[var(--color-green)]' : 'bg-[rgba(255,255,255,0.12)]'}`} />
+                        <span className="font-mono text-[10px] tracking-[0.05em]">{label}</span>
                       </div>
-                      <div className="text-right">
-                        <p className="font-mono text-[11px] text-white mb-0.5">{inv.amount}</p>
-                        <span className={`font-mono text-[9px] tracking-[0.1em] uppercase px-1.5 py-0.5 ${
-                          inv.status === 'Paid'    ? 'text-[var(--color-green)] bg-[rgba(var(--ch-green),0.10)]' :
-                          inv.status === 'Overdue' ? 'text-[var(--color-danger)] bg-[rgba(var(--ch-danger),0.10)]' :
-                          'text-[var(--color-warning)] bg-[rgba(var(--ch-warning),0.10)]'
-                        }`}>
-                          {inv.status}
-                        </span>
-                      </div>
+                    ))}
+                  </div>
+                  <div className="border-t border-[rgba(255,255,255,0.06)] pt-3 flex items-center gap-2 px-1">
+                    <div className="w-6 h-6 rounded-full bg-[var(--color-green)] flex items-center justify-center shrink-0">
+                      <span className="font-mono text-[7px] text-white font-bold">KA</span>
                     </div>
-                  ))}
+                    <div className="min-w-0">
+                      <p className="font-mono text-[9px] text-[rgba(255,255,255,0.70)] truncate">Kwame A.</p>
+                      <p className="font-mono text-[8px] text-[rgba(255,255,255,0.28)]">Owner</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex gap-2 pt-1">
-                  {['New Invoice', 'Record Payment', 'Send Reminder'].map(action => (
-                    <button key={action} className="flex-1 font-mono text-[9px] tracking-[0.10em] uppercase text-[rgba(255,255,255,0.35)] border border-[rgba(255,255,255,0.08)] py-2 hover:border-[rgba(var(--ch-green),0.40)] hover:text-[var(--color-green)] transition-colors duration-150">
-                      {action}
-                    </button>
-                  ))}
+                {/* Main */}
+                <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+                  {/* Top bar */}
+                  <div className="flex items-center justify-between px-5 py-2.5 border-b border-[rgba(255,255,255,0.05)] shrink-0">
+                    <div>
+                      <p className="font-mono text-[11px] font-medium text-white tracking-[0.03em]">Overview</p>
+                      <p className="font-mono text-[8px] text-[rgba(255,255,255,0.28)] tracking-[0.10em] uppercase">June 2026</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="border border-[rgba(255,255,255,0.10)] px-2.5 py-1">
+                        <span className="font-mono text-[8px] text-[rgba(255,255,255,0.35)] tracking-[0.06em]">This month ↓</span>
+                      </div>
+                      <div className="bg-[var(--color-green)] px-3 py-1.5">
+                        <span className="font-mono text-[9px] text-white tracking-[0.10em] uppercase font-medium">+ New Invoice</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* KPI row */}
+                  <div className="grid grid-cols-3 border-b border-[rgba(255,255,255,0.05)] shrink-0">
+                    {[
+                      { label: 'Total Revenue',   val: 'GH₵ 84,200', sub: '↑ 14% vs last month', green: true  },
+                      { label: 'Outstanding',     val: 'GH₵ 12,500', sub: '3 invoices pending',   green: false },
+                      { label: 'Paid This Month', val: 'GH₵ 31,700', sub: '↑ 8% vs last month',   green: true  },
+                    ].map(({ label, val, sub, green }, i) => (
+                      <div key={label} className={`px-4 py-3 ${i > 0 ? 'border-l border-[rgba(255,255,255,0.05)]' : ''}`}>
+                        <p className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)] mb-1.5">{label}</p>
+                        <p className="font-serif text-[15px] font-bold text-white leading-none mb-1">{val}</p>
+                        <p className={`font-mono text-[9px] ${green ? 'text-[var(--color-green)]' : 'text-[var(--color-warning)]'}`}>{sub}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Chart + table */}
+                  <div className="flex-1 flex flex-col overflow-hidden px-4 pt-3 pb-3 gap-3 min-h-0">
+
+                    {/* Revenue sparkline */}
+                    <div className="shrink-0">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)]">Revenue — Jan to Jun</span>
+                        <span className="font-mono text-[9px] text-[var(--color-green)]">↑ 22% overall</span>
+                      </div>
+                      <svg viewBox="0 0 400 48" preserveAspectRatio="none" className="w-full h-12">
+                        <defs>
+                          <linearGradient id="ab-chart-fill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#55AA49" stopOpacity="0.22" />
+                            <stop offset="100%" stopColor="#55AA49" stopOpacity="0.01" />
+                          </linearGradient>
+                        </defs>
+                        {[12, 24, 36].map(y => (
+                          <line key={y} x1="0" y1={y} x2="400" y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+                        ))}
+                        <path d="M8,44 L88,36 L168,28 L248,20 L328,12 L392,6 L392,48 L8,48 Z" fill="url(#ab-chart-fill)" />
+                        <path d="M8,44 L88,36 L168,28 L248,20 L328,12 L392,6" fill="none" stroke="#55AA49" strokeWidth="1.5" strokeOpacity="0.65" strokeLinecap="round" strokeLinejoin="round" />
+                        {[{ cx: 8, cy: 44 }, { cx: 88, cy: 36 }, { cx: 168, cy: 28 }, { cx: 248, cy: 20 }, { cx: 328, cy: 12 }, { cx: 392, cy: 6 }].map(({ cx, cy }, i) => (
+                          <circle key={i} cx={cx} cy={cy} r="2.5" fill="#55AA49" fillOpacity="0.85" />
+                        ))}
+                      </svg>
+                      <div className="flex justify-between mt-1">
+                        {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map(m => (
+                          <span key={m} className="font-mono text-[8px] text-[rgba(255,255,255,0.18)]">{m}</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Invoice table */}
+                    <div className="flex-1 border border-[rgba(255,255,255,0.06)] flex flex-col min-h-0 overflow-hidden">
+                      <div className="grid grid-cols-[1fr_84px_68px] px-4 py-2 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] shrink-0">
+                        {['Client', 'Amount', 'Status'].map(h => (
+                          <span key={h} className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.22)]">{h}</span>
+                        ))}
+                      </div>
+                      {[
+                        { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', status: 'Paid',    paid: true,  overdue: false },
+                        { id: 'INV-0041', client: 'Kente Exports Co',  amount: 'GH₵ 2,200', status: 'Pending', paid: false, overdue: false },
+                        { id: 'INV-0040', client: 'TechBridge Africa', amount: 'GH₵ 7,500', status: 'Paid',    paid: true,  overdue: false },
+                        { id: 'INV-0039', client: 'Volta Agro Ltd',    amount: 'GH₵ 1,950', status: 'Overdue', paid: false, overdue: true  },
+                      ].map(inv => (
+                        <div key={inv.id} className="grid grid-cols-[1fr_84px_68px] items-center px-4 py-2.5 border-b border-[rgba(255,255,255,0.04)] last:border-0 hover:bg-[rgba(255,255,255,0.02)] transition-colors duration-150">
+                          <div className="min-w-0">
+                            <p className="font-mono text-[10px] text-white leading-none mb-0.5 truncate">{inv.client}</p>
+                            <p className="font-mono text-[8px] text-[rgba(255,255,255,0.25)]">{inv.id}</p>
+                          </div>
+                          <span className="font-mono text-[10px] text-white">{inv.amount}</span>
+                          <span className={`font-mono text-[8px] tracking-[0.10em] uppercase px-1.5 py-0.5 border w-fit ${
+                            inv.paid
+                              ? 'text-[var(--color-green)] bg-[rgba(var(--ch-green),0.10)] border-[rgba(var(--ch-green),0.22)]'
+                              : inv.overdue
+                              ? 'text-[var(--color-danger)] bg-[rgba(var(--ch-danger),0.10)] border-[rgba(var(--ch-danger),0.22)]'
+                              : 'text-[var(--color-warning)] bg-[rgba(var(--ch-warning),0.10)] border-[rgba(var(--ch-warning),0.22)]'
+                          }`}>{inv.status}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -400,8 +483,8 @@ export default async function HomePage() {
             <div
               key={label}
               className={[
-                'px-[clamp(12px,2.5vw,40px)] py-20 md:py-28 reveal',
-                'border-[rgba(255,255,255,0.06)]',
+                'px-[clamp(16px,3vw,40px)] py-10 md:py-12 reveal',
+                'border-[rgba(255,255,255,0.07)]',
                 i === 1 || i === 3 ? 'border-l' : '',
                 i < 2 ? 'border-b md:border-b-0' : '',
                 i === 2 ? 'md:border-l' : '',
@@ -409,12 +492,12 @@ export default async function HomePage() {
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <p
-                className="stat-display font-serif font-black leading-none tracking-[-0.04em] mb-4"
-                style={{ fontSize: 'clamp(52px,6.5vw,100px)' }}
+                className="stat-display font-serif font-black leading-none tracking-[-0.04em] mb-2"
+                style={{ fontSize: 'clamp(26px,3vw,42px)' }}
               >
                 {prefix}<CountUp to={value} />{suffix}
               </p>
-              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.32)]">{label}</p>
+              <p className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.30)]">{label}</p>
             </div>
           ))}
         </div>
