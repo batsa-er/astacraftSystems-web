@@ -23,6 +23,13 @@ export default defineType({
       options: { list: ['purple', 'cyan', 'gold'] },
     }),
     defineField({ name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } }),
+    defineField({
+      name: 'services',
+      title: 'Services Delivered',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Shown in the sidebar of the case study page, e.g. "CRM & ERP Systems".',
+    }),
     defineField({ name: 'published', title: 'Published', type: 'boolean', initialValue: true }),
     defineField({
       name: 'featured',

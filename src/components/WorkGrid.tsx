@@ -3,7 +3,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { urlFor } from '@/sanity/client'
 import type { CaseStudy } from '@/sanity/types'
+
+function imgSrc(cs: CaseStudy): string | null {
+  if (cs.coverImage) return urlFor(cs.coverImage).width(800).height(450).url()
+  return cs.image ?? null
+}
 
 export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies: CaseStudy[], defaultIndustry?: string }) {
   const [active, setActive] = useState<string | null>(defaultIndustry ?? null)
@@ -44,17 +50,19 @@ export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((cs, i: number) => (
+          {filtered.map((cs, i: number) => {
+            const img = imgSrc(cs)
+            return (
             <Link
               key={cs._id}
               href={`/work/${cs.slug.current}`}
               className="group flex flex-col border border-[rgba(var(--ch-border),0.12)] bg-[var(--color-panel)] hover:border-[rgba(var(--ch-accent),0.35)] hover:-translate-y-1 transition-all duration-300 overflow-hidden reveal"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              {cs.image && (
+              {img && (
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
                   <Image
-                    src={cs.image}
+                    src={img}
                     alt={cs.client}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -95,7 +103,8 @@ export default function WorkGrid({ caseStudies, defaultIndustry }: { caseStudies
                 </div>
               </div>
             </Link>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

@@ -17,7 +17,14 @@ export default defineType({
       title: 'Engagement Process Steps',
       description: 'Up to 6 steps shown in the "How We Work" section.',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'title', title: 'Step Title', type: 'string', validation: r => r.required() }),
+          defineField({ name: 'body', title: 'Step Description', type: 'text', rows: 3 }),
+        ],
+        preview: { select: { title: 'title', subtitle: 'body' } },
+      }],
     }),
     defineField({
       name: 'stats',

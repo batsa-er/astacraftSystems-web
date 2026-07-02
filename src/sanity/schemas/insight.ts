@@ -16,6 +16,20 @@ export default defineType({
     defineField({ name: 'publishedAt', title: 'Published At', type: 'date' }),
     defineField({ name: 'readTime', title: 'Read Time', type: 'string', placeholder: 'e.g. 8 min read' }),
     defineField({ name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } }),
+    defineField({
+      name: 'relatedServices',
+      title: 'Related Services',
+      description: 'Service links shown at the bottom of the article.',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'title', title: 'Service Title', type: 'string', validation: r => r.required() }),
+          defineField({ name: 'slug', title: 'Service Slug', type: 'string', validation: r => r.required() }),
+        ],
+        preview: { select: { title: 'title', subtitle: 'slug' } },
+      }],
+    }),
     defineField({ name: 'published', title: 'Published', type: 'boolean', initialValue: true }),
     defineField({
       name: 'seoTitle',

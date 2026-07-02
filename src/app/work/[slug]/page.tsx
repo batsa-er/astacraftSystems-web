@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { getCaseStudy, getCaseStudies } from '@/sanity/queries'
 import type { CaseStudy, CaseStudyDetail } from '@/sanity/types'
 import { JsonLd } from '@/components/JsonLd'
+import { urlFor } from '@/sanity/client'
 
 export const revalidate = 3600
 
@@ -129,7 +130,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!cs) cs = (fallback[slug] as CaseStudyDetail | undefined) ?? null
   if (!cs) notFound()
 
-  const coverSrc: string | null = (cs.coverImage as string | undefined) ?? cs.image ?? null
+  const coverSrc: string | null = cs.coverImage
+    ? urlFor(cs.coverImage).width(1600).height(700).url()
+    : cs.image ?? null
   const services: string[] = cs.services ?? []
   const metrics = [
     { num: cs.metric1_num, label: cs.metric1_label },
@@ -319,7 +322,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedWork.map((related) => {
                 const relSlug = related.slug.current
-                const relImg: string | null = (related.coverImage as string | undefined) ?? related.image ?? null
+                const relImg: string | null = related.coverImage
+                  ? urlFor(related.coverImage).width(800).height(450).url()
+                  : related.image ?? null
                 return (
                   <Link
                     key={relSlug}

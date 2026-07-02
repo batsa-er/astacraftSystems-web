@@ -21,28 +21,37 @@ const SlugSchema = z.object({
     .regex(slugPattern, 'Slug must be lowercase alphanumeric with hyphens only'),
 })
 
+// GROQ projections return null (not undefined) for missing fields,
+// so every optional field must tolerate null.
+const str = (fallback: string) => z.string().nullish().transform((v) => v ?? fallback)
+const optStr = z.string().nullish().transform((v) => v ?? undefined)
+const optArr = <T extends z.ZodType>(item: T) =>
+  z.array(item).nullish().transform((v) => v ?? undefined)
+
 // ── Case Studies ──────────────────────────────────────
 export const CaseStudySchema = z.object({
   _id: z.string().min(1),
   slug: SlugSchema,
   client: z.string().min(1),
-  industry: z.string().default(''),
-  summary: z.string().default(''),
-  metric1_num: z.string().default(''),
-  metric1_label: z.string().default(''),
-  metric2_num: z.string().default(''),
-  metric2_label: z.string().default(''),
-  metric3_num: z.string().default(''),
-  metric3_label: z.string().default(''),
-  accent: z.enum(['purple', 'cyan', 'gold']).default('cyan'),
+  industry: str(''),
+  summary: str(''),
+  metric1_num: str(''),
+  metric1_label: str(''),
+  metric2_num: str(''),
+  metric2_label: str(''),
+  metric3_num: str(''),
+  metric3_label: str(''),
+  accent: z.enum(['purple', 'cyan', 'gold']).nullish().transform((v) => v ?? 'cyan'),
+  coverImage: z.any().optional(),
 }) satisfies z.ZodType<CaseStudy>
 
 export const CaseStudyDetailSchema = CaseStudySchema.extend({
-  challenge: z.string().default(''),
-  solution: z.string().default(''),
-  results: z.string().default(''),
-  seoTitle: z.string().optional(),
-  seoDescription: z.string().optional(),
+  challenge: str(''),
+  solution: str(''),
+  results: str(''),
+  services: optArr(z.string()),
+  seoTitle: optStr,
+  seoDescription: optStr,
 }) satisfies z.ZodType<CaseStudyDetail>
 
 // ── Insights ──────────────────────────────────────────
@@ -50,36 +59,38 @@ export const InsightSchema = z.object({
   _id: z.string().min(1),
   slug: SlugSchema,
   title: z.string().min(1),
-  tag: z.string().default(''),
-  label: z.string().optional(),
-  excerpt: z.string().default(''),
-  author: z.string().optional(),
-  authorRole: z.string().optional(),
-  publishedAt: z.string().default(''),
-  readTime: z.string().default(''),
+  tag: str(''),
+  label: optStr,
+  excerpt: str(''),
+  author: optStr,
+  authorRole: optStr,
+  publishedAt: str(''),
+  readTime: str(''),
+  coverImage: z.any().optional(),
 }) satisfies z.ZodType<Insight>
 
 export const InsightDetailSchema = InsightSchema.extend({
-  body: z.string().default(''),
-  seoTitle: z.string().optional(),
-  seoDescription: z.string().optional(),
+  body: str(''),
+  relatedServices: optArr(z.object({ title: z.string(), slug: z.string() })),
+  seoTitle: optStr,
+  seoDescription: optStr,
 }) satisfies z.ZodType<InsightDetail>
 
 // ── Services ──────────────────────────────────────────
 export const ServiceSchema = z.object({
   _id: z.string().min(1),
   slug: SlugSchema,
-  number: z.string().default(''),
+  number: str(''),
   title: z.string().min(1),
-  tagline: z.string().default(''),
-  description: z.string().default(''),
-  outcomes: z.array(z.string()).default([]),
-  price: z.string().default(''),
+  tagline: str(''),
+  description: str(''),
+  outcomes: z.array(z.string()).nullish().transform((v) => v ?? []),
+  price: optStr,
 }) satisfies z.ZodType<Service>
 
 const ServiceStatSchema = z.object({
-  num:   z.string().default(''),
-  label: z.string().default(''),
+  num:   str(''),
+  label: str(''),
 }) satisfies z.ZodType<ServiceStat>
 
 const ServiceFaqSchema = z.object({
@@ -88,13 +99,13 @@ const ServiceFaqSchema = z.object({
 }) satisfies z.ZodType<ServiceFaq>
 
 export const ServiceDetailSchema = ServiceSchema.extend({
-  detail:         z.string().default(''),
-  process:        z.array(z.string()).optional(),
-  stats:          z.array(ServiceStatSchema).optional(),
-  faq:            z.array(ServiceFaqSchema).optional(),
+  detail:         str(''),
+  process:        optArr(z.union([z.string(), z.object({ title: z.string(), body: str('') })])),
+  stats:          optArr(ServiceStatSchema),
+  faq:            optArr(ServiceFaqSchema),
   coverImage:     z.any().optional(),
-  seoTitle:       z.string().optional(),
-  seoDescription: z.string().optional(),
+  seoTitle:       optStr,
+  seoDescription: optStr,
 }) satisfies z.ZodType<ServiceDetail>
 
 // ── Testimonials ──────────────────────────────────────
@@ -102,27 +113,27 @@ export const TestimonialSchema = z.object({
   _id: z.string().min(1),
   quote: z.string().min(1),
   name: z.string().min(1),
-  role: z.string().optional(),
-  initials: z.string().optional(),
-  photo: z.object({ asset: z.object({ _id: z.string(), url: z.string() }) }).optional(),
-  featured: z.boolean().default(false),
+  role: optStr,
+  initials: optStr,
+  photo: z.object({ asset: z.object({ _id: z.string(), url: z.string() }) }).nullish().transform((v) => v ?? undefined),
+  featured: z.boolean().nullish().transform((v) => v ?? false),
 }) satisfies z.ZodType<Testimonial>
 
 // ── Careers ───────────────────────────────────────────
 export const CareerSchema = z.object({
   _id: z.string().min(1),
   title: z.string().min(1),
-  slug: z.object({ current: z.string() }).optional(),
-  department: z.string().optional(),
-  type: z.string().optional(),
-  location: z.string().optional(),
-  excerpt: z.string().optional(),
-  description: z.string().optional(),
-  responsibilities: z.array(z.string()).optional(),
-  requirements: z.array(z.string()).optional(),
-  niceToHave: z.array(z.string()).optional(),
-  benefits: z.array(z.string()).optional(),
-  applyUrl: z.string().optional(),
+  slug: z.object({ current: z.string() }).nullish().transform((v) => v ?? undefined),
+  department: optStr,
+  type: optStr,
+  location: optStr,
+  excerpt: optStr,
+  description: optStr,
+  responsibilities: optArr(z.string()),
+  requirements: optArr(z.string()),
+  niceToHave: optArr(z.string()),
+  benefits: optArr(z.string()),
+  applyUrl: optStr,
 }) satisfies z.ZodType<Career>
 
 // ── Helpers ───────────────────────────────────────────
