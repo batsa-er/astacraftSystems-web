@@ -1,8 +1,20 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { clientIp, rateLimit } from '@/lib/rateLimit'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+const ALLOWED_EXTENSIONS = new Set(['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'png', 'jpg', 'jpeg', 'zip'])
+
+function esc(v: string) {
+  return v
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
 
 const schema = z.object({
   name:    z.string().min(1).max(100),
@@ -28,6 +40,10 @@ const BUDGET_LABELS: Record<string, string> = {
 }
 
 export async function POST(req: Request) {
+  if (!rateLimit(`contact:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+  }
+
   const FROM = process.env.RESEND_FROM_EMAIL ?? 'Astacraft Systems <onboarding@resend.dev>'
   const TO = process.env.CONTACT_TO_EMAIL!
   let rawFields: Record<string, unknown>
@@ -38,17 +54,26 @@ export async function POST(req: Request) {
     const fd = await req.formData().catch(() => null)
     if (!fd) return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
     rawFields = Object.fromEntries(
-      ['name', 'email', 'company', 'phone', 'service', 'budget', 'message'].map(k => [k, fd.get(k) ?? undefined])
+      ['name', 'email', 'company', 'phone', 'service', 'budget', 'message', 'website'].map(k => [k, fd.get(k) ?? undefined])
     )
     const f = fd.get('file')
     if (f instanceof File && f.size > 0) {
       if (f.size > 10 * 1024 * 1024) {
         return NextResponse.json({ error: 'File too large' }, { status: 413 })
       }
-      attachment = { filename: f.name, content: Buffer.from(await f.arrayBuffer()) }
+      const ext = f.name.split('.').pop()?.toLowerCase() ?? ''
+      if (!ALLOWED_EXTENSIONS.has(ext)) {
+        return NextResponse.json({ error: 'Unsupported file type' }, { status: 400 })
+      }
+      attachment = { filename: f.name.replace(/[\r\n\\/]+/g, '_'), content: Buffer.from(await f.arrayBuffer()) }
     }
   } else {
     rawFields = await req.json().catch(() => null) ?? {}
+  }
+
+  // Honeypot: hidden field real users never fill — pretend success for bots
+  if (typeof rawFields.website === 'string' && rawFields.website.trim() !== '') {
+    return NextResponse.json({ ok: true })
   }
 
   const parsed = schema.safeParse(rawFields)
@@ -74,16 +99,16 @@ export async function POST(req: Request) {
         </div>
         <div style="padding:32px;background:#F6F7FB;border:1px solid #e2e8f0">
           <table style="width:100%;border-collapse:collapse">
-            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;width:120px">Name</td><td style="padding:8px 0;font-size:15px;font-weight:500">${name}</td></tr>
-            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Email</td><td style="padding:8px 0;font-size:15px"><a href="mailto:${email}" style="color:#1D4776">${email}</a></td></tr>
-            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Company</td><td style="padding:8px 0;font-size:15px">${company || '—'}</td></tr>
-            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Phone</td><td style="padding:8px 0;font-size:15px">${phone || '—'}</td></tr>
-            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Service</td><td style="padding:8px 0;font-size:15px">${serviceLabel}</td></tr>
-            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Budget</td><td style="padding:8px 0;font-size:15px">${budgetLabel}</td></tr>
+            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;width:120px">Name</td><td style="padding:8px 0;font-size:15px;font-weight:500">${esc(name)}</td></tr>
+            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Email</td><td style="padding:8px 0;font-size:15px"><a href="mailto:${esc(email)}" style="color:#1D4776">${esc(email)}</a></td></tr>
+            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Company</td><td style="padding:8px 0;font-size:15px">${company ? esc(company) : '—'}</td></tr>
+            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Phone</td><td style="padding:8px 0;font-size:15px">${phone ? esc(phone) : '—'}</td></tr>
+            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Service</td><td style="padding:8px 0;font-size:15px">${esc(serviceLabel)}</td></tr>
+            <tr><td style="padding:8px 0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em">Budget</td><td style="padding:8px 0;font-size:15px">${esc(budgetLabel)}</td></tr>
           </table>
           <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0" />
           <p style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 10px">Message</p>
-          <p style="font-size:15px;line-height:1.7;margin:0;white-space:pre-wrap">${message}</p>
+          <p style="font-size:15px;line-height:1.7;margin:0;white-space:pre-wrap">${esc(message)}</p>
         </div>
         <div style="padding:16px 32px;font-size:11px;color:#94a3b8;text-align:center">
           Sent from astacraftsystems.com contact form
@@ -106,7 +131,7 @@ export async function POST(req: Request) {
         <div style="padding:40px 32px;background:#ffffff;border:1px solid #e2e8f0;border-top:none">
           <p style="font-size:13px;color:#64748b;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px">Enquiry confirmed</p>
           <h1 style="font-size:24px;font-weight:700;margin:0 0 12px;color:#080C14;line-height:1.3">
-            Thanks, ${name.split(' ')[0]}. You&rsquo;re all set.
+            Thanks, ${esc(name.split(' ')[0])}. You&rsquo;re all set.
           </h1>
           <p style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 32px">
             We&rsquo;ve received your message and a senior member of our team will be in touch within <strong>24 hours</strong> to confirm your complimentary strategy call.
@@ -132,8 +157,8 @@ export async function POST(req: Request) {
           <div style="background:#F6F7FB;border:1px solid #e2e8f0;border-left:3px solid #1D4776;padding:16px 20px;margin-bottom:32px">
             <p style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 12px">Your submission</p>
             <table style="width:100%;border-collapse:collapse;font-size:13px">
-              ${company ? `<tr><td style="padding:4px 0;color:#94a3b8;width:100px">Company</td><td style="padding:4px 0;color:#0B0F14">${company}</td></tr>` : ''}
-              ${service ? `<tr><td style="padding:4px 0;color:#94a3b8">Looking for</td><td style="padding:4px 0;color:#0B0F14">${serviceLabel}</td></tr>` : ''}
+              ${company ? `<tr><td style="padding:4px 0;color:#94a3b8;width:100px">Company</td><td style="padding:4px 0;color:#0B0F14">${esc(company)}</td></tr>` : ''}
+              ${service ? `<tr><td style="padding:4px 0;color:#94a3b8">Looking for</td><td style="padding:4px 0;color:#0B0F14">${esc(serviceLabel)}</td></tr>` : ''}
             </table>
           </div>
 
@@ -163,7 +188,15 @@ export async function POST(req: Request) {
     `,
   })
 
-  await Promise.all([internalEmail, autoReply])
+  const [internalResult, autoReplyResult] = await Promise.all([internalEmail, autoReply])
+
+  if (internalResult.error) {
+    console.error('[contact] send failed:', internalResult.error)
+    return NextResponse.json({ error: 'Send failed' }, { status: 502 })
+  }
+  if (autoReplyResult.error) {
+    console.error('[contact] auto-reply failed:', autoReplyResult.error)
+  }
 
   return NextResponse.json({ ok: true })
 }

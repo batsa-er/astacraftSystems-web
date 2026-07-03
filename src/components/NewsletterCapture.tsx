@@ -6,6 +6,7 @@ const inputCls = 'w-full bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255
 
 export function NewsletterCapture() {
   const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -16,7 +17,7 @@ export function NewsletterCapture() {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }),
       })
       if (!res.ok) throw new Error()
       setStatus('sent')
@@ -52,9 +53,17 @@ export function NewsletterCapture() {
         Weekly technology insights for African business leaders.
       </p>
       <form onSubmit={handleSubmit} className="flex gap-0">
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="nl-website">Website</label>
+          <input
+            id="nl-website" type="text" tabIndex={-1} autoComplete="off"
+            value={website} onChange={e => setWebsite(e.target.value)}
+          />
+        </div>
         <input
           type="email"
           required
+          maxLength={254}
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="Your email"

@@ -29,7 +29,7 @@ export default function ContactForm() {
   const [form, setForm] = useState({
     name: '', email: '', company: '', phone: '',
     service: bundleService,
-    budget: '', message: '',
+    budget: '', message: '', website: '',
   })
   const [file,      setFile]      = useState<File | null>(null)
   const [fileError, setFileError] = useState<string | null>(null)
@@ -174,12 +174,21 @@ export default function ContactForm() {
           {/* ── Form body ── */}
           <form onSubmit={handleSubmit} className="p-8 space-y-5">
 
+            {/* Honeypot — hidden from real users */}
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="cf-website">Website</label>
+              <input
+                id="cf-website" type="text" tabIndex={-1} autoComplete="off"
+                value={form.website} onChange={set('website')}
+              />
+            </div>
+
             {/* Name + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="cf-name" className={labelCls}>Name *</label>
                 <input
-                  id="cf-name" required type="text" autoComplete="name"
+                  id="cf-name" required type="text" autoComplete="name" maxLength={100}
                   value={form.name} onChange={set('name')}
                   className={inputCls} placeholder="Your name"
                 />
@@ -187,7 +196,7 @@ export default function ContactForm() {
               <div>
                 <label htmlFor="cf-email" className={labelCls}>Work email *</label>
                 <input
-                  id="cf-email" required type="email" autoComplete="email"
+                  id="cf-email" required type="email" autoComplete="email" maxLength={254}
                   value={form.email} onChange={set('email')}
                   className={inputCls} placeholder="you@company.com"
                 />
@@ -199,7 +208,7 @@ export default function ContactForm() {
               <div>
                 <label htmlFor="cf-company" className={labelCls}>Company</label>
                 <input
-                  id="cf-company" type="text" autoComplete="organization"
+                  id="cf-company" type="text" autoComplete="organization" maxLength={200}
                   value={form.company} onChange={set('company')}
                   className={inputCls} placeholder="Your organisation"
                 />
@@ -210,7 +219,7 @@ export default function ContactForm() {
                   <span className="text-[rgba(var(--ch-text),0.28)] normal-case tracking-normal">— optional</span>
                 </label>
                 <input
-                  id="cf-phone" type="tel" autoComplete="tel"
+                  id="cf-phone" type="tel" autoComplete="tel" maxLength={30}
                   value={form.phone} onChange={set('phone')}
                   className={inputCls} placeholder="+233 XX XXX XXXX"
                 />
@@ -239,7 +248,7 @@ export default function ContactForm() {
             <div>
               <label htmlFor="cf-message" className={labelCls}>Tell us about your situation *</label>
               <textarea
-                id="cf-message" required rows={4}
+                id="cf-message" required rows={4} maxLength={5000}
                 value={form.message} onChange={set('message')}
                 className={`${inputCls} resize-none`}
                 placeholder="Current systems, key challenges, goals, rough timeline..."

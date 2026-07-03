@@ -11,7 +11,7 @@ const inputCls = 'w-full bg-[rgba(var(--ch-text),0.04)] border border-[rgba(var(
 const labelCls = 'block font-mono text-[11px] tracking-[0.2em] uppercase text-[rgba(var(--ch-text),0.38)] mb-2'
 
 export function SolutionLeadForm({ bundle }: Props) {
-  const [form, setForm] = useState({ name: '', email: '', phone: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', website: '' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -25,6 +25,7 @@ export function SolutionLeadForm({ bundle }: Props) {
       fd.append('name', form.name)
       fd.append('email', form.email)
       fd.append('phone', form.phone)
+      fd.append('website', form.website)
       fd.append('service', `bundle-${bundle}`)
       fd.append('message', `Enquiry via ${BUNDLE_LABEL_MAP[bundle] ?? bundle} solution page.`)
       const res = await fetch('/api/contact', { method: 'POST', body: fd })
@@ -66,11 +67,18 @@ export function SolutionLeadForm({ bundle }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor={`slf-website-${bundle}`}>Website</label>
+        <input
+          id={`slf-website-${bundle}`} type="text" tabIndex={-1} autoComplete="off"
+          value={form.website} onChange={set('website')}
+        />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor={`slf-name-${bundle}`} className={labelCls}>Name *</label>
           <input
-            id={`slf-name-${bundle}`} required type="text" autoComplete="name"
+            id={`slf-name-${bundle}`} required type="text" autoComplete="name" maxLength={100}
             value={form.name} onChange={set('name')}
             className={inputCls} placeholder="Your name"
           />
@@ -78,7 +86,7 @@ export function SolutionLeadForm({ bundle }: Props) {
         <div>
           <label htmlFor={`slf-email-${bundle}`} className={labelCls}>Work email *</label>
           <input
-            id={`slf-email-${bundle}`} required type="email" autoComplete="email"
+            id={`slf-email-${bundle}`} required type="email" autoComplete="email" maxLength={254}
             value={form.email} onChange={set('email')}
             className={inputCls} placeholder="you@company.com"
           />
@@ -90,7 +98,7 @@ export function SolutionLeadForm({ bundle }: Props) {
           <span className="text-[rgba(var(--ch-text),0.28)] normal-case tracking-normal">— optional</span>
         </label>
         <input
-          id={`slf-phone-${bundle}`} type="tel" autoComplete="tel"
+          id={`slf-phone-${bundle}`} type="tel" autoComplete="tel" maxLength={30}
           value={form.phone} onChange={set('phone')}
           className={inputCls} placeholder="+233 XX XXX XXXX"
         />
