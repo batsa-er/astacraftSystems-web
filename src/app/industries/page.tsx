@@ -100,15 +100,6 @@ export default function IndustriesPage() {
               </Link>
             ))}
           </div>
-
-          <div className="text-center mt-14">
-            <Link
-              href="/work"
-              className="inline-block font-mono text-[10px] tracking-[0.16em] uppercase border border-[rgba(var(--ch-accent),0.20)] text-[rgba(var(--ch-text),0.55)] px-9 py-4 hover:border-[rgba(var(--ch-accent),0.45)] hover:text-[var(--color-accent)] transition-all duration-200"
-            >
-              All case studies →
-            </Link>
-          </div>
         </div>
       </section>
     </main>

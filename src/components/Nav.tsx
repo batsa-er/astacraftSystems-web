@@ -97,24 +97,7 @@ function ChevronDown({ open }: { open: boolean }) {
   )
 }
 
-export interface NavFeaturedCase {
-  client: string
-  industry: string
-  navMetric: string
-  slug: string
-  imageUrl: string | null
-}
-
-const FALLBACK_CASE: NavFeaturedCase = {
-  client:    'Stanbic Business Finance',
-  industry:  'Financial Services · CRM Implementation',
-  navMetric: '62% faster deal cycle',
-  slug:      'stanbic-crm-transformation',
-  imageUrl:  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=520&h=420&q=75&auto=format&fit=crop',
-}
-
-export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }) {
-  const navCase = featuredCase ?? FALLBACK_CASE
+export default function Nav() {
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [dropdown, setDropdown]       = useState<DropdownId>(null)
@@ -282,7 +265,7 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
                 onKeyDown={e => handleTriggerKeyDown(e, 'industries')}
                 aria-haspopup="menu"
                 aria-expanded={dropdown === 'industries'}
-                className={dropdownBtnCls(dropdown === 'industries' || pathname.startsWith('/industries') || pathname.startsWith('/work'))}
+                className={dropdownBtnCls(dropdown === 'industries' || pathname.startsWith('/industries'))}
               >
                 Industries <ChevronDown open={dropdown === 'industries'} />
               </button>
@@ -466,7 +449,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
                     </div>
                     <div className="flex items-center gap-6 ml-auto shrink-0">
                       {[
-                        { stat: 'GH₵ 2M+', label: 'Processed' },
                         { stat: '<5 min',   label: 'First invoice' },
                         { stat: 'Free',     label: 'To start' },
                       ].map(({ stat, label }) => (
@@ -595,11 +577,11 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
             className="mega-dropdown hidden md:block bg-[rgba(var(--ch-bg),0.98)] backdrop-blur-2xl border-b border-[rgba(var(--ch-border),0.10)] shadow-[0_24px_80px_rgba(0,0,0,0.12)] overflow-hidden"
             onKeyDown={handleMenuKeyDown}
           >
-            <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_260px]">
+            <div className="max-w-[1280px] mx-auto">
 
               {/* Left: industry list */}
-              <div className="px-[clamp(24px,5vw,80px)] py-8 pr-10">
-                <div className="grid grid-cols-2 gap-x-8 gap-y-0 mb-6">
+              <div className="px-[clamp(24px,5vw,80px)] py-8">
+                <div className="grid grid-cols-4 gap-x-8 gap-y-0 mb-6">
                   {INDUSTRIES.map(({ name, slug, desc, Icon }) => (
                     <Link
                       key={slug}
@@ -627,46 +609,6 @@ export default function Nav({ featuredCase }: { featuredCase?: NavFeaturedCase }
                   </Link>
                 </div>
               </div>
-
-              {/* Right: customer result card */}
-              <Link
-                href="/work"
-                role="menuitem"
-                className="group relative flex flex-col justify-end bg-[var(--color-dark)] overflow-hidden p-7"
-              >
-                {navCase.imageUrl && (
-                  <Image
-                    src={navCase.imageUrl}
-                    alt="Customer results"
-                    fill
-                    sizes="260px"
-                    className="object-cover opacity-[0.28] group-hover:opacity-[0.40] transition-opacity duration-500"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,30,64,0.97)] via-[rgba(13,30,64,0.65)] to-[rgba(13,30,64,0.20)]" />
-
-                <div className="relative z-10">
-                  <p className="font-mono text-[9px] tracking-[0.24em] uppercase text-[var(--color-green)] mb-4">
-                    Customer Result
-                  </p>
-                  <p
-                    className="font-serif font-black text-white leading-none mb-4"
-                    style={{ fontSize: 'clamp(28px,3vw,36px)' }}
-                  >
-                    &ldquo;{navCase.navMetric}&rdquo;
-                  </p>
-                  <p className="font-mono text-[10px] tracking-[0.06em] text-[rgba(255,255,255,0.55)] mb-0.5">
-                    {navCase.client}
-                  </p>
-                  <p className="font-mono text-[9px] tracking-[0.10em] text-[rgba(255,255,255,0.30)] mb-6">
-                    {navCase.industry}
-                  </p>
-                  <div className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.45)] group-hover:text-white transition-colors duration-200">
-                    View all results
-                    <span className="group-hover:translate-x-0.5 transition-transform duration-200">→</span>
-                  </div>
-                </div>
-              </Link>
 
             </div>
           </div>

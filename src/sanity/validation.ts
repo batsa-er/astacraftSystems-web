@@ -7,7 +7,6 @@ import type {
   Service,
   ServiceDetail,
   ServiceFaq,
-  ServiceStat,
   Testimonial,
   Career,
 } from './types'
@@ -88,11 +87,6 @@ export const ServiceSchema = z.object({
   price: optStr,
 }) satisfies z.ZodType<Service>
 
-const ServiceStatSchema = z.object({
-  num:   str(''),
-  label: str(''),
-}) satisfies z.ZodType<ServiceStat>
-
 const ServiceFaqSchema = z.object({
   q: z.string().min(1),
   a: z.string().min(1),
@@ -101,7 +95,6 @@ const ServiceFaqSchema = z.object({
 export const ServiceDetailSchema = ServiceSchema.extend({
   detail:         str(''),
   process:        optArr(z.union([z.string(), z.object({ title: z.string(), body: str('') })])),
-  stats:          optArr(ServiceStatSchema),
   faq:            optArr(ServiceFaqSchema),
   coverImage:     z.any().optional(),
   seoTitle:       optStr,

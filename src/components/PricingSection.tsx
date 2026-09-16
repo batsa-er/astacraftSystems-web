@@ -120,7 +120,7 @@ export function PricingSection() {
           </div>
           <p className="text-[13px] text-[var(--color-text-2)]">All prices in GHS (Ghanaian Cedis)</p>
           <div className="flex items-center gap-6 flex-wrap justify-center">
-            {['No credit card required', 'Cancel anytime', 'Trusted by businesses across Ghana'].map(t => (
+            {['No credit card required', 'Cancel anytime', 'Free plan available'].map(t => (
               <span key={t} className="flex items-center gap-1.5 text-[13px] text-[var(--color-text-2)]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-green)]" />
                 {t}

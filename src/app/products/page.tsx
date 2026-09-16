@@ -141,10 +141,10 @@ export default function ProductsPage() {
           </div>
           <div className="grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '100ms' }}>
             {[
-              { stat: '50+',    label: 'Businesses onboarded' },
-              { stat: '500+',   label: 'Invoices sent' },
-              { stat: 'GHS 2M+', label: 'Collected via Paystack' },
-              { stat: '<5 min', label: 'Average time to first invoice' },
+              { stat: 'Free',   label: 'Plan to get started' },
+              { stat: '<5 min', label: 'To your first invoice' },
+              { stat: 'MoMo',   label: 'MTN, Telecel & AT Money' },
+              { stat: 'GHS 69', label: 'Paid plans from / month' },
             ].map(({ stat, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 70}ms` }}>
                 <p className="font-serif font-bold text-[var(--color-green)] mb-1" style={{ fontSize: 'clamp(28px,3vw,44px)', lineHeight: 1 }}>{stat}</p>

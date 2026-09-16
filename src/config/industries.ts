@@ -6,11 +6,6 @@ export interface IndustryChallenge {
   body: string
 }
 
-export interface IndustryStat {
-  num: string
-  label: string
-}
-
 export interface IndustryFaq {
   q: string
   a: string
@@ -24,7 +19,6 @@ export interface IndustryConfig {
   tagline: string
   description: string
   whoWeServe: string[]
-  stats: IndustryStat[]
   challenges: IndustryChallenge[]
   capabilities: { title: string; href: string }[]
   faqs: IndustryFaq[]
@@ -41,18 +35,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'Core banking, payments & compliance',
     img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'Core banking, payments and compliance infrastructure built for Africa\'s financial sector.',
-    description: 'From microfinance institutions to pan-African banks, we build the technology that keeps capital moving, clients engaged, and regulators satisfied. We understand the regulatory environment, the payment rails, and the operational realities of running financial services across Ghana and West Africa. Our financial services practice has delivered CRM implementations, ISO 27001 compliance programmes, and mobile money integrations for institutions managing portfolios from GHS 10 million to over USD 1 billion.',
+    description: 'From microfinance institutions to pan-African banks, we build the technology that keeps capital moving, clients engaged, and regulators satisfied. We understand the regulatory environment, the payment rails, and the operational realities of running financial services across Ghana and West Africa. We deliver CRM implementations, ISO 27001 compliance programmes, and mobile money integrations for banks, microfinance institutions, and fintechs.',
     whoWeServe: [
       'Commercial banks and universal banks',
       'Microfinance institutions (MFIs)',
       'Insurance companies and brokers',
       'Payment service providers and fintechs',
       'Savings and credit cooperatives (SACCOs)',
-    ],
-    stats: [
-      { num: '62%', label: 'Average reduction in client onboarding time post-CRM' },
-      { num: '90 days', label: 'Typical CRM go-live for a bank or MFI in Ghana' },
-      { num: 'ISO 27001', label: 'Security standard we implement and audit against' },
     ],
     challenges: [
       { title: 'Fragmented customer data', body: 'Multiple legacy systems with no single customer view. We unify them with CRM implementation and custom integration layers that consolidate your client data in real time across every branch and channel.' },
@@ -90,7 +79,7 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'Cloud infrastructure & digital BSS/OSS',
     img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'Cloud infrastructure and digital operations modernisation for Africa\'s telecom sector.',
-    description: 'We help telecom providers across Ghana and West Africa cut infrastructure cost, digitise customer operations, and modernise the BSS/OSS systems that run their networks. From AWS migrations to self-service enterprise portals, we work at telco scale — maintaining live service continuity throughout every phase of transformation. Our telecoms practice has delivered cloud migrations, enterprise customer portals, and API integration programmes for operators managing millions of active subscribers.',
+    description: 'We help telecom providers across Ghana and West Africa cut infrastructure cost, digitise customer operations, and modernise the BSS/OSS systems that run their networks. From AWS migrations to self-service enterprise portals, we work at telco scale — maintaining live service continuity throughout every phase of transformation. We deliver cloud migrations, enterprise customer portals, and API integration programmes built for operators managing millions of active subscribers.',
     whoWeServe: [
       'Mobile network operators (MNOs)',
       'Internet service providers (ISPs)',
@@ -98,14 +87,9 @@ export const INDUSTRIES: IndustryConfig[] = [
       'Data centre operators',
       'MVNOs and virtual service resellers',
     ],
-    stats: [
-      { num: '38%', label: 'Average infrastructure cost reduction on cloud migration' },
-      { num: '99.97%', label: 'Post-migration uptime achieved for a major telecom client' },
-      { num: '6 months', label: 'Typical cloud migration timeline for enterprise telecoms' },
-    ],
     challenges: [
       { title: 'Legacy BSS/OSS systems', body: 'Decade-old billing and operations platforms dragging down agility. We modernise incrementally — maintaining live service continuity while replacing systems layer by layer.' },
-      { title: 'Rising infrastructure costs', body: 'Data centre sprawl driving up OpEx with no elasticity. Our cloud migration practice moves workloads to AWS and Azure with 30–40% average cost reduction across telecoms deployments in Africa.' },
+      { title: 'Rising infrastructure costs', body: 'Data centre sprawl driving up OpEx with no elasticity. We move workloads to AWS and Azure on right-sized, elastic infrastructure designed to bring ongoing costs down.' },
       { title: 'Enterprise customer portals', body: 'B2B customers expect self-service account management. We build the portals that reduce call centre load, improve NPS, and cut churn among high-value enterprise accounts.' },
     ],
     capabilities: [
@@ -121,7 +105,7 @@ export const INDUSTRIES: IndustryConfig[] = [
       },
       {
         q: 'Do you work with AWS or Azure for African telecom deployments?',
-        a: 'Both. We are certified on AWS and Microsoft Azure and help clients choose based on latency requirements, data sovereignty constraints, and existing licence agreements. For Africa-specific workloads, we leverage AWS Africa (Cape Town) and Azure South Africa, alongside Ghanaian hosting partners where local data residency is required.',
+        a: 'Both. We work across AWS and Microsoft Azure and help clients choose based on latency requirements, data sovereignty constraints, and existing licence agreements. For Africa-specific workloads, we leverage AWS Africa (Cape Town) and Azure South Africa, alongside Ghanaian hosting partners where local data residency is required.',
       },
       {
         q: 'How do you modernise BSS/OSS systems without disrupting billing?',
@@ -139,18 +123,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'ERP, automation & field operations',
     img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'ERP, workflow automation and field operations technology for energy companies across Africa.',
-    description: 'Power utilities, oil and gas operators, and renewable energy developers across Ghana and West Africa trust us to digitise their operations — from field service management to automated regulatory reporting. Our energy practice understands the operational realities of managing distributed infrastructure across multiple regions, including low-connectivity environments, complex asset registers, and multi-regulator compliance requirements. We have delivered field operations platforms, ERP implementations, and compliance reporting systems for utilities managing infrastructure at national scale.',
+    description: 'We help power utilities, oil and gas operators, and renewable energy developers across Ghana and West Africa digitise their operations — from field service management to automated regulatory reporting. We design for the operational realities of managing distributed infrastructure across multiple regions, including low-connectivity environments, complex asset registers, and multi-regulator compliance requirements. We build field operations platforms, ERP implementations, and compliance reporting systems for utilities managing infrastructure at national scale.',
     whoWeServe: [
       'Power utilities and electricity distribution companies',
       'Oil and gas operators',
       'Renewable energy developers and IPPs',
       'Water utilities and sanitation authorities',
       'Mining operations and extractives companies',
-    ],
-    stats: [
-      { num: '85%', label: 'Faster field reporting after mobile operations platform deployment' },
-      { num: '2,400+', label: 'Daily inspection reports digitised for a Ghanaian utility client' },
-      { num: '120 days', label: 'Typical delivery for a field operations platform' },
     ],
     challenges: [
       { title: 'Manual field operations', body: 'Paper-based inspection and maintenance workflows generating backlogs and compliance risk. We replace them with mobile-first digital tools built for offline-first use in Ghana\'s low-connectivity field environments.' },
@@ -170,7 +149,7 @@ export const INDUSTRIES: IndustryConfig[] = [
       },
       {
         q: 'Can you integrate with SCADA or operational technology systems?',
-        a: 'Yes. We build secure API bridges between OT systems and enterprise IT platforms, following strict network segmentation principles to ensure operational systems are never directly exposed. We have experience integrating with common SCADA platforms used by utilities across West Africa, with full documentation of integration points for your operations team.',
+        a: 'Yes. We build secure API bridges between OT systems and enterprise IT platforms, following strict network segmentation principles to ensure operational systems are never directly exposed. We integrate with common SCADA platforms used by utilities across West Africa, with full documentation of integration points for your operations team.',
       },
       {
         q: 'What does ERP implementation cost for an energy company in Ghana?',
@@ -188,18 +167,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'Hospital systems & patient portals',
     img: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'Hospital management systems, patient portals and data compliance for healthcare organisations in Africa.',
-    description: 'We work with hospitals, clinic chains, and health networks across Ghana and West Africa to build digital infrastructure that improves patient outcomes, reduces administrative burden, and meets data protection requirements. Our healthcare technology practice understands both the clinical workflow and the compliance dimensions — including the Ghana Data Protection Act 2012, NHIA integration requirements, and HIPAA-aligned controls for internationally connected health organisations. We have deployed hospital management systems, patient engagement platforms, and billing automation tools across multi-site clinical operations.',
+    description: 'We help hospitals, clinic chains, and health networks across Ghana and West Africa build digital infrastructure that improves patient outcomes, reduces administrative burden, and meets data protection requirements. We design for both the clinical workflow and the compliance dimensions — including the Ghana Data Protection Act 2012, NHIA integration requirements, and HIPAA-aligned controls for internationally connected health organisations. We build hospital management systems, patient engagement platforms, and billing automation tools for single-site and multi-site clinical operations.',
     whoWeServe: [
       'Private hospitals and specialist centres',
       'Multi-location clinic chains',
       'Health maintenance organisations (HMOs)',
       'Health insurance providers',
       'Diagnostic centres and medical laboratories',
-    ],
-    stats: [
-      { num: '3×', label: 'Faster patient registration after hospital management system deployment' },
-      { num: '8 clinics', label: 'Deployed simultaneously in one platform rollout across Accra and Kumasi' },
-      { num: '5 months', label: 'Typical hospital management system delivery timeline' },
     ],
     challenges: [
       { title: 'Disconnected clinical systems', body: 'Patient data spread across paper files and siloed software with no single record. We build unified patient data platforms and EHR integrations that give clinicians a complete view at the point of care across every facility.' },
@@ -215,7 +189,7 @@ export const INDUSTRIES: IndustryConfig[] = [
     faqs: [
       {
         q: 'Can you build a system that integrates with Ghana\'s National Health Insurance Authority (NHIA)?',
-        a: 'Yes. We build NHIA-compatible claims systems and the data pipelines needed for automated claims submission, status tracking, and reconciliation. We understand both the technical specifications and the administrative requirements for NHIA accreditation, and have delivered NHIA integrations for clinic chains across Accra and Kumasi.',
+        a: 'Yes. We build NHIA-compatible claims systems and the data pipelines needed for automated claims submission, status tracking, and reconciliation. We understand both the technical specifications and the administrative requirements for NHIA accreditation.',
       },
       {
         q: 'How do you handle patient data privacy under Ghana\'s Data Protection Act?',
@@ -237,18 +211,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'E-commerce, POS & CRM integration',
     img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'E-commerce platforms, POS integration and CRM for Africa\'s retail and commerce sector.',
-    description: 'From FMCG distributors to multi-branch retail chains across Ghana and West Africa, we build the technology stack that drives revenue, reduces shrinkage, and scales operations. We connect the systems that run your business — POS, inventory, e-commerce, and accounting — into a single, manageable platform. Our retail practice has delivered Odoo ERP implementations, omnichannel integrations, and mobile money payment systems for retail businesses operating from 1 to 50+ locations across the region.',
+    description: 'From FMCG distributors to multi-branch retail chains across Ghana and West Africa, we build the technology stack that drives revenue, reduces shrinkage, and scales operations. We connect the systems that run your business — POS, inventory, e-commerce, and accounting — into a single, manageable platform. We deliver Odoo ERP implementations, omnichannel integrations, and mobile money payment systems for retail businesses operating from 1 to 50+ locations.',
     whoWeServe: [
       'FMCG distributors and wholesalers',
       'Multi-branch retail chains and supermarkets',
       'Franchise operators',
       'E-commerce and direct-to-consumer businesses',
       'Specialty retailers and boutique chains',
-    ],
-    stats: [
-      { num: '40%', label: 'Average inventory accuracy improvement after ERP deployment' },
-      { num: '18 locations', label: 'Unified on one platform in a four-month retail rollout in Ghana' },
-      { num: '4 months', label: 'Typical phased ERP rollout for a retail chain' },
     ],
     challenges: [
       { title: 'Omnichannel complexity', body: 'Online, in-store, and mobile channels operating with separate inventory and customer records, creating friction for staff and customers alike. We unify them under a single operational layer that keeps stock, pricing, and customer data consistent in real time.' },
@@ -286,18 +255,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'Digital services & citizen portals',
     img: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'Digital service delivery, citizen portals and secure infrastructure for the public sector in Ghana and Africa.',
-    description: 'We partner with government ministries, public agencies, and state institutions across Ghana to modernise service delivery, digitise records, and build the secure technology infrastructure that citizens and staff depend on. Our government technology practice prioritises data sovereignty, security, and compliance with Ghana\'s public procurement and data protection frameworks. We have built citizen service portals, regulatory case management systems, and secure document management platforms for agencies serving thousands of Ghanaians daily.',
+    description: 'We help government ministries, public agencies, and state institutions across Ghana modernise service delivery, digitise records, and build the secure technology infrastructure that citizens and staff depend on. Our approach prioritises data sovereignty, security, and compliance with Ghana\'s public procurement and data protection frameworks. We build citizen service portals, regulatory case management systems, and secure document management platforms for agencies serving thousands of citizens daily.',
     whoWeServe: [
       'Government ministries and agencies',
       'Metropolitan and district assemblies',
       'State-owned enterprises',
       'Regulatory bodies and commissions',
       'Public universities and research institutions',
-    ],
-    stats: [
-      { num: '100%', label: 'In-country data hosting — all government deployments can be hosted within Ghana' },
-      { num: 'ISO 27001', label: 'Security framework applied to every government engagement' },
-      { num: '47', label: 'Vulnerabilities remediated in a recent public sector security audit' },
     ],
     challenges: [
       { title: 'Paper-based service delivery', body: 'Citizens waiting days or weeks for services that could be delivered instantly online. We build digital service portals and case management systems that transform delivery without disrupting the operations your staff already depend on.' },
@@ -321,7 +285,7 @@ export const INDUSTRIES: IndustryConfig[] = [
       },
       {
         q: 'What digital services have you built for Ghanaian government agencies?',
-        a: 'We have built citizen service portals with GhIPSS and mobile money payment integration, regulatory case management systems with role-based workflow, and document management platforms for government archives. All deployments include full audit trails, role-based access controls, and system handover documentation for in-house IT teams to manage and maintain.',
+        a: 'We build citizen service portals with GhIPSS and mobile money payment integration, regulatory case management systems with role-based workflow, and document management platforms for government archives. Every deployment includes full audit trails, role-based access controls, and system handover documentation for in-house IT teams to manage and maintain.',
       },
     ],
     bundle: 'secure',
@@ -335,18 +299,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'Property management & agent CRM',
     img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'Property management systems, agent CRM and tenant portals for real estate businesses in Ghana.',
-    description: 'Property developers, agents, and management companies across Ghana use our platforms to manage listings, collect rent, track maintenance, and keep tenants engaged — all in one place. We understand the operational complexity of managing property portfolios across multiple locations, from Accra and Kumasi to secondary cities, and the specific challenges of mobile money rent collection, lease management, and agent commission tracking in the Ghanaian market. We have built tenant portals, agent CRM systems, and custom property listing websites for real estate businesses managing from 50 to 5,000+ units.',
+    description: 'We build platforms that help property developers, agents, and management companies across Ghana manage listings, collect rent, track maintenance, and keep tenants engaged — all in one place. We understand the operational complexity of managing property portfolios across multiple locations, from Accra and Kumasi to secondary cities, and the specific challenges of mobile money rent collection, lease management, and agent commission tracking in the Ghanaian market. We build tenant portals, agent CRM systems, and custom property listing websites for real estate businesses managing from 50 to 5,000+ units.',
     whoWeServe: [
       'Property developers and housing companies',
       'Estate agencies and property brokers',
       'Property management companies',
       'Real estate investment trusts (REITs)',
       'Mortgage lenders and housing finance institutions',
-    ],
-    stats: [
-      { num: '6 weeks', label: 'Typical time to launch a tenant portal and automated rent collection system' },
-      { num: '100%', label: 'Automated rent cycle — from payment link to receipt to reconciliation' },
-      { num: '3 platforms', label: 'Average number of disconnected tools we consolidate per client' },
     ],
     challenges: [
       { title: 'Fragmented property data', body: 'Listings, tenants, leases, and maintenance tracked across spreadsheets and WhatsApp threads with no audit trail. We centralise everything into a managed, searchable platform with role-based access for your whole team.' },
@@ -384,18 +343,13 @@ export const INDUSTRIES: IndustryConfig[] = [
     desc: 'Farm management & supply chain digitisation',
     img: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&q=75&auto=format&fit=crop',
     tagline: 'Farm management platforms, supply chain digitisation and mobile-first tools for agriculture in Africa.',
-    description: 'We build the digital infrastructure connecting smallholder farmers, aggregators, processors, and exporters — from field-level data capture in rural Ghana to last-mile payments and export documentation. Our agritech practice is built for the realities of agricultural operations in West Africa: low-connectivity environments, multi-stakeholder supply chains, and the need to reach farmers at scale without assuming smartphone access or reliable mobile data. We have delivered farm management platforms, farmer registration systems, and traceability solutions for agricultural programmes spanning thousands of smallholder households across Ghana and the region.',
+    description: 'We build the digital infrastructure connecting smallholder farmers, aggregators, processors, and exporters — from field-level data capture in rural Ghana to last-mile payments and export documentation. Our agritech work is built for the realities of agricultural operations in West Africa: low-connectivity environments, multi-stakeholder supply chains, and the need to reach farmers at scale without assuming smartphone access or reliable mobile data. We build farm management platforms, farmer registration systems, and traceability solutions for agricultural programmes spanning thousands of smallholder households.',
     whoWeServe: [
       'Agricultural aggregators and commodity offtakers',
       'Smallholder farmer networks and cooperatives',
       'Agricultural input suppliers and distributors',
       'Food processors and exporters',
       'Development finance institutions and NGOs running agricultural programmes',
-    ],
-    stats: [
-      { num: '10,000+', label: 'Smallholder farmers manageable on a single farm management platform' },
-      { num: 'Offline-first', label: 'All tools built for low-bandwidth rural environments across Ghana and West Africa' },
-      { num: '6 months', label: 'Typical MVP delivery timeline for a farm management platform' },
     ],
     challenges: [
       { title: 'Farmer data collection at scale', body: 'No reliable way to collect and store farm-level data across thousands of smallholders in Ghana\'s rural regions. We build mobile-first tools — optimised for low-cost Android devices and low-bandwidth networks — that capture yield, quality, and compliance data at source.' },
@@ -419,7 +373,7 @@ export const INDUSTRIES: IndustryConfig[] = [
       },
       {
         q: 'Do you work with development organisations and NGOs running agricultural programmes in Africa?',
-        a: 'Yes. We have experience building platforms for development finance programmes across West Africa, including donor reporting dashboards, farmer registration with Ghana Card and biometric ID integration, and multi-currency financial flows for cross-border agricultural projects. We understand both the technical requirements and the governance and reporting expectations of development organisation partners and international funders.',
+        a: 'Yes. We build platforms for development finance programmes across West Africa, including donor reporting dashboards, farmer registration with Ghana Card and biometric ID integration, and multi-currency financial flows for cross-border agricultural projects. We understand both the technical requirements and the governance and reporting expectations of development organisation partners and international funders.',
       },
     ],
     bundle: 'launch',

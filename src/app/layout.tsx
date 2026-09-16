@@ -6,9 +6,6 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollReveal from '@/components/ScrollReveal'
 import { JsonLd } from '@/components/JsonLd'
-import { getFeaturedNavCase } from '@/sanity/queries'
-import { urlFor } from '@/sanity/client'
-import type { SanityImage } from '@/sanity/types'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -73,23 +70,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  let featuredCase: React.ComponentProps<typeof Nav>['featuredCase'] = undefined
-  try {
-    const raw = await getFeaturedNavCase()
-    if (raw?.client && raw?.navMetric) {
-      featuredCase = {
-        client:    raw.client,
-        industry:  raw.industry ?? '',
-        navMetric: raw.navMetric,
-        slug:      raw.slug ?? '',
-        imageUrl:  raw.coverImage
-          ? urlFor(raw.coverImage as SanityImage).width(520).height(420).url()
-          : null,
-      }
-    }
-  } catch {}
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -180,7 +161,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           Skip to main content
         </a>
         <ScrollReveal />
-        <Nav featuredCase={featuredCase} />
+        <Nav />
         <main id="main-content">{children}</main>
         <Footer />
       </body>

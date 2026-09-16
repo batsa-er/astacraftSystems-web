@@ -166,10 +166,10 @@ export default function CrmProductPage() {
           </div>
           <div className="grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '100ms' }}>
             {[
-              { stat: '80+',  label: 'CRM & ERP implementations' },
-              { stat: '94%',  label: 'User adoption rate at 90 days' },
-              { stat: '3 mo', label: 'Average go-live timeline' },
-              { stat: '4',    label: 'Platforms we specialise in' },
+              { stat: '4',       label: 'Platforms we specialise in' },
+              { stat: '3 mo',    label: 'Typical go-live timeline' },
+              { stat: '30 days', label: 'On-call support after go-live' },
+              { stat: 'GHS',     label: 'Currency & GRA tax configured' },
             ].map(({ stat, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 70}ms` }}>
                 <p className="font-serif font-bold text-[var(--color-accent)] mb-1" style={{ fontSize: 'clamp(28px,3vw,44px)', lineHeight: 1 }}>{stat}</p>

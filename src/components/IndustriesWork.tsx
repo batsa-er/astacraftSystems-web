@@ -21,10 +21,10 @@ export function IndustriesWork({ industries }: { industries: IndustryConfig[] })
             </h2>
           </div>
           <Link
-            href="/work"
+            href="/industries"
             className="font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.45)] hover:text-[var(--color-accent)] transition-colors duration-200 mt-6 md:mt-0"
           >
-            All case studies →
+            All industries →
           </Link>
         </div>
 

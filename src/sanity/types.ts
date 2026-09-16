@@ -68,11 +68,6 @@ export interface Service {
   price?: string
 }
 
-export interface ServiceStat {
-  num: string
-  label: string
-}
-
 export interface ServiceFaq {
   q: string
   a: string
@@ -83,7 +78,6 @@ export type ProcessStep = string | { title: string; body: string }
 export interface ServiceDetail extends Service {
   detail: string
   process?: ProcessStep[]
-  stats?: ServiceStat[]
   faq?: ServiceFaq[]
   coverImage?: SanityImage
   seoTitle?: string

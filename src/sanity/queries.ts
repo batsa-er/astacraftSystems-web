@@ -13,23 +13,6 @@ import {
 } from './validation'
 import type { CaseStudy, CaseStudyDetail, Insight, InsightDetail, Service, ServiceDetail, Testimonial, Career } from './types'
 
-// ── Featured nav case study ────────────────────────────
-export async function getFeaturedNavCase(): Promise<{
-  client: string
-  industry: string
-  navMetric: string
-  slug: string
-  coverImage: unknown
-} | null> {
-  return client.fetch(
-    `*[_type == "caseStudy" && featured == true && published == true][0] {
-      client, industry, navMetric,
-      "slug": slug.current,
-      coverImage
-    }`
-  )
-}
-
 // ── Case Studies ──────────────────────────────────────
 export async function getCaseStudies(): Promise<CaseStudy[]> {
   const data = await client.fetch(`*[_type == "caseStudy" && published == true] | order(_createdAt desc) {
@@ -77,7 +60,7 @@ export async function getServices(): Promise<Service[]> {
 export async function getServiceBySlug(slug: string): Promise<ServiceDetail | null> {
   const data = await client.fetch(
     `*[_type == "service" && slug.current == $slug][0] {
-      _id, slug, number, title, tagline, description, outcomes, price, detail, process, stats,
+      _id, slug, number, title, tagline, description, outcomes, price, detail, process,
       coverImage, faq[]{ q, a }, seoTitle, seoDescription
     }`,
     { slug },

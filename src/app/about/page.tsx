@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 import PageHero from '@/components/PageHero'
 import { JsonLd } from '@/components/JsonLd'
 import { urlFor } from '@/sanity/client'
-import { Users, Layers, Clock, ShieldCheck } from 'lucide-react'
+import { Layers, Clock, MapPin, Hammer } from 'lucide-react'
 
 const values = [
   {
@@ -78,15 +78,15 @@ export default async function AboutPage() {
               We believe Africa&apos;s best businesses deserve the same calibre of technology capability that top global enterprises take for granted. That means world-class engineering, reliable infrastructure, and systems built for African market realities.
             </p>
             <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed">
-              AstaBill — our invoicing, receipts, and payments platform — is already trusted by businesses across 12 countries and is the first of a suite of products we are building for the continent.
+              AstaBill — our invoicing, receipts, and payments platform — is the first of a suite of products we are building for the continent.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-6">
             {[
-              { Icon: Users,       num: '50+',  label: 'Enterprise Clients' },
-              { Icon: Layers,      num: '12+',  label: 'Countries Served' },
-              { Icon: Clock,       num: '2026', label: 'Year Founded' },
-              { Icon: ShieldCheck, num: 'GRA',  label: 'Certified' },
+              { Icon: Clock,       num: '2026',  label: 'Year Founded' },
+              { Icon: MapPin,      num: 'Accra', label: 'Headquarters' },
+              { Icon: Layers,      num: '1',     label: 'Live Product' },
+              { Icon: Hammer,      num: '3',     label: 'Products in Development' },
             ].map(({ Icon, num, label }, i) => (
               <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 80}ms` }}>
                 <Icon className="w-5 h-5 text-[rgba(29,71,118,0.45)] mb-3" />
@@ -226,10 +226,10 @@ export default async function AboutPage() {
               Contact Sales →
             </Link>
             <Link
-              href="/work"
+              href="/services"
               className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.35)] text-white px-10 py-4 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
             >
-              View Our Work →
+              Our Services →
             </Link>
           </div>
         </div>

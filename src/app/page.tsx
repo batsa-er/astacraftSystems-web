@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Rocket, TrendingUp, Settings2, ShieldCheck, Building2 } from 'lucide-react'
-import { getTestimonials, getCaseStudies } from '@/sanity/queries'
-import type { Testimonial, CaseStudy } from '@/sanity/types'
+import { getTestimonials } from '@/sanity/queries'
+import type { Testimonial } from '@/sanity/types'
 import { DesignTestimonial } from '@/components/ui/design-testimonial'
-import { CountUp } from '@/components/CountUp'
 import { IndustriesWork } from '@/components/IndustriesWork'
 import { ParticlesWrapper } from '@/components/ui/particles-wrapper'
 import { INDUSTRIES } from '@/config/industries'
@@ -34,31 +33,9 @@ const SERVICE_GROUPS = [
   },
 ]
 
-const STATS = [
-  { prefix: '',  value: 200, suffix: '+',  label: 'Clients served' },
-  { prefix: '$', value: 28,  suffix: 'M+', label: 'Client revenue influenced' },
-  { prefix: '',  value: 50,  suffix: '+',  label: 'Enterprise clients' },
-  { prefix: '',  value: 98,  suffix: '%',  label: 'Client retention rate' },
-]
-
-const CLIENTS = [
-  'Stanbic Bank', 'MTN Enterprise', 'Afreximbank', 'Volta River Authority',
-  'QuickMart Retail', 'Nexus Health', 'Ghana Revenue Authority', 'Ecobank',
-]
-
-
-const FALLBACK_CASES: CaseStudy[] = [
-  { _id: '1', client: 'Stanbic Business Finance', industry: 'Financial Services', summary: 'Full Salesforce CRM implementation for a pan-African business finance division — unifying 12 regional offices.', metric1_num: '62%', metric1_label: 'Faster deal cycle',       metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'stanbic-crm-transformation' } },
-  { _id: '2', client: 'MTN Enterprise',           industry: 'Telecoms',           summary: 'AWS cloud migration cutting infrastructure costs across four data centres while improving uptime.',             metric1_num: '38%', metric1_label: 'Cost reduction',           metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'mtn-cloud-migration' } },
-  { _id: '3', client: 'Afreximbank',              industry: 'Banking',            summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework.',                metric1_num: '47',  metric1_label: 'Vulnerabilities remediated', metric2_num: '', metric2_label: '', metric3_num: '', metric3_label: '', slug: { current: 'afrexim-security-audit' } },
-]
-
 const FALLBACK_TESTIMONIALS = [
-  { quote: "Astacraft didn't just deliver a system — they changed how we run our entire business. The team thinks like operators, not just engineers.", name: 'Kwame Asante',   role: 'CEO, QuickMart Retail',          initials: 'KA' },
   { quote: 'The payment link changed everything. We send the invoice, the client pays on their phone, and the receipt is already waiting for them.',     name: 'Ama Darko',      role: 'Brand Strategist, Accra',         initials: 'AD' },
-  { quote: 'The cloud migration they ran for us was flawless. Zero downtime, costs dropped 38% in the first quarter. Genuinely impressive.',          name: 'Abena Mensah',   role: 'CTO, MTN Enterprise Ghana',      initials: 'AM' },
   { quote: 'AstaBill removed the spreadsheet lag from our week. The dashboard tells me what is paid, what is due, and what needs follow-up.',          name: 'Kofi Mensah',    role: 'IT Consultant, Kumasi',           initials: 'KM' },
-  { quote: 'We have worked with many tech firms across Africa. Astacraft is the only one that treats our problems as their own.',                      name: 'Emmanuel Ofori', role: 'Head of Technology, Afreximbank', initials: 'EO' },
 ]
 
 const SOLUTION_BUNDLES = [
@@ -121,15 +98,12 @@ const SOLUTION_BUNDLES = [
 
 export default async function HomePage() {
   let testimonials: Testimonial[] = []
-  let caseStudies: CaseStudy[]   = []
   try {
-    const [t, cs] = await Promise.all([getTestimonials(), getCaseStudies()])
-    if (t?.length)  testimonials = t
-    if (cs?.length) caseStudies  = cs
+    const t = await getTestimonials()
+    if (t?.length) testimonials = t
   } catch {}
 
-  const displayCases        = (caseStudies.length  ? caseStudies  : FALLBACK_CASES).slice(0, 3)
-  const displayTestimonials = testimonials.length  ? testimonials : FALLBACK_TESTIMONIALS
+  const displayTestimonials = testimonials.length ? testimonials : FALLBACK_TESTIMONIALS
 
   return (
     <>
@@ -151,7 +125,7 @@ export default async function HomePage() {
             </span>
             <span className="w-px h-3 bg-[rgba(255,255,255,0.14)]" />
             <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">
-              Est. 2026 · 12 Countries
+              Est. 2026
             </span>
           </div>
         </div>
@@ -201,35 +175,6 @@ export default async function HomePage() {
                 >
                   Contact Sales
                 </Link>
-              </div>
-              <div className="flex flex-wrap gap-x-8 gap-y-2 hero-in hero-in-4">
-                {[
-                  { num: '200+', label: 'clients served' },
-                  { num: '12',   label: 'countries served' },
-                  { num: '98%',  label: 'client retention' },
-                ].map(({ num, label }) => (
-                  <span key={label} className="font-mono text-[10px] tracking-[0.12em] uppercase">
-                    <span className="text-[var(--color-green)] font-bold">{num}</span>
-                    <span className="text-[rgba(255,255,255,0.30)] ml-2">{label}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative border-t border-[rgba(255,255,255,0.06)] hero-in hero-in-5">
-          <div className="px-[clamp(24px,5vw,80px)] py-5 flex items-center gap-8 overflow-hidden">
-            <p className="font-mono text-[10px] tracking-[0.28em] uppercase text-[rgba(255,255,255,0.18)] shrink-0 hidden sm:block">
-              Trusted by
-            </p>
-            <div className="overflow-hidden flex-1">
-              <div className="flex gap-14 animate-marquee whitespace-nowrap">
-                {[...CLIENTS, ...CLIENTS].map((c, i) => (
-                  <span key={i} className="font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.25)]">
-                    {c}
-                  </span>
-                ))}
               </div>
             </div>
           </div>
@@ -289,7 +234,6 @@ export default async function HomePage() {
 
             <div className="flex gap-8 mb-10 pb-10 border-b border-[rgba(255,255,255,0.07)]">
               {[
-                { stat: 'GH₵ 2M+', label: 'Payments processed' },
                 { stat: '~5 min',   label: 'To first invoice' },
                 { stat: 'Free',     label: 'To get started' },
               ].map(({ stat, label }) => (
@@ -471,35 +415,6 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────────
-          IMPACT NUMBERS
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-dark-deep)]">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {STATS.map(({ prefix, value, suffix, label }, i) => (
-            <div
-              key={label}
-              className={[
-                'px-[clamp(16px,3vw,40px)] py-10 md:py-12 reveal',
-                'border-[rgba(255,255,255,0.07)]',
-                i === 1 || i === 3 ? 'border-l' : '',
-                i < 2 ? 'border-b md:border-b-0' : '',
-                i === 2 ? 'md:border-l' : '',
-              ].join(' ')}
-              style={{ transitionDelay: `${i * 80}ms` }}
-            >
-              <p
-                className="stat-display font-serif font-black leading-none tracking-[-0.04em] mb-2"
-                style={{ fontSize: 'clamp(26px,3vw,42px)' }}
-              >
-                {prefix}<CountUp to={value} />{suffix}
-              </p>
-              <p className="font-mono text-[9px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.30)]">{label}</p>
-            </div>
-          ))}
         </div>
       </section>
 

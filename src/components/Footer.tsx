@@ -108,7 +108,6 @@ export default async function Footer() {
                 {[
                   ['About Us',     '/about'],
                   ['Careers',      '/careers'],
-                  ['Case Studies', '/work'],
                   ['AstaBill',     '/products'],
                   ['Security',     '/security'],
                   ['Insights',     '/insights'],

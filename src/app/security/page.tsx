@@ -49,7 +49,6 @@ const PRACTICES = [
 ]
 
 const COMPLIANCE_ACTIVE = [
-  { label: 'GRA Certified',                   status: 'Active',    note: 'Ghana Revenue Authority compliance for digital receipts' },
   { label: 'GDPR-aligned practices',          status: 'Active',    note: 'Data subject rights and processing agreements in place' },
   { label: 'Penetration testing',             status: 'Annual',    note: 'Third-party penetration tests conducted annually' },
   { label: 'Data residency',                  status: 'Available', note: 'Ghana and regional hosting options available on request' },

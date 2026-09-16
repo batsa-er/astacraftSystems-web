@@ -39,8 +39,6 @@ const STEPS = [
 ]
 
 const TRUST = [
-  { stat: '98%',  label: 'Client retention' },
-  { stat: '200+', label: 'Clients served' },
   { stat: '24h',  label: 'Response time' },
 ]
 

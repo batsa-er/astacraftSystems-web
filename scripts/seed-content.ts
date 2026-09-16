@@ -24,109 +24,6 @@ function uploadImage(url: string, filename: string): Promise<ImageRef> {
 
 const unsplash = (id: string) => `https://images.unsplash.com/${id}?w=1600&q=85&auto=format&fit=crop`
 
-// ── Case Studies (oldest first so _createdAt desc matches display order) ──
-
-const caseStudies = [
-  {
-    _id: 'caseStudy-nexus-health-software',
-    slug: 'nexus-health-software',
-    client: 'Nexus Health Systems',
-    industry: 'Healthcare',
-    summary: 'Custom patient management platform with mobile check-in, EHR integration, and billing automation — deployed across 8 clinics in Accra and Kumasi.',
-    imageId: 'photo-1576091160550-2173dba999ef',
-    metric1_num: '8', metric1_label: 'Clinics deployed',
-    metric2_num: '3×', metric2_label: 'Faster patient registration',
-    metric3_num: '5mo', metric3_label: 'Build timeline',
-    accent: 'gold',
-    services: ['Software Development', 'CRM & ERP Systems', 'Digital Transformation'],
-    challenge: "Nexus Health Systems operated eight private clinics across Accra and Kumasi with a paper-based patient registration and records system. Patient check-in queues were long, duplicate records were common, billing was manual and error-prone, and clinicians had no way to access a patient's history from a different clinic in the network. Previous attempts with off-the-shelf software had failed because none were configured for Ghana's NHIS billing requirements.",
-    solution: "We built a custom patient management platform — a web application for clinic staff and a mobile check-in app for patients — configured specifically for Ghana's NHIS billing codes and claim submission process. The platform included a unified patient record accessible across all eight clinics, automated NHIS claim generation from consultation records, EHR templates for the clinic's most common consultations, and a management dashboard showing patient volume, billing status, and claim pipeline.",
-    results: 'Patient registration time fell from an average of 12 minutes to under four minutes. NHIS claim processing time dropped by 70% due to automated claim generation. Duplicate patient records were eliminated within 30 days of go-live. The medical director gained live visibility into patient volume, revenue, and claim status across all eight clinics from a single dashboard. All eight locations were live within the five-month build timeline.',
-  },
-  {
-    _id: 'caseStudy-volta-river-digital-ops',
-    slug: 'volta-river-digital-ops',
-    client: 'Volta River Authority',
-    industry: 'Energy & Utilities',
-    summary: 'Digital transformation of field operations — replacing paper-based inspection processes with a custom mobile app and real-time reporting dashboard.',
-    imageId: 'photo-1473341304170-971dccb5ac1e',
-    metric1_num: '85%', metric1_label: 'Faster field reporting',
-    metric2_num: '2,400+', metric2_label: 'Daily reports digitized',
-    metric3_num: '120d', metric3_label: 'Build to launch',
-    accent: 'cyan',
-    services: ['Software Development', 'Digital Transformation', 'Cloud & Infrastructure'],
-    challenge: "Volta River Authority's field teams across the Akosombo and Kpong hydroelectric facilities were completing infrastructure inspection reports on paper forms that were then physically transported to the operations centre, manually entered into a spreadsheet system, and reviewed days after the inspection had occurred. With over 2,400 inspection points across the facilities, the lag between a field observation and a management response was typically 48–72 hours — a safety and operational risk.",
-    solution: 'We built a custom offline-capable mobile application for field inspection teams — designed to work reliably in the low-connectivity environments inside the dam facilities. Inspectors complete structured digital forms on ruggedised Android tablets, with photo capture and GPS tagging built in. When connectivity is restored, reports sync automatically to a real-time operations dashboard where anomalies are flagged immediately and assigned to the relevant engineering team.',
-    results: 'Field reporting time fell by 85% — from an average of 45 minutes per inspection cycle to under seven minutes. Management visibility of field conditions shifted from a 48–72 hour lag to near-real time. In the first three months of operation, the system flagged two equipment anomalies that were resolved before they escalated into operational incidents. The entire build-to-launch cycle was completed in 120 days.',
-  },
-  {
-    _id: 'caseStudy-quickmart-erp-odoo',
-    slug: 'quickmart-erp-odoo',
-    client: 'QuickMart Retail',
-    industry: 'Retail & Commerce',
-    summary: 'Odoo ERP deployment across 18 retail locations — replacing five disconnected systems with a single platform for inventory, POS, and procurement.',
-    imageId: 'photo-1441986300917-64674bd600d8',
-    metric1_num: '18', metric1_label: 'Locations live',
-    metric2_num: '40%', metric2_label: 'Inventory accuracy improvement',
-    metric3_num: '4mo', metric3_label: 'Phased rollout',
-    accent: 'cyan',
-    services: ['CRM & ERP Systems', 'Software Development', 'Digital Transformation'],
-    challenge: 'QuickMart was running five separate systems across its 18 retail locations — a legacy POS, a standalone inventory tool, a procurement spreadsheet, a manual accounts process, and a separate HR system. None of them talked to each other. Stock counts were manual and inaccurate, procurement was reactive rather than data-driven, and month-end close took two weeks because the finance team was reconciling data from five different sources.',
-    solution: "We implemented Odoo ERP as a unified platform covering POS, inventory management, procurement, and accounting — configured specifically for Ghana's VAT requirements and integrated with QuickMart's barcode scanning infrastructure. The rollout was phased across 18 locations over four months: a pilot at three high-volume locations in month one established the configuration baseline, followed by a regional rollout. Staff training was delivered in Twi and English by a team embedded at each location during their first week on the new system.",
-    results: 'All 18 locations went live within the four-month timeline. Inventory accuracy improved by 40% in the first quarter post-go-live. Procurement shifted from reactive emergency purchasing to weekly automated reorder suggestions based on actual sales velocity. Month-end close dropped from two weeks to three days. The operations director now has a single dashboard showing real-time stock levels, sales performance, and procurement status across all 18 locations.',
-  },
-  {
-    _id: 'caseStudy-afrexim-security-audit',
-    slug: 'afrexim-security-audit',
-    client: 'Afreximbank',
-    industry: 'Financial Services',
-    summary: 'Enterprise-wide cybersecurity audit, penetration testing, and ISO 27001 compliance framework — ahead of an international regulatory review.',
-    imageId: 'photo-1563986768609-322da13575f3',
-    metric1_num: '47', metric1_label: 'Vulnerabilities remediated',
-    metric2_num: 'ISO', metric2_label: '27001 certified',
-    metric3_num: '8wks', metric3_label: 'Engagement timeline',
-    accent: 'cyan',
-    services: ['Cybersecurity', 'IT Strategy & Consulting'],
-    challenge: 'Afreximbank was preparing for a regulatory review by an international oversight body that required demonstrated compliance with ISO 27001 information security standards. An internal review had identified gaps in their security posture but lacked the depth to understand the full risk exposure or the roadmap to remediation. With eight weeks to the review date, they needed an authoritative external assessment and a clear remediation plan they could act on immediately.',
-    solution: "We conducted a comprehensive enterprise-wide security audit encompassing network infrastructure, application security, access controls, data handling procedures, and incident response capabilities. External and internal penetration testing was carried out across all public-facing systems and the internal network. Each finding was classified by severity and mapped to the relevant ISO 27001 control. We then worked with Afreximbank's IT and compliance teams directly to remediate critical and high findings within the engagement window, rather than handing over a report and leaving.",
-    results: '47 vulnerabilities were identified and remediated within the eight-week engagement — including three critical findings that would have represented significant regulatory risk. Afreximbank achieved ISO 27001 certification ahead of the regulatory review date. The compliance team had a documented, auditor-ready evidence pack for every control. The regulatory review concluded with no material findings against information security controls.',
-  },
-  {
-    _id: 'caseStudy-mtn-cloud-migration',
-    slug: 'mtn-cloud-migration',
-    client: 'MTN Enterprise',
-    industry: 'Telecoms',
-    summary: 'Cloud migration of legacy on-premise infrastructure to AWS — cutting infrastructure costs while improving uptime across four data centres.',
-    imageId: 'photo-1558494949-ef010cbdcc31',
-    metric1_num: '38%', metric1_label: 'Infrastructure cost reduction',
-    metric2_num: '99.97%', metric2_label: 'Uptime post-migration',
-    metric3_num: '6mo', metric3_label: 'Migration timeline',
-    accent: 'gold',
-    services: ['Cloud & Infrastructure', 'Digital Transformation', 'Cybersecurity'],
-    challenge: "MTN Enterprise's B2B division was running critical customer-facing systems on ageing on-premise infrastructure spread across four data centres. Maintenance costs were rising year-on-year, unplanned downtime incidents were increasing, and the infrastructure team was spending the majority of their capacity on firefighting rather than new capability development. The business case for cloud migration had been discussed for two years but had stalled due to concerns about data sovereignty, migration risk, and skills availability.",
-    solution: "We led a phased migration to AWS, beginning with a detailed workload assessment to categorise each system by migration complexity and business criticality. Low-risk workloads moved first via lift-and-shift, establishing team confidence and a working operational model before the more complex systems were re-architected. A dedicated AWS Landing Zone was configured to meet MTN's data residency and compliance requirements. We embedded two cloud engineers within the MTN infrastructure team throughout the engagement to build in-house capability alongside delivery.",
-    results: 'The migration completed in six months — on schedule and within budget. Infrastructure costs fell 38% in the first year post-migration, primarily through right-sizing compute and eliminating idle capacity that had been provisioned for peak loads but never released. Uptime across the migrated workloads reached 99.97% in the 12 months following go-live, compared to a baseline of 99.1% on-premise. The infrastructure team shifted from reactive maintenance to proactive capacity planning.',
-  },
-  {
-    _id: 'caseStudy-stanbic-crm-transformation',
-    slug: 'stanbic-crm-transformation',
-    client: 'Stanbic Business Finance',
-    industry: 'Financial Services',
-    summary: 'Full Salesforce CRM implementation and data migration for a pan-African business finance division — unifying 12 regional offices onto one system.',
-    imageId: 'photo-1486406146926-c627a92ad1ab',
-    metric1_num: '62%', metric1_label: 'Faster deal cycle',
-    metric2_num: '12', metric2_label: 'Offices unified',
-    metric3_num: '90d', metric3_label: 'Go-live',
-    accent: 'cyan',
-    featured: true,
-    navMetric: '62% faster deal cycle',
-    services: ['CRM & ERP Systems', 'Digital Transformation', 'IT Strategy & Consulting'],
-    challenge: 'Stanbic Business Finance operated across 12 regional offices in West Africa, each running its own spreadsheet-based tracking system for business lending pipelines. Deals were falling through the cracks between handoffs, forecast accuracy was near-zero, and the regional MD had no live view of the consolidated pipeline at any point in the month. The sales team were spending 3–4 hours per week manually collating status updates for weekly reporting.',
-    solution: "We designed and implemented a Salesforce Sales Cloud environment tailored to Stanbic's business lending workflow — with custom pipeline stages matching their credit approval process, automated handoff tasks between relationship managers and credit analysts, and a live executive dashboard that aggregated deal status across all 12 offices in real time. Data migration from 12 separate Excel environments was handled with a purpose-built ETL process to ensure no historical pipeline data was lost.",
-    results: 'Within 90 days of go-live, the average deal cycle had shortened by 62% — primarily through eliminating manual status-chasing between teams. The regional MD gained a consolidated pipeline dashboard that updated in real time. Forecast accuracy improved from ad-hoc estimates to data-driven weekly projections within the first quarter. The sales team recovered an average of 3.5 hours per week previously spent on manual reporting.',
-  },
-]
-
 // ── Insights ──────────────────────────────────────────
 
 const insights = [
@@ -588,7 +485,6 @@ const services = [
       { title: 'Team training & adoption', body: 'Role-specific training sessions for every user group — from admin configuration to daily use — before the system goes live.' },
       { title: 'Post-launch support & optimization', body: 'Thirty days of dedicated post-launch support, followed by iterative optimization as your team uncovers new automation opportunities.' },
     ],
-    stats: [{ num: '80+', label: 'CRM/ERP implementations' }, { num: '94%', label: 'User adoption rate' }, { num: '3mo', label: 'Avg. go-live timeline' }],
     faq: [
       {
         q: 'Which CRM is best for Ghana businesses — Salesforce, Odoo, or HubSpot?',
@@ -596,7 +492,7 @@ const services = [
       },
       {
         q: 'Can Odoo or Salesforce handle GRA tax compliance and Ghanaian payroll?',
-        a: "Yes, with proper configuration. Odoo has strong multi-currency and tax module support that we configure for Ghana Revenue Authority VAT and withholding tax requirements. Ghanaian payroll including SSNIT contributions, PAYE, and tier 1/2/3 pension can also be configured within Odoo's HR module. Salesforce requires integration with a local payroll provider for full GRA compliance. We have implemented compliant financial configurations for numerous Ghanaian businesses and understand the specific requirements in detail.",
+        a: "Yes, with proper configuration. Odoo has strong multi-currency and tax module support that we configure for Ghana Revenue Authority VAT and withholding tax requirements. Ghanaian payroll including SSNIT contributions, PAYE, and tier 1/2/3 pension can also be configured within Odoo's HR module. Salesforce requires integration with a local payroll provider for full GRA compliance. We understand the specific requirements in detail and configure for them from the start.",
       },
       {
         q: 'How long does a CRM or ERP implementation take?',
@@ -625,7 +521,6 @@ const services = [
       { title: 'Go-live & monitoring setup', body: 'Managed go-live with monitoring dashboards and alerting configured so you know immediately if any automation fails or behaves unexpectedly.' },
       { title: 'Ongoing optimization & expansion', body: 'As your business grows we expand coverage — adding new triggers, systems, and workflows on a retained basis.' },
     ],
-    stats: [{ num: '120+', label: 'Integrations delivered' }, { num: '85%', label: 'Avg. manual work eliminated' }, { num: '48h', label: 'Time to first working prototype' }],
     faq: [
       {
         q: 'What is the difference between an API and workflow automation?',
@@ -662,7 +557,6 @@ const services = [
       { title: 'QA, testing & security review', body: 'Automated testing, manual QA, and a security review covering OWASP Top 10 vulnerabilities before any system goes live.' },
       { title: 'Deployment, launch & handoff', body: 'Managed deployment to production, post-launch monitoring, full documentation, and a knowledge transfer session for your team.' },
     ],
-    stats: [{ num: '200+', label: 'Systems built' }, { num: '98%', label: 'On-time delivery' }, { num: '50+', label: 'Enterprise clients' }],
     faq: [
       {
         q: 'How long does custom software development take for a Ghana-based business?',
@@ -670,11 +564,11 @@ const services = [
       },
       {
         q: 'Can you build software that works on slow or unreliable internet connections?',
-        a: "Yes. This is a core capability we have refined for African markets. We build progressive web apps, offline-first architectures, and data-efficient mobile experiences that continue working on 2G and 3G connections. Optimizing for Ghana's network realities is standard practice in every project we deliver, not an afterthought.",
+        a: "Yes. This is a core capability for African markets. We build progressive web apps, offline-first architectures, and data-efficient mobile experiences that continue working on 2G and 3G connections. Optimizing for Ghana's network realities is standard practice in every project we deliver, not an afterthought.",
       },
       {
         q: 'Do you work with startups or only large enterprises?',
-        a: 'Both. We have helped early-stage Ghanaian startups build and launch their first products, and we run complex multi-system projects for enterprise and government clients. The engineering standards we apply are the same regardless of company size — what changes is scope and timeline.',
+        a: 'Both. We help early-stage startups build and launch their first products, and we take on complex multi-system projects for enterprise and government organizations. The engineering standards we apply are the same regardless of company size — what changes is scope and timeline.',
       },
       {
         q: 'Do you provide ongoing support and maintenance after the project launches?',
@@ -689,7 +583,7 @@ const services = [
     title: 'Cloud & Infrastructure',
     tagline: 'Infrastructure that scales with you.',
     description: 'Cloud architecture, migration, and managed services on AWS, Microsoft Azure, and Google Cloud. Secure, reliable, cost-optimized infrastructure for businesses at any scale.',
-    detail: "Cloud infrastructure is the backbone of every modern business. We help organizations migrate from on-premise servers to cloud, architect new cloud-native systems from scratch, and manage ongoing infrastructure with the reliability of a dedicated team. Our certified cloud architects work across AWS, Azure, and GCP — designing infrastructure that matches your actual workload, not the workload you might hypothetically have one day.\n\nFor Ghana-based businesses, cloud adoption brings particular advantages: eliminating the cost and risk of maintaining physical servers in a country where reliable power and cooling are challenges, accessing global infrastructure with verifiable uptime SLAs, and enabling remote teams to work from anywhere. We also address the data sovereignty and latency considerations that matter most to African businesses — including which cloud regions minimize latency for users in West Africa and how to structure data storage to meet Ghana's regulatory requirements.",
+    detail: "Cloud infrastructure is the backbone of every modern business. We help organizations migrate from on-premise servers to cloud, architect new cloud-native systems from scratch, and manage ongoing infrastructure with the reliability of a dedicated team. Our cloud architects work across AWS, Azure, and GCP — designing infrastructure that matches your actual workload, not the workload you might hypothetically have one day.\n\nFor Ghana-based businesses, cloud adoption brings particular advantages: eliminating the cost and risk of maintaining physical servers in a country where reliable power and cooling are challenges, accessing global infrastructure with verifiable uptime SLAs, and enabling remote teams to work from anywhere. We also address the data sovereignty and latency considerations that matter most to African businesses — including which cloud regions minimize latency for users in West Africa and how to structure data storage to meet Ghana's regulatory requirements.",
     outcomes: ['Cloud migration & lift-and-shift', 'Architecture design (AWS/Azure/GCP)', 'Managed cloud services', 'DevOps & CI/CD pipelines', 'Cost optimization & governance', 'Disaster recovery & backup'],
     process: [
       { title: 'Cloud readiness assessment', body: 'We audit your current infrastructure, applications, and data to determine what can migrate as-is, what needs re-architecting, and what to retire.' },
@@ -699,7 +593,6 @@ const services = [
       { title: 'Performance optimization', body: 'Post-migration tuning of compute, storage, and networking to hit the performance and cost targets defined in the architecture phase.' },
       { title: 'Ongoing managed services', body: 'Continuous monitoring, patching, cost governance, and capacity planning — cloud infrastructure managed like an internal team, without the headcount.' },
     ],
-    stats: [{ num: '35%', label: 'Avg. infrastructure cost reduction' }, { num: '99.9%', label: 'Uptime SLA' }, { num: '50+', label: 'Cloud migrations completed' }],
     faq: [
       {
         q: 'Is cloud computing reliable in Ghana given our internet infrastructure?',
@@ -711,7 +604,7 @@ const services = [
       },
       {
         q: 'How much can a Ghana business save by moving to the cloud?',
-        a: 'Our clients typically see 25–40% reduction in total infrastructure cost within the first year. This comes from eliminating hardware capital expenditure, reducing IT staff time spent on server maintenance, and right-sizing compute resources so you only pay for what you use. We provide a detailed cost comparison during the assessment phase so you can see the numbers before committing.',
+        a: 'A well-planned migration reduces total infrastructure cost. The savings come from eliminating hardware capital expenditure, reducing IT staff time spent on server maintenance, and right-sizing compute resources so you only pay for what you use. We provide a detailed cost comparison during the assessment phase so you can see the numbers before committing.',
       },
       {
         q: 'Can you migrate our existing on-premise system to the cloud without downtime?',
@@ -726,7 +619,7 @@ const services = [
     title: 'Business Process Transformation',
     tagline: 'Redesign how your business operates.',
     description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
-    detail: 'Digital transformation is not a one-time project — it is a fundamental shift in how an organization uses technology to operate and compete. We guide businesses through every stage of that journey: diagnosing where manual processes and legacy systems are creating friction, designing the target operating model, and executing change in phases that maintain business continuity.\n\nFor Ghanaian organizations, this often means replacing paper-based workflows with digitized systems, connecting siloed departments onto shared platforms, and building the data infrastructure that executive teams need to make faster decisions. We have led transformations across banking, telecoms, healthcare, NGOs, and government agencies in Ghana and across West Africa — and we understand the change management challenges that are unique to African organizational cultures.',
+    detail: 'Digital transformation is not a one-time project — it is a fundamental shift in how an organization uses technology to operate and compete. We guide businesses through every stage of that journey: diagnosing where manual processes and legacy systems are creating friction, designing the target operating model, and executing change in phases that maintain business continuity.\n\nFor Ghanaian organizations, this often means replacing paper-based workflows with digitized systems, connecting siloed departments onto shared platforms, and building the data infrastructure that executive teams need to make faster decisions. We lead transformations for banking, telecoms, healthcare, NGOs, and government agencies in Ghana and across West Africa — and we understand the change management challenges that are unique to African organizational cultures.',
     outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
     process: [
       { title: 'Current state assessment', body: 'A structured discovery of your existing processes, systems, and pain points — identifying where manual work, legacy systems, and data silos are costing the most.' },
@@ -736,7 +629,6 @@ const services = [
       { title: 'Full rollout & change management', body: 'Phased rollout with structured change management, staff training, and communication plans to drive genuine adoption across the organization.' },
       { title: 'Optimization & continuous improvement', body: 'Post-rollout measurement against agreed KPIs, iterative improvements, and regular reviews to ensure the transformation delivers its promised return.' },
     ],
-    stats: [{ num: '60%', label: 'Avg. process efficiency gain' }, { num: '40+', label: 'Transformations delivered' }, { num: '18mo', label: 'Avg. transformation timeline' }],
     faq: [
       {
         q: 'How do I know if my Ghana business is ready for digital transformation?',
@@ -748,7 +640,7 @@ const services = [
       },
       {
         q: 'Do you work with NGOs and government agencies in Ghana?',
-        a: 'Yes. A significant portion of our transformation work is in the public and non-profit sectors. We understand procurement processes, donor reporting requirements, and the specific constraints of government and NGO technology environments in Ghana. We have experience navigating these engagements efficiently.',
+        a: 'Yes. The public and non-profit sectors are a core focus of our transformation work. We understand procurement processes, donor reporting requirements, and the specific constraints of government and NGO technology environments in Ghana. We structure these engagements to move efficiently within those constraints.',
       },
       {
         q: 'How long does a digital transformation project take?',
@@ -763,17 +655,16 @@ const services = [
     title: 'Cybersecurity & SOC Monitoring',
     tagline: 'Enterprise-grade protection. 24/7.',
     description: 'Security audits, penetration testing, compliance frameworks, and 24/7 Security Operations Centre monitoring — designed to protect your business from modern threats and meet Bank of Ghana and Data Protection Act requirements.',
-    detail: "Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana's cybersecurity directives, Ghana's Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur certified security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We work with financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.\n\nFor organizations that need continuous coverage, our Security Operations Centre (SOC) monitoring service provides 24/7 threat detection across your entire environment — endpoints, network, cloud, and applications — with analyst-reviewed escalations, real-time alerting, and the monthly reports and audit-ready evidence packs that Bank of Ghana examinations and compliance audits require.",
+    detail: "Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana's cybersecurity directives, Ghana's Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We build security programmes for financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.\n\nFor organizations that need continuous coverage, our Security Operations Centre (SOC) monitoring service provides 24/7 threat detection across your entire environment — endpoints, network, cloud, and applications — with analyst-reviewed escalations, real-time alerting, and the monthly reports and audit-ready evidence packs that Bank of Ghana examinations and compliance audits require.",
     outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', '24/7 SOC monitoring & incident response', 'Endpoint Detection & Response (EDR)', 'Employee security awareness training', 'Security policy development', 'Monthly threat reports & audit evidence packs'],
     process: [
       { title: 'Security baseline assessment', body: 'A comprehensive review of your current security posture — network architecture, access controls, data handling, and existing policies — to establish what we are working with.' },
       { title: 'Threat & risk modelling', body: 'We build a threat model specific to your industry, data assets, and operating environment so remediation effort is focused where risk is highest.' },
-      { title: 'Penetration testing', body: 'Simulated attacks against your systems — web applications, internal networks, and cloud infrastructure — conducted by certified ethical hackers.' },
+      { title: 'Penetration testing', body: 'Simulated attacks against your systems — web applications, internal networks, and cloud infrastructure — conducted by ethical hackers under an agreed scope.' },
       { title: 'Remediation prioritization', body: 'A prioritized report telling you exactly what to fix, in what order, with severity ratings and remediation guidance for every finding.' },
       { title: 'Controls implementation', body: 'We implement the recommended controls — patching, access hardening, encryption, monitoring — working with your IT team or handling it entirely.' },
       { title: 'Continuous monitoring', body: '24/7 SOC monitoring with defined escalation procedures, monthly threat reports, and quarterly security reviews to keep your posture current.' },
     ],
-    stats: [{ num: '0', label: 'Client breaches post-engagement' }, { num: 'ISO', label: '27001 compliance advisory' }, { num: '24/7', label: 'SOC monitoring capability' }],
     faq: [
       {
         q: 'What cybersecurity laws apply to businesses in Ghana?',
@@ -810,7 +701,6 @@ const services = [
       { title: 'Implementation guidance', body: 'We oversee implementation partners, review proposals, and provide technical governance throughout delivery — keeping your interests front and centre.' },
       { title: 'Advisory retainer & review cadence', body: 'Ongoing strategic advice on retainer: quarterly roadmap reviews, vendor negotiations, and on-demand access to a senior technology advisor.' },
     ],
-    stats: [{ num: '$4M+', label: 'In client tech spend advised' }, { num: '100+', label: 'Architecture reviews' }, { num: '12+', label: 'Countries served' }],
     faq: [
       {
         q: 'What is IT consulting and does my Ghana business need it?',
@@ -826,7 +716,7 @@ const services = [
       },
       {
         q: 'Can you help us select and evaluate technology vendors in Ghana?',
-        a: 'Yes. Vendor selection is one of the most valuable things we do. We help you define your requirements clearly, build an evaluation framework, run structured RFP processes, assess vendor proposals objectively, and negotiate commercial terms. We have deep knowledge of the technology vendor landscape in Ghana and across Africa — including which vendors actually have local support capability versus those who claim to. Our recommendations are independent: we do not receive referral fees or commissions from any technology vendor.',
+        a: 'Yes. Vendor selection is one of the most valuable things we do. We help you define your requirements clearly, build an evaluation framework, run structured RFP processes, assess vendor proposals objectively, and negotiate commercial terms. We track the technology vendor landscape in Ghana and across Africa — including which vendors actually have local support capability versus those who claim to. Our recommendations are independent: we do not receive referral fees or commissions from any technology vendor.',
       },
     ],
   },
@@ -835,11 +725,8 @@ const services = [
 // ── Testimonials ──────────────────────────────────────
 
 const testimonials = [
-  { _id: 'testimonial-kwame-asante', quote: "Astacraft didn't just deliver a system — they changed how we run our entire business. The team thinks like operators, not just engineers.", name: 'Kwame Asante', role: 'CEO, QuickMart Retail', initials: 'KA', featured: true },
   { _id: 'testimonial-ama-darko', quote: 'The payment link changed everything. We send the invoice, the client pays on their phone, and the receipt is already waiting for them.', name: 'Ama Darko', role: 'Brand Strategist, Accra', initials: 'AD', featured: false },
-  { _id: 'testimonial-abena-mensah', quote: 'The cloud migration they ran for us was flawless. Zero downtime, costs dropped 38% in the first quarter. Genuinely impressive.', name: 'Abena Mensah', role: 'CTO, MTN Enterprise Ghana', initials: 'AM', featured: false },
   { _id: 'testimonial-kofi-mensah', quote: 'AstaBill removed the spreadsheet lag from our week. The dashboard tells me what is paid, what is due, and what needs follow-up.', name: 'Kofi Mensah', role: 'IT Consultant, Kumasi', initials: 'KM', featured: false },
-  { _id: 'testimonial-emmanuel-ofori', quote: 'We have worked with many tech firms across Africa. Astacraft is the only one that treats our problems as their own.', name: 'Emmanuel Ofori', role: 'Head of Technology, Afreximbank', initials: 'EO', featured: false },
 ]
 
 // ── Site Settings ─────────────────────────────────────
@@ -864,40 +751,11 @@ async function seed() {
 
   console.log('Uploading images...')
   const imageRefs = new Map<string, ImageRef>()
-  const allImageIds = [
-    ...caseStudies.map((c) => c.imageId),
-    ...insights.map((i) => i.imageId),
-  ]
+  const allImageIds = insights.map((i) => i.imageId)
   for (const id of Array.from(new Set(allImageIds))) {
     const ref = await uploadImage(unsplash(id), `${id}.jpg`)
     imageRefs.set(id, ref)
     console.log(`  ✓ ${id} → ${ref.asset._ref}`)
-  }
-
-  console.log('\nCreating case studies (oldest first)...')
-  for (const cs of caseStudies) {
-    await client.createOrReplace({
-      _id: cs._id,
-      _type: 'caseStudy',
-      client: cs.client,
-      slug: { _type: 'slug', current: cs.slug },
-      industry: cs.industry,
-      summary: cs.summary,
-      challenge: cs.challenge,
-      solution: cs.solution,
-      results: cs.results,
-      metric1_num: cs.metric1_num, metric1_label: cs.metric1_label,
-      metric2_num: cs.metric2_num, metric2_label: cs.metric2_label,
-      metric3_num: cs.metric3_num, metric3_label: cs.metric3_label,
-      accent: cs.accent,
-      coverImage: imageRefs.get(cs.imageId),
-      services: cs.services,
-      published: true,
-      featured: cs.featured ?? false,
-      ...(cs.navMetric ? { navMetric: cs.navMetric } : {}),
-    })
-    console.log(`  ✓ ${cs.client}`)
-    await new Promise((r) => setTimeout(r, 300))
   }
 
   console.log('\nCreating insights...')
@@ -934,7 +792,6 @@ async function seed() {
       detail: svc.detail,
       outcomes: svc.outcomes,
       process: svc.process.map((p, i) => ({ _key: key('step', i), ...p })),
-      stats: svc.stats.map((s, i) => ({ _key: key('stat', i), ...s })),
       faq: svc.faq.map((f, i) => ({ _key: key('faq', i), ...f })),
     })
     console.log(`  ✓ ${svc.slug}`)

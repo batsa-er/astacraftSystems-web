@@ -49,7 +49,6 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       { title: 'QA, testing & security review', body: 'Automated testing, manual QA, and a security review covering OWASP Top 10 vulnerabilities before any system goes live.' },
       { title: 'Deployment, launch & handoff', body: 'Managed deployment to production, post-launch monitoring, full documentation, and a knowledge transfer session for your team.' },
     ],
-    stats: [{ num: '200+', label: 'Systems built' }, { num: '98%', label: 'On-time delivery' }, { num: '50+', label: 'Enterprise clients' }],
     faq: [
       {
         q: 'How long does custom software development take for a Ghana-based business?',
@@ -57,11 +56,11 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
       {
         q: 'Can you build software that works on slow or unreliable internet connections?',
-        a: 'Yes. This is a core capability we have refined for African markets. We build progressive web apps, offline-first architectures, and data-efficient mobile experiences that continue working on 2G and 3G connections. Optimizing for Ghana\'s network realities is standard practice in every project we deliver, not an afterthought.',
+        a: 'Yes. This is a core capability for African markets. We build progressive web apps, offline-first architectures, and data-efficient mobile experiences that continue working on 2G and 3G connections. Optimizing for Ghana\'s network realities is standard practice in every project we deliver, not an afterthought.',
       },
       {
         q: 'Do you work with startups or only large enterprises?',
-        a: 'Both. We have helped early-stage Ghanaian startups build and launch their first products, and we run complex multi-system projects for enterprise and government clients. The engineering standards we apply are the same regardless of company size — what changes is scope and timeline.',
+        a: 'Both. We help early-stage startups build and launch their first products, and we take on complex multi-system projects for enterprise and government organizations. The engineering standards we apply are the same regardless of company size — what changes is scope and timeline.',
       },
       {
         q: 'Do you provide ongoing support and maintenance after the project launches?',
@@ -82,7 +81,6 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       { title: 'Go-live & monitoring setup',          body: 'Managed go-live with monitoring dashboards and alerting configured so you know immediately if any automation fails or behaves unexpectedly.' },
       { title: 'Ongoing optimization & expansion',    body: 'As your business grows we expand coverage — adding new triggers, systems, and workflows on a retained basis.' },
     ],
-    stats: [{ num: '120+', label: 'Integrations delivered' }, { num: '85%', label: 'Avg. manual work eliminated' }, { num: '48h', label: 'Time to first working prototype' }],
     faq: [
       {
         q: 'What is the difference between an API and workflow automation?',
@@ -105,7 +103,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
   'digital-transformation': {
     number: '02', title: 'Business Process Transformation', tagline: 'Redesign how your business operates.',
     description: 'We help organizations redesign processes, automate workflows, and replace legacy systems with modern technology — reducing operational costs and unlocking new capability.',
-    detail: 'Digital transformation is not a one-time project — it is a fundamental shift in how an organization uses technology to operate and compete. We guide businesses through every stage of that journey: diagnosing where manual processes and legacy systems are creating friction, designing the target operating model, and executing change in phases that maintain business continuity.\n\nFor Ghanaian organizations, this often means replacing paper-based workflows with digitized systems, connecting siloed departments onto shared platforms, and building the data infrastructure that executive teams need to make faster decisions. We have led transformations across banking, telecoms, healthcare, NGOs, and government agencies in Ghana and across West Africa — and we understand the change management challenges that are unique to African organizational cultures.',
+    detail: 'Digital transformation is not a one-time project — it is a fundamental shift in how an organization uses technology to operate and compete. We guide businesses through every stage of that journey: diagnosing where manual processes and legacy systems are creating friction, designing the target operating model, and executing change in phases that maintain business continuity.\n\nFor Ghanaian organizations, this often means replacing paper-based workflows with digitized systems, connecting siloed departments onto shared platforms, and building the data infrastructure that executive teams need to make faster decisions. We lead transformations for banking, telecoms, healthcare, NGOs, and government agencies in Ghana and across West Africa — and we understand the change management challenges that are unique to African organizational cultures.',
     outcomes: ['Business process automation', 'Workflow digitization', 'Legacy system replacement', 'Change management & training', 'Technology roadmap development', 'ROI measurement frameworks'],
     process: [
       { title: 'Current state assessment',          body: 'A structured discovery of your existing processes, systems, and pain points — identifying where manual work, legacy systems, and data silos are costing the most.' },
@@ -115,7 +113,6 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       { title: 'Full rollout & change management',  body: 'Phased rollout with structured change management, staff training, and communication plans to drive genuine adoption across the organization.' },
       { title: 'Optimization & continuous improvement', body: 'Post-rollout measurement against agreed KPIs, iterative improvements, and regular reviews to ensure the transformation delivers its promised return.' },
     ],
-    stats: [{ num: '60%', label: 'Avg. process efficiency gain' }, { num: '40+', label: 'Transformations delivered' }, { num: '18mo', label: 'Avg. transformation timeline' }],
     faq: [
       {
         q: 'How do I know if my Ghana business is ready for digital transformation?',
@@ -127,7 +124,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
       {
         q: 'Do you work with NGOs and government agencies in Ghana?',
-        a: 'Yes. A significant portion of our transformation work is in the public and non-profit sectors. We understand procurement processes, donor reporting requirements, and the specific constraints of government and NGO technology environments in Ghana. We have experience navigating these engagements efficiently.',
+        a: 'Yes. The public and non-profit sectors are a core focus of our transformation work. We understand procurement processes, donor reporting requirements, and the specific constraints of government and NGO technology environments in Ghana. We structure these engagements to move efficiently within those constraints.',
       },
       {
         q: 'How long does a digital transformation project take?',
@@ -138,7 +135,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
   'cloud-solutions': {
     number: '03', title: 'Cloud & Infrastructure', tagline: 'Infrastructure that scales with you.',
     description: 'Cloud architecture, migration, and managed services on AWS, Microsoft Azure, and Google Cloud. Secure, reliable, cost-optimized infrastructure for businesses at any scale.',
-    detail: 'Cloud infrastructure is the backbone of every modern business. We help organizations migrate from on-premise servers to cloud, architect new cloud-native systems from scratch, and manage ongoing infrastructure with the reliability of a dedicated team. Our certified cloud architects work across AWS, Azure, and GCP — designing infrastructure that matches your actual workload, not the workload you might hypothetically have one day.\n\nFor Ghana-based businesses, cloud adoption brings particular advantages: eliminating the cost and risk of maintaining physical servers in a country where reliable power and cooling are challenges, accessing global infrastructure with Verifiable uptime SLAs, and enabling remote teams to work from anywhere. We also address the data sovereignty and latency considerations that matter most to African businesses — including which cloud regions minimize latency for users in West Africa and how to structure data storage to meet Ghana\'s regulatory requirements.',
+    detail: 'Cloud infrastructure is the backbone of every modern business. We help organizations migrate from on-premise servers to cloud, architect new cloud-native systems from scratch, and manage ongoing infrastructure with the reliability of a dedicated team. Our cloud architects work across AWS, Azure, and GCP — designing infrastructure that matches your actual workload, not the workload you might hypothetically have one day.\n\nFor Ghana-based businesses, cloud adoption brings particular advantages: eliminating the cost and risk of maintaining physical servers in a country where reliable power and cooling are challenges, accessing global infrastructure with Verifiable uptime SLAs, and enabling remote teams to work from anywhere. We also address the data sovereignty and latency considerations that matter most to African businesses — including which cloud regions minimize latency for users in West Africa and how to structure data storage to meet Ghana\'s regulatory requirements.',
     outcomes: ['Cloud migration & lift-and-shift', 'Architecture design (AWS/Azure/GCP)', 'Managed cloud services', 'DevOps & CI/CD pipelines', 'Cost optimization & governance', 'Disaster recovery & backup'],
     process: [
       { title: 'Cloud readiness assessment',    body: 'We audit your current infrastructure, applications, and data to determine what can migrate as-is, what needs re-architecting, and what to retire.' },
@@ -148,7 +145,6 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       { title: 'Performance optimization',      body: 'Post-migration tuning of compute, storage, and networking to hit the performance and cost targets defined in the architecture phase.' },
       { title: 'Ongoing managed services',      body: 'Continuous monitoring, patching, cost governance, and capacity planning — cloud infrastructure managed like an internal team, without the headcount.' },
     ],
-    stats: [{ num: '35%', label: 'Avg. infrastructure cost reduction' }, { num: '99.9%', label: 'Uptime SLA' }, { num: '50+', label: 'Cloud migrations completed' }],
     faq: [
       {
         q: 'Is cloud computing reliable in Ghana given our internet infrastructure?',
@@ -160,7 +156,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
       {
         q: 'How much can a Ghana business save by moving to the cloud?',
-        a: 'Our clients typically see 25–40% reduction in total infrastructure cost within the first year. This comes from eliminating hardware capital expenditure, reducing IT staff time spent on server maintenance, and right-sizing compute resources so you only pay for what you use. We provide a detailed cost comparison during the assessment phase so you can see the numbers before committing.',
+        a: 'A well-planned migration reduces total infrastructure cost. The savings come from eliminating hardware capital expenditure, reducing IT staff time spent on server maintenance, and right-sizing compute resources so you only pay for what you use. We provide a detailed cost comparison during the assessment phase so you can see the numbers before committing.',
       },
       {
         q: 'Can you migrate our existing on-premise system to the cloud without downtime?',
@@ -171,17 +167,16 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
   'cybersecurity': {
     number: '04', title: 'Cybersecurity & SOC Monitoring', tagline: 'Enterprise-grade protection. 24/7.',
     description: 'Security audits, penetration testing, compliance frameworks, and 24/7 Security Operations Centre monitoring — designed to protect your business from modern threats and meet Bank of Ghana and Data Protection Act requirements.',
-    detail: 'Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana\'s cybersecurity directives, Ghana\'s Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur certified security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We work with financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.\n\nFor organizations that need continuous coverage, our Security Operations Centre (SOC) monitoring service provides 24/7 threat detection across your entire environment — endpoints, network, cloud, and applications — with analyst-reviewed escalations, real-time alerting, and the monthly reports and audit-ready evidence packs that Bank of Ghana examinations and compliance audits require.',
+    detail: 'Cybersecurity is no longer optional for businesses of any size in Ghana. The Bank of Ghana\'s cybersecurity directives, Ghana\'s Data Protection Act 2012, and the increasing sophistication of attacks targeting West African organizations have made security a board-level concern. A single breach can cost more than years of security investment — in downtime, data loss, regulatory fines, and reputational damage that takes years to rebuild.\n\nOur security team delivers the full spectrum of protection: systematic vulnerability identification, simulated attacks that expose real weaknesses before criminals do, compliance frameworks that satisfy regulators and auditors, and continuous monitoring that catches threats before they become incidents. We build security programmes for financial institutions, telecoms, healthcare organizations, government agencies, and enterprises across Ghana — and we understand the specific threat landscape and regulatory requirements that apply to each sector.\n\nFor organizations that need continuous coverage, our Security Operations Centre (SOC) monitoring service provides 24/7 threat detection across your entire environment — endpoints, network, cloud, and applications — with analyst-reviewed escalations, real-time alerting, and the monthly reports and audit-ready evidence packs that Bank of Ghana examinations and compliance audits require.',
     outcomes: ['Security audits & vulnerability assessments', 'Penetration testing', 'Compliance (ISO 27001, GDPR, PCI-DSS)', '24/7 SOC monitoring & incident response', 'Endpoint Detection & Response (EDR)', 'Employee security awareness training', 'Security policy development', 'Monthly threat reports & audit evidence packs'],
     process: [
       { title: 'Security baseline assessment', body: 'A comprehensive review of your current security posture — network architecture, access controls, data handling, and existing policies — to establish what we are working with.' },
       { title: 'Threat & risk modelling',      body: 'We build a threat model specific to your industry, data assets, and operating environment so remediation effort is focused where risk is highest.' },
-      { title: 'Penetration testing',          body: 'Simulated attacks against your systems — web applications, internal networks, and cloud infrastructure — conducted by certified ethical hackers.' },
+      { title: 'Penetration testing',          body: 'Simulated attacks against your systems — web applications, internal networks, and cloud infrastructure — conducted by ethical hackers under an agreed scope.' },
       { title: 'Remediation prioritization',   body: 'A prioritized report telling you exactly what to fix, in what order, with severity ratings and remediation guidance for every finding.' },
       { title: 'Controls implementation',      body: 'We implement the recommended controls — patching, access hardening, encryption, monitoring — working with your IT team or handling it entirely.' },
       { title: 'Continuous monitoring',        body: '24/7 SOC monitoring with defined escalation procedures, monthly threat reports, and quarterly security reviews to keep your posture current.' },
     ],
-    stats: [{ num: '0', label: 'Client breaches post-engagement' }, { num: 'ISO', label: '27001 compliance advisory' }, { num: '24/7', label: 'SOC monitoring capability' }],
     faq: [
       {
         q: 'What cybersecurity laws apply to businesses in Ghana?',
@@ -214,7 +209,6 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       { title: 'Team training & adoption',       body: 'Role-specific training sessions for every user group — from admin configuration to daily use — before the system goes live.' },
       { title: 'Post-launch support & optimization', body: 'Thirty days of dedicated post-launch support, followed by iterative optimization as your team uncovers new automation opportunities.' },
     ],
-    stats: [{ num: '80+', label: 'CRM/ERP implementations' }, { num: '94%', label: 'User adoption rate' }, { num: '3mo', label: 'Avg. go-live timeline' }],
     faq: [
       {
         q: 'Which CRM is best for Ghana businesses — Salesforce, Odoo, or HubSpot?',
@@ -222,7 +216,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
       {
         q: 'Can Odoo or Salesforce handle GRA tax compliance and Ghanaian payroll?',
-        a: 'Yes, with proper configuration. Odoo has strong multi-currency and tax module support that we configure for Ghana Revenue Authority VAT and withholding tax requirements. Ghanaian payroll including SSNIT contributions, PAYE, and tier 1/2/3 pension can also be configured within Odoo\'s HR module. Salesforce requires integration with a local payroll provider for full GRA compliance. We have implemented compliant financial configurations for numerous Ghanaian businesses and understand the specific requirements in detail.',
+        a: 'Yes, with proper configuration. Odoo has strong multi-currency and tax module support that we configure for Ghana Revenue Authority VAT and withholding tax requirements. Ghanaian payroll including SSNIT contributions, PAYE, and tier 1/2/3 pension can also be configured within Odoo\'s HR module. Salesforce requires integration with a local payroll provider for full GRA compliance. We understand the specific requirements in detail and configure for them from the start.',
       },
       {
         q: 'How long does a CRM or ERP implementation take?',
@@ -247,7 +241,6 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       { title: 'Implementation guidance',            body: 'We oversee implementation partners, review proposals, and provide technical governance throughout delivery — keeping your interests front and centre.' },
       { title: 'Advisory retainer & review cadence', body: 'Ongoing strategic advice on retainer: quarterly roadmap reviews, vendor negotiations, and on-demand access to a senior technology advisor.' },
     ],
-    stats: [{ num: '$4M+', label: 'In client tech spend advised' }, { num: '100+', label: 'Architecture reviews' }, { num: '12+', label: 'Countries served' }],
     faq: [
       {
         q: 'What is IT consulting and does my Ghana business need it?',
@@ -263,7 +256,7 @@ const fallbackServices: Record<string, Omit<ServiceDetail, '_id' | 'slug'>> = {
       },
       {
         q: 'Can you help us select and evaluate technology vendors in Ghana?',
-        a: 'Yes. Vendor selection is one of the most valuable things we do. We help you define your requirements clearly, build an evaluation framework, run structured RFP processes, assess vendor proposals objectively, and negotiate commercial terms. We have deep knowledge of the technology vendor landscape in Ghana and across Africa — including which vendors actually have local support capability versus those who claim to. Our recommendations are independent: we do not receive referral fees or commissions from any technology vendor.',
+        a: 'Yes. Vendor selection is one of the most valuable things we do. We help you define your requirements clearly, build an evaluation framework, run structured RFP processes, assess vendor proposals objectively, and negotiate commercial terms. We track the technology vendor landscape in Ghana and across Africa — including which vendors actually have local support capability versus those who claim to. Our recommendations are independent: we do not receive referral fees or commissions from any technology vendor.',
       },
     ],
   },
@@ -316,7 +309,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!svc) notFound()
 
   const category  = categoryMap[slug] ?? { label: 'Service', color: 'rgba(255,255,255,0.40)' }
-  const stats     = svc.stats   || fallbackServices[slug]?.stats   || []
   const process   = svc.process || fallbackServices[slug]?.process || []
   const heroImage = svc.coverImage
     ? urlFor(svc.coverImage as SanityImage).width(1600).height(900).url()
@@ -430,29 +422,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </p>
         </div>
       </section>
-
-      {/* ─── STATS STRIP ─── */}
-      {stats.length > 0 && (
-        <section className="bg-[var(--color-accent)] px-[clamp(24px,5vw,80px)] py-14">
-          <div className="max-w-[860px] mx-auto grid grid-cols-3 gap-0">
-            {stats.map(({ num, label }: { num: string; label: string }, i: number) => (
-              <div
-                key={label}
-                className={`reveal-scale text-center ${i < stats.length - 1 ? 'border-r border-[rgba(255,255,255,0.12)]' : ''}`}
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <p
-                  className="font-serif font-black text-white leading-none mb-2"
-                  style={{ fontSize: 'clamp(32px,4vw,56px)' }}
-                >
-                  {num}
-                </p>
-                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(255,255,255,0.50)]">{label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* ─── APPROACH + DELIVERABLES ─── */}
       <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">

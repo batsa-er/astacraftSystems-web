@@ -32,7 +32,7 @@ export default async function CareersPage() {
       <PageHero
         eyebrow="Careers"
         title={<>Build technology<br />that matters.</>}
-        description="We hire engineers, architects, and strategists who care about impact. Every hire at Astacraft has the opportunity to shape technology outcomes for hundreds of businesses across Africa."
+        description="We hire engineers, architects, and strategists who care about impact. Every hire at Astacraft has the opportunity to shape technology outcomes for businesses across Africa."
       />
 
       {/* Culture split */}

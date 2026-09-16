@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getServices, getCaseStudies, getInsights } from '@/sanity/queries'
+import { getServices, getInsights } from '@/sanity/queries'
 import { INDUSTRIES } from '@/config/industries'
 
 const BASE = 'https://astacraftsystems.com'
@@ -23,9 +23,8 @@ const FALLBACK_INSIGHT_SLUGS = [
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [services, caseStudies, insights] = await Promise.all([
+  const [services, insights] = await Promise.all([
     getServices().catch(() => null),
-    getCaseStudies().catch(() => null),
     getInsights().catch(() => null),
   ])
 
@@ -45,7 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/solutions/operations`,      lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/solutions/secure`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/solutions/enterprise`,      lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/work`,                      lastModified: now, changeFrequency: 'weekly',  priority: 0.7 },
     { url: `${BASE}/insights`,                  lastModified: now, changeFrequency: 'daily',   priority: 0.8 },
     { url: `${BASE}/contact`,                   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/security`,                  lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
@@ -59,13 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: now,
     changeFrequency: 'monthly',
     priority: 0.9,
-  }))
-
-  const workRoutes: MetadataRoute.Sitemap = (caseStudies ?? []).map(c => ({
-    url: `${BASE}/work/${c.slug.current}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.7,
   }))
 
   const insightRoutes: MetadataRoute.Sitemap = insights
@@ -92,5 +83,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ]
 
-  return [...staticRoutes, ...industryRoutes, ...serviceRoutes, ...workRoutes, ...insightRoutes]
+  return [...staticRoutes, ...industryRoutes, ...serviceRoutes, ...insightRoutes]
 }
