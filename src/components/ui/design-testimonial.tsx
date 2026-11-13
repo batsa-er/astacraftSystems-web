@@ -260,31 +260,6 @@ export function DesignTestimonial({ testimonials }: { testimonials: Testimonial[
           </div>
         </div>
       </div>
-
-      {/* Ticker — company names scrolling */}
-      <div className="mt-16 overflow-hidden opacity-[0.06] pointer-events-none">
-        <motion.div
-          className="flex whitespace-nowrap text-5xl font-bold tracking-tight text-[var(--color-text)]"
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        >
-          {Array.from({ length: 10 }).map((_, i) => (
-            <span key={i} className="mx-8">
-              {testimonials
-                .map(
-                  (t) =>
-                    t.company ??
-                    (t.role?.includes(",")
-                      ? t.role.split(",").slice(1).join(",").trim()
-                      : t.role) ??
-                    t.name,
-                )
-                .join(" • ")}{" "}
-              •
-            </span>
-          ))}
-        </motion.div>
-      </div>
     </div>
   )
 }
