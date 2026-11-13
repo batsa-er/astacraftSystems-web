@@ -274,6 +274,7 @@ export default async function HomePage() {
                   <svg className="w-2.5 h-2.5 opacity-20 shrink-0" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="white" strokeWidth="1"/><path d="M5 2v3l2 1" stroke="white" strokeWidth="1" strokeLinecap="round"/></svg>
                   <span className="font-mono text-[10px] text-[rgba(255,255,255,0.25)] tracking-wide">astabill.com/dashboard</span>
                 </div>
+                <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.70)] border border-[rgba(255,255,255,0.25)] px-2 py-1 shrink-0">Sample data</span>
               </div>
 
               {/* Dashboard: sidebar + main */}
@@ -611,52 +612,6 @@ export default async function HomePage() {
         <div className="max-w-[1280px] mx-auto reveal">
           <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-14">What Clients Say</p>
           <DesignTestimonial testimonials={displayTestimonials} />
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────────
-          TECHNOLOGY PARTNERS
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-20">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 reveal">
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(var(--ch-text),0.50)] mb-2">Technology Ecosystem</p>
-              <h2
-                className="font-serif font-bold text-[var(--color-text)] leading-tight"
-                style={{ fontSize: 'clamp(22px,2.8vw,36px)' }}
-              >
-                Platforms we build on
-              </h2>
-            </div>
-            <p className="text-[13px] text-[rgba(var(--ch-text),0.62)] max-w-[40ch] leading-relaxed">
-              We build on certified cloud and enterprise platforms — so your existing stack integrates from day one.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
-            {[
-              { name: 'Amazon Web Services', logo: '/logos/aws.svg' },
-              { name: 'Microsoft',           logo: '/logos/microsoft.svg' },
-              { name: 'Google Cloud',        logo: '/logos/gcp.svg' },
-              { name: 'Salesforce',          logo: '/logos/salesforce.svg' },
-              { name: 'HubSpot',             logo: '/logos/hubspot.svg' },
-              { name: 'Odoo',                logo: '/logos/odoo.svg' },
-              { name: 'Zoho',                logo: '/logos/zoho.svg' },
-            ].map(({ name, logo }) => (
-              <div
-                key={name}
-                className="bg-[var(--color-bg)] flex items-center justify-center py-10 px-4 group hover:bg-[var(--color-surface)] transition-colors duration-300"
-              >
-                <Image
-                  src={logo}
-                  alt={name}
-                  width={110}
-                  height={32}
-                  className="h-8 w-auto max-w-[110px] object-contain grayscale brightness-[0.4] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300"
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
