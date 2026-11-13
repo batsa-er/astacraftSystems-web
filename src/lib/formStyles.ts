@@ -1,0 +1,5 @@
+export const inputCls = 'w-full bg-[var(--color-panel)] border border-[rgba(var(--ch-text),0.45)] px-4 py-3 text-[16px] text-[var(--color-text)] placeholder:text-[rgba(var(--ch-text),0.60)] hover:border-[rgba(var(--ch-text),0.70)] focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[rgba(var(--ch-accent),0.30)] transition-colors duration-200'
+export const labelCls = 'block font-mono text-[11px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.78)] mb-2'
+export const submitCls = 'btn-shimmer w-full font-mono text-[12px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200 disabled:opacity-60'
+export const consentCls = 'flex items-start gap-3 text-[14px] text-[rgba(var(--ch-text),0.82)] leading-snug cursor-pointer'
+export const checkboxCls = 'mt-0.5 w-5 h-5 shrink-0 accent-[var(--color-cta)]'
