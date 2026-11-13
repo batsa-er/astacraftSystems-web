@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-const inputCls = 'w-full bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.12)] px-4 py-3 text-[13px] text-white placeholder:text-[rgba(255,255,255,0.28)] hover:border-[rgba(255,255,255,0.22)] focus:outline-none focus:border-[rgba(255,255,255,0.45)] transition-colors duration-200'
+const inputCls = 'w-full bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.35)] px-4 py-3 text-[13px] text-white placeholder:text-[rgba(255,255,255,0.65)] hover:border-[rgba(255,255,255,0.22)] focus:outline-none focus:border-[rgba(255,255,255,0.45)] transition-colors duration-200'
 
 export function NewsletterCapture() {
   const [email, setEmail] = useState('')
@@ -33,12 +33,12 @@ export function NewsletterCapture() {
   if (status === 'sent') {
     return (
       <div className="mt-6">
-        <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.50)] mb-3">
+        <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.78)] mb-3">
           The Infrastructure Brief
         </p>
         <div className="flex items-center gap-2.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-green)] shrink-0" />
-          <span className="text-[13px] text-[rgba(255,255,255,0.65)]">You&apos;re in. First issue coming Friday.</span>
+          <span className="text-[13px] text-[rgba(255,255,255,0.85)]">You&apos;re in. First issue coming Friday.</span>
         </div>
       </div>
     )
@@ -46,10 +46,10 @@ export function NewsletterCapture() {
 
   return (
     <div className="mt-6">
-      <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.50)] mb-3">
+      <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.78)] mb-3">
         The Infrastructure Brief
       </p>
-      <p className="text-[12px] text-[rgba(255,255,255,0.42)] mb-3 leading-relaxed">
+      <p className="text-[12px] text-[rgba(255,255,255,0.78)] mb-3 leading-relaxed">
         Weekly technology insights for African business leaders.
       </p>
       <form onSubmit={handleSubmit} className="flex gap-0">
@@ -67,13 +67,15 @@ export function NewsletterCapture() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="Your email"
+          aria-label="Email address for the newsletter"
           className={`${inputCls} flex-1`}
           disabled={status === 'sending'}
         />
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="shrink-0 font-mono text-[10px] tracking-[0.12em] uppercase font-medium bg-[var(--color-green)] text-white px-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200 disabled:opacity-60"
+          aria-label="Subscribe to the newsletter"
+          className="shrink-0 font-mono text-[10px] tracking-[0.12em] uppercase font-medium bg-[var(--color-cta)] text-white px-5 min-w-[48px] hover:bg-[var(--color-cta-hover)] transition-colors duration-200 disabled:opacity-60"
         >
           {status === 'sending' ? '…' : '→'}
         </button>

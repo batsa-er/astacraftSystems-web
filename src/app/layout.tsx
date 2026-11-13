@@ -6,10 +6,13 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollReveal from '@/components/ScrollReveal'
 import { JsonLd } from '@/components/JsonLd'
+import { SITE } from '@/config/site'
+import type { PageKey } from '@/config/pages'
+import { pageVisible } from '@/lib/pages'
+import { hasCaseStudies } from '@/sanity/queries'
 
 const manrope = Manrope({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-manrope',
   display: 'swap',
 })
@@ -28,28 +31,30 @@ export const viewport: Viewport = {
   ],
 }
 
+const TITLE = 'Astacraft Systems | Invoicing, customer messaging and automation for African businesses'
+const DESCRIPTION = 'Astacraft builds software for African businesses: invoicing and payments, WhatsApp customer messaging, and automations that take repetitive work off your team.'
+
 export const metadata: Metadata = {
-  title: 'Astacraft Systems | Technology, Cloud & Digital Transformation — Ghana',
-  description: 'Astacraft Systems delivers enterprise software, cloud infrastructure, cybersecurity, and CRM/ERP solutions for businesses in Ghana and across Africa.',
-  metadataBase: new URL('https://astacraftsystems.com'),
-  keywords: 'Software Development Ghana, Digital Transformation Ghana, Cloud Solutions Ghana, Cybersecurity Ghana, CRM Implementation Ghana, ERP Solutions Ghana, SaaS Development Ghana, Technology Consulting Ghana, Business Automation Ghana, IT Services Accra',
-  authors: [{ name: 'Astacraft Systems Limited' }],
+  title: TITLE,
+  description: DESCRIPTION,
+  metadataBase: new URL(SITE.url),
+  authors: [{ name: SITE.company }],
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large', 'max-video-preview': -1 } },
-  alternates: { canonical: 'https://astacraftsystems.com/' },
+  alternates: { canonical: `${SITE.url}/` },
   openGraph: {
-    title: 'Astacraft Systems | Technology, Cloud & Digital Transformation',
-    description: 'We build software, automate operations, secure digital infrastructure, and deliver business solutions that help African organizations grow faster.',
-    url: 'https://astacraftsystems.com',
-    siteName: 'Astacraft Systems Limited',
-    locale: 'en_US',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE.url,
+    siteName: SITE.companyShort,
+    locale: 'en_GH',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     site: '@astacraftsys',
     creator: '@astacraftsys',
-    title: 'Astacraft Systems | Technology, Cloud & Digital Transformation',
-    description: 'Software development, cloud infrastructure, cybersecurity, and digital transformation solutions for African businesses.',
+    title: TITLE,
+    description: DESCRIPTION,
   },
   icons: {
     icon: [
@@ -61,93 +66,72 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
   },
-  other: {
-    'geo.region': 'GH-AA',
-    'geo.placename': 'Accra, Ghana',
-    'geo.position': '5.6037;-0.1870',
-    'ICBM': '5.6037, -0.1870',
-    'language': 'English',
-  },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const NAV_LINKS: { key: PageKey | 'insights'; href: string; label: string }[] = [
+  { key: 'services',   href: '/services',   label: 'Services' },
+  { key: 'products',   href: '/products',   label: 'Products' },
+  { key: 'industries', href: '/industries', label: 'Industries' },
+  { key: 'work',       href: '/work',       label: 'Work' },
+  { key: 'about',      href: '/about',      label: 'About' },
+  { key: 'insights',   href: '/insights',   label: 'Insights' },
+]
+
+const ORGANIZATION_JSON_LD = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.company,
+    url: SITE.url,
+    logo: `${SITE.url}/web-app-manifest-512x512.png`,
+    description: DESCRIPTION,
+    email: SITE.email,
+    telephone: SITE.phone.replace(/\s/g, ''),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: `${SITE.address.street}, ${SITE.address.area}`,
+      addressLocality: SITE.address.city,
+      addressRegion: SITE.address.region,
+      addressCountry: SITE.address.country,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: SITE.phone.replace(/\s/g, ''),
+      email: SITE.email,
+      areaServed: 'GH',
+      availableLanguage: 'English',
+    },
+    sameAs: [
+      'https://www.linkedin.com/company/astacraftsystems',
+      'https://twitter.com/astacraftsys',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    url: SITE.url,
+    name: SITE.companyShort,
+    description: DESCRIPTION,
+    publisher: { '@id': `${SITE.url}/#organization` },
+  },
+]
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const showWork = await hasCaseStudies()
+  const navLinks = NAV_LINKS
+    .filter(l => l.key === 'insights' || (pageVisible(l.key) && (l.key !== 'work' || showWork)))
+    .map(({ href, label }) => ({ href, label }))
+
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.sanity.io" />
-        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-        <JsonLd data={[
-          {
-            '@context': 'https://schema.org',
-            '@type': ['Organization', 'LocalBusiness'],
-            '@id': 'https://astacraftsystems.com/#organization',
-            name: 'Astacraft Systems Limited',
-            url: 'https://astacraftsystems.com',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://astacraftsystems.com/opengraph-image',
-            },
-            image: 'https://astacraftsystems.com/opengraph-image',
-            description: 'Technology, software development, cloud, cybersecurity, CRM/ERP, and digital transformation solutions for businesses in Ghana and across Africa.',
-            email: 'info@astacraftsystems.com',
-            telephone: '+233249187555',
-            address: {
-              '@type': 'PostalAddress',
-              streetAddress: 'Sam Nujoma Street',
-              addressLocality: 'Accra',
-              addressRegion: 'Greater Accra',
-              addressCountry: 'GH',
-            },
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: 5.6037,
-              longitude: -0.1870,
-            },
-            areaServed: [
-              { '@type': 'Country', name: 'Ghana' },
-              { '@type': 'Country', name: 'Nigeria' },
-              { '@type': 'Country', name: 'Kenya' },
-              { '@type': 'Country', name: 'South Africa' },
-              { '@type': 'Country', name: 'Ivory Coast' },
-              { '@type': 'Country', name: 'Senegal' },
-              { '@type': 'Country', name: 'Rwanda' },
-              { '@type': 'Country', name: 'Tanzania' },
-              { '@type': 'Country', name: 'Uganda' },
-              { '@type': 'Country', name: 'Ethiopia' },
-              { '@type': 'Country', name: 'Cameroon' },
-              { '@type': 'Country', name: 'Zambia' },
-            ],
-            sameAs: [
-              'https://www.linkedin.com/company/astacraftsystems',
-              'https://twitter.com/astacraftsys',
-            ],
-            foundingDate: '2026',
-            knowsAbout: [
-              'Software Development',
-              'Digital Transformation',
-              'Cloud Solutions',
-              'Cybersecurity',
-              'CRM Implementation',
-              'ERP Implementation',
-              'Business Automation',
-              'IT Consulting',
-            ],
-          },
-          {
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            '@id': 'https://astacraftsystems.com/#website',
-            url: 'https://astacraftsystems.com',
-            name: 'Astacraft Systems',
-            description: 'Technology and digital transformation solutions for African businesses.',
-            publisher: { '@id': 'https://astacraftsystems.com/#organization' },
-          },
-        ]} />
+        <JsonLd data={ORGANIZATION_JSON_LD} />
       </head>
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-7J9CQZBTMD" strategy="afterInteractive" />
-      <Script id="ga4-init" strategy="afterInteractive">{`
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-7J9CQZBTMD" strategy="lazyOnload" />
+      <Script id="ga4-init" strategy="lazyOnload">{`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -161,7 +145,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <ScrollReveal />
-        <Nav />
+        <Nav links={navLinks} />
         <main id="main-content">{children}</main>
         <Footer />
       </body>
