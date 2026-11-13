@@ -182,7 +182,7 @@ export default function SecurityPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-10 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
           >
             Book a Technology Call →
           </Link>

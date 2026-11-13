@@ -1,100 +1,46 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Rocket, TrendingUp, Settings2, ShieldCheck, Building2 } from 'lucide-react'
 import { getTestimonials } from '@/sanity/queries'
 import type { Testimonial } from '@/sanity/types'
-import { DesignTestimonial } from '@/components/ui/design-testimonial'
+import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { IndustriesWork } from '@/components/IndustriesWork'
-import { ParticlesWrapper } from '@/components/ui/particles-wrapper'
+import { AstaBillMockup } from '@/components/AstaBillMockup'
+import { StatusBadge } from '@/components/StatusBadge'
+import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { INDUSTRIES } from '@/config/industries'
+import { SERVICES } from '@/config/services'
+import { DONDO_PROGRAMME_LABEL } from '@/config/dondo'
+import { PRODUCTS } from '@/config/site'
 
 export const revalidate = 3600
 
-const SERVICE_GROUPS = [
+const WHAT_WE_DO = [
   {
-    label: 'Product Platforms',
-    accent: 'var(--color-green)',
-    items: [
-      { num: '01', href: '/products',               title: 'AstaBill — Billing & Payments',        desc: 'Send invoices, collect payments via Mobile Money and card, and track cash flow — all in one platform.' },
-      { num: '02', href: '/services/crm-erp',        title: 'CRM & ERP Implementation',             desc: 'Salesforce, Odoo, and SAP implementations configured for how African enterprises operate.' },
-      { num: '03', href: '/services/api-automation', title: 'System Integration & Automation',      desc: 'Custom APIs, workflow automation, and integrations that connect your systems and eliminate manual work.' },
-    ],
+    title: 'Get paid',
+    copy: 'Send invoices and receipts, and take payment by Mobile Money or card through AstaBill.',
+    link: { label: PRODUCTS.astabill.name, href: '/products#astabill' },
   },
   {
-    label: 'Enterprise Systems',
-    accent: 'var(--color-accent)',
-    items: [
-      { num: '04', href: '/services/software-development',   title: 'Software Development',             desc: 'Custom platforms, mobile apps, and scalable backends engineered for enterprise performance.' },
-      { num: '05', href: '/services/cloud-solutions',         title: 'Cloud & Infrastructure',           desc: 'Architecture, migrations, and managed services on AWS, Azure, and GCP.' },
-      { num: '06', href: '/services/digital-transformation',  title: 'Business Process Transformation',  desc: 'We redesign how your business operates — processes, data, and the tools your teams rely on.' },
-      { num: '07', href: '/services/cybersecurity',           title: 'Cybersecurity & SOC Monitoring',   desc: 'Security audits, penetration testing, and 24/7 threat monitoring for enterprise organisations.' },
-      { num: '08', href: '/services/it-consulting',           title: 'IT Consulting & Managed Services', desc: 'Technology strategy, architecture advisory, and fully managed IT operations.' },
-    ],
+    title: 'Talk to customers',
+    copy: 'Answer WhatsApp messages and send SMS reminders from one shared inbox, with an AI assistant that knows your business. More channels are on the way.',
+    link: { label: PRODUCTS.dondo.name, href: PRODUCTS.dondo.path },
+  },
+  {
+    title: 'Automate the rest',
+    copy: 'We connect your systems and automate approvals, follow-ups and reports, so your team stops copying data by hand.',
+    link: { label: 'Services', href: '/services' },
   },
 ]
 
 const FALLBACK_TESTIMONIALS = [
-  { quote: 'The payment link changed everything. We send the invoice, the client pays on their phone, and the receipt is already waiting for them.',     name: 'Ama Darko',      role: 'Brand Strategist, Accra',         initials: 'AD' },
-  { quote: 'AstaBill removed the spreadsheet lag from our week. The dashboard tells me what is paid, what is due, and what needs follow-up.',          name: 'Kofi Mensah',    role: 'IT Consultant, Kumasi',           initials: 'KM' },
+  { quote: 'The payment link changed everything. We send the invoice, the client pays on their phone, and the receipt is already waiting for them.', name: 'Ama Darko',   role: 'Brand Strategist, Accra', initials: 'AD' },
+  { quote: 'AstaBill removed the spreadsheet lag from our week. The dashboard tells me what is paid, what is due, and what needs follow-up.',      name: 'Kofi Mensah', role: 'IT Consultant, Kumasi',   initials: 'KM' },
 ]
 
-const SOLUTION_BUNDLES = [
-  {
-    num: '01',
-    href: '/solutions/launch',
-    name: 'Astacraft Launch™',
-    tag: 'Startups',
-    tagline: 'Domain, website & email — everything to go live with confidence.',
-    price: 'from GH₵ 2,500',
-    accent: 'var(--color-green)',
-    accentRgb: 'var(--ch-green)',
-    icon: Rocket,
-  },
-  {
-    num: '02',
-    href: '/solutions/growth',
-    name: 'Astacraft Growth™',
-    tag: 'SMEs',
-    tagline: 'CRM, automation & collaboration to scale without scaling headcount.',
-    price: 'from GH₵ 5,500',
-    accent: 'var(--color-accent)',
-    accentRgb: 'var(--ch-accent)',
-    icon: TrendingUp,
-  },
-  {
-    num: '03',
-    href: '/solutions/operations',
-    name: 'Astacraft Operations™',
-    tag: 'Digitization',
-    tagline: 'Workflow automation & portals to eliminate paper-based processes.',
-    price: 'from GH₵ 8,500',
-    accent: 'var(--color-accent)',
-    accentRgb: 'var(--ch-accent)',
-    icon: Settings2,
-  },
-  {
-    num: '04',
-    href: '/solutions/secure',
-    name: 'Astacraft Secure™',
-    tag: 'Security',
-    tagline: '24/7 SOC monitoring, endpoint protection & compliance.',
-    price: 'from GH₵ 2,000/mo',
-    accent: 'var(--color-secure)',
-    accentRgb: 'var(--ch-secure)',
-    icon: ShieldCheck,
-  },
-  {
-    num: '05',
-    href: '/solutions/enterprise',
-    name: 'Astacraft Enterprise™',
-    tag: 'Enterprise',
-    tagline: 'Cloud migration, custom software & a dedicated delivery team.',
-    price: 'from GH₵ 5,000',
-    accent: 'var(--color-accent)',
-    accentRgb: 'var(--ch-accent)',
-    icon: Building2,
-  },
-]
+const primaryBtn = 'btn-shimmer inline-block text-center bg-[var(--color-cta)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200'
+const ghostBtnDark = 'inline-block text-center border border-[rgba(255,255,255,0.45)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-white transition-colors duration-200'
+const sectionNum = 'absolute -top-6 left-0 font-serif font-black leading-none select-none pointer-events-none text-[rgba(var(--ch-text),0.04)]'
+const h2Cls = 'relative font-serif font-black text-[var(--color-text)] leading-[0.95] tracking-[-0.035em]'
 
 export default async function HomePage() {
   let testimonials: Testimonial[] = []
@@ -107,558 +53,194 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ─────────────────────────────────────────────────────────────────
-          HERO
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100dvh] flex flex-col overflow-hidden">
-        <ParticlesWrapper />
-        <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-accent),0.30)_0%,transparent_60%)] animate-orb-1 pointer-events-none" />
-        <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-green),0.12)_0%,transparent_60%)] animate-orb-2 pointer-events-none" />
-        <div className="absolute bottom-[-8%] right-[25%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-accent),0.14)_0%,transparent_60%)] animate-orb-3 pointer-events-none" />
+      {/* HERO */}
+      <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-[var(--color-dark)]">
+        <div className="absolute -top-[25%] right-[-8%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(29,71,118,0.55)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute top-[30%] left-[-12%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,rgba(85,170,73,0.12)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
 
-        <div className="relative flex flex-col gap-3 px-[clamp(24px,5vw,80px)] pt-32 hero-in hero-in-1">
-          <div className="badge-announce inline-flex items-center gap-3 border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-sm w-fit">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-green)] animate-status shrink-0" />
-            <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[rgba(255,255,255,0.55)]">
-              Systems online
-            </span>
-            <span className="w-px h-3 bg-[rgba(255,255,255,0.14)]" />
-            <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.30)]">
-              Est. 2026
-            </span>
-          </div>
-        </div>
-
-        <div className="relative px-[clamp(24px,5vw,80px)] flex-1 flex flex-col justify-center py-16">
+        <div className="relative px-[clamp(24px,5vw,80px)] flex-1 flex flex-col justify-center pt-28 pb-16">
           <div className="max-w-[1280px] mx-auto w-full">
             <h1
-              className="font-serif font-black text-white leading-[0.88] tracking-[-0.035em]"
-              style={{ fontSize: 'clamp(52px,9.5vw,132px)' }}
+              className="font-serif font-black text-white leading-[0.95] tracking-[-0.035em]"
+              style={{ fontSize: 'clamp(38px,8.4vw,116px)' }}
             >
-              {['Enterprise software', 'and cloud systems'].map((word, i) => (
-                <span key={word} className="block overflow-hidden">
-                  <span
-                    className="block clip-reveal"
-                    style={{ animationDelay: `${0.12 + i * 0.14}s` }}
-                  >
-                    {word}
-                  </span>
-                </span>
-              ))}
-              <span className="block overflow-hidden">
-                <span className="block clip-reveal text-gradient italic" style={{ animationDelay: '0.40s' }}>
-                  for Africa.
-                </span>
-              </span>
+              <span className="block clip-reveal" style={{ animationDelay: '0.05s' }}>Get paid,</span>
+              <span className="block clip-reveal" style={{ animationDelay: '0.15s' }}>talk to customers,</span>
+              <span className="block clip-reveal text-gradient italic pb-[0.08em]" style={{ animationDelay: '0.25s' }}>automate the rest.</span>
             </h1>
 
-            <div className="mt-12 flex flex-col gap-8 hero-in hero-in-3">
+            <div className="mt-8 md:mt-12 flex flex-col gap-8 hero-in hero-in-3">
               <p
-                className="text-[rgba(255,255,255,0.62)] leading-relaxed max-w-[52ch]"
+                className="text-[rgba(255,255,255,0.80)] leading-relaxed max-w-[58ch]"
                 style={{ fontSize: 'clamp(15px,1.4vw,18px)' }}
               >
-                AstaCraft Systems builds software products and enterprise-grade systems that automate business operations — from billing and payments to cloud infrastructure across Africa.
+                Astacraft builds software for African businesses: invoicing and payments, WhatsApp customer messaging, and automations that take repetitive work off your team.
               </p>
-              <div className="flex flex-wrap items-center gap-6">
-                <a
-                  href="https://astabill.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-shimmer inline-block bg-[var(--color-green)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-                >
-                  Try AstaBill Free →
+              <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4">
+                <Link href="/contact" className={primaryBtn}>Book a consultation</Link>
+                <a href={PRODUCTS.astabill.url} target="_blank" rel="noopener noreferrer" className={ghostBtnDark}>
+                  Try {PRODUCTS.astabill.name} free
                 </a>
+              </div>
+              <p className="inline-flex items-center gap-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[rgba(255,255,255,0.75)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#68CA50] shrink-0" aria-hidden="true" />
+                Built in Accra for Ghanaian businesses
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 01 — WHAT WE DO */}
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-20 md:py-28">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="relative mb-12 md:mb-16 reveal">
+            <span className={sectionNum} style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">01</span>
+            <p className="relative font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-5">What we do</p>
+            <h2 className={`${h2Cls} max-w-[18ch]`} style={{ fontSize: 'clamp(30px,4.5vw,60px)' }}>
+              Three ways we help your business run better
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[rgba(var(--ch-border),0.10)] reveal">
+            {WHAT_WE_DO.map(({ title, copy, link }, i) => (
+              <div key={title} className="bg-[var(--color-bg)] p-7 md:p-9 flex flex-col">
+                <span className="font-mono text-[11px] tracking-[0.18em] text-[rgba(var(--ch-text),0.60)] mb-6" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="font-serif font-bold text-[var(--color-text)] mb-3" style={{ fontSize: 'clamp(20px,2vw,26px)' }}>{title}</h3>
+                <p className="text-[15px] text-[rgba(var(--ch-text),0.75)] leading-relaxed flex-1 mb-7">{copy}</p>
                 <Link
-                  href="/contact"
-                  className="inline-block border border-[rgba(255,255,255,0.35)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.60)] transition-colors duration-200"
+                  href={link.href}
+                  className="font-mono text-[11px] tracking-[0.14em] uppercase font-medium text-[var(--color-accent)] underline underline-offset-4 decoration-[rgba(var(--ch-accent),0.35)] hover:decoration-[var(--color-accent)] w-fit py-1"
                 >
-                  Contact Sales
+                  {link.label} →
                 </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────────
-          ASTABILL — flagship product, above the fold before services
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[var(--color-navy)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(var(--ch-green),0.15)_0%,transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
-
-        <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-
-          <div className="reveal">
-            <div className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.24em] uppercase text-[var(--color-green)] border border-[rgba(var(--ch-green),0.22)] px-4 py-2 mb-10">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-green)] animate-status" />
-              Flagship Product
-            </div>
-
-            <div className="mb-7">
-              <Image src="/astabill-logo-white.svg" alt="AstaBill" width={137} height={36} className="h-9 w-auto" />
-            </div>
-
-            <h2
-              className="font-serif font-black text-white leading-[0.90] tracking-[-0.035em] mb-6"
-              style={{ fontSize: 'clamp(32px,4.2vw,58px)' }}
-            >
-              Invoice smart.<br />
-              <span style={{ color: 'var(--color-green)' }}>Get paid faster.</span>
-            </h2>
-
-            <p
-              className="text-[rgba(255,255,255,0.52)] leading-relaxed mb-10 max-w-[48ch]"
-              style={{ fontSize: 'clamp(14px,1.2vw,16px)' }}
-            >
-              The invoicing and payment platform built for African businesses. Send a professional invoice, collect via Mobile Money or card, and see your cash flow — all in one place.
-            </p>
-
-            <ul className="space-y-3.5 mb-10">
-              {[
-                'Professional invoices with public payment pages',
-                'Mobile Money (MTN MoMo, Telecel, AT Money) & card via Paystack',
-                'Real-time cash flow — invoiced, collected, and overdue at a glance',
-              ].map(point => (
-                <li key={point} className="flex items-start gap-3">
-                  <span className="mt-1 w-4 h-4 rounded-full bg-[rgba(var(--ch-green),0.15)] border border-[rgba(var(--ch-green),0.35)] flex items-center justify-center shrink-0">
-                    <svg className="w-2 h-2" viewBox="0 0 8 8" fill="none">
-                      <path d="M1.5 4L3.5 6L6.5 2" stroke="var(--color-green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </span>
-                  <span className="text-[14px] text-[rgba(255,255,255,0.60)] leading-snug">{point}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex gap-8 mb-10 pb-10 border-b border-[rgba(255,255,255,0.07)]">
-              {[
-                { stat: '~5 min',   label: 'To first invoice' },
-                { stat: 'Free',     label: 'To get started' },
-              ].map(({ stat, label }) => (
-                <div key={label}>
-                  <p className="font-serif font-black text-white leading-none mb-1" style={{ fontSize: 'clamp(22px,2.2vw,32px)' }}>{stat}</p>
-                  <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.35)]">{label}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="https://astabill.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-shimmer inline-block bg-[var(--color-green)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-              >
-                Try Free →
-              </a>
-              <Link
-                href="/products"
-                className="inline-block border border-[rgba(255,255,255,0.25)] text-[rgba(255,255,255,0.70)] font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-8 py-4 hover:border-[rgba(255,255,255,0.55)] hover:text-white transition-colors duration-200"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-
-          <div className="reveal lg:pl-4" style={{ transitionDelay: '140ms' }}>
-            <div className="border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.025)] shadow-2xl overflow-hidden">
-
-              {/* Browser chrome */}
-              <div className="flex items-center gap-2 px-5 py-3 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
-                <span className="w-2 h-2 rounded-full bg-[rgba(255,80,80,0.40)]" />
-                <span className="w-2 h-2 rounded-full bg-[rgba(255,180,0,0.30)]" />
-                <span className="w-2 h-2 rounded-full bg-[rgba(var(--ch-green),0.30)]" />
-                <div className="ml-4 flex-1 bg-[rgba(255,255,255,0.05)] rounded-sm px-3 py-1 flex items-center gap-2">
-                  <svg className="w-2.5 h-2.5 opacity-20 shrink-0" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="white" strokeWidth="1"/><path d="M5 2v3l2 1" stroke="white" strokeWidth="1" strokeLinecap="round"/></svg>
-                  <span className="font-mono text-[10px] text-[rgba(255,255,255,0.25)] tracking-wide">astabill.com/dashboard</span>
-                </div>
-                <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.70)] border border-[rgba(255,255,255,0.25)] px-2 py-1 shrink-0">Sample data</span>
-              </div>
-
-              {/* Dashboard: sidebar + main */}
-              <div className="flex h-[490px]">
-
-                {/* Sidebar */}
-                <div className="w-[148px] shrink-0 border-r border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.15)] flex flex-col pt-5 pb-4 px-3">
-                  <div className="px-1.5 mb-5">
-                    <Image src="/astabill-logo-white.svg" alt="AstaBill" width={76} height={20} className="h-[18px] w-auto opacity-80" />
-                  </div>
-                  <div className="flex flex-col gap-0.5 flex-1">
-                    {[
-                      { label: 'Overview',  active: true  },
-                      { label: 'Invoices',  active: false },
-                      { label: 'Payments',  active: false },
-                      { label: 'Clients',   active: false },
-                      { label: 'Reports',   active: false },
-                    ].map(({ label, active }) => (
-                      <div
-                        key={label}
-                        className={`flex items-center gap-2.5 px-2.5 py-[7px] ${
-                          active ? 'bg-[rgba(255,255,255,0.08)] text-white' : 'text-[rgba(255,255,255,0.30)]'
-                        }`}
-                      >
-                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${active ? 'bg-[var(--color-green)]' : 'bg-[rgba(255,255,255,0.12)]'}`} />
-                        <span className="font-mono text-[10px] tracking-[0.05em]">{label}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="border-t border-[rgba(255,255,255,0.06)] pt-3 flex items-center gap-2 px-1">
-                    <div className="w-6 h-6 rounded-full bg-[var(--color-green)] flex items-center justify-center shrink-0">
-                      <span className="font-mono text-[7px] text-white font-bold">KA</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-mono text-[9px] text-[rgba(255,255,255,0.70)] truncate">Kwame A.</p>
-                      <p className="font-mono text-[8px] text-[rgba(255,255,255,0.28)]">Owner</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Main */}
-                <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-
-                  {/* Top bar */}
-                  <div className="flex items-center justify-between px-5 py-2.5 border-b border-[rgba(255,255,255,0.05)] shrink-0">
-                    <div>
-                      <p className="font-mono text-[11px] font-medium text-white tracking-[0.03em]">Overview</p>
-                      <p className="font-mono text-[8px] text-[rgba(255,255,255,0.28)] tracking-[0.10em] uppercase">June 2026</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="border border-[rgba(255,255,255,0.10)] px-2.5 py-1">
-                        <span className="font-mono text-[8px] text-[rgba(255,255,255,0.35)] tracking-[0.06em]">This month ↓</span>
-                      </div>
-                      <div className="bg-[var(--color-green)] px-3 py-1.5">
-                        <span className="font-mono text-[9px] text-white tracking-[0.10em] uppercase font-medium">+ New Invoice</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* KPI row */}
-                  <div className="grid grid-cols-3 border-b border-[rgba(255,255,255,0.05)] shrink-0">
-                    {[
-                      { label: 'Total Revenue',   val: 'GH₵ 84,200', sub: '↑ 14% vs last month', green: true  },
-                      { label: 'Outstanding',     val: 'GH₵ 12,500', sub: '3 invoices pending',   green: false },
-                      { label: 'Paid This Month', val: 'GH₵ 31,700', sub: '↑ 8% vs last month',   green: true  },
-                    ].map(({ label, val, sub, green }, i) => (
-                      <div key={label} className={`px-4 py-3 ${i > 0 ? 'border-l border-[rgba(255,255,255,0.05)]' : ''}`}>
-                        <p className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)] mb-1.5">{label}</p>
-                        <p className="font-serif text-[15px] font-bold text-white leading-none mb-1">{val}</p>
-                        <p className={`font-mono text-[9px] ${green ? 'text-[var(--color-green)]' : 'text-[var(--color-warning)]'}`}>{sub}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Chart + table */}
-                  <div className="flex-1 flex flex-col overflow-hidden px-4 pt-3 pb-3 gap-3 min-h-0">
-
-                    {/* Revenue sparkline */}
-                    <div className="shrink-0">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.28)]">Revenue — Jan to Jun</span>
-                        <span className="font-mono text-[9px] text-[var(--color-green)]">↑ 22% overall</span>
-                      </div>
-                      <svg viewBox="0 0 400 48" preserveAspectRatio="none" className="w-full h-12">
-                        <defs>
-                          <linearGradient id="ab-chart-fill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#55AA49" stopOpacity="0.22" />
-                            <stop offset="100%" stopColor="#55AA49" stopOpacity="0.01" />
-                          </linearGradient>
-                        </defs>
-                        {[12, 24, 36].map(y => (
-                          <line key={y} x1="0" y1={y} x2="400" y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-                        ))}
-                        <path d="M8,44 L88,36 L168,28 L248,20 L328,12 L392,6 L392,48 L8,48 Z" fill="url(#ab-chart-fill)" />
-                        <path d="M8,44 L88,36 L168,28 L248,20 L328,12 L392,6" fill="none" stroke="#55AA49" strokeWidth="1.5" strokeOpacity="0.65" strokeLinecap="round" strokeLinejoin="round" />
-                        {[{ cx: 8, cy: 44 }, { cx: 88, cy: 36 }, { cx: 168, cy: 28 }, { cx: 248, cy: 20 }, { cx: 328, cy: 12 }, { cx: 392, cy: 6 }].map(({ cx, cy }, i) => (
-                          <circle key={i} cx={cx} cy={cy} r="2.5" fill="#55AA49" fillOpacity="0.85" />
-                        ))}
-                      </svg>
-                      <div className="flex justify-between mt-1">
-                        {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map(m => (
-                          <span key={m} className="font-mono text-[8px] text-[rgba(255,255,255,0.18)]">{m}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Invoice table */}
-                    <div className="flex-1 border border-[rgba(255,255,255,0.06)] flex flex-col min-h-0 overflow-hidden">
-                      <div className="grid grid-cols-[1fr_84px_68px] px-4 py-2 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] shrink-0">
-                        {['Client', 'Amount', 'Status'].map(h => (
-                          <span key={h} className="font-mono text-[8px] tracking-[0.14em] uppercase text-[rgba(255,255,255,0.22)]">{h}</span>
-                        ))}
-                      </div>
-                      {[
-                        { id: 'INV-0042', client: 'Acme Ghana Ltd',    amount: 'GH₵ 4,800', status: 'Paid',    paid: true,  overdue: false },
-                        { id: 'INV-0041', client: 'Kente Exports Co',  amount: 'GH₵ 2,200', status: 'Pending', paid: false, overdue: false },
-                        { id: 'INV-0040', client: 'TechBridge Africa', amount: 'GH₵ 7,500', status: 'Paid',    paid: true,  overdue: false },
-                        { id: 'INV-0039', client: 'Volta Agro Ltd',    amount: 'GH₵ 1,950', status: 'Overdue', paid: false, overdue: true  },
-                      ].map(inv => (
-                        <div key={inv.id} className="grid grid-cols-[1fr_84px_68px] items-center px-4 py-2.5 border-b border-[rgba(255,255,255,0.04)] last:border-0 hover:bg-[rgba(255,255,255,0.02)] transition-colors duration-150">
-                          <div className="min-w-0">
-                            <p className="font-mono text-[10px] text-white leading-none mb-0.5 truncate">{inv.client}</p>
-                            <p className="font-mono text-[8px] text-[rgba(255,255,255,0.25)]">{inv.id}</p>
-                          </div>
-                          <span className="font-mono text-[10px] text-white">{inv.amount}</span>
-                          <span className={`font-mono text-[8px] tracking-[0.10em] uppercase px-1.5 py-0.5 border w-fit ${
-                            inv.paid
-                              ? 'text-[var(--color-green)] bg-[rgba(var(--ch-green),0.10)] border-[rgba(var(--ch-green),0.22)]'
-                              : inv.overdue
-                              ? 'text-[var(--color-danger)] bg-[rgba(var(--ch-danger),0.10)] border-[rgba(var(--ch-danger),0.22)]'
-                              : 'text-[var(--color-warning)] bg-[rgba(var(--ch-warning),0.10)] border-[rgba(var(--ch-warning),0.22)]'
-                          }`}>{inv.status}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────────
-          SOLUTION BUNDLES
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto">
-
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-5">
-                Business Lifecycle Bundles
-              </p>
-              <h2
-                className="font-serif font-black text-[var(--color-text)] leading-[0.90] tracking-[-0.035em]"
-                style={{ fontSize: 'clamp(36px,5.5vw,72px)' }}
-              >
-                Technology for where<br />
-                <span className="text-gradient italic">your business is today.</span>
-              </h2>
-            </div>
-            <p className="text-[14px] text-[rgba(var(--ch-text),0.52)] max-w-[38ch] leading-relaxed md:text-right shrink-0">
-              Five productized bundles — each built for a specific stage of growth. Fixed scope, clear pricing, fully managed. Start with Launch and upgrade to Enterprise without changing provider.
-            </p>
-          </div>
-
-          {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-[rgba(var(--ch-border),0.10)] reveal" style={{ transitionDelay: '80ms' }}>
-            {SOLUTION_BUNDLES.map(({ num, href, name, tag, tagline, price, accent, accentRgb, icon: Icon }) => (
-              <Link
-                key={num}
-                href={href}
-                className="group relative flex flex-col bg-[var(--color-surface)] p-7 hover:bg-[var(--color-panel)] transition-colors duration-300 overflow-hidden"
-              >
-                {/* Decorative background number */}
-                <span
-                  className="absolute -bottom-3 -right-1 font-serif font-black leading-none select-none pointer-events-none"
-                  style={{ fontSize: 'clamp(72px,6vw,96px)', color: accent, opacity: 0.06 }}
-                  aria-hidden="true"
-                >
-                  {num}
-                </span>
-
-                {/* Stage + icon */}
-                <div className="flex items-center justify-between mb-7">
-                  <span className="font-mono text-[10px] tracking-[0.18em] text-[rgba(var(--ch-text),0.22)]">{num}</span>
-                  <Icon
-                    className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
-                    style={{ color: accent }}
-                  />
-                </div>
-
-                {/* Name */}
-                <h3
-                  className="font-serif font-bold text-[var(--color-text)] leading-tight mb-3"
-                  style={{ fontSize: 'clamp(15px,1.15vw,18px)' }}
-                >
-                  {name}
-                </h3>
-
-                {/* Tag chip */}
-                <span
-                  className="inline-block font-mono text-[9px] tracking-[0.16em] uppercase px-2 py-0.5 border mb-5 w-fit"
-                  style={{
-                    color: accent,
-                    borderColor: `rgba(${accentRgb},0.28)`,
-                    backgroundColor: `rgba(${accentRgb},0.07)`,
-                  }}
-                >
-                  {tag}
-                </span>
-
-                {/* Tagline */}
-                <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed flex-1 mb-7">
-                  {tagline}
-                </p>
-
-                {/* Price + arrow */}
-                <div className="flex items-center justify-between border-t border-[rgba(var(--ch-border),0.08)] pt-5">
-                  <span className="font-mono text-[11px] font-semibold" style={{ color: accent }}>
-                    {price}
-                  </span>
-                  <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.18)] group-hover:translate-x-1 group-hover:text-[var(--color-accent)] transition-all duration-200">
-                    →
-                  </span>
-                </div>
-              </Link>
             ))}
           </div>
-
-          {/* Footer row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-7 reveal" style={{ transitionDelay: '160ms' }}>
-            <p className="text-[13px] text-[rgba(var(--ch-text),0.42)]">
-              Not sure which bundle fits your business?{' '}
-              <Link
-                href="/contact?ref=help-me-choose"
-                className="text-[var(--color-accent)] underline underline-offset-2 decoration-[rgba(var(--ch-accent),0.30)] hover:decoration-[var(--color-accent)] transition-colors duration-200"
-              >
-                Help me choose →
-              </Link>
-            </p>
-            <Link
-              href="/solutions"
-              className="shrink-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.45)] hover:text-[var(--color-accent)] transition-colors duration-200"
-            >
-              View all bundles and pricing →
-            </Link>
-          </div>
-
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────────
-          WHAT WE DO — two-tier: Product Platforms + Enterprise Systems
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
-            <div className="relative">
-              <span className="absolute -top-6 left-0 font-serif font-black leading-none select-none pointer-events-none text-[rgba(var(--ch-text),0.04)]" style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">01</span>
-              <p className="relative font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-5">What We Do</p>
-              <h2
-                className="relative font-serif font-black text-[var(--color-text)] leading-[0.90] tracking-[-0.035em]"
-                style={{ fontSize: 'clamp(36px,5.5vw,72px)' }}
-              >
-                Platforms and<br />systems.
+      {/* 02 — PRODUCTS */}
+      <section className="relative bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
+
+        <div className="relative max-w-[1280px] mx-auto">
+          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.80)] mb-10 reveal">
+            <span aria-hidden="true">02 · </span>Products
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14 items-center">
+            <div className="reveal">
+              <div className="flex flex-wrap items-center gap-4 mb-6">
+                <Image src="/astabill-logo-white.svg" alt="" width={137} height={36} className="h-9 w-auto" />
+                <StatusBadge status="Available now" dark />
+              </div>
+              <h2 className="font-serif font-black text-white leading-[0.95] tracking-[-0.035em] mb-5" style={{ fontSize: 'clamp(32px,4.2vw,58px)' }}>
+                {PRODUCTS.astabill.name}.
               </h2>
+              <p className="text-[rgba(255,255,255,0.85)] leading-relaxed mb-8 max-w-[48ch]" style={{ fontSize: 'clamp(15px,1.2vw,17px)' }}>
+                Invoicing and payments for Ghanaian businesses. Mobile Money, cards and GRA-ready invoices.
+              </p>
+              <a href={PRODUCTS.astabill.url} target="_blank" rel="noopener noreferrer" className={primaryBtn}>
+                Try free<span className="sr-only"> — {PRODUCTS.astabill.name}</span>
+              </a>
+            </div>
+
+            <div className="reveal" style={{ transitionDelay: '100ms' }}>
+              <AstaBillMockup />
+            </div>
+          </div>
+
+          <div className="mt-14 md:mt-20 border border-[rgba(255,255,255,0.22)] bg-[rgba(10,22,40,0.35)] p-7 md:p-10 reveal">
+            <div className="flex flex-wrap items-center gap-4 mb-5">
+              <h2 className="font-serif font-black text-white leading-none tracking-[-0.03em]" style={{ fontSize: 'clamp(28px,3.4vw,46px)' }}>
+                {PRODUCTS.dondo.name}
+              </h2>
+              <StatusBadge status={DONDO_PROGRAMME_LABEL} dark />
+            </div>
+            <p className="text-[rgba(255,255,255,0.85)] leading-relaxed mb-8 max-w-[70ch]" style={{ fontSize: 'clamp(15px,1.2vw,17px)' }}>
+              Named after the Akan talking drum, Dondo brings your customer conversations into one inbox, starting with WhatsApp and SMS. We are onboarding a small group of pilot businesses.
+            </p>
+            <Link href={PRODUCTS.dondo.path} className={ghostBtnDark}>Join the pilot</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 03 — SERVICES */}
+      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-20 md:py-28">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-14 reveal">
+            <div className="relative">
+              <span className={sectionNum} style={{ fontSize: 'clamp(80px,11vw,148px)' }} aria-hidden="true">03</span>
+              <p className="relative font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-5">Services</p>
+              <h2 className={`${h2Cls} max-w-[16ch]`} style={{ fontSize: 'clamp(30px,4.5vw,60px)' }}>
+                When you need it built for you.
+              </h2>
+              <p className="relative mt-5 text-[15px] text-[rgba(var(--ch-text),0.75)] max-w-[48ch] leading-relaxed">
+                Fixed-scope projects, delivered by our team in Accra.
+              </p>
             </div>
             <Link
               href="/services"
-              className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.55)] hover:text-[var(--color-accent)] transition-colors duration-200"
+              className="font-mono text-[11px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.72)] hover:text-[var(--color-accent)] transition-colors duration-200 py-1"
             >
               All services →
             </Link>
           </div>
 
-          <div className="space-y-12">
-            {SERVICE_GROUPS.map((group, gi) => (
-              <div key={group.label}>
-                <div className="flex items-center gap-4 mb-2 reveal" style={{ transitionDelay: `${gi * 60}ms` }}>
-                  <span
-                    className="font-mono text-[10px] tracking-[0.24em] uppercase font-medium"
-                    style={{ color: group.accent }}
-                  >
-                    {group.label}
+          <ul className="border-t border-[rgba(var(--ch-border),0.12)] list-none">
+            {SERVICES.map(({ number, slug, shortTitle, summary }) => (
+              <li key={slug} className="reveal">
+                <Link
+                  href={`/services#${slug}`}
+                  className="service-row group flex items-start md:items-center gap-5 md:gap-10 py-7 md:py-9 border-b border-[rgba(var(--ch-border),0.10)]"
+                >
+                  <span className="font-mono text-[11px] tracking-[0.18em] text-[rgba(var(--ch-text),0.60)] w-7 shrink-0 pt-1 md:pt-0" aria-hidden="true">{number}</span>
+                  <span className="flex-1 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-2 md:gap-10 items-center">
+                    <span className="font-serif font-bold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-200" style={{ fontSize: 'clamp(17px,1.9vw,22px)' }}>
+                      {shortTitle}
+                    </span>
+                    <span className="text-[14px] text-[rgba(var(--ch-text),0.75)] leading-relaxed">{summary}</span>
                   </span>
-                  <span className="flex-1 h-px bg-[rgba(var(--ch-border),0.10)]" />
-                </div>
-                <div className="border-t border-[rgba(var(--ch-border),0.10)]">
-                  {group.items.map(({ num, href, title, desc }, i) => (
-                    <Link
-                      key={num}
-                      href={href}
-                      className="service-row group flex items-center gap-6 md:gap-10 py-9 md:py-11 border-b border-[rgba(var(--ch-border),0.08)] hover:translate-x-3 transition-transform duration-300 reveal"
-                      style={{ transitionDelay: `${(gi * 3 + i) * 45}ms` }}
-                    >
-                      <span className="font-mono text-[11px] tracking-[0.18em] text-[rgba(var(--ch-text),0.20)] w-7 shrink-0">
-                        {num}
-                      </span>
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-2 md:gap-10 items-center">
-                        <h3
-                          className="font-serif font-bold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-200"
-                          style={{ fontSize: 'clamp(16px,1.9vw,22px)' }}
-                        >
-                          {title}
-                        </h3>
-                        <p className="text-[13px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mt-1 md:mt-0">
-                          {desc}
-                        </p>
-                      </div>
-                      <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.18)] group-hover:text-[var(--color-accent)] group-hover:translate-x-1.5 transition-all duration-200 shrink-0">
-                        →
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                  <span className="font-mono text-[12px] text-[rgba(var(--ch-text),0.50)] group-hover:text-[var(--color-accent)] transition-colors duration-200 shrink-0" aria-hidden="true">→</span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────────
-          INDUSTRIES + WORK
-      ───────────────────────────────────────────────────────────────── */}
+      {/* 04 — WHO WE WORK WITH */}
       <IndustriesWork industries={INDUSTRIES} />
 
-      {/* ─────────────────────────────────────────────────────────────────
-          TESTIMONIALS
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
+      {/* 05 — PROOF */}
+      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-20 md:py-28">
         <div className="max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] mb-14">What Clients Say</p>
-          <DesignTestimonial testimonials={displayTestimonials} />
+          <h2 className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-accent)] text-center mb-12">
+            <span aria-hidden="true">05 · </span>What our customers say
+          </h2>
+          <TestimonialCarousel testimonials={displayTestimonials} />
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────────
-          FINAL CTA
-      ───────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 md:py-36 overflow-hidden">
+      {/* 06 — CLOSING CTA */}
+      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full bg-[radial-gradient(ellipse,rgba(var(--ch-accent),0.20)_0%,transparent_65%)] pointer-events-none" />
-
         <div className="relative max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.24)] mb-9">
-            Africa&apos;s Business Software Platform
-          </p>
           <h2
-            className="font-serif font-black text-white leading-[0.88] tracking-[-0.04em] mb-8"
-            style={{ fontSize: 'clamp(44px,9vw,124px)' }}
+            className="font-serif font-black text-white leading-[0.95] tracking-[-0.035em] mb-7 max-w-[16ch]"
+            style={{ fontSize: 'clamp(34px,6.5vw,92px)' }}
           >
-            Africa runs<br />
-            on AstaBill.<br />
-            <span className="text-gradient italic">Scale further.</span>
+            Tell us what slows your business down.
           </h2>
-          <p className="text-[rgba(255,255,255,0.45)] mb-12 max-w-[52ch]" style={{ fontSize: 'clamp(15px,1.3vw,18px)' }}>
-            Start with AstaBill free — our invoicing and payments platform for African businesses. Or talk to us about building enterprise systems, cloud infrastructure, and digital transformation at scale.
+          <p className="text-[rgba(255,255,255,0.80)] mb-10 max-w-[52ch]" style={{ fontSize: 'clamp(15px,1.3vw,18px)' }}>
+            We&rsquo;ll show you what can be automated, and what it would cost. The first consultation is free.
           </p>
-          <div className="flex flex-wrap gap-4 mb-12">
-            <a
-              href="https://astabill.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-shimmer inline-block bg-[var(--color-green)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
-            >
-              Try AstaBill Free →
-            </a>
-            <Link
-              href="/contact"
-              className="inline-block border border-[rgba(255,255,255,0.35)] text-white font-mono text-[11px] tracking-[0.14em] uppercase font-medium px-10 py-5 hover:border-[rgba(255,255,255,0.60)] transition-colors duration-200"
-            >
-              Book a Technology Call
-            </Link>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4">
+            <Link href="/contact" className={primaryBtn}>Book a consultation</Link>
+            <WhatsAppButton label="Chat with us on WhatsApp" className={ghostBtnDark} />
           </div>
-          <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.16)]">
-            Astacraft Systems Limited · Accra, Ghana ·{' '}
-            <a href="mailto:info@astacraftsystems.com" className="hover:text-[rgba(255,255,255,0.40)] transition-colors duration-200">
-              info@astacraftsystems.com
-            </a>
-          </p>
         </div>
       </section>
     </>

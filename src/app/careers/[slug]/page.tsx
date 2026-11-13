@@ -95,7 +95,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
 
           <a
             href={job.applyUrl || `mailto:careers@astacraftsystems.com?subject=${encodeURIComponent('Application: ' + job.title)}`}
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-10 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
           >
             Apply for this Role →
           </a>
@@ -168,7 +168,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<{ s
               </p>
               <a
                 href={job.applyUrl || `mailto:careers@astacraftsystems.com?subject=${encodeURIComponent('Application: ' + job.title)}`}
-                className="block w-full text-center font-mono text-[10px] tracking-[0.14em] uppercase bg-[var(--color-green)] text-white px-6 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+                className="block w-full text-center font-mono text-[10px] tracking-[0.14em] uppercase bg-[var(--color-cta)] text-white px-6 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
               >
                 Apply Now →
               </a>

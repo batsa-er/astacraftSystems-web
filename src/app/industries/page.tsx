@@ -1,107 +1,59 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
+import PageHero from '@/components/PageHero'
+import { CtaBand } from '@/components/CtaBand'
 import { INDUSTRIES } from '@/config/industries'
+import { requirePage } from '@/lib/pages'
+import { pageMetadata } from '@/lib/seo'
 
-const BASE = 'https://astacraftsystems.com'
-const url = `${BASE}/industries`
-const title = 'Industries We Serve | Enterprise Technology Solutions Across Africa | Astacraft Systems'
-const description = 'Technology solutions for financial services, telecoms, healthcare, government, retail and more. Astacraft Systems builds enterprise infrastructure for African businesses.'
+export const metadata: Metadata = pageMetadata({
+  title: 'Industries | Clinics, schools, real estate, retail and financial services | Astacraft Systems',
+  description: 'We focus on businesses where better customer communication and less paperwork pay off within weeks: clinics, schools, real estate, retail and financial services.',
+  path: '/industries',
+})
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: url },
-  openGraph: {
-    title,
-    description,
-    url,
-    siteName: 'Astacraft Systems',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title,
-    description,
-  },
-}
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebPage',
-      '@id': url,
-      url,
-      name: title,
-      description,
-      inLanguage: 'en',
-      breadcrumb: { '@id': `${url}#breadcrumb` },
-      publisher: { '@type': 'Organization', name: 'Astacraft Systems', url: BASE },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${url}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home',       item: BASE },
-        { '@type': 'ListItem', position: 2, name: 'Industries', item: url },
-      ],
-    },
-  ],
-}
+const labelCls = 'font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--color-accent)] mb-2'
 
 export default function IndustriesPage() {
+  requirePage('industries')
+
   return (
-    <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="bg-[var(--color-dark)] pt-32 pb-20 px-[clamp(24px,5vw,80px)] relative overflow-hidden">
-        <div className="absolute inset-0 hero-grid opacity-[0.06] pointer-events-none" />
-        <div className="max-w-[1280px] mx-auto relative">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-8">
-            <Link href="/" className="font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(255,255,255,0.30)] hover:text-[rgba(255,255,255,0.60)] transition-colors duration-200">Home</Link>
-            <span className="text-[rgba(255,255,255,0.18)] text-[10px]">/</span>
-            <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-green)]">Industries</span>
-          </nav>
-          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[var(--color-green)] mb-6">Industries</p>
-          <h1
-            className="font-serif font-black text-white leading-[0.92] tracking-[-0.035em] mb-6"
-            style={{ fontSize: 'clamp(36px,5vw,72px)' }}
-          >
-            We work where<br />it matters most.
-          </h1>
-          <p className="text-[clamp(15px,1.4vw,19px)] text-[rgba(255,255,255,0.50)] max-w-[48ch] leading-relaxed">
-            Eight sectors. Deep domain knowledge. Technology built for how African enterprises actually operate.
-          </p>
+    <>
+      <PageHero
+        title="Industries"
+        description="We focus on businesses where better customer communication and less paperwork pay off within weeks."
+        cta={{ label: 'Book a consultation', href: '/contact' }}
+      />
+
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-14 md:py-24">
+        <div className="max-w-[1280px] mx-auto border-t border-[rgba(var(--ch-border),0.12)]">
+          {INDUSTRIES.map(({ name, slug, problem, help, Icon }) => (
+            <article
+              key={slug}
+              id={slug}
+              className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr] gap-6 md:gap-12 py-9 md:py-12 border-b border-[rgba(var(--ch-border),0.12)] scroll-mt-24 reveal"
+            >
+              <div className="flex items-start gap-4">
+                <span className="w-11 h-11 border border-[rgba(var(--ch-accent),0.30)] flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5 text-[var(--color-accent)]" aria-hidden="true" />
+                </span>
+                <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight pt-1.5" style={{ fontSize: 'clamp(20px,2vw,26px)' }}>
+                  {name}
+                </h2>
+              </div>
+              <div>
+                <h3 className={labelCls}>The problem</h3>
+                <p className="text-[15px] text-[rgba(var(--ch-text),0.78)] leading-relaxed">{problem}</p>
+              </div>
+              <div>
+                <h3 className={labelCls}>How we help</h3>
+                <p className="text-[15px] text-[rgba(var(--ch-text),0.78)] leading-relaxed">{help}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-20">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[rgba(var(--ch-border),0.10)]">
-            {INDUSTRIES.map(({ name, slug, desc, Icon }, i) => (
-              <Link
-                key={slug}
-                href={`/industries/${slug}`}
-                className="group bg-[var(--color-bg)] p-8 hover:bg-[var(--color-surface)] transition-colors duration-200 flex flex-col justify-between min-h-[220px]"
-              >
-                <div className="flex items-start justify-between mb-8">
-                  <div className="w-10 h-10 border border-[rgba(var(--ch-accent),0.12)] flex items-center justify-center group-hover:border-[var(--color-accent)] group-hover:bg-[rgba(var(--ch-accent),0.06)] transition-all duration-200">
-                    <Icon className="w-4.5 h-4.5 text-[rgba(var(--ch-accent),0.40)] group-hover:text-[var(--color-accent)] transition-colors duration-200" />
-                  </div>
-                  <span className="font-mono text-[10px] tracking-[0.16em] text-[rgba(var(--ch-text),0.20)] group-hover:text-[rgba(var(--ch-accent),0.45)] transition-colors duration-200">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                <div>
-                  <p className="font-serif font-bold text-[var(--color-text)] text-[18px] mb-2 leading-tight group-hover:text-[var(--color-accent)] transition-colors duration-200">
-                    {name}
-                  </p>
-                  <p className="text-[12px] text-[rgba(var(--ch-text),0.42)] leading-snug">{desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+      <CtaBand title="Tell us what slows your business down." body="We&rsquo;ll show you what can be automated, and what it would cost. The first consultation is free." cta={{ label: 'Book a consultation', href: '/contact' }} />
+    </>
   )
 }

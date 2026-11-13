@@ -124,7 +124,7 @@ export default function ContactForm() {
             href="https://calendly.com/astacraftsystems/technology-strategy-call"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-8 py-3.5 hover:bg-[var(--color-green-hover)] transition-colors duration-200 mb-6"
+            className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-8 py-3.5 hover:bg-[var(--color-cta-hover)] transition-colors duration-200 mb-6"
           >
             Book your call now →
           </a>
@@ -330,7 +330,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="btn-shimmer w-full font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200 disabled:opacity-60"
+                className="btn-shimmer w-full font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200 disabled:opacity-60"
               >
                 {status === 'sending' ? 'Sending…' : 'Book My Strategy Call →'}
               </button>

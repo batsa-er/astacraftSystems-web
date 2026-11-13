@@ -1,87 +1,61 @@
 import type { MetadataRoute } from 'next'
-import { getServices, getInsights } from '@/sanity/queries'
-import { INDUSTRIES } from '@/config/industries'
+import { getInsights, hasCaseStudies, getCaseStudies } from '@/sanity/queries'
+import { PAGES, type PageKey } from '@/config/pages'
+import { SITE } from '@/config/site'
+import { pageVisible } from '@/lib/pages'
 
-const BASE = 'https://astacraftsystems.com'
+const BASE = SITE.url
 
-const FALLBACK_SERVICE_SLUGS = [
-  'software-development',
-  'digital-transformation',
-  'cloud-solutions',
-  'cybersecurity',
-  'crm-erp',
-  'api-automation',
-  'it-consulting',
-]
-
-const FALLBACK_INSIGHT_SLUGS = [
-  { slug: 'brand-consistency-africa',       date: '2025-01-15' },
-  { slug: 'website-conversion-fundamentals', date: '2024-12-10' },
-  { slug: 'crm-implementation-guide-ghana', date: '2025-02-10' },
-  { slug: 'b2b-social-creative-lessons',    date: '2024-11-20' },
-  { slug: 'rebrand-checklist',              date: '2024-10-05' },
-]
+const PRIORITY: Record<PageKey, number> = {
+  home: 1.0,
+  services: 0.9,
+  products: 0.9,
+  dondo: 0.9,
+  industries: 0.8,
+  work: 0.7,
+  security: 0.6,
+  about: 0.7,
+  contact: 0.7,
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [services, insights] = await Promise.all([
-    getServices().catch(() => null),
+  const [insights, showWork] = await Promise.all([
     getInsights().catch(() => null),
+    hasCaseStudies(),
   ])
-
-  const serviceSlugs = services?.map(s => s.slug.current) ?? FALLBACK_SERVICE_SLUGS
-
   const now = new Date()
 
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE,                                lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/about`,                     lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/services`,                  lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/products`,                  lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/products/crm`,              lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/solutions`,                 lastModified: now, changeFrequency: 'monthly', priority: 0.95 },
-    { url: `${BASE}/solutions/launch`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/solutions/growth`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/solutions/operations`,      lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/solutions/secure`,          lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/solutions/enterprise`,      lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/insights`,                  lastModified: now, changeFrequency: 'daily',   priority: 0.8 },
-    { url: `${BASE}/contact`,                   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/security`,                  lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE}/careers`,                   lastModified: now, changeFrequency: 'weekly',  priority: 0.6 },
-    { url: `${BASE}/privacy`,                   lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
-    { url: `${BASE}/terms`,                     lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
-  ]
-
-  const serviceRoutes: MetadataRoute.Sitemap = serviceSlugs.map(slug => ({
-    url: `${BASE}/services/${slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  }))
-
-  const insightRoutes: MetadataRoute.Sitemap = insights
-    ? insights.map(i => ({
-        url: `${BASE}/insights/${i.slug.current}`,
-        lastModified: i.publishedAt ? new Date(i.publishedAt) : now,
-        changeFrequency: 'yearly' as const,
-        priority: 0.6,
-      }))
-    : FALLBACK_INSIGHT_SLUGS.map(({ slug, date }) => ({
-        url: `${BASE}/insights/${slug}`,
-        lastModified: new Date(date),
-        changeFrequency: 'yearly' as const,
-        priority: 0.6,
-      }))
-
-  const industryRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE}/industries`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    ...INDUSTRIES.map(i => ({
-      url: `${BASE}/industries/${i.slug}`,
+  const mainRoutes: MetadataRoute.Sitemap = (Object.keys(PAGES) as PageKey[])
+    .filter(key => pageVisible(key) && (key !== 'work' || showWork))
+    .map(key => ({
+      url: key === 'home' ? BASE : `${BASE}${PAGES[key].path}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,
-      priority: 0.85,
-    })),
+      priority: PRIORITY[key],
+    }))
+
+  const otherRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE}/insights`, lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
+    { url: `${BASE}/careers`,  lastModified: now, changeFrequency: 'weekly',  priority: 0.5 },
+    { url: `${BASE}/privacy`,  lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
+    { url: `${BASE}/terms`,    lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
   ]
 
-  return [...staticRoutes, ...industryRoutes, ...serviceRoutes, ...insightRoutes]
+  const insightRoutes: MetadataRoute.Sitemap = (insights ?? []).map(i => ({
+    url: `${BASE}/insights/${i.slug.current}`,
+    lastModified: i.publishedAt ? new Date(i.publishedAt) : now,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }))
+
+  const workRoutes: MetadataRoute.Sitemap = showWork && pageVisible('work')
+    ? (await getCaseStudies().catch(() => [])).map(c => ({
+        url: `${BASE}/work/${c.slug.current}`,
+        lastModified: now,
+        changeFrequency: 'yearly' as const,
+        priority: 0.6,
+      }))
+    : []
+
+  return [...mainRoutes, ...otherRoutes, ...insightRoutes, ...workRoutes]
 }

@@ -114,3 +114,11 @@ export async function getCareerBySlug(slug: string): Promise<Career | null> {
   }`, { slug })
   return validateOne(CareerSchema, data, 'career')
 }
+
+export async function hasCaseStudies(): Promise<boolean> {
+  try {
+    return (await getCaseStudies()).length > 0
+  } catch {
+    return false
+  }
+}
