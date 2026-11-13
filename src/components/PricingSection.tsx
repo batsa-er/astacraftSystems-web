@@ -85,7 +85,7 @@ export function PricingSection() {
   const [annual, setAnnual] = useState(false)
 
   return (
-    <section id="pricing" className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
+    <section id="pricing" className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-16 md:py-24 scroll-mt-[72px]">
       <div className="max-w-[1280px] mx-auto">
 
         {/* Header */}
@@ -103,9 +103,11 @@ export function PricingSection() {
               Monthly
             </span>
             <button
-              aria-label="Toggle billing period"
+              role="switch"
+              aria-checked={annual}
+              aria-label="Bill annually"
               onClick={() => setAnnual(v => !v)}
-              className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${annual ? 'bg-[var(--color-green)]' : 'bg-[rgba(var(--ch-border),0.18)]'}`}
+              className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${annual ? 'bg-[var(--color-cta)]' : 'bg-[rgba(var(--ch-border),0.55)]'}`}
             >
               <span
                 className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${annual ? 'translate-x-5' : 'translate-x-0'}`}
@@ -114,7 +116,7 @@ export function PricingSection() {
             <span className={`text-[15px] font-semibold transition-colors ${annual ? 'text-[var(--color-text)]' : 'text-[var(--color-text-2)]'}`}>
               Annual
             </span>
-            <span className="text-[12px] font-semibold text-[var(--color-green)] bg-[rgba(var(--ch-green),0.10)] border border-[rgba(var(--ch-green),0.22)] px-3 py-1 rounded-full">
+            <span className="text-[12px] font-semibold text-[var(--color-text)] bg-[rgba(var(--ch-green),0.10)] border border-[rgba(var(--ch-green),0.22)] px-3 py-1 rounded-full">
               Save 10%
             </span>
           </div>
@@ -155,7 +157,7 @@ export function PricingSection() {
                   </div>
                 )}
 
-                <p className={`font-mono text-[10px] tracking-[0.22em] uppercase mb-4 mt-2 ${popular ? 'text-white/50' : 'text-[var(--color-text-2)]'}`}>
+                <p className={`font-mono text-[10px] tracking-[0.22em] uppercase mb-4 mt-2 ${popular ? 'text-white/80' : 'text-[var(--color-text-2)]'}`}>
                   {label}
                 </p>
 
@@ -171,24 +173,24 @@ export function PricingSection() {
                   )}
                 </div>
 
-                <p className={`text-[13px] mb-1 ${popular ? 'text-white/50' : 'text-[var(--color-text-2)]'}`}>
+                <p className={`text-[13px] mb-1 ${popular ? 'text-white/80' : 'text-[var(--color-text-2)]'}`}>
                   {alwaysFree ? 'always free' : '/ month'}
                 </p>
                 {!alwaysFree && (
-                  <p className={`text-[11px] mb-3 ${popular ? 'text-white/35' : 'text-[rgba(var(--ch-text),0.28)]'}`}>
+                  <p className={`text-[11px] mb-3 ${popular ? 'text-white/80' : 'text-[var(--color-text-2)]'}`}>
                     {annual ? 'billed annually' : 'billed monthly'}
                   </p>
                 )}
 
-                <p className={`text-[13px] leading-relaxed mb-7 mt-2 min-h-[56px] ${popular ? 'text-white/65' : 'text-[var(--color-text-2)]'}`}>
+                <p className={`text-[13px] leading-relaxed mb-7 mt-2 min-h-[56px] ${popular ? 'text-white/85' : 'text-[var(--color-text-2)]'}`}>
                   {desc}
                 </p>
 
                 <ul className="space-y-3 flex-1">
                   {features.map(f => (
                     <li key={f} className="flex items-start gap-2.5">
-                      <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${popular ? 'text-white/70' : 'text-[var(--color-green)]'}`} />
-                      <span className={`text-[13px] leading-snug ${popular ? 'text-white/70' : 'text-[var(--color-text-2)]'}`}>{f}</span>
+                      <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${popular ? 'text-white/85' : 'text-[var(--color-green)]'}`} />
+                      <span className={`text-[13px] leading-snug ${popular ? 'text-white/85' : 'text-[var(--color-text-2)]'}`}>{f}</span>
                     </li>
                   ))}
                 </ul>
