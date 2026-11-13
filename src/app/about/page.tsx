@@ -163,7 +163,7 @@ export default async function AboutPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-8 py-3 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+                className="inline-block font-mono text-[10px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-8 py-3 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
               >
                 Get in Touch →
               </Link>
@@ -221,7 +221,7 @@ export default async function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
             <Link
               href="/contact"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-10 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
             >
               Contact Sales →
             </Link>

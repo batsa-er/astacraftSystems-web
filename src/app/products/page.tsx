@@ -127,7 +127,7 @@ export default function ProductsPage() {
                 href="https://astabill.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-8 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+                className="font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-8 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
               >
                 Get Started Free
               </a>
@@ -382,7 +382,7 @@ export default function ProductsPage() {
               href="https://astabill.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-12 py-5 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-12 py-5 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
             >
               Get Started Free →
             </a>

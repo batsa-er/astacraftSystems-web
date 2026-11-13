@@ -711,7 +711,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
           </p>
           <Link
             href={ctaHref}
-            className="btn-shimmer inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-green)] text-white px-10 py-4 hover:bg-[var(--color-green-hover)] transition-colors duration-200"
+            className="btn-shimmer inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-10 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
           >
             Book Strategy Call →
           </Link>
