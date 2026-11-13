@@ -233,28 +233,36 @@ export default function Nav() {
           <ul className="hidden lg:flex items-center gap-1 list-none">
 
             {/* Platform — lifecycle bundles + capabilities */}
-            <li>
+            <li className="flex items-center">
+              <Link href="/solutions" className={`${linkCls(dropdown === 'platform' || pathname.startsWith('/solutions') || pathname.startsWith('/services'))} pr-1`}>
+                Platform
+              </Link>
               <button
                 onClick={() => setDropdown(dropdown === 'platform' ? null : 'platform')}
                 onKeyDown={e => handleTriggerKeyDown(e, 'platform')}
                 aria-haspopup="menu"
                 aria-expanded={dropdown === 'platform'}
-                className={dropdownBtnCls(dropdown === 'platform' || pathname.startsWith('/solutions') || pathname.startsWith('/services'))}
+                aria-label="Platform menu"
+                className={`${dropdownBtnCls(dropdown === 'platform' || pathname.startsWith('/solutions') || pathname.startsWith('/services'))} pl-1`}
               >
-                Platform <ChevronDown open={dropdown === 'platform'} />
+                <ChevronDown open={dropdown === 'platform'} />
               </button>
             </li>
 
             {/* Products */}
-            <li>
+            <li className="flex items-center">
+              <Link href="/products" className={`${linkCls(dropdown === 'products' || pathname.startsWith('/products'))} pr-1`}>
+                Products
+              </Link>
               <button
                 onClick={() => setDropdown(dropdown === 'products' ? null : 'products')}
                 onKeyDown={e => handleTriggerKeyDown(e, 'products')}
                 aria-haspopup="menu"
                 aria-expanded={dropdown === 'products'}
-                className={dropdownBtnCls(dropdown === 'products' || pathname.startsWith('/products'))}
+                aria-label="Products menu"
+                className={`${dropdownBtnCls(dropdown === 'products' || pathname.startsWith('/products'))} pl-1`}
               >
-                Products <ChevronDown open={dropdown === 'products'} />
+                <ChevronDown open={dropdown === 'products'} />
               </button>
             </li>
 
