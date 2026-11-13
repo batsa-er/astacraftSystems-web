@@ -189,7 +189,7 @@ export default function CrmProductPage() {
               The right platform for your business.
             </h2>
             <p className="text-[15px] text-[rgba(var(--ch-text),0.50)] max-w-[52ch] mx-auto mt-4 leading-relaxed">
-              We are certified partners across four major CRM and ERP platforms. We recommend based on fit — not margin.
+              We implement four major CRM and ERP platforms. We recommend based on fit — not margin.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
