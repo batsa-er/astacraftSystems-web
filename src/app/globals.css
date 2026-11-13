@@ -27,6 +27,9 @@
   /* Brand grass green — from the "S" in the Astacraft logo */
   --color-green:        #55AA49;
   --color-green-hover:  #489A3E;
+  /* Button green — dark enough for white text at WCAG AA (5.1:1). Same in light and dark mode. */
+  --color-cta:          #2F7D32;
+  --color-cta-hover:    #276B2B;
   /* Dark section backgrounds — always dark regardless of light/dark mode */
   --color-dark:         #0A1628;
   --color-dark-deep:    #071020;
