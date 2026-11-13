@@ -50,7 +50,7 @@ export default function OGImage() {
 
         {/* Headline */}
         <div style={{
-          fontSize: '68px',
+          fontSize: '62px',
           fontWeight: '800',
           color: 'white',
           lineHeight: 1.0,
@@ -58,7 +58,7 @@ export default function OGImage() {
           marginBottom: '28px',
           position: 'relative',
         }}>
-          Technology &amp;<br />Digital Transformation.
+          Get paid, talk to customers,<br />automate the rest.
         </div>
 
         {/* Sub-line */}
@@ -69,7 +69,7 @@ export default function OGImage() {
           letterSpacing: '1px',
           position: 'relative',
         }}>
-          Software · Cloud · Cybersecurity · CRM/ERP · Ghana &amp; Africa
+          Invoicing · Customer messaging · Automation · Accra, Ghana
         </div>
 
         {/* URL bottom-right */}
