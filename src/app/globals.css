@@ -20,7 +20,7 @@
   --color-surface:      #ECEEF6;
   --color-panel:        #FFFFFF;
   --color-text:         #080C14;
-  --color-text-2:       rgba(8,12,20,0.55);
+  --color-text-2:       rgba(8,12,20,0.72);
   /* Brand navy blue — from the "A" in the Astacraft logo */
   --color-accent:       #1D4776;
   --color-accent-hover: #163662;
@@ -55,7 +55,7 @@
     --color-surface:      #111827;
     --color-panel:        #1A2236;
     --color-text:         #F1F5F9;
-    --color-text-2:       rgba(241,245,249,0.55);
+    --color-text-2:       rgba(241,245,249,0.75);
     --color-accent:       #4A8FD4;
     --color-accent-hover: #3B7EC4;
     --color-green:        #68CA50;

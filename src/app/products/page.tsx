@@ -1,22 +1,25 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import PageHero from '@/components/PageHero'
 import { JsonLd } from '@/components/JsonLd'
 import { Check, Users, FileText, Receipt, ClipboardList, Smartphone, BarChart3 } from 'lucide-react'
 import { PricingSection } from '@/components/PricingSection'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
+import { AstaBillMockup } from '@/components/AstaBillMockup'
+import { StatusBadge } from '@/components/StatusBadge'
+import { Placeholder } from '@/components/Placeholder'
+import { placeholder } from '@/config/placeholders'
+import { DONDO_PROGRAMME_LABEL } from '@/config/dondo'
+import { PRODUCTS, SITE } from '@/config/site'
+import { requirePage, pageVisible } from '@/lib/pages'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'AstaBill | Invoice Smart. Get Paid Faster.',
-  description: 'AstaBill brings invoicing, sales receipts, payment collection, and cash flow visibility into one polished workflow — built for teams, solo operators, and walk-in businesses alike.',
-  alternates: { canonical: 'https://astacraftsystems.com/products' },
-  openGraph: {
-    title: 'AstaBill | Invoice Smart. Get Paid Faster.',
-    description: 'AstaBill brings invoicing, sales receipts, payment collection, and cash flow visibility into one polished workflow — built for teams, solo operators, and walk-in businesses alike.',
-    url: 'https://astacraftsystems.com/products',
-    type: 'website',
-  },
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Products | AstaBill invoicing and Dondo customer messaging | Astacraft Systems',
+  description: 'Software you subscribe to and run yourself, built for how Ghanaian businesses work. AstaBill for invoices and payments is available now; Dondo, a shared customer inbox, is in a pilot programme.',
+  path: '/products',
+})
 
 const TESTIMONIALS = [
   {
@@ -33,189 +36,127 @@ const TESTIMONIALS = [
   },
 ]
 
-const ASTABILL_FAQ = [
+const ASTABILL_FEATURES = [
   {
-    q: 'Is AstaBill free to use?',
-    a: 'Yes. AstaBill has a free plan that lets you send invoices, issue receipts, and collect payments with no credit card required. Paid plans start from GH₵ 69/month and unlock higher invoice volumes, team access, and advanced features.',
+    Icon: FileText,
+    title: 'Professional Invoicing',
+    body: 'Build an invoice from one focused workspace — line items, discounts, taxes, and notes. Send it as a clean public payment page your client opens on their phone.',
+    features: ['Live totals while you edit', 'Custom branded templates', 'Auto-reminders & follow-ups'],
   },
   {
-    q: 'Does AstaBill support Mobile Money payments?',
-    a: 'Yes. AstaBill accepts MTN Mobile Money, Telecel Cash, and AT Money directly from the invoice payment page — no third-party checkout or redirect required. Card payments via Visa and Mastercard are also supported through Paystack.',
+    Icon: Receipt,
+    title: 'Sales Receipts',
+    body: 'Issue receipts in seconds for walk-in customers and cash sales. Share by email or a link — no printing required.',
+    features: ['Point-of-sale ready', 'Email or shareable link delivery', 'Synced to your dashboard'],
   },
   {
-    q: 'Is AstaBill compliant with Ghana Revenue Authority (GRA) requirements?',
-    a: 'Yes. AstaBill generates GRA-compliant invoices and receipts by default, including the required fields for digital documentation under Ghana Revenue Authority regulations.',
+    Icon: ClipboardList,
+    title: 'Quotes',
+    body: 'Prepare pre-work quotes and convert them directly into invoices without rebuilding the job details from scratch.',
+    features: ['One-click quote → invoice', 'Line item reuse', 'Client-facing quote view'],
   },
   {
-    q: 'Can I use AstaBill for my team or multiple businesses?',
-    a: 'Yes. AstaBill supports multi-business workspaces and team access with owner, admin, and member permission levels. You can manage separate businesses from a single account and control what each team member can see and do.',
+    Icon: Smartphone,
+    title: 'Payment Collection',
+    body: 'Accept Mobile Money and cards directly from the invoice page — powered by Paystack. No third-party checkout, no redirects.',
+    features: ['MTN MoMo, Telecel Cash, AT Money', 'Visa & Mastercard via Paystack', 'Instant payment notifications'],
   },
   {
-    q: 'How long does it take to send my first invoice on AstaBill?',
-    a: 'Most businesses send their first invoice within 5 minutes of signing up. You create the invoice in one workspace, share a payment link with your client, and they pay directly from their phone — no account or app required on their end.',
+    Icon: BarChart3,
+    title: 'Cash Flow Visibility',
+    body: 'See invoiced, collected, and overdue numbers together from one operating view. Know exactly where your money is at any moment.',
+    features: ['Real-time revenue dashboard', 'AR aging & overdue tracking', 'Customer payment insights'],
   },
   {
-    q: 'Does AstaBill work for walk-in customers and cash sales?',
-    a: 'Yes. AstaBill includes a sales receipt feature for walk-in and cash transactions. You issue the receipt in seconds and share it by email or a shareable link — no printing required.',
+    Icon: Users,
+    title: 'Team Access',
+    body: 'Give your whole team access with clear permission levels — owner, admin, and member roles across all your businesses.',
+    features: ['Owner, admin, member roles', 'Multi-business support', 'Workspace audit log (Business)'],
   },
 ]
 
+const primaryBtn = 'inline-block text-center font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-8 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200'
+const jumpCls = 'flex items-center justify-between gap-4 border border-[rgba(255,255,255,0.35)] px-5 py-3 text-white hover:border-white transition-colors duration-200'
+
 export default function ProductsPage() {
+  requirePage('products')
+  const pilotFee = placeholder('products.dondo-pilot-fee')
+  const showDondo = pageVisible('dondo')
+
   return (
     <>
-      <JsonLd data={[
-        {
+      <JsonLd data={{
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        '@id': 'https://astacraftsystems.com/products#astabill',
-        name: 'AstaBill',
+        '@id': `${SITE.url}/products#astabill`,
+        name: PRODUCTS.astabill.name,
         applicationCategory: 'BusinessApplication',
-        operatingSystem: 'Web, iOS, Android',
-        description: 'AstaBill brings invoicing, sales receipts, payment collection, and cash flow visibility into one polished workflow — built for teams, solo operators, and walk-in businesses alike.',
-        url: 'https://astacraftsystems.com/products',
-        publisher: { '@id': 'https://astacraftsystems.com/#organization' },
-        offers: {
-          '@type': 'Offer',
-          priceCurrency: 'GHS',
-          price: '0',
-          description: 'Free plan available. Paid plans from GHS 69/month.',
-        },
-        featureList: [
-          'Professional invoicing with public payment pages',
-          'Sales receipts for walk-in and cash customers',
-          'Quotes that convert directly to invoices',
-          'Mobile Money payments (MTN MoMo, Telecel Cash, AT Money)',
-          'Card payments via Paystack (Visa, Mastercard)',
-          'Cash flow visibility — invoiced, collected, and overdue at a glance',
-          'Team access with owner, admin, and member roles',
-          'Automated payment reminders via WhatsApp, SMS, and email',
-        ],
+        operatingSystem: 'Web',
+        description: 'Create invoices, quotations and receipts, share a payment link, and get paid by Mobile Money or card.',
+        url: PRODUCTS.astabill.url,
+        publisher: { '@id': `${SITE.url}/#organization` },
         areaServed: { '@type': 'Country', name: 'Ghana' },
-        screenshot: 'https://astacraftsystems.com/opengraph-image',
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: ASTABILL_FAQ.map(({ q, a }) => ({
-            '@type': 'Question',
-            name: q,
-            acceptedAnswer: { '@type': 'Answer', text: a },
-          })),
-        },
-      ]} />
+      }} />
       <PageHero
-        eyebrow="Products"
-        title={<>Invoice smart.<br />Get paid faster.</>}
-        description="AstaBill brings invoicing, sales receipts, payment collection, and cash flow visibility into one polished workflow — built for teams, solo operators, and walk-in businesses alike."
-      />
-
-      {/* Product overview */}
-      <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-24">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          <div className="reveal">
-            <span className="inline-block font-mono text-[11px] tracking-[0.22em] uppercase px-3 py-1.5 border border-[rgba(34,166,86,0.40)] text-[var(--color-green)] mb-8">
-              Cloud-Based · Paystack-Powered · Made in Ghana
-            </span>
-            <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight mb-6" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
-              One workflow.<br />From invoice to payment.
-            </h2>
-            <p className="text-[15px] text-[rgba(var(--ch-text),0.60)] leading-relaxed mb-8">
-              AstaBill was built from the ground up for African businesses. Create an invoice in one focused workspace, share it as a professional public payment page, and watch the money land — via Mobile Money or card, no chasing required.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="https://astabill.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-8 py-4 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
-              >
-                Get Started Free
+        title="Products"
+        description="Software you subscribe to and run yourself, built for how Ghanaian businesses work."
+      >
+        <ul className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 list-none hero-in hero-in-4">
+          <li>
+            <a href="#astabill" className={jumpCls}>
+              <span className="font-serif font-bold text-[17px]">{PRODUCTS.astabill.name}</span>
+              <StatusBadge status="Available now" dark />
+            </a>
+          </li>
+          {showDondo && (
+            <li>
+              <a href="#dondo" className={jumpCls}>
+                <span className="font-serif font-bold text-[17px]">{PRODUCTS.dondo.name}</span>
+                <StatusBadge status={DONDO_PROGRAMME_LABEL} dark />
               </a>
-              <Link
-                href="#pricing"
-                className="font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(var(--ch-accent),0.35)] text-[rgba(var(--ch-text),0.70)] px-8 py-4 hover:border-[var(--color-accent)] hover:text-[var(--color-text)] transition-colors duration-200"
-              >
-                View Pricing
-              </Link>
+            </li>
+          )}
+        </ul>
+      </PageHero>
+
+      <section id="astabill" className="relative bg-[#1D4776] px-[clamp(24px,5vw,80px)] py-16 md:py-24 overflow-hidden scroll-mt-[72px]">
+        <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
+        <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14 items-center">
+          <div className="reveal">
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <Image src="/astabill-logo-white.svg" alt={PRODUCTS.astabill.name} width={137} height={36} className="h-9 w-auto" />
+              <StatusBadge status="Available now" dark />
             </div>
+            <h2 className="font-serif font-black text-white leading-[0.95] tracking-[-0.035em] mb-6" style={{ fontSize: 'clamp(32px,4.2vw,58px)' }}>
+              Invoices that get paid.
+            </h2>
+            <p className="text-[rgba(255,255,255,0.85)] leading-relaxed mb-8 max-w-[52ch]" style={{ fontSize: 'clamp(15px,1.2vw,17px)' }}>
+              Create invoices, quotations and receipts, share a payment link, and get paid by MTN MoMo, Telecel Cash, AT Money or card. See who owes you and what came in this month.
+            </p>
+            <a href={PRODUCTS.astabill.url} target="_blank" rel="noopener noreferrer" className={primaryBtn}>
+              Try {PRODUCTS.astabill.name} free
+            </a>
           </div>
-          <div className="grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '100ms' }}>
-            {[
-              { stat: 'Free',   label: 'Plan to get started' },
-              { stat: '<5 min', label: 'To your first invoice' },
-              { stat: 'MoMo',   label: 'MTN, Telecel & AT Money' },
-              { stat: 'GHS 69', label: 'Paid plans from / month' },
-            ].map(({ stat, label }, i) => (
-              <div key={label} className="border border-[rgba(var(--ch-accent),0.12)] p-6 reveal-scale" style={{ transitionDelay: `${i * 70}ms` }}>
-                <p className="font-serif font-bold text-[var(--color-green)] mb-1" style={{ fontSize: 'clamp(28px,3vw,44px)', lineHeight: 1 }}>{stat}</p>
-                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[rgba(var(--ch-text),0.35)]">{label}</p>
-              </div>
-            ))}
+          <div className="reveal" style={{ transitionDelay: '100ms' }}>
+            <AstaBillMockup />
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-28">
+      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-16 reveal">
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Core Capabilities</p>
-            <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight" style={{ fontSize: 'clamp(32px,4.5vw,56px)' }}>
-              Everything in one place.
-            </h2>
-          </div>
+          <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-10 reveal">{PRODUCTS.astabill.name} features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                Icon: FileText,
-                title: 'Professional Invoicing',
-                body: 'Build an invoice from one focused workspace — line items, discounts, taxes, and notes. Send it as a clean public payment page your client opens on their phone.',
-                features: ['Live totals while you edit', 'Custom branded templates', 'Auto-reminders & follow-ups'],
-              },
-              {
-                Icon: Receipt,
-                title: 'Sales Receipts',
-                body: 'Issue receipts in seconds for walk-in customers and cash sales. Share by email or a link — no printing required.',
-                features: ['Point-of-sale ready', 'Email or shareable link delivery', 'Synced to your dashboard'],
-              },
-              {
-                Icon: ClipboardList,
-                title: 'Quotes',
-                body: 'Prepare pre-work quotes and convert them directly into invoices without rebuilding the job details from scratch.',
-                features: ['One-click quote → invoice', 'Line item reuse', 'Client-facing quote view'],
-              },
-              {
-                Icon: Smartphone,
-                title: 'Payment Collection',
-                body: 'Accept Mobile Money and cards directly from the invoice page — powered by Paystack. No third-party checkout, no redirects.',
-                features: ['MTN MoMo, Telecel Cash, AT Money', 'Visa & Mastercard via Paystack', 'Instant payment notifications'],
-              },
-              {
-                Icon: BarChart3,
-                title: 'Cash Flow Visibility',
-                body: 'See invoiced, collected, and overdue numbers together from one operating view. Know exactly where your money is at any moment.',
-                features: ['Real-time revenue dashboard', 'AR aging & overdue tracking', 'Customer payment insights'],
-              },
-              {
-                Icon: Users,
-                title: 'Team Access',
-                body: 'Give your whole team access with clear permission levels — owner, admin, and member roles across all your businesses.',
-                features: ['Owner, admin, member roles', 'Multi-business support', 'Workspace audit log (Business)'],
-              },
-            ].map(({ Icon, title, body, features }, i) => (
-              <div
-                key={title}
-                className="border border-[rgba(var(--ch-accent),0.08)] bg-[var(--color-surface)] p-8 reveal"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <Icon className="w-5 h-5 text-[var(--color-green)] mb-6 stroke-[1.4]" />
-                <h3 className="font-serif text-[22px] font-bold text-[var(--color-text)] mb-3">{title}</h3>
-                <p className="text-[14px] text-[rgba(var(--ch-text),0.55)] leading-relaxed mb-6">{body}</p>
-                <ul className="space-y-2">
+            {ASTABILL_FEATURES.map(({ Icon, title, body, features }) => (
+              <div key={title} className="border border-[rgba(var(--ch-accent),0.12)] bg-[var(--color-surface)] p-7 reveal">
+                <Icon className="w-5 h-5 text-[var(--color-accent)] mb-6 stroke-[1.4]" aria-hidden="true" />
+                <h3 className="font-serif text-[21px] font-bold text-[var(--color-text)] mb-3">{title}</h3>
+                <p className="text-[14px] text-[rgba(var(--ch-text),0.78)] leading-relaxed mb-6">{body}</p>
+                <ul className="space-y-2 list-none">
                   {features.map(f => (
                     <li key={f} className="flex items-start gap-2">
-                      <Check className="text-[var(--color-green)] mt-0.5 shrink-0 w-3 h-3" />
-                      <span className="font-mono text-[11px] tracking-[0.06em] text-[rgba(var(--ch-text),0.50)]">{f}</span>
+                      <Check className="text-[var(--color-accent)] mt-0.5 shrink-0 w-3.5 h-3.5" aria-hidden="true" />
+                      <span className="font-mono text-[12px] tracking-[0.04em] text-[rgba(var(--ch-text),0.75)]">{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -225,176 +166,52 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Competitive comparison */}
-      <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-14 reveal">
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Why AstaBill</p>
-            <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
-              Built for Africa. Not adapted for it.
-            </h2>
-          </div>
-          <div className="overflow-x-auto reveal" style={{ transitionDelay: '80ms' }}>
-            <table className="w-full min-w-[640px] border-collapse text-[13px]">
-              <colgroup>
-                <col className="w-[38%]" />
-                <col />
-                <col />
-                <col />
-                <col />
-              </colgroup>
-              <thead>
-                <tr className="border-b border-[rgba(var(--ch-accent),0.12)]">
-                  <th className="text-left py-4 pr-6 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.40)] w-[38%]">Feature</th>
-                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-green)] text-center">AstaBill</th>
-                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] text-center">Wave</th>
-                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] text-center">QuickBooks</th>
-                  <th className="py-4 px-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[rgba(var(--ch-text),0.35)] text-center">Zoho Books</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { feature: 'Mobile Money (MTN, Telecel, AT Money)', astabill: true,  wave: false, qbo: false, zoho: false },
-                  { feature: 'GHS currency & GRA-compliant receipts',  astabill: true,  wave: false, qbo: false, zoho: false },
-                  { feature: 'Paystack payment integration',           astabill: true,  wave: false, qbo: false, zoho: false },
-                  { feature: 'Invoice-to-payment in one flow',         astabill: true,  wave: true,  qbo: true,  zoho: true  },
-                  { feature: 'Free tier available',                    astabill: true,  wave: true,  qbo: false, zoho: true  },
-                  { feature: 'Real-time cash flow dashboard',          astabill: true,  wave: true,  qbo: true,  zoho: true  },
-                  { feature: 'WhatsApp & SMS payment reminders',       astabill: true,  wave: false, qbo: false, zoho: false },
-                  { feature: 'Multi-business support',                 astabill: true,  wave: false, qbo: false, zoho: true  },
-                  { feature: 'Africa-local support team',              astabill: true,  wave: false, qbo: false, zoho: false },
-                ].map(({ feature, astabill, wave, qbo, zoho }, i) => (
-                  <tr key={feature} className={`border-b border-[rgba(var(--ch-accent),0.06)] ${i % 2 === 0 ? 'bg-[rgba(var(--ch-accent),0.015)]' : ''}`}>
-                    <td className="py-3.5 pr-6 text-[rgba(var(--ch-text),0.65)]">{feature}</td>
-                    {[
-                      { val: astabill, green: true },
-                      { val: wave,     green: false },
-                      { val: qbo,      green: false },
-                      { val: zoho,     green: false },
-                    ].map(({ val, green }, j) => (
-                      <td key={j} className="py-3.5 px-4 text-center">
-                        {val ? (
-                          <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full ${green ? 'bg-[rgba(34,166,86,0.15)] text-[var(--color-green)]' : 'bg-[rgba(var(--ch-text),0.06)] text-[rgba(var(--ch-text),0.40)]'}`}>
-                            <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center justify-center w-5 h-5 text-[rgba(var(--ch-text),0.18)]">—</span>
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Platform suite teaser */}
-      <section className="bg-[var(--color-bg)] px-[clamp(24px,5vw,80px)] py-24">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
-            <div>
-              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-3">The Astacraft Platform</p>
-              <h2 className="font-serif font-bold text-[var(--color-text)] leading-tight" style={{ fontSize: 'clamp(26px,3vw,42px)' }}>
-                AstaBill is just the start.
-              </h2>
-            </div>
-            <a href="https://astabill.com" target="_blank" rel="noopener noreferrer" className="mt-6 md:mt-0 font-mono text-[10px] tracking-[0.16em] uppercase text-[rgba(var(--ch-text),0.45)] hover:text-[var(--color-accent)] transition-colors duration-200">
-              Try AstaBill free →
-            </a>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal" style={{ transitionDelay: '60ms' }}>
-            {[
-              { status: 'Live',         label: 'AstaBill',   desc: 'Invoicing, receipts, payments, expenses, and cash flow — the financial operating system for African businesses.' },
-              { status: 'Coming Soon',  label: 'AstaBooks',  desc: 'Full double-entry accounting, bank reconciliation, and financial reporting built for African compliance requirements.' },
-              { status: 'Coming Soon',  label: 'AstaHR',     desc: 'Payroll, leave management, SSNIT deductions, and people operations for growing teams across Africa.' },
-              { status: 'Coming Soon',  label: 'AstaPay',    desc: 'Payment infrastructure and disbursement tools — collect, split, and send money across multiple channels and currencies.' },
-            ].map(({ status, label, desc }, i) => (
-              <div key={label} className="border border-[rgba(var(--ch-accent),0.10)] bg-[var(--color-surface)] p-6 reveal" style={{ transitionDelay: `${i * 70}ms` }}>
-                <span className={`inline-block font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-1 mb-4 ${
-                  status === 'Live'        ? 'bg-[rgba(34,166,86,0.12)] text-[var(--color-green)] border border-[rgba(34,166,86,0.25)]' :
-                  'bg-[rgba(var(--ch-accent),0.10)] text-[var(--color-accent)] border border-[rgba(var(--ch-accent),0.20)]'
-                }`}>{status}</span>
-                <h3 className="font-serif font-bold text-[var(--color-text)] mb-2" style={{ fontSize: 'clamp(16px,1.5vw,20px)' }}>{label}</h3>
-                <p className="text-[13px] text-[rgba(var(--ch-text),0.50)] leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-28">
+      <section className="bg-[var(--color-surface)] border-y border-[rgba(var(--ch-accent),0.08)] px-[clamp(24px,5vw,80px)] py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto reveal">
-          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] text-center mb-12">What businesses say</p>
+          <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] text-center mb-12">What our customers say</h2>
           <TestimonialCarousel testimonials={TESTIMONIALS} />
         </div>
       </section>
 
       <PricingSection />
 
-      {/* FAQ */}
-      <section className="bg-[var(--color-surface)] px-[clamp(24px,5vw,80px)] py-28">
-        <div className="max-w-[860px] mx-auto">
-          <div className="mb-12 reveal">
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-4">Common Questions</p>
-            <h2 className="font-serif font-black text-[var(--color-text)] leading-[0.92] tracking-[-0.03em]" style={{ fontSize: 'clamp(28px,3.5vw,48px)' }}>
-              Frequently asked questions.
-            </h2>
-          </div>
-          <div className="space-y-px">
-            {ASTABILL_FAQ.map(({ q, a }, i) => (
-              <details
-                key={i}
-                className="group border border-[rgba(var(--ch-accent),0.10)] bg-[var(--color-bg)] reveal"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <summary className="flex items-center justify-between gap-4 px-8 py-6 cursor-pointer select-none list-none">
-                  <span className="font-serif text-[clamp(15px,1.3vw,18px)] font-semibold text-[var(--color-text)] leading-snug">{q}</span>
-                  <span className="font-mono text-[20px] text-[var(--color-accent)] shrink-0 transition-transform duration-200 group-open:rotate-45">+</span>
-                </summary>
-                <div className="px-8 pb-7 border-t border-[rgba(var(--ch-accent),0.07)]">
-                  <p className="text-[14px] text-[rgba(var(--ch-text),0.60)] leading-[1.85] pt-5">{a}</p>
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      {showDondo && (
+        <section id="dondo" className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-16 md:py-24 overflow-hidden scroll-mt-[72px]">
+          <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
+          <div className="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-start">
+            <div className="reveal">
+              <div className="flex flex-wrap items-center gap-4 mb-6">
+                <p className="font-serif font-black text-white text-[28px] leading-none tracking-[-0.03em]">{PRODUCTS.dondo.name}</p>
+                <StatusBadge status={DONDO_PROGRAMME_LABEL} dark />
+              </div>
+              <h2 className="font-serif font-black text-white leading-[0.95] tracking-[-0.035em] mb-6" style={{ fontSize: 'clamp(32px,4.2vw,58px)' }}>
+                Every customer conversation, one inbox.
+              </h2>
+              <p className="text-[rgba(255,255,255,0.85)] leading-relaxed mb-8 max-w-[60ch]" style={{ fontSize: 'clamp(15px,1.2vw,17px)' }}>
+                The dondo is the Akan talking drum, used to carry messages across distances. Dondo carries your business&rsquo;s messages: one shared inbox for your customer conversations, starting with WhatsApp and SMS, reminders and broadcasts to customers who opted in, and an AI assistant that answers from your own information.
+              </p>
+              <Link href={PRODUCTS.dondo.path} className={primaryBtn}>Join the pilot</Link>
+            </div>
 
-      {/* CTA */}
-      <section className="relative bg-[var(--color-dark)] px-[clamp(24px,5vw,80px)] py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,166,86,0.08)_0%,transparent_70%)] pointer-events-none" />
-        <div className="relative max-w-[1280px] mx-auto text-center reveal">
-          <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[rgba(255,255,255,0.28)] mb-4">Start today</p>
-          <h2
-            className="font-serif font-bold text-white leading-tight mb-6"
-            style={{ fontSize: 'clamp(36px,5vw,64px)' }}
-          >
-            Send your first invoice free.
-          </h2>
-          <p className="text-[clamp(15px,1.1vw,17px)] text-[rgba(255,255,255,0.50)] max-w-lg mx-auto mb-10">
-            No credit card required. Get set up in under five minutes and start collecting payments the same day.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://astabill.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium bg-[var(--color-cta)] text-white px-12 py-5 hover:bg-[var(--color-cta-hover)] transition-colors duration-200"
-            >
-              Get Started Free →
-            </a>
-            <Link
-              href="#pricing"
-              className="inline-block font-mono text-[11px] tracking-[0.14em] uppercase font-medium border border-[rgba(255,255,255,0.38)] text-white px-12 py-5 hover:border-[rgba(255,255,255,0.65)] transition-colors duration-200"
-            >
-              View Pricing
-            </Link>
+            <dl className="border border-[rgba(255,255,255,0.22)] p-7 md:p-9 space-y-7 reveal" style={{ transitionDelay: '100ms' }}>
+              <div>
+                <dt className="font-mono text-[11px] tracking-[0.2em] uppercase text-white mb-3">What pilot businesses get</dt>
+                <dd className="text-[15px] text-[rgba(255,255,255,0.85)] leading-relaxed">
+                  Guided set-up of your WhatsApp Business number and SMS sender ID, a shared inbox for your team, and direct support from our product team.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] tracking-[0.2em] uppercase text-white mb-3">What we ask</dt>
+                <dd className="text-[15px] text-[rgba(255,255,255,0.85)] leading-relaxed">
+                  {pilotFee.state === 'omitted'
+                    ? 'Regular feedback.'
+                    : <>Regular feedback and a pilot fee of <Placeholder id="products.dondo-pilot-fee" />.</>}
+                </dd>
+              </div>
+            </dl>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   )
 }
